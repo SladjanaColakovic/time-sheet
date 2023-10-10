@@ -1,16 +1,16 @@
-package com.example.timesheet.api.impl;
+package com.example.timesheet.service;
 
 import com.example.timesheet.core.model.Country;
-import com.example.timesheet.core.repository.CountryRepositoryI;
-import com.example.timesheet.core.service.CountryServiceI;
+import com.example.timesheet.core.repository.ICountryRepository;
+import com.example.timesheet.core.service.ICountryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class CountryService implements CountryServiceI {
-    private final CountryRepositoryI countryRepository;
+public class CountryService implements ICountryService {
+    private final ICountryRepository countryRepository;
     @Autowired
-    public CountryService(CountryRepositoryI countryRepository){
+    public CountryService(ICountryRepository countryRepository){
         this.countryRepository = countryRepository;
     }
     @Override

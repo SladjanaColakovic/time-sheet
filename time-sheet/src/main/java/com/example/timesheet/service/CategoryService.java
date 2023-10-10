@@ -1,16 +1,16 @@
-package com.example.timesheet.api.impl;
+package com.example.timesheet.service;
 
 import com.example.timesheet.core.model.Category;
-import com.example.timesheet.core.repository.CategoryRepositoryI;
-import com.example.timesheet.core.service.CategoryServiceI;
+import com.example.timesheet.core.repository.ICategoryRepository;
+import com.example.timesheet.core.service.ICategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class CategoryService implements CategoryServiceI {
-    private final CategoryRepositoryI categoryRepository;
+public class CategoryService implements ICategoryService {
+    private final ICategoryRepository categoryRepository;
     @Autowired
-    public CategoryService(CategoryRepositoryI categoryRepository){
+    public CategoryService(ICategoryRepository categoryRepository){
         this.categoryRepository = categoryRepository;
     }
     @Override

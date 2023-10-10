@@ -1,8 +1,8 @@
-package com.example.timesheet.core.service;
+package com.example.timesheet.core.repository;
 
 import com.example.timesheet.core.model.Country;
 
-public interface CountryServiceI {
+public interface ICountryRepository {
     Country create(Country country);
     Country getById(Long id);
 }

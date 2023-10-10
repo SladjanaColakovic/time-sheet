@@ -1,8 +1,8 @@
-package com.example.timesheet.core.repository;
+package com.example.timesheet.core.service;
 
 import com.example.timesheet.core.model.Category;
 
-public interface CategoryRepositoryI {
+public interface ICategoryService {
     Category create(Category category);
     Category getById(Long id);
 }
