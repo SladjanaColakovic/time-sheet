@@ -9,6 +9,9 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Component
 public class CountryJpa implements ICountryRepository {
     private final CountryJpaRepository countryJpaRepository;
@@ -30,5 +33,28 @@ public class CountryJpa implements ICountryRepository {
         CountryEntity country = countryJpaRepository.findById(id).orElse(null);
         if(country == null) throw new ObjectNotFound();
         return  mapper.map(country, Country.class);
+    }
+
+    @Override
+    public void delete(Long id) {
+        CountryEntity country = countryJpaRepository.findById(id).orElse(null);
+        if(country == null) throw new ObjectNotFound();
+        countryJpaRepository.delete(country);
+    }
+
+    @Override
+    public List<Country> getAll() {
+        List<CountryEntity> countries = countryJpaRepository.findAll();
+        return countries
+                .stream()
+                .map(element -> mapper.map(element, Country.class))
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public Country update(Country country) {
+        CountryEntity editing = mapper.map(country, CountryEntity.class);
+        CountryEntity saved = countryJpaRepository.save(editing);
+        return mapper.map(saved, Country.class);
     }
 }

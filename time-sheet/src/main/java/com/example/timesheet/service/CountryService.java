@@ -6,6 +6,8 @@ import com.example.timesheet.core.service.ICountryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class CountryService implements ICountryService {
     private final ICountryRepository countryRepository;
@@ -21,5 +23,20 @@ public class CountryService implements ICountryService {
     @Override
     public Country getById(Long id) {
         return countryRepository.getById(id);
+    }
+
+    @Override
+    public void delete(Long id) {
+        countryRepository.delete(id);
+    }
+
+    @Override
+    public List<Country> getAll() {
+        return countryRepository.getAll();
+    }
+
+    @Override
+    public Country update(Country country) {
+        return countryRepository.update(country);
     }
 }
