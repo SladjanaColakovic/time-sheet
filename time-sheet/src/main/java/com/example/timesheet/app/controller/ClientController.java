@@ -36,7 +36,6 @@ public class ClientController {
     @GetMapping("/{id}")
     public ResponseEntity<?> getById(@PathVariable Long id){
         Client client = clientService.getById(id);
-        if(client == null) return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         return new ResponseEntity<>(mapper.map(client, ClientDTO.class), HttpStatus.OK);
 
     }

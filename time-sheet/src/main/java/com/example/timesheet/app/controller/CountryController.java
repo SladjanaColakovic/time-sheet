@@ -30,8 +30,6 @@ public class CountryController {
     @GetMapping("/{id}")
     public ResponseEntity<?> getById(@PathVariable Long id){
         Country country = countryService.getById(id);
-        if(country == null) return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-
         return new ResponseEntity<>(mapper.map(country, CountryDTO.class), HttpStatus.OK);
     }
 

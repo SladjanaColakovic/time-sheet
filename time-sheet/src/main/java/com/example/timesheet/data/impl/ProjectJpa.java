@@ -1,5 +1,6 @@
 package com.example.timesheet.data.impl;
 
+import com.example.timesheet.core.exception.ObjectNotFound;
 import com.example.timesheet.core.model.Project;
 import com.example.timesheet.core.repository.IProjectRepository;
 import com.example.timesheet.data.entity.ProjectEntity;
@@ -30,6 +31,7 @@ public class ProjectJpa implements IProjectRepository {
     @Override
     public Project getById(Long id) {
         ProjectEntity project = projectJpaRepository.findById(id).orElse(null);
+        if(project == null) throw new ObjectNotFound();
         return mapper.map(project, Project.class);
     }
 }

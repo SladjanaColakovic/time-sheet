@@ -1,5 +1,6 @@
 package com.example.timesheet.data.impl;
 
+import com.example.timesheet.core.exception.ObjectNotFound;
 import com.example.timesheet.core.model.Category;
 import com.example.timesheet.core.repository.ICategoryRepository;
 import com.example.timesheet.data.entity.CategoryEntity;
@@ -27,6 +28,7 @@ public class CategoryJpa implements ICategoryRepository {
     @Override
     public Category getById(Long id) {
         CategoryEntity category = categoryJpaRepository.findById(id).orElse(null);
+        if(category == null) throw new ObjectNotFound();
         return mapper.map(category, Category.class);
     }
 }

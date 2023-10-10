@@ -36,7 +36,6 @@ public class ProjectController {
     @GetMapping("/{id}")
     public ResponseEntity<?> getById(@PathVariable Long id){
         Project project = projectService.getById(id);
-        if(project == null) return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         return new ResponseEntity<>(mapper.map(project, ProjectDTO.class), HttpStatus.OK);
     }
 
