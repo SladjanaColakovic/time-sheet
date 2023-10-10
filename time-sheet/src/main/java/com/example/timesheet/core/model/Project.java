@@ -1,0 +1,21 @@
+package com.example.timesheet.core.model;
+
+import com.example.timesheet.core.enumeration.ProjectStatus;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+import java.util.Set;
+
+@Setter
+@Getter
+@NoArgsConstructor
+public class Project {
+    private long id;
+    private String name;
+    private String description;
+    private ProjectStatus status;
+    private boolean isDeleted;
+    private Client client;
+
+}

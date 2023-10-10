@@ -24,7 +24,7 @@ public class CountryController {
     @PostMapping
     public ResponseEntity<?> create(@RequestBody NewCountryDTO newCountry){
         Country country = countryService.create(mapper.map(newCountry, Country.class));
-        return new ResponseEntity<>(mapper.map(country, CountryDTO.class), HttpStatus.OK);
+        return new ResponseEntity<>(mapper.map(country, CountryDTO.class), HttpStatus.CREATED);
     }
 
     @GetMapping("/{id}")
