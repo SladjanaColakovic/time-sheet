@@ -10,6 +10,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @RestController
 @RequestMapping(value = "api/category")
 public class CategoryController {
@@ -30,6 +33,27 @@ public class CategoryController {
     @GetMapping("/{id}")
     public ResponseEntity<?> getById(@PathVariable Long id){
         Category category = categoryService.getById(id);
+        return new ResponseEntity<>(mapper.map(category, CategoryDTO.class), HttpStatus.OK);
+    }
+
+    @GetMapping
+    public ResponseEntity<?> getAll(){
+        List<Category> categories = categoryService.getAll();
+        return new ResponseEntity<>(categories.stream()
+                    .map(element -> mapper.map(element, CategoryDTO.class))
+                    .collect(Collectors.toList()), HttpStatus.OK
+                    );
+    }
+
+    @DeleteMapping
+    public ResponseEntity<?> delete(@RequestParam("id") Long id){
+        categoryService.delete(id);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @PutMapping
+    public ResponseEntity<?> update(@RequestBody CategoryDTO editing){
+        Category category = categoryService.update(mapper.map(editing, Category.class));
         return new ResponseEntity<>(mapper.map(category, CategoryDTO.class), HttpStatus.OK);
     }
 }
