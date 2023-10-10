@@ -9,6 +9,9 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Component
 public class ClientJpa implements IClientRepository {
 
@@ -32,5 +35,28 @@ public class ClientJpa implements IClientRepository {
         ClientEntity client = clientJpaRepository.findById(id).orElse(null);
         if(client == null) throw new ObjectNotFound();
         return mapper.map(client, Client.class);
+    }
+
+    @Override
+    public void delete(Long id) {
+        ClientEntity client = clientJpaRepository.findById(id).orElse(null);
+        if(client == null) throw new ObjectNotFound();
+        clientJpaRepository.delete(client);
+    }
+
+    @Override
+    public List<Client> getAll() {
+        List<ClientEntity> clients = clientJpaRepository.findAll();
+        return clients
+                .stream()
+                .map(element -> mapper.map(element, Client.class))
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public Client update(Client client) {
+        ClientEntity editing = mapper.map(client, ClientEntity.class);
+        ClientEntity saved = clientJpaRepository.save(editing);
+        return mapper.map(saved, Client.class);
     }
 }

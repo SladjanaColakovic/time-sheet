@@ -9,6 +9,9 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Component
 public class ProjectJpa implements IProjectRepository {
 
@@ -33,5 +36,28 @@ public class ProjectJpa implements IProjectRepository {
         ProjectEntity project = projectJpaRepository.findById(id).orElse(null);
         if(project == null) throw new ObjectNotFound();
         return mapper.map(project, Project.class);
+    }
+
+    @Override
+    public void delete(Long id) {
+        ProjectEntity project = projectJpaRepository.findById(id).orElse(null);
+        if(project == null) throw new ObjectNotFound();
+        projectJpaRepository.delete(project);
+    }
+
+    @Override
+    public List<Project> getAll() {
+        List<ProjectEntity> projects = projectJpaRepository.findAll();
+        return projects
+                .stream()
+                .map(element -> mapper.map(element, Project.class))
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public Project update(Project project) {
+        ProjectEntity editing = mapper.map(project, ProjectEntity.class);
+        ProjectEntity saved = projectJpaRepository.save(editing);
+        return mapper.map(saved, Project.class);
     }
 }

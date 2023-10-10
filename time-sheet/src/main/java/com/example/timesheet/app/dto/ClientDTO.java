@@ -17,6 +17,6 @@ public class ClientDTO {
     private String postalCode;
     private boolean isDeleted;
     private CountryDTO country;
-    private Set<ProjectDTO> projects;
+    //private Set<ProjectDTO> projects;
 
 }

@@ -7,10 +7,7 @@ import lombok.Setter;
 @Setter
 @Getter
 @NoArgsConstructor
-public class NewProjectDTO {
+public class CategoryUpdateDTO {
+    private long id;
     private String name;
-    private String description;
-    private long clientId;
-    private long lead;
-
 }

@@ -1,6 +1,7 @@
 package com.example.timesheet.app.controller;
 
 import com.example.timesheet.app.dto.CategoryDTO;
+import com.example.timesheet.app.dto.CategoryUpdateDTO;
 import com.example.timesheet.app.dto.CountryDTO;
 import com.example.timesheet.app.dto.NewCountryDTO;
 import com.example.timesheet.core.model.Country;
@@ -53,7 +54,7 @@ public class CountryController {
     }
 
     @PutMapping
-    public ResponseEntity<?> update(@RequestBody CategoryDTO editing){
+    public ResponseEntity<?> update(@RequestBody CategoryUpdateDTO editing){
         Country country = countryService.update(mapper.map(editing, Country.class));
         return new ResponseEntity<>(mapper.map(country, CountryDTO.class), HttpStatus.OK);
     }

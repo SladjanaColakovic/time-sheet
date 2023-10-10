@@ -1,6 +1,7 @@
 package com.example.timesheet.app.controller;
 
 import com.example.timesheet.app.dto.CategoryDTO;
+import com.example.timesheet.app.dto.CategoryUpdateDTO;
 import com.example.timesheet.app.dto.NewCategoryDTO;
 import com.example.timesheet.core.model.Category;
 import com.example.timesheet.core.service.ICategoryService;
@@ -42,7 +43,7 @@ public class CategoryController {
         return new ResponseEntity<>(categories.stream()
                     .map(element -> mapper.map(element, CategoryDTO.class))
                     .collect(Collectors.toList()), HttpStatus.OK
-                    );
+        );
     }
 
     @DeleteMapping
@@ -52,7 +53,7 @@ public class CategoryController {
     }
 
     @PutMapping
-    public ResponseEntity<?> update(@RequestBody CategoryDTO editing){
+    public ResponseEntity<?> update(@RequestBody CategoryUpdateDTO editing){
         Category category = categoryService.update(mapper.map(editing, Category.class));
         return new ResponseEntity<>(mapper.map(category, CategoryDTO.class), HttpStatus.OK);
     }

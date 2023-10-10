@@ -5,6 +5,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.Set;
+
 
 @Setter
 @Getter
@@ -16,5 +18,7 @@ public class Project {
     private ProjectStatus status;
     private boolean isDeleted;
     private Client client;
+    private TeamMember lead;
+    private Set<ProjectSheet> projectSheets;
 
 }

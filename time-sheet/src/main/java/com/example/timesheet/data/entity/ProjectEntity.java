@@ -6,6 +6,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.Set;
+
 @Entity
 @Setter
 @Getter
@@ -30,6 +32,12 @@ public class ProjectEntity {
 
     @ManyToOne(fetch = FetchType.EAGER)
     private ClientEntity client;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    private TeamMemberEntity lead;
+
+    @OneToMany(mappedBy = "project", fetch = FetchType.EAGER)
+    private Set<ProjectSheetEntity> projectSheets;
 
 
 
