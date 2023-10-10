@@ -1,6 +1,5 @@
 package com.example.timesheet.core.repository;
 
-import com.example.timesheet.core.model.Category;
 import com.example.timesheet.core.model.Country;
 
 import java.util.List;

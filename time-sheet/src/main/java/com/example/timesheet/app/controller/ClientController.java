@@ -5,7 +5,6 @@ import com.example.timesheet.app.dto.ClientDTO;
 import com.example.timesheet.app.dto.NewClientDTO;
 import com.example.timesheet.core.model.Client;
 import com.example.timesheet.core.service.IClientService;
-import com.example.timesheet.core.service.ICountryService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

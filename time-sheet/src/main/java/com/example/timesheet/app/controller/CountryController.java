@@ -3,7 +3,6 @@ package com.example.timesheet.app.controller;
 import com.example.timesheet.app.dto.CategoryDTO;
 import com.example.timesheet.app.dto.CountryDTO;
 import com.example.timesheet.app.dto.NewCountryDTO;
-import com.example.timesheet.core.model.Category;
 import com.example.timesheet.core.model.Country;
 import com.example.timesheet.core.service.ICountryService;
 import org.modelmapper.ModelMapper;
