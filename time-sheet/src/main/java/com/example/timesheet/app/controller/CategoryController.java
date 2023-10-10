@@ -1,9 +1,7 @@
 package com.example.timesheet.app.controller;
 
 import com.example.timesheet.app.dto.NewCategoryDTO;
-import com.example.timesheet.app.dto.NewCountryDTO;
 import com.example.timesheet.core.model.Category;
-import com.example.timesheet.core.model.Country;
 import com.example.timesheet.core.service.CategoryServiceI;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,14 +10,15 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping(value = "/category")
+@RequestMapping(value = "api/category")
 public class CategoryController {
-
+    private final CategoryServiceI categoryService;
+    private final ModelMapper mapper;
     @Autowired
-    private CategoryServiceI categoryService;
-
-    @Autowired
-    private ModelMapper mapper;
+    public CategoryController(CategoryServiceI categoryService, ModelMapper mapper){
+        this.categoryService = categoryService;
+        this.mapper = mapper;
+    }
 
     @PostMapping
     public ResponseEntity<?> create(@RequestBody NewCategoryDTO newCategory){
@@ -28,6 +27,9 @@ public class CategoryController {
 
     @GetMapping("/{id}")
     public ResponseEntity<?> getById(@PathVariable Long id){
-        return new ResponseEntity(categoryService.getById(id), HttpStatus.OK);
+        Category category = categoryService.getById(id);
+        if(category == null) return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+
+        return new ResponseEntity<>(category, HttpStatus.OK);
     }
 }

@@ -10,14 +10,15 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping(value = "/country")
+@RequestMapping(value = "api/country")
 public class CountryController {
-
+    private final CountryServiceI countryService;
+    private final ModelMapper mapper;
     @Autowired
-    private CountryServiceI countryService;
-
-    @Autowired
-    private ModelMapper mapper;
+    public CountryController(CountryServiceI countryService, ModelMapper mapper){
+        this.countryService = countryService;
+        this.mapper = mapper;
+    }
 
     @PostMapping
     public ResponseEntity<?> create(@RequestBody NewCountryDTO newCountry){
@@ -26,7 +27,11 @@ public class CountryController {
 
     @GetMapping("/{id}")
     public ResponseEntity<?> getById(@PathVariable Long id){
-        return new ResponseEntity(countryService.getById(id), HttpStatus.OK);
+        Country country = countryService.getById(id);
+        if(country == null){
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+        return new ResponseEntity<>(country, HttpStatus.OK);
     }
 
 }

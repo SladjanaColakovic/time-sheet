@@ -1,4 +1,4 @@
-package com.example.timesheet.infra.entity;
+package com.example.timesheet.data.entity;
 
 import jakarta.persistence.*;
 import lombok.Getter;

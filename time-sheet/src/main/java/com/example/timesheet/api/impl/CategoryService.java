@@ -8,9 +8,11 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class CategoryService implements CategoryServiceI {
-
+    private final CategoryRepositoryI categoryRepository;
     @Autowired
-    private CategoryRepositoryI categoryRepository;
+    public CategoryService(CategoryRepositoryI categoryRepository){
+        this.categoryRepository = categoryRepository;
+    }
     @Override
     public Category create(Category category) {
         return categoryRepository.create(category);

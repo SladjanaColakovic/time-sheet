@@ -1,6 +1,6 @@
-package com.example.timesheet.infra.repository;
+package com.example.timesheet.data.repository;
 
-import com.example.timesheet.infra.entity.CategoryEntity;
+import com.example.timesheet.data.entity.CategoryEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

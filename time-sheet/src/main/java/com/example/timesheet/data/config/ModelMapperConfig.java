@@ -1,4 +1,4 @@
-package com.example.timesheet.infra.config;
+package com.example.timesheet.data.config;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.Bean;

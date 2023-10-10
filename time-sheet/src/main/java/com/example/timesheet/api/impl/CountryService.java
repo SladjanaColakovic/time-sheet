@@ -8,9 +8,11 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class CountryService implements CountryServiceI {
-
+    private final CountryRepositoryI countryRepository;
     @Autowired
-    private CountryRepositoryI countryRepository;
+    public CountryService(CountryRepositoryI countryRepository){
+        this.countryRepository = countryRepository;
+    }
     @Override
     public Country create(Country country) {
         return countryRepository.create(country);
