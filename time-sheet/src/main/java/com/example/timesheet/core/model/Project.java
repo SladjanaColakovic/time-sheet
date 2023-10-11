@@ -16,7 +16,6 @@ public class Project {
     private String name;
     private String description;
     private ProjectStatus status;
-    private boolean isDeleted;
     private Client client;
     private TeamMember lead;
     //private Set<TeamMember> teamMembers;

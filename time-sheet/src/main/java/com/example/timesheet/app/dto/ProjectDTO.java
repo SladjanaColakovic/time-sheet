@@ -15,7 +15,6 @@ public class ProjectDTO {
     private String name;
     private String description;
     private ProjectStatus status;
-    private boolean isDeleted;
     private ClientDTO client;
     private TeamMemberDTO lead;
     private Set<TeamMemberDTO> teamMembers;

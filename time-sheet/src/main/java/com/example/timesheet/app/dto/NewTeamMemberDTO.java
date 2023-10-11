@@ -12,6 +12,7 @@ import lombok.Setter;
 public class NewTeamMemberDTO {
     private String name;
     private String username;
+    private String password;
     private String email;
     private float hoursPerWeek;
     private TeamMemberStatus status;

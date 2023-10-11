@@ -15,11 +15,11 @@ public class TeamMember {
     private Long id;
     private String name;
     private String username;
+    private String password;
     private String email;
     private float hoursPerWeek;
     private TeamMemberStatus status;
     private Role role;
-    private boolean isDeleted;
     //private Set<Project> leadingProjects;
     //private Set<Project> workingProjects;
 }

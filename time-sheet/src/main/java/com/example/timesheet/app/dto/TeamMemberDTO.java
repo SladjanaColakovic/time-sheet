@@ -21,7 +21,6 @@ public class TeamMemberDTO {
     private float hoursPerWeek;
     private TeamMemberStatus status;
     private Role role;
-    private boolean isDeleted;
     private Set<ProjectDTO> leadingProjects;
     private Set<ProjectDTO> workingProjects;
 }

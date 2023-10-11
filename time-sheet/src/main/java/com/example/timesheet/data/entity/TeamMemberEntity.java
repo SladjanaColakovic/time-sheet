@@ -25,6 +25,9 @@ public class TeamMemberEntity {
     private String username;
 
     @Column(nullable = false)
+    private String password;
+
+    @Column(nullable = false)
     private String email;
 
     @Column(nullable = false)
