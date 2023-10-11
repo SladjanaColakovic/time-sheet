@@ -1,11 +1,10 @@
 package com.example.timesheet.app.controller;
 
-import com.example.timesheet.app.dto.CategoryUpdateDTO;
-import com.example.timesheet.app.dto.CountryDTO;
+import com.example.timesheet.CustomMapper;
+import com.example.timesheet.app.dto.CountryUpdateDTO;
 import com.example.timesheet.app.dto.NewCountryDTO;
 import com.example.timesheet.core.model.Country;
 import com.example.timesheet.core.service.ICountryService;
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,30 +17,30 @@ import java.util.stream.Collectors;
 @RequestMapping(value = "api/country")
 public class CountryController {
     private final ICountryService countryService;
-    private final ModelMapper mapper;
+    private final CustomMapper mapper;
     @Autowired
-    public CountryController(ICountryService countryService, ModelMapper mapper){
+    public CountryController(ICountryService countryService, CustomMapper mapper){
         this.countryService = countryService;
         this.mapper = mapper;
     }
 
     @PostMapping
     public ResponseEntity<?> create(@RequestBody NewCountryDTO newCountry){
-        Country country = countryService.create(mapper.map(newCountry, Country.class));
-        return new ResponseEntity<>(mapper.map(country, CountryDTO.class), HttpStatus.CREATED);
+        Country country = countryService.create(mapper.newCountryDTOToCountry(newCountry));
+        return new ResponseEntity<>(mapper.countryToCountryDTO(country), HttpStatus.CREATED);
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<?> getById(@PathVariable Long id){
         Country country = countryService.getById(id);
-        return new ResponseEntity<>(mapper.map(country, CountryDTO.class), HttpStatus.OK);
+        return new ResponseEntity<>(mapper.countryToCountryDTO(country), HttpStatus.OK);
     }
 
     @GetMapping
     public ResponseEntity<?> getAll(){
         List<Country> countries = countryService.getAll();
         return new ResponseEntity<>(countries.stream()
-                .map(element -> mapper.map(element, CountryDTO.class))
+                .map(mapper::countryToCountryDTO)
                 .collect(Collectors.toList()), HttpStatus.OK
         );
     }
@@ -53,9 +52,9 @@ public class CountryController {
     }
 
     @PutMapping
-    public ResponseEntity<?> update(@RequestBody CategoryUpdateDTO editing){
-        Country country = countryService.update(mapper.map(editing, Country.class));
-        return new ResponseEntity<>(mapper.map(country, CountryDTO.class), HttpStatus.OK);
+    public ResponseEntity<?> update(@RequestBody CountryUpdateDTO editing){
+        Country country = countryService.update(mapper.countryUpdateDTOToCountry(editing));
+        return new ResponseEntity<>(mapper.countryToCountryDTO(country), HttpStatus.OK);
     }
 
 }

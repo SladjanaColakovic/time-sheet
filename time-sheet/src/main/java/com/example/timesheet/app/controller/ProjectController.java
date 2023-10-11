@@ -1,11 +1,10 @@
 package com.example.timesheet.app.controller;
 
+import com.example.timesheet.CustomMapper;
 import com.example.timesheet.app.dto.NewProjectDTO;
-import com.example.timesheet.app.dto.ProjectDTO;
 import com.example.timesheet.app.dto.ProjectUpdateDTO;
 import com.example.timesheet.core.model.Project;
 import com.example.timesheet.core.service.IProjectService;
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,32 +19,32 @@ public class ProjectController {
 
     private final IProjectService projectService;
 
-    private final ModelMapper mapper;
+    private final CustomMapper mapper;
 
     @Autowired
-    public ProjectController(IProjectService projectService, ModelMapper mapper) {
+    public ProjectController(IProjectService projectService, CustomMapper mapper) {
         this.projectService = projectService;
         this.mapper = mapper;
     }
 
     @PostMapping
     public ResponseEntity<?> create(@RequestBody NewProjectDTO newProject){
-        Project project = mapper.map(newProject, Project.class);
+        Project project = mapper.newProjectDTOToProject(newProject);
         Project created = projectService.create(project);
-        return new ResponseEntity<>(mapper.map(created, ProjectDTO.class), HttpStatus.CREATED);
+        return new ResponseEntity<>(mapper.projectToProjectDTO(created), HttpStatus.CREATED);
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<?> getById(@PathVariable Long id){
         Project project = projectService.getById(id);
-        return new ResponseEntity<>(mapper.map(project, ProjectDTO.class), HttpStatus.OK);
+        return new ResponseEntity<>(mapper.projectToProjectDTO(project), HttpStatus.OK);
     }
 
     @GetMapping
     public ResponseEntity<?> getAll(){
         List<Project> projects = projectService.getAll();
         return new ResponseEntity<>(projects.stream()
-                .map(element -> mapper.map(element, ProjectDTO.class))
+                .map(mapper::projectToProjectDTO)
                 .collect(Collectors.toList()), HttpStatus.OK
         );
     }
@@ -58,8 +57,8 @@ public class ProjectController {
 
     @PutMapping
     public ResponseEntity<?> update(@RequestBody ProjectUpdateDTO editing){
-        Project project = projectService.update(mapper.map(editing, Project.class));
-        return new ResponseEntity<>(mapper.map(project, ProjectDTO.class), HttpStatus.OK);
+        Project project = projectService.update(mapper.projectUpdateDTOToProject(editing));
+        return new ResponseEntity<>(mapper.projectToProjectDTO(project), HttpStatus.OK);
     }
 
 

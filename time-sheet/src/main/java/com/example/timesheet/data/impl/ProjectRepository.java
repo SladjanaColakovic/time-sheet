@@ -1,11 +1,11 @@
 package com.example.timesheet.data.impl;
 
+import com.example.timesheet.CustomMapper;
 import com.example.timesheet.core.exception.ObjectNotFoundException;
 import com.example.timesheet.core.model.Project;
 import com.example.timesheet.core.repository.IProjectRepository;
 import com.example.timesheet.data.entity.ProjectEntity;
 import com.example.timesheet.data.repository.ProjectJpaRepository;
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -17,25 +17,25 @@ public class ProjectRepository implements IProjectRepository {
 
     private final ProjectJpaRepository projectJpaRepository;
 
-    private final ModelMapper mapper;
+    private final CustomMapper mapper;
 
     @Autowired
-    public ProjectRepository(ProjectJpaRepository projectJpaRepository, ModelMapper mapper){
+    public ProjectRepository(ProjectJpaRepository projectJpaRepository, CustomMapper mapper){
         this.projectJpaRepository = projectJpaRepository;
         this.mapper = mapper;
     }
     @Override
     public Project create(Project project) {
-        ProjectEntity newEntity = mapper.map(project, ProjectEntity.class);
+        ProjectEntity newEntity = mapper.projectToProjectEntity(project);
         ProjectEntity saved = projectJpaRepository.save(newEntity);
-        return mapper.map(saved, Project.class);
+        return mapper.projectEntityToProject(saved);
     }
 
     @Override
     public Project getById(Long id) {
         ProjectEntity project = projectJpaRepository.findById(id).orElse(null);
         if(project == null) throw new ObjectNotFoundException();
-        return mapper.map(project, Project.class);
+        return mapper.projectEntityToProject(project);
     }
 
     @Override
@@ -50,14 +50,16 @@ public class ProjectRepository implements IProjectRepository {
         List<ProjectEntity> projects = projectJpaRepository.findAll();
         return projects
                 .stream()
-                .map(element -> mapper.map(element, Project.class))
+                .map(mapper::projectEntityToProject)
                 .collect(Collectors.toList());
     }
 
     @Override
     public Project update(Project project) {
-        ProjectEntity editing = mapper.map(project, ProjectEntity.class);
+        ProjectEntity editing = projectJpaRepository.findById(project.getId()).orElse(null);
+        if(editing == null) throw new ObjectNotFoundException();
+        mapper.projectToProjectEntityUpdate(project, editing);
         ProjectEntity saved = projectJpaRepository.save(editing);
-        return mapper.map(saved, Project.class);
+        return mapper.projectEntityToProject(saved);
     }
 }

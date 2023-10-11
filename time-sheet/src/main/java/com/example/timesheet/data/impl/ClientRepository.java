@@ -6,7 +6,6 @@ import com.example.timesheet.core.model.Client;
 import com.example.timesheet.core.repository.IClientRepository;
 import com.example.timesheet.data.entity.ClientEntity;
 import com.example.timesheet.data.repository.ClientJpaRepository;
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -18,27 +17,26 @@ public class ClientRepository implements IClientRepository {
 
     private final ClientJpaRepository clientJpaRepository;
 
-    private final ModelMapper mapper;
+    private final CustomMapper mapper;
 
-    private final CustomMapper clientMapper;
 
     @Autowired
-    public ClientRepository(ClientJpaRepository clientJpaRepository, ModelMapper mapper, CustomMapper clientMapper){
+    public ClientRepository(ClientJpaRepository clientJpaRepository, CustomMapper mapper){
         this.clientJpaRepository = clientJpaRepository;
         this.mapper = mapper;
-        this.clientMapper = clientMapper;
+
     }
     @Override
     public Client create(Client client) {
-        ClientEntity newEntity = mapper.map(client, ClientEntity.class);
+        ClientEntity newEntity = mapper.clientToClientEntity(client);
         ClientEntity saved = clientJpaRepository.save(newEntity);
-        return mapper.map(saved, Client.class);
+        return mapper.clientEntityToClient(saved);
     }
     @Override
     public Client getById(Long id) {
         ClientEntity client = clientJpaRepository.findById(id).orElse(null);
         if(client == null) throw new ObjectNotFoundException();
-        return mapper.map(client, Client.class);
+        return mapper.clientEntityToClient(client);
     }
 
     @Override
@@ -53,7 +51,7 @@ public class ClientRepository implements IClientRepository {
         List<ClientEntity> clients = clientJpaRepository.findAll();
         return clients
                 .stream()
-                .map(element -> mapper.map(element, Client.class))
+                .map(mapper::clientEntityToClient)
                 .collect(Collectors.toList());
     }
 
@@ -61,8 +59,8 @@ public class ClientRepository implements IClientRepository {
     public Client update(Client client) {
         ClientEntity editing = clientJpaRepository.findById(client.getId()).orElse(null);
         if(editing == null) throw new ObjectNotFoundException();
-        clientMapper.clientToClientEntityUpdate(client, editing);
+        mapper.clientToClientEntityUpdate(client, editing);
         ClientEntity saved = clientJpaRepository.save(editing);
-        return mapper.map(saved, Client.class);
+        return mapper.clientEntityToClient(saved);
     }
 }
