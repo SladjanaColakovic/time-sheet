@@ -2,7 +2,7 @@ package com.example.timesheet.data.impl;
 
 import com.example.timesheet.core.exception.ObjectNotFoundException;
 import com.example.timesheet.core.model.TeamMember;
-import com.example.timesheet.core.repository.ITeamMemberRepository;;
+import com.example.timesheet.core.repository.ITeamMemberRepository;
 import com.example.timesheet.data.entity.TeamMemberEntity;
 import com.example.timesheet.data.repository.TeamMemberJpaRepository;
 import org.modelmapper.ModelMapper;

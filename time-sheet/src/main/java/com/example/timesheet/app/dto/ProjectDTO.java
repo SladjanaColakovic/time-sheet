@@ -2,8 +2,6 @@ package com.example.timesheet.app.dto;
 
 import com.example.timesheet.app.enumeration.ProjectStatus;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;

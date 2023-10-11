@@ -1,6 +1,5 @@
 package com.example.timesheet.app.controller;
 
-import com.example.timesheet.app.dto.CategoryDTO;
 import com.example.timesheet.app.dto.CategoryUpdateDTO;
 import com.example.timesheet.app.dto.CountryDTO;
 import com.example.timesheet.app.dto.NewCountryDTO;
