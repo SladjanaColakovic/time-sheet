@@ -11,7 +11,7 @@ import java.util.Set;
 @Getter
 @NoArgsConstructor
 public class ProjectSheetDTO {
-    private long id;
+    private Long id;
     private ProjectDTO project;
     private TeamMemberDTO teamMember;
     private Set<TimeSheetItemDTO> timeSheetItems;

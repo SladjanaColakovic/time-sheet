@@ -8,6 +8,6 @@ import lombok.Setter;
 @Getter
 @NoArgsConstructor
 public class CategoryUpdateDTO {
-    private long id;
+    private Long id;
     private String name;
 }

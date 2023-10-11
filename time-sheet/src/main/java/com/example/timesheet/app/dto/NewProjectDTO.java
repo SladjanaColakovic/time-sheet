@@ -10,7 +10,7 @@ import lombok.Setter;
 public class NewProjectDTO {
     private String name;
     private String description;
-    private long clientId;
-    private long lead;
+    private ClientDTO client;
+    private TeamMemberDTO lead;
 
 }

@@ -12,6 +12,6 @@ public class NewClientDTO {
     private String address;
     private String city;
     private String postalCode;
-    private long countryId;
+    private CountryDTO country;
 
 }

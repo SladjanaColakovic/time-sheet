@@ -13,7 +13,7 @@ import java.util.Set;
 @Getter
 @NoArgsConstructor
 public class TeamMemberDTO {
-    private long id;
+    private Long id;
     private String name;
     private String username;
     private String email;

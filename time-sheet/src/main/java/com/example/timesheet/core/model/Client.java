@@ -10,7 +10,7 @@ import java.util.Set;
 @Setter
 @NoArgsConstructor
 public class Client {
-    private long id;
+    private Long id;
     private String name;
     private String address;
     private String city;

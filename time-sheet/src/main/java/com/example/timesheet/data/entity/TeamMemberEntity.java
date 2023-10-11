@@ -17,7 +17,7 @@ import java.util.Set;
 public class TeamMemberEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
     @Column(nullable = false)
     private String name;
 

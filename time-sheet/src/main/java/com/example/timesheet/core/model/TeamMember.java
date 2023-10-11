@@ -12,7 +12,7 @@ import java.util.Set;
 @Getter
 @NoArgsConstructor
 public class TeamMember {
-    private long id;
+    private Long id;
     private String name;
     private String username;
     private String email;

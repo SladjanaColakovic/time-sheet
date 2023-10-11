@@ -1,6 +1,6 @@
 package com.example.timesheet.data.impl;
 
-import com.example.timesheet.core.exception.ObjectNotFound;
+import com.example.timesheet.core.exception.ObjectNotFoundException;
 import com.example.timesheet.core.model.TeamMember;
 import com.example.timesheet.core.repository.ITeamMemberRepository;;
 import com.example.timesheet.data.entity.TeamMemberEntity;
@@ -34,14 +34,14 @@ public class TeamMemberJpa implements ITeamMemberRepository {
     @Override
     public TeamMember getById(Long id) {
         TeamMemberEntity teamMember = teamMemberJpaRepository.findById(id).orElse(null);
-        if(teamMember == null) throw new ObjectNotFound();
+        if(teamMember == null) throw new ObjectNotFoundException();
         return mapper.map(teamMember, TeamMember.class);
     }
 
     @Override
     public void delete(Long id) {
         TeamMemberEntity teamMember = teamMemberJpaRepository.findById(id).orElse(null);
-        if(teamMember == null) throw new ObjectNotFound();
+        if(teamMember == null) throw new ObjectNotFoundException();
         teamMemberJpaRepository.delete(teamMember);
     }
 

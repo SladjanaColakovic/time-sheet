@@ -10,7 +10,7 @@ import java.time.LocalDate;
 @Getter
 @NoArgsConstructor
 public class TimeSheetItem {
-    private long id;
+    private Long id;
     private LocalDate date;
     private String description;
     private float time;

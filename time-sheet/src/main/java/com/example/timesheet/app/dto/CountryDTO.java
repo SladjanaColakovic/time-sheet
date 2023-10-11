@@ -8,6 +8,6 @@ import lombok.Setter;
 @Getter
 @NoArgsConstructor
 public class CountryDTO {
-    private long id;
+    private Long id;
     private String  name;
 }

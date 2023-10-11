@@ -10,7 +10,7 @@ import java.util.Set;
 @Getter
 @NoArgsConstructor
 public class ProjectSheet {
-    private long id;
+    private Long id;
     private Project project;
     private TeamMember teamMember;
     private Set<TimeSheetItem> timeSheetItems;

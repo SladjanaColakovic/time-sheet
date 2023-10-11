@@ -33,8 +33,6 @@ public class ProjectController {
 
     @PostMapping
     public ResponseEntity<?> create(@RequestBody NewProjectDTO newProject){
-        mapper.getConfiguration()
-                .setMatchingStrategy(MatchingStrategies.LOOSE);
         Project project = mapper.map(newProject, Project.class);
         Project created = projectService.create(project);
         return new ResponseEntity<>(mapper.map(created, ProjectDTO.class), HttpStatus.CREATED);

@@ -9,8 +9,10 @@ import lombok.Setter;
 @Getter
 @NoArgsConstructor
 public class ProjectUpdateDTO {
-    private long id;
+    private Long id;
     private String name;
     private String description;
     private ProjectStatus status;
+    private TeamMemberDTO lead;
+    private ClientDTO client;
 }

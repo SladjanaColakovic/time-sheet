@@ -15,7 +15,7 @@ public class ProjectSheetEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
 
     @ManyToOne(fetch = FetchType.EAGER)
     private ProjectEntity project;

@@ -6,8 +6,12 @@ import com.example.timesheet.app.dto.ClientDTO;
 import com.example.timesheet.app.dto.ClientUpdateDTO;
 import com.example.timesheet.app.dto.NewClientDTO;
 import com.example.timesheet.core.model.Client;
+import com.example.timesheet.core.model.Country;
 import com.example.timesheet.core.service.IClientService;
+import org.modelmapper.Converter;
 import org.modelmapper.ModelMapper;
+import org.modelmapper.TypeMap;
+import org.modelmapper.convention.MatchingStrategies;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -34,7 +38,7 @@ public class ClientController {
     public ResponseEntity<?> create(@RequestBody NewClientDTO newClient){
         Client client = mapper.map(newClient, Client.class);
         Client created = clientService.create(client);
-        return new ResponseEntity<>(created, HttpStatus.CREATED);
+        return new ResponseEntity<>(mapper.map(created, ClientDTO.class), HttpStatus.CREATED);
     }
 
     @GetMapping("/{id}")

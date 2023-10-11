@@ -1,6 +1,6 @@
 package com.example.timesheet.data.impl;
 
-import com.example.timesheet.core.exception.ObjectNotFound;
+import com.example.timesheet.core.exception.ObjectNotFoundException;
 import com.example.timesheet.core.model.Client;
 import com.example.timesheet.core.repository.IClientRepository;
 import com.example.timesheet.data.entity.ClientEntity;
@@ -33,14 +33,14 @@ public class ClientJpa implements IClientRepository {
     @Override
     public Client getById(Long id) {
         ClientEntity client = clientJpaRepository.findById(id).orElse(null);
-        if(client == null) throw new ObjectNotFound();
+        if(client == null) throw new ObjectNotFoundException();
         return mapper.map(client, Client.class);
     }
 
     @Override
     public void delete(Long id) {
         ClientEntity client = clientJpaRepository.findById(id).orElse(null);
-        if(client == null) throw new ObjectNotFound();
+        if(client == null) throw new ObjectNotFoundException();
         clientJpaRepository.delete(client);
     }
 

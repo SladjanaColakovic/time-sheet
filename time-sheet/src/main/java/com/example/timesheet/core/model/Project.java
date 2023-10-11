@@ -12,7 +12,7 @@ import java.util.Set;
 @Getter
 @NoArgsConstructor
 public class Project {
-    private long id;
+    private Long id;
     private String name;
     private String description;
     private ProjectStatus status;

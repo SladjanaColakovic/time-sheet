@@ -10,7 +10,7 @@ import java.util.Set;
 @Getter
 @NoArgsConstructor
 public class ClientDTO {
-    private long id;
+    private Long id;
     private String name;
     private String address;
     private String city;
