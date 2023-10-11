@@ -1,11 +1,10 @@
 package com.example.timesheet.app.controller;
 
-import com.example.timesheet.app.dto.CategoryDTO;
+import com.example.timesheet.CustomMapper;
 import com.example.timesheet.app.dto.CategoryUpdateDTO;
 import com.example.timesheet.app.dto.NewCategoryDTO;
 import com.example.timesheet.core.model.Category;
 import com.example.timesheet.core.service.ICategoryService;
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,30 +17,31 @@ import java.util.stream.Collectors;
 @RequestMapping(value = "api/category")
 public class CategoryController {
     private final ICategoryService categoryService;
-    private final ModelMapper mapper;
+
+    private final CustomMapper mapper;
     @Autowired
-    public CategoryController(ICategoryService categoryService, ModelMapper mapper){
+    public CategoryController(ICategoryService categoryService, CustomMapper mapper){
         this.categoryService = categoryService;
         this.mapper = mapper;
     }
 
     @PostMapping
     public ResponseEntity<?> create(@RequestBody NewCategoryDTO newCategory){
-        Category category = categoryService.create(mapper.map(newCategory, Category.class));
-        return new ResponseEntity<>(mapper.map(category, CategoryDTO.class), HttpStatus.CREATED);
+        Category category = categoryService.create(mapper.newCategoryDTOToCategory(newCategory));
+        return new ResponseEntity<>(mapper.categoryToCategoryDTO(category), HttpStatus.CREATED);
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<?> getById(@PathVariable Long id){
         Category category = categoryService.getById(id);
-        return new ResponseEntity<>(mapper.map(category, CategoryDTO.class), HttpStatus.OK);
+        return new ResponseEntity<>(mapper.categoryToCategoryDTO(category), HttpStatus.OK);
     }
 
     @GetMapping
     public ResponseEntity<?> getAll(){
         List<Category> categories = categoryService.getAll();
         return new ResponseEntity<>(categories.stream()
-                    .map(element -> mapper.map(element, CategoryDTO.class))
+                    .map(element -> mapper.categoryToCategoryDTO(element))
                     .collect(Collectors.toList()), HttpStatus.OK
         );
     }
@@ -54,7 +54,7 @@ public class CategoryController {
 
     @PutMapping
     public ResponseEntity<?> update(@RequestBody CategoryUpdateDTO editing){
-        Category category = categoryService.update(mapper.map(editing, Category.class));
-        return new ResponseEntity<>(mapper.map(category, CategoryDTO.class), HttpStatus.OK);
+        Category category = categoryService.update(mapper.categoryUpdateDTOToCategory(editing));
+        return new ResponseEntity<>(mapper.categoryToCategoryDTO(category), HttpStatus.OK);
     }
 }

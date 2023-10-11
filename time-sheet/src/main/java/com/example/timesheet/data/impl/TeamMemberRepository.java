@@ -13,13 +13,13 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Component
-public class TeamMemberJpa implements ITeamMemberRepository {
+public class TeamMemberRepository implements ITeamMemberRepository {
 
     private final TeamMemberJpaRepository teamMemberJpaRepository;
     private final ModelMapper mapper;
 
     @Autowired
-    public TeamMemberJpa(TeamMemberJpaRepository teamMemberJpaRepository, ModelMapper mapper){
+    public TeamMemberRepository(TeamMemberJpaRepository teamMemberJpaRepository, ModelMapper mapper){
         this.teamMemberJpaRepository = teamMemberJpaRepository;
         this.mapper = mapper;
     }

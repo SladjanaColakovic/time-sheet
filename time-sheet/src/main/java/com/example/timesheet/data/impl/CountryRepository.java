@@ -13,11 +13,11 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Component
-public class CountryJpa implements ICountryRepository {
+public class CountryRepository implements ICountryRepository {
     private final CountryJpaRepository countryJpaRepository;
     private final ModelMapper mapper;
     @Autowired
-    public CountryJpa(CountryJpaRepository countryJpaRepository, ModelMapper mapper){
+    public CountryRepository(CountryJpaRepository countryJpaRepository, ModelMapper mapper){
         this.countryJpaRepository = countryJpaRepository;
         this.mapper = mapper;
     }

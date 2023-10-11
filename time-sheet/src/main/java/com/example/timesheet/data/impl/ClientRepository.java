@@ -1,10 +1,10 @@
 package com.example.timesheet.data.impl;
 
+import com.example.timesheet.CustomMapper;
 import com.example.timesheet.core.exception.ObjectNotFoundException;
 import com.example.timesheet.core.model.Client;
 import com.example.timesheet.core.repository.IClientRepository;
 import com.example.timesheet.data.entity.ClientEntity;
-import com.example.timesheet.data.mapper.ClientMapper;
 import com.example.timesheet.data.repository.ClientJpaRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,16 +14,16 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Component
-public class ClientJpa implements IClientRepository {
+public class ClientRepository implements IClientRepository {
 
     private final ClientJpaRepository clientJpaRepository;
 
     private final ModelMapper mapper;
 
-    private final ClientMapper clientMapper;
+    private final CustomMapper clientMapper;
 
     @Autowired
-    public ClientJpa(ClientJpaRepository clientJpaRepository, ModelMapper mapper, ClientMapper clientMapper){
+    public ClientRepository(ClientJpaRepository clientJpaRepository, ModelMapper mapper, CustomMapper clientMapper){
         this.clientJpaRepository = clientJpaRepository;
         this.mapper = mapper;
         this.clientMapper = clientMapper;
@@ -61,8 +61,7 @@ public class ClientJpa implements IClientRepository {
     public Client update(Client client) {
         ClientEntity editing = clientJpaRepository.findById(client.getId()).orElse(null);
         if(editing == null) throw new ObjectNotFoundException();
-        clientMapper.updateClient(client, editing);
-        //ClientEntity editing = mapper.map(client, ClientEntity.class);
+        clientMapper.clientToClientEntityUpdate(client, editing);
         ClientEntity saved = clientJpaRepository.save(editing);
         return mapper.map(saved, Client.class);
     }

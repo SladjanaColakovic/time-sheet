@@ -13,14 +13,14 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Component
-public class ProjectJpa implements IProjectRepository {
+public class ProjectRepository implements IProjectRepository {
 
     private final ProjectJpaRepository projectJpaRepository;
 
     private final ModelMapper mapper;
 
     @Autowired
-    public ProjectJpa(ProjectJpaRepository projectJpaRepository, ModelMapper mapper){
+    public ProjectRepository(ProjectJpaRepository projectJpaRepository, ModelMapper mapper){
         this.projectJpaRepository = projectJpaRepository;
         this.mapper = mapper;
     }

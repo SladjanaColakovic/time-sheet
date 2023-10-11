@@ -13,12 +13,12 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Component
-public class TimeSheetItemJpa implements ITimeSheetItemRepository {
+public class TimeSheetItemRepository implements ITimeSheetItemRepository {
 
     private final TimeSheetItemJpaRepository timeSheetItemJpaRepository;
     private final ModelMapper mapper;
     @Autowired
-    public TimeSheetItemJpa(TimeSheetItemJpaRepository timeSheetItemJpaRepository, ModelMapper mapper){
+    public TimeSheetItemRepository(TimeSheetItemJpaRepository timeSheetItemJpaRepository, ModelMapper mapper){
         this.timeSheetItemJpaRepository = timeSheetItemJpaRepository;
         this.mapper = mapper;
     }
