@@ -36,7 +36,7 @@ public class ProjectEntity {
 
     @ManyToOne(fetch = FetchType.EAGER)
     private TeamMemberEntity lead;
-    
+
     @ManyToMany(mappedBy = "workingProjects")
     private Set<TeamMemberEntity> teamMembers;
 
