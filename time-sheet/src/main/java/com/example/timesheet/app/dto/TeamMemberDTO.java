@@ -7,6 +7,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.Set;
+
 
 @Setter
 @Getter
@@ -20,6 +22,6 @@ public class TeamMemberDTO {
     private TeamMemberStatus status;
     private Role role;
     private boolean isDeleted;
-    //private Set<ProjectDTO> leadingProjects;
-    //private Set<ProjectSheetDTO> projectSheets;
+    private Set<ProjectDTO> leadingProjects;
+    private Set<ProjectDTO> workingProjects;
 }

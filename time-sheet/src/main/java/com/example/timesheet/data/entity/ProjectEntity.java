@@ -1,6 +1,7 @@
 package com.example.timesheet.data.entity;
 
 import com.example.timesheet.data.enumeration.ProjectStatus;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -35,9 +36,9 @@ public class ProjectEntity {
 
     @ManyToOne(fetch = FetchType.EAGER)
     private TeamMemberEntity lead;
-
-    @OneToMany(mappedBy = "project", fetch = FetchType.EAGER)
-    private Set<ProjectSheetEntity> projectSheets;
+    
+    @ManyToMany(mappedBy = "workingProjects")
+    private Set<TeamMemberEntity> teamMembers;
 
 
 

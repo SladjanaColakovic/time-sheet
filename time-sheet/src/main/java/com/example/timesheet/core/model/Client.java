@@ -17,5 +17,5 @@ public class Client {
     private String postalCode;
     private boolean isDeleted;
     private Country country;
-    private Set<Project> projects;
+    //private Set<Project> projects;
 }

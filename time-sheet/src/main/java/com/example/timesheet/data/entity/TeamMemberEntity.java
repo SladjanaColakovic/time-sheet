@@ -42,6 +42,8 @@ public class TeamMemberEntity {
     @OneToMany(mappedBy = "lead", fetch = FetchType.EAGER)
     private Set<ProjectEntity> leadingProjects;
 
-    @OneToMany(mappedBy = "teamMember", fetch = FetchType.EAGER)
-    private Set<ProjectSheetEntity> projectSheets;
+    @ManyToMany
+    @JoinTable(name = "time_sheet", joinColumns = @JoinColumn(name = "team_member_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "project_id", referencedColumnName = "id"))
+    private Set<ProjectEntity> workingProjects;
 }

@@ -18,6 +18,6 @@ public class ProjectDTO {
     private boolean isDeleted;
     private ClientDTO client;
     private TeamMemberDTO lead;
-    private Set<ProjectSheetDTO> projectSheets;
+    private Set<TeamMemberDTO> teamMembers;
 
 }

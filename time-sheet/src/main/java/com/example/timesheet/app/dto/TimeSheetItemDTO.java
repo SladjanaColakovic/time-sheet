@@ -15,5 +15,7 @@ public class TimeSheetItemDTO {
     private float time;
     private float overtime;
     private CategoryDTO category;
-    private ProjectSheetDTO projectSheet;
+    private TeamMemberDTO teamMember;
+    private ProjectDTO project;
+    private ClientDTO client;
 }

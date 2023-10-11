@@ -16,5 +16,7 @@ public class TimeSheetItem {
     private float time;
     private float overtime;
     private Category category;
-    private ProjectSheet projectSheet;
+    private TeamMember teamMember;
+    private Project project;
+    private Client client;
 }

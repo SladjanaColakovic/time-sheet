@@ -20,6 +20,6 @@ public class TeamMember {
     private TeamMemberStatus status;
     private Role role;
     private boolean isDeleted;
-    private Set<Project> leadingProjects;
-    private Set<ProjectSheet> projectSheets;
+    //private Set<Project> leadingProjects;
+    //private Set<Project> workingProjects;
 }

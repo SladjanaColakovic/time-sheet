@@ -19,6 +19,5 @@ public class Project {
     private boolean isDeleted;
     private Client client;
     private TeamMember lead;
-    private Set<ProjectSheet> projectSheets;
-
+    //private Set<TeamMember> teamMembers;
 }
