@@ -7,6 +7,8 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.Where;
 
 import java.util.Set;
 
@@ -14,6 +16,8 @@ import java.util.Set;
 @Setter
 @Getter
 @NoArgsConstructor
+@SQLDelete(sql = "UPDATE team_member_entity SET is_deleted = true WHERE id = ?")
+@Where(clause = "is_deleted = false")
 public class TeamMemberEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
