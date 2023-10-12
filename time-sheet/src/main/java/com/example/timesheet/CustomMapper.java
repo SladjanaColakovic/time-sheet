@@ -88,5 +88,6 @@ public interface CustomMapper {
 
     ReportSearch reportSearchDTOToReportSearch(ReportSearchDTO reportSearchDTO);
 
+    ReportDTO reportToReportDTO(Report report);
 
 }

@@ -1,5 +1,6 @@
 package com.example.timesheet.service;
 
+import com.example.timesheet.core.model.Report;
 import com.example.timesheet.core.model.ReportSearch;
 import com.example.timesheet.core.model.TimeSheetItem;
 import com.example.timesheet.core.repository.IReportRepository;
@@ -19,7 +20,7 @@ public class ReportService implements IReportService {
     }
 
     @Override
-    public List<TimeSheetItem> reportSearch(ReportSearch reportSearch) {
+    public Report reportSearch(ReportSearch reportSearch) {
         return reportRepository.reportSearch(reportSearch);
     }
 }

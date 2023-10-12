@@ -1,6 +1,7 @@
 package com.example.timesheet.data.impl;
 
 import com.example.timesheet.CustomMapper;
+import com.example.timesheet.core.model.Report;
 import com.example.timesheet.core.model.ReportSearch;
 import com.example.timesheet.core.model.TimeSheetItem;
 import com.example.timesheet.core.repository.IReportRepository;
@@ -25,11 +26,14 @@ public class ReportRepository implements IReportRepository {
         this.mapper = mapper;
     }
     @Override
-    public List<TimeSheetItem> reportSearch(ReportSearch reportSearch) {
+    public Report reportSearch(ReportSearch reportSearch) {
         List<TimeSheetItemEntity> items = timeSheetItemJpaRepository.reportSearch(reportSearch);
-        return items
+        Report report = new Report();
+        report.setItems(items
                 .stream()
                 .map(mapper::timeSheetItemEntityToTimeSheetItem)
-                .collect(Collectors.toList());
+                .collect(Collectors.toList()));
+        report.setTotalReport(0.0F);
+        return report;
     }
 }

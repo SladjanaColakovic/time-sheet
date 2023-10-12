@@ -2,6 +2,7 @@ package com.example.timesheet.app.controller;
 
 import com.example.timesheet.CustomMapper;
 import com.example.timesheet.app.dto.ReportSearchDTO;
+import com.example.timesheet.core.model.Report;
 import com.example.timesheet.core.model.ReportSearch;
 import com.example.timesheet.core.model.TimeSheetItem;
 import com.example.timesheet.core.service.IReportService;
@@ -28,10 +29,7 @@ public class ReportController {
     @GetMapping
     public ResponseEntity<?> reportSearch(@RequestBody ReportSearchDTO reportSearchDTO){
         ReportSearch reportSearch = mapper.reportSearchDTOToReportSearch(reportSearchDTO);
-        List<TimeSheetItem> items = reportService.reportSearch(reportSearch);
-        return new ResponseEntity<>(items.stream()
-                .map(mapper::timeSheetItemToTimeSheetItemDTO)
-                .collect(Collectors.toList()), HttpStatus.OK
-        );
+        Report report = reportService.reportSearch(reportSearch);
+        return new ResponseEntity<>(mapper.reportToReportDTO(report), HttpStatus.OK);
     }
 }
