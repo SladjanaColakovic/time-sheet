@@ -41,4 +41,9 @@ public class TeamMemberService implements ITeamMemberService {
     public TeamMember update(TeamMember teamMember) {
         return teamMemberRepository.update(teamMember);
     }
+
+    @Override
+    public TeamMember getByUsername(String username) {
+        return teamMemberRepository.getByUsername(username);
+    }
 }

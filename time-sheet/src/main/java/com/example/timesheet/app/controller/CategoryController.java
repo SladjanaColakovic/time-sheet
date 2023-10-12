@@ -8,6 +8,7 @@ import com.example.timesheet.core.service.ICategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -26,12 +27,14 @@ public class CategoryController {
     }
 
     @PostMapping
+    @PreAuthorize("hasRole('WORKER')")
     public ResponseEntity<?> create(@RequestBody NewCategoryDTO newCategory){
         Category category = categoryService.create(mapper.newCategoryDTOToCategory(newCategory));
         return new ResponseEntity<>(mapper.categoryToCategoryDTO(category), HttpStatus.CREATED);
     }
 
     @GetMapping("/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<?> getById(@PathVariable Long id){
         Category category = categoryService.getById(id);
         return new ResponseEntity<>(mapper.categoryToCategoryDTO(category), HttpStatus.OK);

@@ -11,4 +11,5 @@ public interface ITeamMemberRepository {
     void delete(Long id);
     List<TeamMember> getAll();
     TeamMember update(TeamMember teamMember);
+    TeamMember getByUsername(String username);
 }
