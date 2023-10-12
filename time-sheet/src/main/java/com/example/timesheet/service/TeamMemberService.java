@@ -1,5 +1,6 @@
 package com.example.timesheet.service;
 
+import com.example.timesheet.core.model.ChangePassword;
 import com.example.timesheet.core.model.TeamMember;
 import com.example.timesheet.core.repository.ITeamMemberRepository;
 import com.example.timesheet.core.service.ITeamMemberService;
@@ -45,5 +46,10 @@ public class TeamMemberService implements ITeamMemberService {
     @Override
     public TeamMember getByUsername(String username) {
         return teamMemberRepository.getByUsername(username);
+    }
+
+    @Override
+    public void changePassword(ChangePassword changePassword) {
+        teamMemberRepository.changePassword(changePassword);
     }
 }

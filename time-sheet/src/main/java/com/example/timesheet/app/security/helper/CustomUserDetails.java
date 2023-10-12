@@ -7,6 +7,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -18,11 +19,13 @@ public class CustomUserDetails implements UserDetails {
     private String username;
     private String password;
     private String role;
+    private Timestamp lastPasswordChangeDate;
 
-    public CustomUserDetails(String username, String password, String role) {
+    public CustomUserDetails(String username, String password, String role, Timestamp lastPasswordChangeDate) {
         this.username = username;
         this.password = password;
         this.role = role;
+        this.lastPasswordChangeDate = lastPasswordChangeDate;
     }
 
     @Override

@@ -27,7 +27,7 @@ public class TokenUtils {
     @Value("Authorization")
     private String AUTH_HEADER;
     private static final String AUDIENCE_WEB = "web";
-    private SignatureAlgorithm SIGNATURE_ALGORITHM = SignatureAlgorithm.HS512;
+    private final SignatureAlgorithm SIGNATURE_ALGORITHM = SignatureAlgorithm.HS512;
 
     public String generateToken(TeamMember user) {
         return Jwts.builder()
@@ -127,8 +127,6 @@ public class TokenUtils {
         } catch (Exception e) {
             claims = null;
         }
-
-
         return claims;
     }
 
@@ -139,7 +137,7 @@ public class TokenUtils {
         return (username != null
                 && username.equals(userDetails.getUsername())
                 && !isTokenExpired(token)
-                /*&& !isCreatedBeforeLastPasswordReset(created, user.getLastPasswordResetDate())*/);
+                && !isCreatedBeforeLastPasswordReset(created, user.getLastPasswordChangeDate()));
     }
 
     private Boolean isTokenExpired(String token) {

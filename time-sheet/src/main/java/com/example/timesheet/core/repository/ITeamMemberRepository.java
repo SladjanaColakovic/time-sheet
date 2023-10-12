@@ -1,6 +1,7 @@
 package com.example.timesheet.core.repository;
 
 
+import com.example.timesheet.core.model.ChangePassword;
 import com.example.timesheet.core.model.TeamMember;
 
 import java.util.List;
@@ -12,4 +13,5 @@ public interface ITeamMemberRepository {
     List<TeamMember> getAll();
     TeamMember update(TeamMember teamMember);
     TeamMember getByUsername(String username);
+    void changePassword(ChangePassword changePassword);
 }

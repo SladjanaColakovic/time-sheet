@@ -2,13 +2,16 @@ package com.example.timesheet.app.controller;
 
 
 import com.example.timesheet.CustomMapper;
+import com.example.timesheet.app.dto.ChangePasswordDTO;
 import com.example.timesheet.app.dto.NewTeamMemberDTO;
 import com.example.timesheet.app.dto.TeamMemberUpdateDTO;
+import com.example.timesheet.core.model.ChangePassword;
 import com.example.timesheet.core.model.TeamMember;
 import com.example.timesheet.core.service.ITeamMemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -56,5 +59,13 @@ public class TeamMemberController {
     public ResponseEntity<?> update(@RequestBody TeamMemberUpdateDTO editing){
         TeamMember teamMember = teamMemberService.update(mapper.teamMemberUpdateDTOToTeamMember(editing));
         return new ResponseEntity<>(mapper.teamMemberToTeamMemberDTO(teamMember), HttpStatus.OK);
+    }
+
+    @PutMapping("/changePassword")
+    @PreAuthorize("hasAnyRole('WORKER', 'ADMIN')")
+    public ResponseEntity<?> changePassword(@RequestBody ChangePasswordDTO changePasswordDTO){
+        ChangePassword changePassword = mapper.chnagePasswordDTOToChangePassword(changePasswordDTO);
+        teamMemberService.changePassword(changePassword);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }

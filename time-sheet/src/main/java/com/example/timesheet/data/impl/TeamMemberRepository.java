@@ -1,7 +1,8 @@
 package com.example.timesheet.data.impl;
 
 import com.example.timesheet.CustomMapper;
-import com.example.timesheet.core.exception.ObjectNotFoundException;
+import com.example.timesheet.core.exception.*;
+import com.example.timesheet.core.model.ChangePassword;
 import com.example.timesheet.core.model.TeamMember;
 import com.example.timesheet.core.repository.ITeamMemberRepository;
 import com.example.timesheet.data.entity.TeamMemberEntity;
@@ -11,6 +12,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 @Component
@@ -30,6 +32,7 @@ public class TeamMemberRepository implements ITeamMemberRepository {
     @Override
     public TeamMember create(TeamMember teamMember) {
         TeamMemberEntity newEntity = mapper.teamMemberToTeamMemberEntity(teamMember);
+        if(!Pattern.compile("^(?=.*[A-Z])(?=.*[0-9])(?=.*[a-z]).{8,}$").matcher(teamMember.getPassword()).matches()) throw new InvalidPasswordFormatException();
         newEntity.setPassword(passwordEncoder.encode(teamMember.getPassword()));
         TeamMemberEntity saved = teamMemberJpaRepository.save(newEntity);
         return mapper.teamMemberEntityToTeamMember(saved);
@@ -71,5 +74,16 @@ public class TeamMemberRepository implements ITeamMemberRepository {
     public TeamMember getByUsername(String username) {
         TeamMemberEntity teamMember = teamMemberJpaRepository.findByUsername(username);
         return mapper.teamMemberEntityToTeamMember(teamMember);
+    }
+
+    @Override
+    public void changePassword(ChangePassword changePassword) {
+        TeamMemberEntity teamMember = teamMemberJpaRepository.findByUsername(changePassword.getUsername());
+        if(teamMember == null) throw new UserNotFoundException();
+        if(!passwordEncoder.matches(changePassword.getOldPassword(), teamMember.getPassword())) throw new InvalidOldPasswordException();
+        if(!changePassword.getPassword().equals(changePassword.getConfirmPassword())) throw new PasswordsDoNotMatchException();
+        if(!Pattern.compile("^(?=.*[A-Z])(?=.*[0-9])(?=.*[a-z]).{8,}$").matcher(changePassword.getPassword()).matches()) throw new InvalidPasswordFormatException();
+        teamMember.setPassword(passwordEncoder.encode(changePassword.getPassword()));
+        teamMemberJpaRepository.save(teamMember);
     }
 }

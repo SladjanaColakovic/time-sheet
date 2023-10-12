@@ -10,6 +10,8 @@ import lombok.Setter;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
 
+import java.sql.Timestamp;
+import java.util.Date;
 import java.util.Set;
 
 @Entity
@@ -30,6 +32,8 @@ public class TeamMemberEntity {
 
     @Column(nullable = false)
     private String password;
+
+    private Timestamp lastPasswordChangeDate;
 
     @Column(nullable = false)
     private String email;
@@ -52,4 +56,10 @@ public class TeamMemberEntity {
     @JoinTable(name = "time_sheet", joinColumns = @JoinColumn(name = "team_member_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "project_id", referencedColumnName = "id"))
     private Set<ProjectEntity> workingProjects;
+
+    public void setPassword(String password) {
+        Timestamp now = new Timestamp(new Date().getTime());
+        this.setLastPasswordChangeDate(now);
+        this.password = password;
+    }
 }

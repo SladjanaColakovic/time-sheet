@@ -90,4 +90,6 @@ public interface CustomMapper {
 
     ReportDTO reportToReportDTO(Report report);
 
+    ChangePassword chnagePasswordDTOToChangePassword(ChangePasswordDTO changePasswordDTO);
+
 }

@@ -6,6 +6,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.sql.Timestamp;
+
 
 @Setter
 @Getter
@@ -19,6 +21,7 @@ public class TeamMember {
     private Float hoursPerWeek;
     private TeamMemberStatus status;
     private Role role;
+    private Timestamp lastPasswordChangeDate;
     //private Set<Project> leadingProjects;
     //private Set<Project> workingProjects;
 }
