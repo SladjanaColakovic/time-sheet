@@ -4,11 +4,15 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.Where;
 
 @Entity
 @Setter
 @Getter
 @NoArgsConstructor
+@SQLDelete(sql = "UPDATE country_entity SET is_deleted = true WHERE id = ?")
+@Where(clause = "is_deleted = false")
 public class CountryEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -16,4 +20,7 @@ public class CountryEntity {
 
     @Column(nullable = false)
     private String name;
+
+    @Column(nullable = false)
+    private boolean isDeleted;
 }
