@@ -15,9 +15,8 @@ public interface TimeSheetItemJpaRepository extends JpaRepository<TimeSheetItemE
             " (:#{#reportSearch.projectId} is null OR i.project.id = :#{#reportSearch.projectId}) AND" +
             " (:#{#reportSearch.categoryId} is null OR i.category.id = :#{#reportSearch.categoryId}) AND " +
             " (:#{#reportSearch.teamMemberId} is null OR i.teamMember.id = :#{#reportSearch.teamMemberId}) AND " +
-            "((coalesce(:#{#reportSearch.startDate}, null) is null AND coalesce(:#{#reportSearch.endDate}, null) is null) OR " +
-            "((coalesce(:#{#reportSearch.startDate}, null) is not null AND coalesce(:#{#reportSearch.endDate}, null) is not null AND  i.date between :#{#reportSearch.startDate} AND :#{#reportSearch.endDate}) OR " +
-            " (coalesce(:#{#reportSearch.startDate}, null) is not null AND coalesce(:#{#reportSearch.endDate}, null) is null AND  i.date >= :#{#reportSearch.startDate}) OR " +
-            " (coalesce(:#{#reportSearch.startDate}, null) is null AND coalesce(:#{#reportSearch.endDate}, null) is not null AND  i.date <= :#{#reportSearch.endDate})))")
+            "( (coalesce(:#{#reportSearch.startDate}, null) is null AND coalesce(:#{#reportSearch.endDate}, null) is null) OR " +
+            "( (coalesce(:#{#reportSearch.startDate}, null) is not null AND i.date >= :#{#reportSearch.startDate}) OR " +
+            "(coalesce(:#{#reportSearch.endDate}, null) is not null AND i.date <= :#{#reportSearch.endDate})))")
     List<TimeSheetItemEntity> reportSearch(ReportSearch reportSearch);
 }
