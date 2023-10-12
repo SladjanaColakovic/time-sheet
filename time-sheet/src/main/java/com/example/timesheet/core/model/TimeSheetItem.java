@@ -18,5 +18,4 @@ public class TimeSheetItem {
     private Category category;
     private TeamMember teamMember;
     private Project project;
-    private Client client;
 }

@@ -1,7 +1,6 @@
 package com.example.timesheet.data.entity;
 
 import com.example.timesheet.data.enumeration.ProjectStatus;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

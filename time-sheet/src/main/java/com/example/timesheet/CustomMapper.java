@@ -24,9 +24,6 @@ public interface CustomMapper {
 
     Category categoryEntityToCategory(CategoryEntity categoryEntity);
 
-
-
-
     Country newCountryDTOToCountry(NewCountryDTO newCountryDTO);
 
     CountryDTO countryToCountryDTO(Country country);
@@ -39,7 +36,6 @@ public interface CustomMapper {
     void countryToCountryEntityUpdate(Country country, @MappingTarget CountryEntity countryEntity);
 
     Country countryEntityToCountry(CountryEntity countryEntity);
-
 
     TeamMember newTeamMemberDTOToTeamMember(NewTeamMemberDTO newTeamMemberDTO);
 
@@ -56,7 +52,6 @@ public interface CustomMapper {
     TeamMember teamMemberEntityToTeamMember(TeamMemberEntity teamMemberEntity);
 
 
-
     Client newClientDTOToClient(NewClientDTO newClientDTO);
 
     ClientDTO clientToClientDTO(Client client);
@@ -69,8 +64,6 @@ public interface CustomMapper {
     void clientToClientEntityUpdate(Client client, @MappingTarget ClientEntity clientEntity);
 
     Client clientEntityToClient(ClientEntity clientEntity);
-
-
 
     Project newProjectDTOToProject(NewProjectDTO newProjectDTO);
 
@@ -85,8 +78,6 @@ public interface CustomMapper {
 
     Project projectEntityToProject(ProjectEntity projectEntity);
 
-
-
     TimeSheetItem newTimeSheetItemDTOToTimeSheetItem(NewTimeSheetItemDTO newTimeSheetItemDTO);
 
     TimeSheetItemDTO timeSheetItemToTimeSheetItemDTO(TimeSheetItem timeSheetItem);
@@ -94,6 +85,8 @@ public interface CustomMapper {
     TimeSheetItemEntity timeSheetItemToTimeSheetItemEntity(TimeSheetItem timeSheetItem);
 
     TimeSheetItem timeSheetItemEntityToTimeSheetItem(TimeSheetItemEntity timeSheetItemEntity);
+
+    ReportSearch reportSearchDTOToReportSearch(ReportSearchDTO reportSearchDTO);
 
 
 }

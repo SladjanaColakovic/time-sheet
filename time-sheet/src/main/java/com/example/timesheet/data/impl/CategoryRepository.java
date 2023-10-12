@@ -47,7 +47,7 @@ public class CategoryRepository implements ICategoryRepository {
         List<CategoryEntity> categories = categoryJpaRepository.findAll();
         return categories
                 .stream()
-                .map(element -> mapper.categoryEntityToCategory(element))
+                .map(mapper::categoryEntityToCategory)
                 .collect(Collectors.toList());
     }
 

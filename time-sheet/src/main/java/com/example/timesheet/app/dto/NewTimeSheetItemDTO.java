@@ -14,7 +14,6 @@ public class NewTimeSheetItemDTO {
     private String description;
     private float time;
     private float overtime;
-    private ClientDTO client;
     private ProjectDTO project;
     private CategoryDTO category;
     private TeamMemberDTO teamMember;
