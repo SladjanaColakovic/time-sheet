@@ -34,8 +34,7 @@ public class TeamMemberEntity {
     @Column(nullable = false)
     private String email;
 
-    @Column(nullable = false)
-    private float hoursPerWeek;
+    private Float hoursPerWeek;
 
     @Enumerated(EnumType.ORDINAL)
     private TeamMemberStatus status;

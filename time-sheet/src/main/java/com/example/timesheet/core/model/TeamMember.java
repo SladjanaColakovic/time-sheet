@@ -16,7 +16,7 @@ public class TeamMember {
     private String username;
     private String password;
     private String email;
-    private float hoursPerWeek;
+    private Float hoursPerWeek;
     private TeamMemberStatus status;
     private Role role;
     //private Set<Project> leadingProjects;

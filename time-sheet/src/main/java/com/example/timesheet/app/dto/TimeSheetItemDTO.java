@@ -12,8 +12,8 @@ public class TimeSheetItemDTO {
     private Long id;
     private LocalDate date;
     private String description;
-    private float time;
-    private float overtime;
+    private Float time;
+    private Float overtime;
     private CategoryDTO category;
     private TeamMemberDTO teamMember;
     private ProjectDTO project;

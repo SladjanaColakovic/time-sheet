@@ -18,7 +18,7 @@ public class TeamMemberDTO {
     private String name;
     private String username;
     private String email;
-    private float hoursPerWeek;
+    private Float hoursPerWeek;
     private TeamMemberStatus status;
     private Role role;
     private Set<ProjectDTO> leadingProjects;

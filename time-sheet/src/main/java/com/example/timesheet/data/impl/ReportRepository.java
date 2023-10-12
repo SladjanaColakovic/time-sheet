@@ -33,7 +33,10 @@ public class ReportRepository implements IReportRepository {
                 .stream()
                 .map(mapper::timeSheetItemEntityToTimeSheetItem)
                 .collect(Collectors.toList()));
-        report.setTotalReport(0.0F);
+        Float totalReport = items.stream()
+                .map(x -> x.getTime())
+                .reduce(0f, (f1, f2) -> f1 + f2);
+        report.setTotalReport(totalReport);
         return report;
     }
 }
