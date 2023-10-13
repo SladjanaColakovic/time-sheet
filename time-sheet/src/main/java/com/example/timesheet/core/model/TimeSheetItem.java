@@ -13,8 +13,8 @@ public class TimeSheetItem {
     private Long id;
     private LocalDate date;
     private String description;
-    private Float time;
-    private Float overtime;
+    private float time;
+    private float overtime;
     private Category category;
     private TeamMember teamMember;
     private Project project;

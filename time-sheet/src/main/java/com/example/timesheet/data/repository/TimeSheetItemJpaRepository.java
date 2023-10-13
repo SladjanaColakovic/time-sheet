@@ -1,6 +1,8 @@
 package com.example.timesheet.data.repository;
 
+import com.example.timesheet.core.model.DailyTimeSheet;
 import com.example.timesheet.core.model.ReportSearch;
+import com.example.timesheet.core.model.TimeSheetRange;
 import com.example.timesheet.data.entity.TimeSheetItemEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -18,4 +20,14 @@ public interface TimeSheetItemJpaRepository extends JpaRepository<TimeSheetItemE
             " (coalesce(:#{#reportSearch.startDate}, null) is null OR i.date >= :#{#reportSearch.startDate}) AND " +
             " (coalesce(:#{#reportSearch.endDate}, null) is null OR i.date <= :#{#reportSearch.endDate})")
     List<TimeSheetItemEntity> reportSearch(ReportSearch reportSearch);
+
+   /* @Query("select new com.example.timesheet.core.model.DailyTimeSheet(i.date, sum(i.time), case " +
+            "when (sum(i.time) = 7.5) then com.example.timesheet.core.enumeration.Flag.GREEN " +
+            "when (sum(i.time) > 0 and sum(i.time) < 7.5) then com.example.timesheet.core.enumeration.Flag.RED else com.example.timesheet.core.enumeration.Flag.WHITE end)" +
+            "from TimeSheetItemEntity  i where i.teamMember.id = :teamMemberId group by i.date")*/
+   @Query("select new com.example.timesheet.core.model.DailyTimeSheet(i.date, sum(i.time), sum(i.overtime)) " +
+           "from TimeSheetItemEntity i where i.teamMember.id = :#{#timeSheetRange.teamMemberId} AND" +
+           " i.date between :#{#timeSheetRange.from} AND :#{#timeSheetRange.to} group by i.date")
+    List<DailyTimeSheet> getDailyTimeSheets(TimeSheetRange timeSheetRange);
+
 }

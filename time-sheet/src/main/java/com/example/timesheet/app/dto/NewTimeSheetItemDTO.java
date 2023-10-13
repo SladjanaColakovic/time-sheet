@@ -12,8 +12,8 @@ import java.time.LocalDate;
 public class NewTimeSheetItemDTO {
     private LocalDate date;
     private String description;
-    private Float time;
-    private Float overtime;
+    private float time;
+    private float overtime;
     private ProjectDTO project;
     private CategoryDTO category;
     private TeamMemberDTO teamMember;

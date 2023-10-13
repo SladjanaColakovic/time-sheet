@@ -92,4 +92,8 @@ public interface CustomMapper {
 
     ChangePassword chnagePasswordDTOToChangePassword(ChangePasswordDTO changePasswordDTO);
 
+    TimeSheetRange timeSheetRangeDTOToTimeSheetRange(TimeSheetRangeDTO timeSheetRangeDTO);
+
+    TimeSheetDTO timeSheetToTimeSheetDTO(TimeSheet timeSheet);
+
 }

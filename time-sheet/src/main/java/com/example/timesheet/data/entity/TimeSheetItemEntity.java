@@ -22,9 +22,9 @@ public class TimeSheetItemEntity {
     private String description;
 
     @Column(nullable = false)
-    private Float time;
+    private float time;
 
-    private Float overtime;
+    private float overtime;
 
     @ManyToOne(fetch = FetchType.EAGER)
     private CategoryEntity category;

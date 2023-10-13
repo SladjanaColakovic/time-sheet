@@ -27,7 +27,6 @@ public class CategoryController {
     }
 
     @PostMapping
-    @PreAuthorize("hasRole('WORKER')")
     public ResponseEntity<?> create(@RequestBody NewCategoryDTO newCategory){
         Category category = categoryService.create(mapper.newCategoryDTOToCategory(newCategory));
         return new ResponseEntity<>(mapper.categoryToCategoryDTO(category), HttpStatus.CREATED);
