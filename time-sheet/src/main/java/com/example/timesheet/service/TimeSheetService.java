@@ -30,27 +30,18 @@ public class TimeSheetService implements ITimeSheetService {
 
     @Override
     public TimeSheet getTimeSheet(TimeSheetRange timeSheetRange) {
-        Map<LocalDate, DailyTimeSheet> initialTimeSheet = new HashMap<>();
-        for(LocalDate date = timeSheetRange.getFrom(); date.isBefore(timeSheetRange.getTo()); date = date.plusDays(1)){
-            initialTimeSheet.put(date, new DailyTimeSheet(date, 0.0, 0.0, Flag.WHITE));
-        }
+        Map<LocalDate, DailyTimeSheet> initialTimeSheet = createInitialTimeSheet(timeSheetRange.getFrom(), timeSheetRange.getTo());
         List<DailyTimeSheet> dailyTimeSheets = dailyTimeSheetRepository.getDailyTimeSheets(timeSheetRange);
-        dailyTimeSheets.forEach(element -> {
-            if (element.getHoursPerDay() + element.getOvertimeHoursPerDay() >= DAILY_WORK_NORM) element.setFlag(Flag.GREEN);
-            else element.setFlag(Flag.RED);
-        });
-        Map<LocalDate, DailyTimeSheet> map = dailyTimeSheets.stream()
+        List<DailyTimeSheet> flaggedDailyTimeSheets = flagDailyTimeSheets(dailyTimeSheets);
+
+        Map<LocalDate, DailyTimeSheet> dailyTimeSheetsMap = flaggedDailyTimeSheets.stream()
                 .collect(Collectors.toMap(DailyTimeSheet::getDate, Function.identity()));
-        initialTimeSheet.putAll(map);
-        for(DailyTimeSheet d: dailyTimeSheets){
-            System.out.println(d.getDate());
-        }
+        initialTimeSheet.putAll(dailyTimeSheetsMap);
+
         TimeSheet timeSheetResponse = new TimeSheet();
-        Double totalReport = dailyTimeSheets.stream()
-                .map(element -> element.getHoursPerDay() + element.getOvertimeHoursPerDay())
-                .reduce(0.0, Double::sum);
+        Double totalReport = calculateTotalReport(dailyTimeSheets);
         timeSheetResponse.setTotalHours(totalReport);
-        ArrayList<DailyTimeSheet> valueList = new ArrayList<DailyTimeSheet>(initialTimeSheet.values());
+        ArrayList<DailyTimeSheet> valueList = new ArrayList<>(initialTimeSheet.values());
         timeSheetResponse.setDailyTimeSheets(valueList);
         return timeSheetResponse;
     }
@@ -61,6 +52,20 @@ public class TimeSheetService implements ITimeSheetService {
             initialTimeSheet.put(date, new DailyTimeSheet(date, 0.0, 0.0, Flag.WHITE));
         }
         return initialTimeSheet;
+    }
+
+    private List<DailyTimeSheet> flagDailyTimeSheets(List<DailyTimeSheet> dailyTimeSheets){
+        dailyTimeSheets.forEach(element -> {
+            if (element.getHoursPerDay() + element.getOvertimeHoursPerDay() >= DAILY_WORK_NORM) element.setFlag(Flag.GREEN);
+            else element.setFlag(Flag.RED);
+        });
+        return dailyTimeSheets;
+    }
+
+    private Double calculateTotalReport(List<DailyTimeSheet> dailyTimeSheets){
+        return dailyTimeSheets.stream()
+                .map(element -> element.getHoursPerDay() + element.getOvertimeHoursPerDay())
+                .reduce(0.0, Double::sum);
     }
 
 }
