@@ -1,7 +1,7 @@
 package com.example.timesheet.core.enumeration;
 
 public enum Flag {
-    RED,
-    GREEN,
-    WHITE
+    FULFILLED,
+    UNFULFILLED,
+    NOT_FILLED
 }

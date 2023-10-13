@@ -48,15 +48,15 @@ public class TimeSheetService implements ITimeSheetService {
     private Map<LocalDate, DailyTimeSheet> createInitialTimeSheet(LocalDate from, LocalDate to){
         Map<LocalDate, DailyTimeSheet> initialTimeSheet = new HashMap<>();
         for(LocalDate date = from; date.isBefore(to); date = date.plusDays(1)){
-            initialTimeSheet.put(date, new DailyTimeSheet(date, 0.0, 0.0, Flag.WHITE));
+            initialTimeSheet.put(date, new DailyTimeSheet(date, 0.0, 0.0, Flag.NOT_FILLED));
         }
         return initialTimeSheet;
     }
 
     private List<DailyTimeSheet> flagDailyTimeSheets(List<DailyTimeSheet> dailyTimeSheets, Double regularHours){
         dailyTimeSheets.forEach(element -> {
-            if (element.getHoursPerDay() + element.getOvertimeHoursPerDay() >= regularHours) element.setFlag(Flag.GREEN);
-            else element.setFlag(Flag.RED);
+            if (element.getHoursPerDay() + element.getOvertimeHoursPerDay() >= regularHours) element.setFlag(Flag.FULFILLED);
+            else element.setFlag(Flag.UNFULFILLED);
         });
         return dailyTimeSheets;
     }
