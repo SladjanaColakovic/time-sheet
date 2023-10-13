@@ -90,6 +90,7 @@ public class WebSecurityConfig {
                 .requestMatchers(HttpMethod.POST, "api/client")
                 .requestMatchers(HttpMethod.POST, "api/project")
                 .requestMatchers(HttpMethod.POST, "api/timeSheetItem")
-                .requestMatchers(HttpMethod.GET, "api/timeSheet");
+                .requestMatchers(HttpMethod.GET, "api/timeSheet")
+                .requestMatchers(HttpMethod.GET, "api/report");
     }
 }

@@ -2,6 +2,7 @@ package com.example.timesheet.data.impl;
 
 import com.example.timesheet.CustomMapper;
 import com.example.timesheet.core.exception.ObjectNotFoundException;
+import com.example.timesheet.core.model.ReportSearch;
 import com.example.timesheet.core.model.TimeSheetItem;
 import com.example.timesheet.core.repository.ITimeSheetItemRepository;
 import com.example.timesheet.data.entity.TimeSheetItemEntity;
@@ -39,6 +40,15 @@ public class TimeSheetItemRepository implements ITimeSheetItemRepository {
     @Override
     public List<TimeSheetItem> getAll() {
         List<TimeSheetItemEntity> items = timeSheetItemJpaRepository.findAll();
+        return items
+                .stream()
+                .map(mapper::timeSheetItemEntityToTimeSheetItem)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<TimeSheetItem> reportSearch(ReportSearch reportSearch) {
+        List<TimeSheetItemEntity> items = timeSheetItemJpaRepository.reportSearch(reportSearch);
         return items
                 .stream()
                 .map(mapper::timeSheetItemEntityToTimeSheetItem)
