@@ -86,6 +86,7 @@ public class WebSecurityConfig {
                 .requestMatchers(HttpMethod.POST, "/auth/login")
                 .requestMatchers(HttpMethod.POST, "api/teamMember")
                 .requestMatchers(HttpMethod.POST, "api/category")
+                .requestMatchers(HttpMethod.GET, "api/category")
                 .requestMatchers(HttpMethod.POST, "api/country")
                 .requestMatchers(HttpMethod.POST, "api/client")
                 .requestMatchers(HttpMethod.POST, "api/project")

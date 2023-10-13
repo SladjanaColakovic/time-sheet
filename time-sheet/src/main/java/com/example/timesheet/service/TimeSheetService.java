@@ -21,7 +21,6 @@ import java.util.stream.Collectors;
 public class TimeSheetService implements ITimeSheetService {
 
     private final IDailyTimeSheetRepository dailyTimeSheetRepository;
-    private final Double DAILY_WORK_NORM = 7.5;
 
     @Autowired
     public TimeSheetService(IDailyTimeSheetRepository dailyTimeSheetRepository){
@@ -32,14 +31,14 @@ public class TimeSheetService implements ITimeSheetService {
     public TimeSheet getTimeSheet(TimeSheetRange timeSheetRange) {
         Map<LocalDate, DailyTimeSheet> initialTimeSheet = createInitialTimeSheet(timeSheetRange.getFrom(), timeSheetRange.getTo());
         List<DailyTimeSheet> dailyTimeSheets = dailyTimeSheetRepository.getDailyTimeSheets(timeSheetRange);
-        List<DailyTimeSheet> flaggedDailyTimeSheets = flagDailyTimeSheets(dailyTimeSheets);
+        List<DailyTimeSheet> flaggedDailyTimeSheets = flagDailyTimeSheets(dailyTimeSheets, timeSheetRange.getRegularHours());
 
         Map<LocalDate, DailyTimeSheet> dailyTimeSheetsMap = flaggedDailyTimeSheets.stream()
                 .collect(Collectors.toMap(DailyTimeSheet::getDate, Function.identity()));
         initialTimeSheet.putAll(dailyTimeSheetsMap);
 
         TimeSheet timeSheetResponse = new TimeSheet();
-        Double totalReport = calculateTotalReport(dailyTimeSheets);
+        Double totalReport = calculateTotalHours(dailyTimeSheets);
         timeSheetResponse.setTotalHours(totalReport);
         ArrayList<DailyTimeSheet> valueList = new ArrayList<>(initialTimeSheet.values());
         timeSheetResponse.setDailyTimeSheets(valueList);
@@ -54,15 +53,15 @@ public class TimeSheetService implements ITimeSheetService {
         return initialTimeSheet;
     }
 
-    private List<DailyTimeSheet> flagDailyTimeSheets(List<DailyTimeSheet> dailyTimeSheets){
+    private List<DailyTimeSheet> flagDailyTimeSheets(List<DailyTimeSheet> dailyTimeSheets, Double regularHours){
         dailyTimeSheets.forEach(element -> {
-            if (element.getHoursPerDay() + element.getOvertimeHoursPerDay() >= DAILY_WORK_NORM) element.setFlag(Flag.GREEN);
+            if (element.getHoursPerDay() + element.getOvertimeHoursPerDay() >= regularHours) element.setFlag(Flag.GREEN);
             else element.setFlag(Flag.RED);
         });
         return dailyTimeSheets;
     }
 
-    private Double calculateTotalReport(List<DailyTimeSheet> dailyTimeSheets){
+    private Double calculateTotalHours(List<DailyTimeSheet> dailyTimeSheets){
         return dailyTimeSheets.stream()
                 .map(element -> element.getHoursPerDay() + element.getOvertimeHoursPerDay())
                 .reduce(0.0, Double::sum);

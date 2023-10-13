@@ -1,6 +1,8 @@
 package com.example.timesheet.app.controller;
 
 import com.example.timesheet.CustomMapper;
+import com.example.timesheet.app.dto.Categories;
+import com.example.timesheet.app.dto.CategoryDTO;
 import com.example.timesheet.app.dto.CategoryUpdateDTO;
 import com.example.timesheet.app.dto.NewCategoryDTO;
 import com.example.timesheet.core.model.Category;
@@ -29,23 +31,25 @@ public class CategoryController {
     @PostMapping
     public ResponseEntity<?> create(@RequestBody NewCategoryDTO newCategory){
         Category category = categoryService.create(mapper.newCategoryDTOToCategory(newCategory));
-        return new ResponseEntity<>(mapper.categoryToCategoryDTO(category), HttpStatus.CREATED);
+        CategoryDTO response = mapper.categoryToCategoryDTO(category);
+        return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
 
     @GetMapping("/{id}")
     @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<?> getById(@PathVariable Long id){
         Category category = categoryService.getById(id);
-        return new ResponseEntity<>(mapper.categoryToCategoryDTO(category), HttpStatus.OK);
+        CategoryDTO response = mapper.categoryToCategoryDTO(category);
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
     @GetMapping
     public ResponseEntity<?> getAll(){
         List<Category> categories = categoryService.getAll();
-        return new ResponseEntity<>(categories.stream()
-                    .map(mapper::categoryToCategoryDTO)
-                    .collect(Collectors.toList()), HttpStatus.OK
-        );
+        List<CategoryDTO> response = categories.stream()
+                .map(mapper::categoryToCategoryDTO)
+                .collect(Collectors.toList());
+        return new ResponseEntity<>(new Categories(response), HttpStatus.OK);
     }
 
     @DeleteMapping
@@ -57,6 +61,7 @@ public class CategoryController {
     @PutMapping
     public ResponseEntity<?> update(@RequestBody CategoryUpdateDTO editing){
         Category category = categoryService.update(mapper.categoryUpdateDTOToCategory(editing));
-        return new ResponseEntity<>(mapper.categoryToCategoryDTO(category), HttpStatus.OK);
+        CategoryDTO response = mapper.categoryToCategoryDTO(category);
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 }

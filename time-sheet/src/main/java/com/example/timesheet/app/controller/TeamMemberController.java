@@ -2,9 +2,7 @@ package com.example.timesheet.app.controller;
 
 
 import com.example.timesheet.CustomMapper;
-import com.example.timesheet.app.dto.ChangePasswordDTO;
-import com.example.timesheet.app.dto.NewTeamMemberDTO;
-import com.example.timesheet.app.dto.TeamMemberUpdateDTO;
+import com.example.timesheet.app.dto.*;
 import com.example.timesheet.core.model.ChangePassword;
 import com.example.timesheet.core.model.TeamMember;
 import com.example.timesheet.core.service.ITeamMemberService;
@@ -31,21 +29,24 @@ public class TeamMemberController {
     @PostMapping
     public ResponseEntity<?> create(@RequestBody NewTeamMemberDTO newTeamMember){
         TeamMember teamMember = teamMemberService.create(mapper.newTeamMemberDTOToTeamMember(newTeamMember));
-        return new ResponseEntity<>(mapper.teamMemberToTeamMemberDTO(teamMember), HttpStatus.CREATED);
+        TeamMemberDTO response = mapper.teamMemberToTeamMemberDTO(teamMember);
+        return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<?> getById(@PathVariable Long id){
         TeamMember teamMember = teamMemberService.getById(id);
-        return new ResponseEntity<>(mapper.teamMemberToTeamMemberDTO(teamMember), HttpStatus.OK);
+        TeamMemberDTO response = mapper.teamMemberToTeamMemberDTO(teamMember);
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
     @GetMapping
     public ResponseEntity<?> getAll(){
         List<TeamMember> teamMembers = teamMemberService.getAll();
-        return new ResponseEntity<>(teamMembers.stream()
+        List<TeamMemberDTO> response = teamMembers.stream()
                 .map(mapper::teamMemberToTeamMemberDTO)
-                .collect(Collectors.toList()), HttpStatus.OK
+                .collect(Collectors.toList());
+        return new ResponseEntity<>(new TeamMembers(response), HttpStatus.OK
         );
     }
 
@@ -58,7 +59,8 @@ public class TeamMemberController {
     @PutMapping
     public ResponseEntity<?> update(@RequestBody TeamMemberUpdateDTO editing){
         TeamMember teamMember = teamMemberService.update(mapper.teamMemberUpdateDTOToTeamMember(editing));
-        return new ResponseEntity<>(mapper.teamMemberToTeamMemberDTO(teamMember), HttpStatus.OK);
+        TeamMemberDTO response = mapper.teamMemberToTeamMemberDTO(teamMember);
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
     @PutMapping("/changePassword")

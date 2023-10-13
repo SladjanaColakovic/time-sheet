@@ -2,7 +2,9 @@ package com.example.timesheet.app.controller;
 
 import com.example.timesheet.CustomMapper;
 import com.example.timesheet.app.dto.NewProjectDTO;
+import com.example.timesheet.app.dto.ProjectDTO;
 import com.example.timesheet.app.dto.ProjectUpdateDTO;
+import com.example.timesheet.app.dto.Projects;
 import com.example.timesheet.core.model.Project;
 import com.example.timesheet.core.service.IProjectService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,21 +33,24 @@ public class ProjectController {
     public ResponseEntity<?> create(@RequestBody NewProjectDTO newProject){
         Project project = mapper.newProjectDTOToProject(newProject);
         Project created = projectService.create(project);
-        return new ResponseEntity<>(mapper.projectToProjectDTO(created), HttpStatus.CREATED);
+        ProjectDTO response = mapper.projectToProjectDTO(created);
+        return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<?> getById(@PathVariable Long id){
         Project project = projectService.getById(id);
-        return new ResponseEntity<>(mapper.projectToProjectDTO(project), HttpStatus.OK);
+        ProjectDTO response = mapper.projectToProjectDTO(project);
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
     @GetMapping
     public ResponseEntity<?> getAll(){
         List<Project> projects = projectService.getAll();
-        return new ResponseEntity<>(projects.stream()
+        List<ProjectDTO> response = projects.stream()
                 .map(mapper::projectToProjectDTO)
-                .collect(Collectors.toList()), HttpStatus.OK
+                .collect(Collectors.toList());
+        return new ResponseEntity<>(new Projects(response), HttpStatus.OK
         );
     }
 
@@ -58,7 +63,8 @@ public class ProjectController {
     @PutMapping
     public ResponseEntity<?> update(@RequestBody ProjectUpdateDTO editing){
         Project project = projectService.update(mapper.projectUpdateDTOToProject(editing));
-        return new ResponseEntity<>(mapper.projectToProjectDTO(project), HttpStatus.OK);
+        ProjectDTO response = mapper.projectToProjectDTO(project);
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
 

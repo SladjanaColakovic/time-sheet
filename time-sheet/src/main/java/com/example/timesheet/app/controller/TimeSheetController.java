@@ -1,6 +1,7 @@
 package com.example.timesheet.app.controller;
 
 import com.example.timesheet.CustomMapper;
+import com.example.timesheet.app.dto.TimeSheetDTO;
 import com.example.timesheet.app.dto.TimeSheetRangeDTO;
 import com.example.timesheet.core.model.TimeSheet;
 import com.example.timesheet.core.model.TimeSheetRange;
@@ -27,6 +28,7 @@ public class TimeSheetController {
     public ResponseEntity<?> getDailyTimeSheets(@RequestBody TimeSheetRangeDTO timeSheetRangeDTO){
         TimeSheetRange timeSheetRange = mapper.timeSheetRangeDTOToTimeSheetRange(timeSheetRangeDTO);
         TimeSheet timeSheet = timeSheetService.getTimeSheet(timeSheetRange);
-        return new ResponseEntity<>(mapper.timeSheetToTimeSheetDTO(timeSheet), HttpStatus.OK);
+        TimeSheetDTO response = mapper.timeSheetToTimeSheetDTO(timeSheet);
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 }

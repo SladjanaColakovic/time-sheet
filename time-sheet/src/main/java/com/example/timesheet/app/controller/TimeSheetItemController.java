@@ -2,6 +2,8 @@ package com.example.timesheet.app.controller;
 
 import com.example.timesheet.CustomMapper;
 import com.example.timesheet.app.dto.NewTimeSheetItemDTO;
+import com.example.timesheet.app.dto.TimeSheetItemDTO;
+import com.example.timesheet.app.dto.TimeSheetItems;
 import com.example.timesheet.core.model.TimeSheetItem;
 import com.example.timesheet.core.service.ITimeSheetItemService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,21 +31,24 @@ public class TimeSheetItemController {
     @PostMapping
     public ResponseEntity<?> create(@RequestBody NewTimeSheetItemDTO newTimeSheetItem){
         TimeSheetItem timeSheetItem = timeSheetItemService.create(mapper.newTimeSheetItemDTOToTimeSheetItem(newTimeSheetItem));
-        return new ResponseEntity<>(mapper.timeSheetItemToTimeSheetItemDTO(timeSheetItem), HttpStatus.CREATED);
+        TimeSheetItemDTO response = mapper.timeSheetItemToTimeSheetItemDTO(timeSheetItem);
+        return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<?> getById(@PathVariable Long id){
         TimeSheetItem timeSheetItem = timeSheetItemService.getById(id);
-        return new ResponseEntity<>(mapper.timeSheetItemToTimeSheetItemDTO(timeSheetItem), HttpStatus.OK);
+        TimeSheetItemDTO response = mapper.timeSheetItemToTimeSheetItemDTO(timeSheetItem);
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
     @GetMapping
     public ResponseEntity<?> getAll(){
         List<TimeSheetItem> items = timeSheetItemService.getAll();
-        return new ResponseEntity<>(items.stream()
+        List<TimeSheetItemDTO> response = items.stream()
                 .map(mapper::timeSheetItemToTimeSheetItemDTO)
-                .collect(Collectors.toList()), HttpStatus.OK
+                .collect(Collectors.toList());
+        return new ResponseEntity<>(new TimeSheetItems(response), HttpStatus.OK
         );
     }
 

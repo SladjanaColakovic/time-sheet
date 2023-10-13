@@ -3,7 +3,9 @@ package com.example.timesheet.app.controller;
 
 
 import com.example.timesheet.CustomMapper;
+import com.example.timesheet.app.dto.ClientDTO;
 import com.example.timesheet.app.dto.ClientUpdateDTO;
+import com.example.timesheet.app.dto.Clients;
 import com.example.timesheet.app.dto.NewClientDTO;
 import com.example.timesheet.core.model.Client;
 import com.example.timesheet.core.service.IClientService;
@@ -33,22 +35,25 @@ public class ClientController {
     public ResponseEntity<?> create(@RequestBody NewClientDTO newClient){
         Client client = mapper.newClientDTOToClient(newClient);
         Client created = clientService.create(client);
-        return new ResponseEntity<>(mapper.clientToClientDTO(created), HttpStatus.CREATED);
+        ClientDTO response = mapper.clientToClientDTO(created);
+        return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<?> getById(@PathVariable Long id){
         Client client = clientService.getById(id);
-        return new ResponseEntity<>(mapper.clientToClientDTO(client), HttpStatus.OK);
+        ClientDTO response = mapper.clientToClientDTO(client);
+        return new ResponseEntity<>(response, HttpStatus.OK);
 
     }
 
     @GetMapping
     public ResponseEntity<?> getAll(){
         List<Client> clients = clientService.getAll();
-        return new ResponseEntity<>(clients.stream()
+        List<ClientDTO> response = clients.stream()
                 .map(mapper::clientToClientDTO)
-                .collect(Collectors.toList()), HttpStatus.OK
+                .collect(Collectors.toList());
+        return new ResponseEntity<>(new Clients(response), HttpStatus.OK
         );
     }
 
@@ -61,7 +66,8 @@ public class ClientController {
     @PutMapping
     public ResponseEntity<?> update(@RequestBody ClientUpdateDTO editing){
         Client client = clientService.update(mapper.clientUpdateDTOToClient(editing));
-        return new ResponseEntity<>(mapper.clientToClientDTO(client), HttpStatus.OK);
+        ClientDTO response = mapper.clientToClientDTO(client);
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
 }

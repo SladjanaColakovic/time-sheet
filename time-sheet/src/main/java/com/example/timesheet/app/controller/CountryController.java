@@ -1,6 +1,8 @@
 package com.example.timesheet.app.controller;
 
 import com.example.timesheet.CustomMapper;
+import com.example.timesheet.app.dto.Countries;
+import com.example.timesheet.app.dto.CountryDTO;
 import com.example.timesheet.app.dto.CountryUpdateDTO;
 import com.example.timesheet.app.dto.NewCountryDTO;
 import com.example.timesheet.core.model.Country;
@@ -27,21 +29,24 @@ public class CountryController {
     @PostMapping
     public ResponseEntity<?> create(@RequestBody NewCountryDTO newCountry){
         Country country = countryService.create(mapper.newCountryDTOToCountry(newCountry));
-        return new ResponseEntity<>(mapper.countryToCountryDTO(country), HttpStatus.CREATED);
+        CountryDTO response = mapper.countryToCountryDTO(country);
+        return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<?> getById(@PathVariable Long id){
         Country country = countryService.getById(id);
-        return new ResponseEntity<>(mapper.countryToCountryDTO(country), HttpStatus.OK);
+        CountryDTO response = mapper.countryToCountryDTO(country);
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
     @GetMapping
     public ResponseEntity<?> getAll(){
         List<Country> countries = countryService.getAll();
-        return new ResponseEntity<>(countries.stream()
+        List<CountryDTO> response = countries.stream()
                 .map(mapper::countryToCountryDTO)
-                .collect(Collectors.toList()), HttpStatus.OK
+                .collect(Collectors.toList());
+        return new ResponseEntity<>(new Countries(response), HttpStatus.OK
         );
     }
 
@@ -54,7 +59,8 @@ public class CountryController {
     @PutMapping
     public ResponseEntity<?> update(@RequestBody CountryUpdateDTO editing){
         Country country = countryService.update(mapper.countryUpdateDTOToCountry(editing));
-        return new ResponseEntity<>(mapper.countryToCountryDTO(country), HttpStatus.OK);
+        CountryDTO response = mapper.countryToCountryDTO(country);
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
 }

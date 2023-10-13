@@ -13,4 +13,5 @@ public class TimeSheetRange {
     private LocalDate from;
     private LocalDate to;
     private Long teamMemberId;
+    private Double regularHours;
 }
