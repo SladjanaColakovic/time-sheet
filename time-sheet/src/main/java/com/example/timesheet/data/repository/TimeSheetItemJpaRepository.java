@@ -8,7 +8,9 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDate;
 import java.util.List;
+import java.util.Map;
 
 @Repository
 public interface TimeSheetItemJpaRepository extends JpaRepository<TimeSheetItemEntity, Long> {
@@ -28,6 +30,6 @@ public interface TimeSheetItemJpaRepository extends JpaRepository<TimeSheetItemE
    @Query("select new com.example.timesheet.core.model.DailyTimeSheet(i.date, sum(i.time), sum(i.overtime)) " +
            "from TimeSheetItemEntity i where i.teamMember.id = :#{#timeSheetRange.teamMemberId} AND" +
            " i.date between :#{#timeSheetRange.from} AND :#{#timeSheetRange.to} group by i.date")
-    List<DailyTimeSheet> getDailyTimeSheets(TimeSheetRange timeSheetRange);
+   List<DailyTimeSheet> getDailyTimeSheets(TimeSheetRange timeSheetRange);
 
 }
