@@ -30,18 +30,18 @@ public class TimeSheetService implements ITimeSheetService {
     @Override
     public TimeSheet getTimeSheet(TimeSheetRange timeSheetRange) {
         Map<LocalDate, DailyTimeSheet> initialTimeSheet = createInitialTimeSheet(timeSheetRange.getFrom(), timeSheetRange.getTo());
-        List<DailyTimeSheet> dailyTimeSheets = dailyTimeSheetRepository.getDailyTimeSheets(timeSheetRange);
-        List<DailyTimeSheet> flaggedDailyTimeSheets = flagDailyTimeSheets(dailyTimeSheets, timeSheetRange.getRegularHours());
+        List<DailyTimeSheet> existingDailyTimeSheets = dailyTimeSheetRepository.getDailyTimeSheets(timeSheetRange);
+        List<DailyTimeSheet> flaggedExistingDailyTimeSheets = flagDailyTimeSheets(existingDailyTimeSheets, timeSheetRange.getRegularHours());
 
-        Map<LocalDate, DailyTimeSheet> dailyTimeSheetsMap = flaggedDailyTimeSheets.stream()
+        Map<LocalDate, DailyTimeSheet> map = flaggedExistingDailyTimeSheets.stream()
                 .collect(Collectors.toMap(DailyTimeSheet::getDate, Function.identity()));
-        initialTimeSheet.putAll(dailyTimeSheetsMap);
+        initialTimeSheet.putAll(map);
 
         TimeSheet timeSheetResponse = new TimeSheet();
-        Double totalReport = calculateTotalHours(dailyTimeSheets);
-        timeSheetResponse.setTotalHours(totalReport);
-        ArrayList<DailyTimeSheet> valueList = new ArrayList<>(initialTimeSheet.values());
-        timeSheetResponse.setDailyTimeSheets(valueList);
+        Double totalHours = calculateTotalHours(existingDailyTimeSheets);
+        timeSheetResponse.setTotalHours(totalHours);
+        ArrayList<DailyTimeSheet> dailyTimeSheets = new ArrayList<>(initialTimeSheet.values());
+        timeSheetResponse.setDailyTimeSheets(dailyTimeSheets);
         return timeSheetResponse;
     }
 
