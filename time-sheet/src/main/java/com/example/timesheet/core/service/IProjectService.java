@@ -10,4 +10,5 @@ public interface IProjectService {
     void delete(Long id);
     List<Project> getAll();
     Project update(Project project);
+    List<Project> getLeadingProjects(String username);
 }

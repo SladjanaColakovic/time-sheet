@@ -41,4 +41,9 @@ public class ProjectService implements IProjectService {
     public Project update(Project project) {
         return projectRepository.update(project);
     }
+
+    @Override
+    public List<Project> getLeadingProjects(String username) {
+        return projectRepository.getLeadingProjects(username);
+    }
 }

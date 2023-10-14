@@ -62,4 +62,13 @@ public class ProjectRepository implements IProjectRepository {
         ProjectEntity saved = projectJpaRepository.save(editing);
         return mapper.projectEntityToProject(saved);
     }
+
+    @Override
+    public List<Project> getLeadingProjects(String username) {
+        List<ProjectEntity> projects = projectJpaRepository.getLeadingProjects(username);
+        return projects
+                .stream()
+                .map(mapper::projectEntityToProject)
+                .collect(Collectors.toList());
+    }
 }
