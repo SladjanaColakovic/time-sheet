@@ -12,20 +12,20 @@ import java.time.LocalDate;
 @NoArgsConstructor
 public class DailyTimeSheet {
     private LocalDate date;
-    private Double hoursPerDay;
-    private Double overtimeHoursPerDay;
+    private double hoursPerDay;
+    private double overtimeHoursPerDay;
+    private double totalHoursPerDay;
     private Flag flag;
 
-    public DailyTimeSheet(LocalDate date, Double hoursPerDay, Double overtimeHoursPerDay){
+    public DailyTimeSheet(LocalDate date, double hoursPerDay, double overtimeHoursPerDay){
         this.date = date;
         this.hoursPerDay = hoursPerDay;
         this.overtimeHoursPerDay = overtimeHoursPerDay;
     }
 
-    public DailyTimeSheet(LocalDate date, Double hoursPerDay, Double overtimeHoursPerDay, Flag flag){
+    public DailyTimeSheet(LocalDate date, double totalHoursPerDay, Flag flag){
         this.date = date;
-        this.hoursPerDay = hoursPerDay;
-        this.overtimeHoursPerDay = overtimeHoursPerDay;
+        this.totalHoursPerDay = hoursPerDay;
         this.flag = flag;
     }
 }

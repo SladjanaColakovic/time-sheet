@@ -21,6 +21,7 @@ import java.util.stream.Collectors;
 public class TimeSheetService implements ITimeSheetService {
 
     private final IDailyTimeSheetRepository dailyTimeSheetRepository;
+    private final Double DAILY_WORK_NORM = 7.5;
 
     @Autowired
     public TimeSheetService(IDailyTimeSheetRepository dailyTimeSheetRepository){
@@ -29,33 +30,30 @@ public class TimeSheetService implements ITimeSheetService {
 
     @Override
     public TimeSheet getTimeSheet(TimeSheetRange timeSheetRange) {
-        Map<LocalDate, DailyTimeSheet> initialTimeSheet = createInitialTimeSheet(timeSheetRange.getFrom(), timeSheetRange.getTo());
-        List<DailyTimeSheet> existingDailyTimeSheets = dailyTimeSheetRepository.getDailyTimeSheets(timeSheetRange);
-        List<DailyTimeSheet> flaggedExistingDailyTimeSheets = flagDailyTimeSheets(existingDailyTimeSheets, timeSheetRange.getRegularHours());
+        Map<LocalDate, DailyTimeSheet> timeSheet = createInitialTimeSheet(timeSheetRange.getFrom(), timeSheetRange.getTo());
+        List<DailyTimeSheet> dailyTimeSheets = dailyTimeSheetRepository.getDailyTimeSheets(timeSheetRange);
+        List<DailyTimeSheet> flaggedDailyTimeSheets = flagDailyTimeSheets(dailyTimeSheets);
 
-        Map<LocalDate, DailyTimeSheet> map = flaggedExistingDailyTimeSheets.stream()
+        Map<LocalDate, DailyTimeSheet> existingTimeSheet = flaggedDailyTimeSheets
+                .stream()
                 .collect(Collectors.toMap(DailyTimeSheet::getDate, Function.identity()));
-        initialTimeSheet.putAll(map);
 
-        TimeSheet timeSheetResponse = new TimeSheet();
-        Double totalHours = calculateTotalHours(existingDailyTimeSheets);
-        timeSheetResponse.setTotalHours(totalHours);
-        ArrayList<DailyTimeSheet> dailyTimeSheets = new ArrayList<>(initialTimeSheet.values());
-        timeSheetResponse.setDailyTimeSheets(dailyTimeSheets);
-        return timeSheetResponse;
+        timeSheet.putAll(existingTimeSheet);
+        return new TimeSheet(new ArrayList<>(timeSheet.values()), calculateTotalHours(dailyTimeSheets));
     }
 
     private Map<LocalDate, DailyTimeSheet> createInitialTimeSheet(LocalDate from, LocalDate to){
         Map<LocalDate, DailyTimeSheet> initialTimeSheet = new HashMap<>();
         for(LocalDate date = from; date.isBefore(to); date = date.plusDays(1)){
-            initialTimeSheet.put(date, new DailyTimeSheet(date, 0.0, 0.0, Flag.NOT_FILLED));
+            initialTimeSheet.put(date, new DailyTimeSheet(date, 0.0, Flag.NOT_FILLED));
         }
         return initialTimeSheet;
     }
 
-    private List<DailyTimeSheet> flagDailyTimeSheets(List<DailyTimeSheet> dailyTimeSheets, Double regularHours){
+    private List<DailyTimeSheet> flagDailyTimeSheets(List<DailyTimeSheet> dailyTimeSheets){
         dailyTimeSheets.forEach(element -> {
-            if (element.getHoursPerDay() + element.getOvertimeHoursPerDay() >= regularHours) element.setFlag(Flag.FULFILLED);
+            element.setTotalHoursPerDay(element.getHoursPerDay() + element.getOvertimeHoursPerDay());
+            if (element.getTotalHoursPerDay() >= DAILY_WORK_NORM) element.setFlag(Flag.FULFILLED);
             else element.setFlag(Flag.UNFULFILLED);
         });
         return dailyTimeSheets;

@@ -12,4 +12,9 @@ import java.util.List;
 public class TimeSheet {
     private List<DailyTimeSheet> dailyTimeSheets;
     private Double totalHours;
+
+    public TimeSheet(List<DailyTimeSheet> dailyTimeSheets, Double totalHours){
+        this.dailyTimeSheets = dailyTimeSheets;
+        this.totalHours = totalHours;
+    }
 }

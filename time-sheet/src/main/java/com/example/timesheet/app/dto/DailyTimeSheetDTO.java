@@ -12,7 +12,6 @@ import java.time.LocalDate;
 @NoArgsConstructor
 public class DailyTimeSheetDTO {
     private LocalDate date;
-    private Double hoursPerDay;
-    private Double overtimeHoursPerDay;
+    private double totalHoursPerDay;
     private Flag flag;
 }
