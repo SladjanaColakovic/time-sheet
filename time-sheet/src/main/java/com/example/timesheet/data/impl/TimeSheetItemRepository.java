@@ -16,13 +16,12 @@ import java.util.stream.Collectors;
 @Component
 public class TimeSheetItemRepository implements ITimeSheetItemRepository {
 
-    private final TimeSheetItemJpaRepository timeSheetItemJpaRepository;
-    private final CustomMapper mapper;
     @Autowired
-    public TimeSheetItemRepository(TimeSheetItemJpaRepository timeSheetItemJpaRepository, CustomMapper mapper){
-        this.timeSheetItemJpaRepository = timeSheetItemJpaRepository;
-        this.mapper = mapper;
-    }
+    private  TimeSheetItemJpaRepository timeSheetItemJpaRepository;
+
+    @Autowired
+    private  CustomMapper mapper;
+
     @Override
     public TimeSheetItem create(TimeSheetItem timeSheetItem) {
         TimeSheetItemEntity newEntity = mapper.timeSheetItemToTimeSheetItemEntity(timeSheetItem);

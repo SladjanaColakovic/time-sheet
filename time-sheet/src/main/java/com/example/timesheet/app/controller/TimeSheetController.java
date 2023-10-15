@@ -15,14 +15,11 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api/timeSheet")
 public class TimeSheetController {
 
-    private final ITimeSheetService timeSheetService;
-    private final CustomMapper mapper;
+    @Autowired
+    private ITimeSheetService timeSheetService;
 
     @Autowired
-    public TimeSheetController(ITimeSheetService timeSheetService, CustomMapper mapper){
-        this.timeSheetService = timeSheetService;
-        this.mapper = mapper;
-    }
+    private CustomMapper mapper;
 
     @GetMapping()
     public ResponseEntity<?> getDailyTimeSheets(@RequestBody TimeSheetRangeDTO timeSheetRangeDTO){

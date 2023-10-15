@@ -10,11 +10,9 @@ import java.util.List;
 
 @Service
 public class CategoryService implements ICategoryService {
-    private final ICategoryRepository categoryRepository;
     @Autowired
-    public CategoryService(ICategoryRepository categoryRepository){
-        this.categoryRepository = categoryRepository;
-    }
+    private ICategoryRepository categoryRepository;
+
     @Override
     public Category create(Category category) {
         return categoryRepository.create(category);

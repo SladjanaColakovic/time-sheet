@@ -18,13 +18,10 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping(value = "api/country")
 public class CountryController {
-    private final ICountryService countryService;
-    private final CustomMapper mapper;
     @Autowired
-    public CountryController(ICountryService countryService, CustomMapper mapper){
-        this.countryService = countryService;
-        this.mapper = mapper;
-    }
+    private ICountryService countryService;
+    @Autowired
+    private CustomMapper mapper;
 
     @PostMapping
     public ResponseEntity<?> create(@RequestBody NewCountryDTO newCountry){

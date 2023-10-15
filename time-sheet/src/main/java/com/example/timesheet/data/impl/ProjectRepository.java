@@ -15,15 +15,13 @@ import java.util.stream.Collectors;
 @Component
 public class ProjectRepository implements IProjectRepository {
 
-    private final ProjectJpaRepository projectJpaRepository;
-
-    private final CustomMapper mapper;
+    @Autowired
+    private ProjectJpaRepository projectJpaRepository;
 
     @Autowired
-    public ProjectRepository(ProjectJpaRepository projectJpaRepository, CustomMapper mapper){
-        this.projectJpaRepository = projectJpaRepository;
-        this.mapper = mapper;
-    }
+    private CustomMapper mapper;
+
+
     @Override
     public Project create(Project project) {
         ProjectEntity newEntity = mapper.projectToProjectEntity(project);

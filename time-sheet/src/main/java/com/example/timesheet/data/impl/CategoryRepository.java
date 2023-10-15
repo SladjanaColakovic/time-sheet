@@ -14,13 +14,13 @@ import java.util.stream.Collectors;
 
 @Component
 public class CategoryRepository implements ICategoryRepository {
-    private final CategoryJpaRepository categoryJpaRepository;
-    private final CustomMapper mapper;
+
     @Autowired
-    public CategoryRepository(CategoryJpaRepository categoryJpaRepository, CustomMapper mapper){
-        this.categoryJpaRepository = categoryJpaRepository;
-        this.mapper = mapper;
-    }
+    private CategoryJpaRepository categoryJpaRepository;
+
+    @Autowired
+    private CustomMapper mapper;
+
     @Override
     public Category create(Category category) {
         CategoryEntity newEntity = mapper.categoryToCategoryEntity(category);

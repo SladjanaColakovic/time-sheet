@@ -11,12 +11,8 @@ import java.util.List;
 @Service
 public class TimeSheetItemService implements ITimeSheetItemService {
 
-    private final ITimeSheetItemRepository timeSheetItemRepository;
-
     @Autowired
-    public TimeSheetItemService(ITimeSheetItemRepository timeSheetItemRepository){
-        this.timeSheetItemRepository = timeSheetItemRepository;
-    }
+    private ITimeSheetItemRepository timeSheetItemRepository;
 
     @Override
     public TimeSheetItem create(TimeSheetItem timeSheetItem) {

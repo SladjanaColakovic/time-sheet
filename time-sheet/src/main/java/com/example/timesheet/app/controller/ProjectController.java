@@ -25,15 +25,11 @@ import java.util.stream.Collectors;
 @RequestMapping(value = "/api/project")
 public class ProjectController {
 
-    private final IProjectService projectService;
-
-    private final CustomMapper mapper;
+    @Autowired
+    private IProjectService projectService;
 
     @Autowired
-    public ProjectController(IProjectService projectService, CustomMapper mapper) {
-        this.projectService = projectService;
-        this.mapper = mapper;
-    }
+    private CustomMapper mapper;
 
     @PostMapping
     public ResponseEntity<?> create(@RequestBody NewProjectDTO newProject){

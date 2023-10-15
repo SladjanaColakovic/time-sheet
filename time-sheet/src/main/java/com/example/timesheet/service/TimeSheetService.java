@@ -20,13 +20,9 @@ import java.util.stream.Collectors;
 @Service
 public class TimeSheetService implements ITimeSheetService {
 
-    private final IDailyTimeSheetRepository dailyTimeSheetRepository;
-    private final Double DAILY_WORK_NORM = 7.5;
-
     @Autowired
-    public TimeSheetService(IDailyTimeSheetRepository dailyTimeSheetRepository){
-        this.dailyTimeSheetRepository = dailyTimeSheetRepository;
-    }
+    private IDailyTimeSheetRepository dailyTimeSheetRepository;
+    private final Double DAILY_WORK_NORM = 7.5;
 
     @Override
     public TimeSheet getTimeSheet(TimeSheetRange timeSheetRange) {

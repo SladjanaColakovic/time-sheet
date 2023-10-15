@@ -19,14 +19,13 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping(value = "api/category")
 public class CategoryController {
-    private final ICategoryService categoryService;
 
-    private final CustomMapper mapper;
     @Autowired
-    public CategoryController(ICategoryService categoryService, CustomMapper mapper){
-        this.categoryService = categoryService;
-        this.mapper = mapper;
-    }
+    private ICategoryService categoryService;
+
+    @Autowired
+    private CustomMapper mapper;
+
 
     @PostMapping
     public ResponseEntity<?> create(@RequestBody NewCategoryDTO newCategory){

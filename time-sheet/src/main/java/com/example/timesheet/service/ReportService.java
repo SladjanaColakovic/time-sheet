@@ -16,15 +16,11 @@ import java.util.stream.Collectors;
 @Service
 public class ReportService implements IReportService {
 
-    private final ITimeSheetItemRepository timeSheetItemRepository;
-
-    private final CustomMapper mapper;
+    @Autowired
+    private ITimeSheetItemRepository timeSheetItemRepository;
 
     @Autowired
-    public ReportService(ITimeSheetItemRepository timeSheetItemRepository, CustomMapper mapper){
-        this.timeSheetItemRepository = timeSheetItemRepository;
-        this.mapper = mapper;
-    }
+    private CustomMapper mapper;
 
     @Override
     public Report reportSearch(ReportSearch reportSearch) {

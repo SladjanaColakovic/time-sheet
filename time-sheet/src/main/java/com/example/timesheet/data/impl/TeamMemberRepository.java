@@ -18,16 +18,12 @@ import java.util.stream.Collectors;
 @Component
 public class TeamMemberRepository implements ITeamMemberRepository {
 
-    private final TeamMemberJpaRepository teamMemberJpaRepository;
-    private final CustomMapper mapper;
-    private final PasswordEncoder passwordEncoder;
-
     @Autowired
-    public TeamMemberRepository(TeamMemberJpaRepository teamMemberJpaRepository, CustomMapper mapper, PasswordEncoder passwordEncoder){
-        this.teamMemberJpaRepository = teamMemberJpaRepository;
-        this.mapper = mapper;
-        this.passwordEncoder = passwordEncoder;
-    }
+    private  TeamMemberJpaRepository teamMemberJpaRepository;
+    @Autowired
+    private CustomMapper mapper;
+    @Autowired
+    private  PasswordEncoder passwordEncoder;
 
     @Override
     public TeamMember create(TeamMember teamMember) {

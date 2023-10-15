@@ -14,14 +14,13 @@ import java.util.stream.Collectors;
 
 @Component
 public class CountryRepository implements ICountryRepository {
-    private final CountryJpaRepository countryJpaRepository;
-    //private final ModelMapper mapper;
-    private final CustomMapper mapper;
+
     @Autowired
-    public CountryRepository(CountryJpaRepository countryJpaRepository, CustomMapper mapper){
-        this.countryJpaRepository = countryJpaRepository;
-        this.mapper = mapper;
-    }
+    private CountryJpaRepository countryJpaRepository;
+
+    @Autowired
+    private CustomMapper mapper;
+
     @Override
     public Country create(Country country) {
         CountryEntity newEntity = mapper.countryToCountryEntity(country);

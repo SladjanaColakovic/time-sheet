@@ -18,13 +18,12 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping(value = "/api/teamMember")
 public class TeamMemberController {
-    private final ITeamMemberService teamMemberService;
-    private final CustomMapper mapper;
+
     @Autowired
-    public TeamMemberController(ITeamMemberService teamMemberService, CustomMapper mapper){
-        this.teamMemberService = teamMemberService;
-        this.mapper = mapper;
-    }
+    private ITeamMemberService teamMemberService;
+
+    @Autowired
+    private CustomMapper mapper;
 
     @PostMapping
     public ResponseEntity<?> create(@RequestBody NewTeamMemberDTO newTeamMember){

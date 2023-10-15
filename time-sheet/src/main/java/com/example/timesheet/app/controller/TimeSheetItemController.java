@@ -18,15 +18,11 @@ import java.util.stream.Collectors;
 @RequestMapping(value = "/api/timeSheetItem")
 public class TimeSheetItemController {
 
-    private final ITimeSheetItemService timeSheetItemService;
-
-    private final CustomMapper mapper;
+    @Autowired
+    private ITimeSheetItemService timeSheetItemService;
 
     @Autowired
-    public TimeSheetItemController(ITimeSheetItemService timeSheetItemService, CustomMapper mapper){
-        this.timeSheetItemService = timeSheetItemService;
-        this.mapper = mapper;
-    }
+    private CustomMapper mapper;
 
     @PostMapping
     public ResponseEntity<?> create(@RequestBody NewTimeSheetItemDTO newTimeSheetItem){

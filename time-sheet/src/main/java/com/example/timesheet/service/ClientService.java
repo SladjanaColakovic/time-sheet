@@ -10,11 +10,10 @@ import java.util.List;
 
 @Service
 public class ClientService implements IClientService {
-    private final IClientRepository clientRepository;
+
     @Autowired
-    public ClientService(IClientRepository clientRepository){
-        this.clientRepository = clientRepository;
-    }
+    private IClientRepository clientRepository;
+
     @Override
     public Client create(Client client) {
         return clientRepository.create(client);

@@ -16,14 +16,12 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping(value = "/api/report")
 public class ReportController {
 
-    private final IReportService reportService;
-    private final CustomMapper mapper;
+    @Autowired
+    private IReportService reportService;
 
     @Autowired
-    public ReportController(IReportService reportService, CustomMapper mapper){
-        this.reportService = reportService;
-        this.mapper = mapper;
-    }
+    private CustomMapper mapper;
+
     @GetMapping
     public ResponseEntity<?> reportSearch(@RequestBody ReportSearchDTO reportSearchDTO){
         ReportSearch reportSearch = mapper.reportSearchDTOToReportSearch(reportSearchDTO);

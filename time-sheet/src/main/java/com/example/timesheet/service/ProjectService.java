@@ -11,12 +11,9 @@ import java.util.List;
 @Service
 public class ProjectService implements IProjectService {
 
-    private final IProjectRepository projectRepository;
-
     @Autowired
-    public ProjectService(IProjectRepository projectRepository){
-        this.projectRepository = projectRepository;
-    }
+    private  IProjectRepository projectRepository;
+
     @Override
     public Project create(Project project) {
         return projectRepository.create(project);

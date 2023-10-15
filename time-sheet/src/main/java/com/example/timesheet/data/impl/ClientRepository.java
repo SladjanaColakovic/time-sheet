@@ -15,17 +15,12 @@ import java.util.stream.Collectors;
 @Component
 public class ClientRepository implements IClientRepository {
 
-    private final ClientJpaRepository clientJpaRepository;
-
-    private final CustomMapper mapper;
-
+    @Autowired
+    private ClientJpaRepository clientJpaRepository;
 
     @Autowired
-    public ClientRepository(ClientJpaRepository clientJpaRepository, CustomMapper mapper){
-        this.clientJpaRepository = clientJpaRepository;
-        this.mapper = mapper;
+    private CustomMapper mapper;
 
-    }
     @Override
     public Client create(Client client) {
         ClientEntity newEntity = mapper.clientToClientEntity(client);

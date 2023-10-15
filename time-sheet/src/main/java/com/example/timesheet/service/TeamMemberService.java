@@ -12,12 +12,9 @@ import java.util.List;
 @Service
 public class TeamMemberService implements ITeamMemberService {
 
-    private final ITeamMemberRepository teamMemberRepository;
-
     @Autowired
-    public TeamMemberService(ITeamMemberRepository teamMemberRepository){
-        this.teamMemberRepository = teamMemberRepository;
-    }
+    private ITeamMemberRepository teamMemberRepository;
+
     @Override
     public TeamMember create(TeamMember teamMember) {
         return teamMemberRepository.create(teamMember);

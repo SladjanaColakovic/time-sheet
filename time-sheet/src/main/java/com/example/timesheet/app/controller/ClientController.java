@@ -21,15 +21,12 @@ import java.util.stream.Collectors;
 @RequestMapping(value = "api/client")
 public class ClientController {
 
-    private final IClientService clientService;
-
-    private final CustomMapper mapper;
+    @Autowired
+    private IClientService clientService;
 
     @Autowired
-    public ClientController(IClientService clientService, CustomMapper mapper){
-        this.clientService = clientService;
-        this.mapper = mapper;
-    }
+    private CustomMapper mapper;
+
 
     @PostMapping
     public ResponseEntity<?> create(@RequestBody NewClientDTO newClient){
