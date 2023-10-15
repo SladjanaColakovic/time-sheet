@@ -12,6 +12,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
@@ -23,7 +24,6 @@ public class CategoryTests {
 
     @Mock
     private ICategoryRepository categoryRepository;
-
     @Mock
     private Category category;
     @InjectMocks
@@ -39,6 +39,18 @@ public class CategoryTests {
         assertEquals(categories.get(0).getName(), DB_NAME);
 
         verify(categoryRepository, times(1)).getAll();
+        verifyNoMoreInteractions(categoryRepository);
+    }
+
+    @Test
+    public void testGetById() {
+        when(categoryRepository.getById(DB_ID)).thenReturn(category);
+
+        Category dbCategory = categoryService.getById(DB_ID);
+
+        assertEquals(category, dbCategory);
+
+        verify(categoryRepository, times(1)).getById(DB_ID);
         verifyNoMoreInteractions(categoryRepository);
     }
 
@@ -69,6 +81,53 @@ public class CategoryTests {
 
         verify(categoryRepository, times(2)).getAll();
         verify(categoryRepository, times(1)).create(newCategory);
+        verifyNoMoreInteractions(categoryRepository);
+    }
+
+    @Test
+    @Transactional
+    public void testUpdate() {
+
+        when(categoryRepository.getById(DB_ID)).thenReturn(new Category(DB_ID, DB_NAME));
+
+        Category categoryForUpdate = categoryService.getById(DB_ID);
+        categoryForUpdate.setName(NEW_NAME);
+
+        when(categoryRepository.create(categoryForUpdate)).thenReturn(categoryForUpdate);
+
+        Category saved = categoryService.create(categoryForUpdate);
+
+        assertNotNull(saved);
+
+        Category dbCategory = categoryService.getById(DB_ID);
+        assertEquals(dbCategory.getName(), NEW_NAME);
+
+        verify(categoryRepository, times(2)).getById(DB_ID);
+        verify(categoryRepository, times(1)).create(categoryForUpdate);
+        verifyNoMoreInteractions(categoryRepository);
+    }
+
+    @Test
+    @Transactional
+    public void testDelete() {
+        when(categoryRepository.getAll()).thenReturn(Arrays.asList(new Category(DB_ID, DB_NAME), new Category(DB_ID_TO_DELETE, DB_NAME_TO_DELETE)));
+        doNothing().when(categoryRepository).delete(DB_ID_TO_DELETE);
+        when(categoryRepository.getById(DB_ID_TO_DELETE)).thenReturn(null);
+
+        int dbSizeBeforeDelete = categoryService.getAll().size();
+        categoryService.delete(DB_ID_TO_DELETE);
+
+        when(categoryService.getAll()).thenReturn(Arrays.asList(new Category(DB_ID, DB_NAME)));
+
+        List<Category> categories = categoryService.getAll();
+        assertEquals(dbSizeBeforeDelete -1, categories.size());
+
+        Category dbCategory = categoryService.getById(DB_ID_TO_DELETE);
+        assertNull(dbCategory);
+
+        verify(categoryRepository, times(1)).delete(DB_ID_TO_DELETE);
+        verify(categoryRepository, times(2)).getAll();
+        verify(categoryRepository, times(1)).getById(DB_ID_TO_DELETE);
         verifyNoMoreInteractions(categoryRepository);
     }
 }
