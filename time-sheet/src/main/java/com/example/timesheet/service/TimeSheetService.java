@@ -21,7 +21,7 @@ public class TimeSheetService implements ITimeSheetService {
 
     @Autowired
     private IDailyTimeSheetRepository dailyTimeSheetRepository;
-    private final Double DAILY_WORK_NORM = 7.5;
+    private final double DAILY_WORK_NORM = 7.5;
 
     @Override
     public TimeSheet getTimeSheet(TimeSheetRange timeSheetRange) {

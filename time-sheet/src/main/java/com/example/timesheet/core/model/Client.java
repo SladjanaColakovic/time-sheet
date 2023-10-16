@@ -16,4 +16,22 @@ public class Client {
     private String postalCode;
     private Country country;
     //private Set<Project> projects;
+
+
+    public Client(Long id, String name, String address, String city, String postalCode, Country country) {
+        this.id = id;
+        this.name = name;
+        this.address = address;
+        this.city = city;
+        this.postalCode = postalCode;
+        this.country = country;
+    }
+
+    public Client(String name, String address, String city, String postalCode, Country country) {
+        this.name = name;
+        this.address = address;
+        this.city = city;
+        this.postalCode = postalCode;
+        this.country = country;
+    }
 }
