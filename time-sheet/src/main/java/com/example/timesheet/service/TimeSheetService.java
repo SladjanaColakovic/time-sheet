@@ -29,13 +29,13 @@ public class TimeSheetService implements ITimeSheetService {
         Map<LocalDate, DailyTimeSheet> dailyTimeSheets = getExistingDailyTimeSheets(timeSheetRange);
 
         double totalHours = 0.0;
-        for(LocalDate date = timeSheetRange.getFrom(); date.isBefore(timeSheetRange.getTo()); date = date.plusDays(1)){
-            if(!dailyTimeSheets.containsKey(date)){
-                response.add(new DailyTimeSheet(date, 0.0, Flag.NOT_FILLED));
-                continue;
-            }
-            DailyTimeSheet dailyTimeSheet = flagDailyTimeSheet(dailyTimeSheets.get(date));
+        for(LocalDate date = timeSheetRange.getFrom(); date.isBefore(timeSheetRange.getTo()); date = date.plusDays(1)) {
+            DailyTimeSheet dailyTimeSheet = dailyTimeSheets.containsKey(date)
+                    ? flagDailyTimeSheet(dailyTimeSheets.get(date))
+                    : new DailyTimeSheet(date, 0.0, Flag.NOT_FILLED);
+
             response.add(dailyTimeSheet);
+
             totalHours += dailyTimeSheet.getTotalHoursPerDay();
         }
         return new TimeSheet(response, totalHours);
@@ -58,5 +58,4 @@ public class TimeSheetService implements ITimeSheetService {
         else dailyTimeSheet.setFlag(Flag.UNFULFILLED);
         return  dailyTimeSheet;
     }
-
 }

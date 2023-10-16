@@ -31,7 +31,8 @@ public class ProjectService implements IProjectService {
 
     @Override
     public List<Project> getAll(Long teamMemberId, String role) {
-        if(role.equals("ADMIN")) return projectRepository.getAll();
+        if(role.equals("ADMIN"))
+            return projectRepository.getAll();
         return projectRepository.getLeadingProjects(teamMemberId);
     }
 
