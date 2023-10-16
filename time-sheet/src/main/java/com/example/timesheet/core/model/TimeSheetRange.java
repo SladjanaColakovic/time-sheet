@@ -13,5 +13,10 @@ public class TimeSheetRange {
     private LocalDate from;
     private LocalDate to;
     private Long teamMemberId;
-    //private Double regularHours;
+
+    public TimeSheetRange(LocalDate from, LocalDate to, Long teamMemberId){
+        this.from= from;
+        this.to = to;
+        this.teamMemberId = teamMemberId;
+    }
 }

@@ -11,5 +11,5 @@ import java.util.List;
 @NoArgsConstructor
 public class TimeSheetDTO {
     private List<DailyTimeSheetDTO> dailyTimeSheets;
-    private Double totalHours;
+    private double totalHours;
 }

@@ -11,9 +11,9 @@ import java.util.List;
 @NoArgsConstructor
 public class TimeSheet {
     private List<DailyTimeSheet> dailyTimeSheets;
-    private Double totalHours;
+    private double totalHours;
 
-    public TimeSheet(List<DailyTimeSheet> dailyTimeSheets, Double totalHours){
+    public TimeSheet(List<DailyTimeSheet> dailyTimeSheets, double totalHours){
         this.dailyTimeSheets = dailyTimeSheets;
         this.totalHours = totalHours;
     }
