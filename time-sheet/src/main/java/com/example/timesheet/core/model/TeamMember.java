@@ -35,4 +35,14 @@ public class TeamMember {
         this.status = status;
         this.role = role;
     }
+
+    public TeamMember(String name, String username, String password, String email, Float hoursPerWeek, TeamMemberStatus status, Role role) {
+        this.name = name;
+        this.username = username;
+        this.password = password;
+        this.email = email;
+        this.hoursPerWeek = hoursPerWeek;
+        this.status = status;
+        this.role = role;
+    }
 }

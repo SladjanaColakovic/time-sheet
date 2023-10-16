@@ -26,30 +26,32 @@ public class TimeSheetService implements ITimeSheetService {
 
     @Override
     public TimeSheet getTimeSheet(TimeSheetRange timeSheetRange) {
-        List<DailyTimeSheet> timeSheet = new ArrayList<>();
-        List<DailyTimeSheet> dailyTimeSheets = dailyTimeSheetRepository.getDailyTimeSheets(timeSheetRange);
-        Map<LocalDate, DailyTimeSheet> existingTimeSheet = dailyTimeSheets
+        List<DailyTimeSheet> response = new ArrayList<>();
+        Map<LocalDate, DailyTimeSheet> dailyTimeSheets = dailyTimeSheetRepository.getDailyTimeSheets(timeSheetRange)
                 .stream()
                 .collect(Collectors.toMap(DailyTimeSheet::getDate, Function.identity()));
+
         for(LocalDate date = timeSheetRange.getFrom(); date.isBefore(timeSheetRange.getTo()); date = date.plusDays(1)){
-            if(!existingTimeSheet.containsKey(date)){
-                timeSheet.add(new DailyTimeSheet(date, 0.0, Flag.NOT_FILLED));
+            if(!dailyTimeSheets.containsKey(date)){
+                response.add(new DailyTimeSheet(date, 0.0, Flag.NOT_FILLED));
                 continue;
             }
-            DailyTimeSheet dailyTimeSheet = existingTimeSheet.get(date);
-            if (dailyTimeSheet.getTotalHoursPerDay() >= DAILY_WORK_NORM) dailyTimeSheet.setFlag(Flag.FULFILLED);
-            else dailyTimeSheet.setFlag(Flag.UNFULFILLED);
-            timeSheet.add(dailyTimeSheet);
-
+            DailyTimeSheet dailyTimeSheet = flagDailyTimeSheet(dailyTimeSheets.get(date));
+            response.add(dailyTimeSheet);
         }
-        return new TimeSheet(timeSheet, calculateTotalHours(dailyTimeSheets));
-
+        return new TimeSheet(response, calculateTotalHours(response));
     }
 
     private Double calculateTotalHours(List<DailyTimeSheet> dailyTimeSheets){
         return dailyTimeSheets.stream()
                 .map(DailyTimeSheet::getTotalHoursPerDay)
                 .reduce(0.0, Double::sum);
+    }
+
+    private DailyTimeSheet flagDailyTimeSheet(DailyTimeSheet dailyTimeSheet){
+        if (dailyTimeSheet.getTotalHoursPerDay() >= DAILY_WORK_NORM) dailyTimeSheet.setFlag(Flag.FULFILLED);
+        else dailyTimeSheet.setFlag(Flag.UNFULFILLED);
+        return  dailyTimeSheet;
     }
 
 }

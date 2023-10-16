@@ -14,13 +14,13 @@ public class TeamMemberConstants {
     public static final float DB_HOURS_PER_WEEK = 40;
 
 
-    public static final String DB_NEW_NAME = "Ana Bogdanovic";
-    public static final Role DB_NEW_ROLE = Role.WORKER;
-    public static final String DB_NEW_USERNAME = "ana10";
-    public static final String DB_NEW_EMAIL = "ana@gmail.com";
-    public static final TeamMemberStatus DB_NEW_STATUS = TeamMemberStatus.ACTIVE;
-    public static final String DB_NEW_PASSWORD = "$2a$10$gviA8hU/zQgelKwdWjCTEu7VNwcJ7VZWF9fLLmRjninubwnwZCa42";
-    public static final float DB_NEW_HOURS_PER_WEEK = 40;
+    public static final String NEW_NAME = "Ana Bogdanovic";
+    public static final Role NEW_ROLE = Role.WORKER;
+    public static final String NEW_USERNAME = "ana10";
+    public static final String NEW_EMAIL = "ana@gmail.com";
+    public static final TeamMemberStatus NEW_STATUS = TeamMemberStatus.ACTIVE;
+    public static final String NEW_PASSWORD = "$2a$10$gviA8hU/zQgelKwdWjCTEu7VNwcJ7VZWF9fLLmRjninubwnwZCa42";
+    public static final float NEW_HOURS_PER_WEEK = 40;
 
 
     public static final Long DB_ID_TO_DELETE = 1L;

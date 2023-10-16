@@ -45,10 +45,11 @@ public class ProjectController {
     }
 
     @GetMapping
-    public ResponseEntity<?> getAll(@RequestHeader (name="Authorization") String token){
+    public ResponseEntity<?> getAll(@RequestHeader (name="Authorization") String authHeader){
 
-        Long userId = tokenUtils.getUserIdFromToken(token.substring(7));
-        String role = tokenUtils.getRoleFromToken(token.substring(7));
+        String token = authHeader.substring(7);
+        Long userId = tokenUtils.getUserIdFromToken(token);
+        String role = tokenUtils.getRoleFromToken(token);
 
         List<Project> projects = projectService.getAll(userId, role);
         List<ProjectDTO> response = projects.stream()
