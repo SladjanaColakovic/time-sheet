@@ -26,38 +26,29 @@ public class TimeSheetService implements ITimeSheetService {
 
     @Override
     public TimeSheet getTimeSheet(TimeSheetRange timeSheetRange) {
-        Map<LocalDate, DailyTimeSheet> timeSheet = createInitialTimeSheet(timeSheetRange.getFrom(), timeSheetRange.getTo());
+        List<DailyTimeSheet> timeSheet = new ArrayList<>();
         List<DailyTimeSheet> dailyTimeSheets = dailyTimeSheetRepository.getDailyTimeSheets(timeSheetRange);
-        List<DailyTimeSheet> flaggedDailyTimeSheets = flagDailyTimeSheet(dailyTimeSheets);
-
-        Map<LocalDate, DailyTimeSheet> existingTimeSheet = flaggedDailyTimeSheets
+        Map<LocalDate, DailyTimeSheet> existingTimeSheet = dailyTimeSheets
                 .stream()
                 .collect(Collectors.toMap(DailyTimeSheet::getDate, Function.identity()));
+        for(LocalDate date = timeSheetRange.getFrom(); date.isBefore(timeSheetRange.getTo()); date = date.plusDays(1)){
+            if(!existingTimeSheet.containsKey(date)){
+                timeSheet.add(new DailyTimeSheet(date, 0.0, Flag.NOT_FILLED));
+                continue;
+            }
+            DailyTimeSheet dailyTimeSheet = existingTimeSheet.get(date);
+            if (dailyTimeSheet.getTotalHoursPerDay() >= DAILY_WORK_NORM) dailyTimeSheet.setFlag(Flag.FULFILLED);
+            else dailyTimeSheet.setFlag(Flag.UNFULFILLED);
+            timeSheet.add(dailyTimeSheet);
 
-        timeSheet.putAll(existingTimeSheet);
-        return new TimeSheet(new ArrayList<>(timeSheet.values()), calculateTotalHours(dailyTimeSheets));
-    }
-
-    private Map<LocalDate, DailyTimeSheet> createInitialTimeSheet(LocalDate from, LocalDate to){
-        Map<LocalDate, DailyTimeSheet> initialTimeSheet = new HashMap<>();
-        for(LocalDate date = from; date.isBefore(to); date = date.plusDays(1)){
-            initialTimeSheet.put(date, new DailyTimeSheet(date, 0.0, Flag.NOT_FILLED));
         }
-        return initialTimeSheet;
-    }
+        return new TimeSheet(timeSheet, calculateTotalHours(dailyTimeSheets));
 
-    private List<DailyTimeSheet> flagDailyTimeSheet(List<DailyTimeSheet> dailyTimeSheets){
-        dailyTimeSheets.forEach(element -> {
-            element.setTotalHoursPerDay(element.getHoursPerDay() + element.getOvertimeHoursPerDay());
-            if (element.getTotalHoursPerDay() >= DAILY_WORK_NORM) element.setFlag(Flag.FULFILLED);
-            else element.setFlag(Flag.UNFULFILLED);
-        });
-        return dailyTimeSheets;
     }
 
     private Double calculateTotalHours(List<DailyTimeSheet> dailyTimeSheets){
         return dailyTimeSheets.stream()
-                .map(element -> element.getHoursPerDay() + element.getOvertimeHoursPerDay())
+                .map(DailyTimeSheet::getTotalHoursPerDay)
                 .reduce(0.0, Double::sum);
     }
 

@@ -5,15 +5,12 @@ import com.example.timesheet.app.dto.NewProjectDTO;
 import com.example.timesheet.app.dto.ProjectDTO;
 import com.example.timesheet.app.dto.ProjectUpdateDTO;
 import com.example.timesheet.app.dto.Projects;
+import com.example.timesheet.app.security.token.TokenUtils;
 import com.example.timesheet.core.model.Project;
 import com.example.timesheet.core.service.IProjectService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -28,6 +25,9 @@ public class ProjectController {
 
     @Autowired
     private CustomMapper mapper;
+
+    @Autowired
+    private TokenUtils tokenUtils;
 
     @PostMapping
     public ResponseEntity<?> create(@RequestBody NewProjectDTO newProject){
@@ -45,24 +45,16 @@ public class ProjectController {
     }
 
     @GetMapping
-    @PreAuthorize("hasRole('ADMIN') or @customUserSecurity.hasAccess(authentication,#username)")
-    public ResponseEntity<?> getAll(@RequestParam(required = false) String username){
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        List<Project> projects;
-        if(authentication.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_ADMIN"))) {
-            projects = projectService.getAll();
-            List<ProjectDTO> response = projects.stream()
-                    .map(mapper::projectToProjectDTO)
-                    .collect(Collectors.toList());
-            return new ResponseEntity<>(new Projects(response), HttpStatus.OK);
-        }
-        else{
-            projects = projectService.getLeadingProjects(username);
-            List<ProjectDTO> response = projects.stream()
-                    .map(mapper::projectToProjectDTO)
-                    .collect(Collectors.toList());
-            return new ResponseEntity<>(new Projects(response), HttpStatus.OK);
-        }
+    public ResponseEntity<?> getAll(@RequestHeader (name="Authorization") String token){
+
+        Long userId = tokenUtils.getUserIdFromToken(token.substring(7));
+        String role = tokenUtils.getRoleFromToken(token.substring(7));
+
+        List<Project> projects = projectService.getAll(userId, role);
+        List<ProjectDTO> response = projects.stream()
+                .map(mapper::projectToProjectDTO)
+                .collect(Collectors.toList());
+        return new ResponseEntity<>(new Projects(response), HttpStatus.OK);
     }
 
     @DeleteMapping

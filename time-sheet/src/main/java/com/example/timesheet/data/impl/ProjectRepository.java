@@ -62,8 +62,8 @@ public class ProjectRepository implements IProjectRepository {
     }
 
     @Override
-    public List<Project> getLeadingProjects(String username) {
-        List<ProjectEntity> projects = projectJpaRepository.getLeadingProjects(username);
+    public List<Project> getLeadingProjects(Long teamMemberId) {
+        List<ProjectEntity> projects = projectJpaRepository.getLeadingProjects(teamMemberId);
         return projects
                 .stream()
                 .map(mapper::projectEntityToProject)

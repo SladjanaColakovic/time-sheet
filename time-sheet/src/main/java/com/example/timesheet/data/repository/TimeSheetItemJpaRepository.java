@@ -20,7 +20,7 @@ public interface TimeSheetItemJpaRepository extends JpaRepository<TimeSheetItemE
             " (coalesce(:#{#reportSearch.startDate}, null) is null OR i.date >= :#{#reportSearch.startDate}) AND " +
             " (coalesce(:#{#reportSearch.endDate}, null) is null OR i.date <= :#{#reportSearch.endDate})")
     List<TimeSheetItemEntity> reportSearch(ReportSearch reportSearch);
-   @Query("select new com.example.timesheet.core.model.DailyTimeSheet(i.date, sum(i.time), sum(i.overtime)) " +
+   @Query("select new com.example.timesheet.core.model.DailyTimeSheet(i.date, sum(i.time + i.overtime)) " +
            "from TimeSheetItemEntity i where i.teamMember.id = :#{#timeSheetRange.teamMemberId} AND" +
            " i.date between :#{#timeSheetRange.from} AND :#{#timeSheetRange.to} group by i.date")
    List<DailyTimeSheet> getDailyTimeSheets(TimeSheetRange timeSheetRange);

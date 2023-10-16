@@ -30,8 +30,9 @@ public class ProjectService implements IProjectService {
     }
 
     @Override
-    public List<Project> getAll() {
-        return projectRepository.getAll();
+    public List<Project> getAll(Long teamMemberId, String role) {
+        if(role.equals("ADMIN")) return projectRepository.getAll();
+        return projectRepository.getLeadingProjects(teamMemberId);
     }
 
     @Override
@@ -39,8 +40,4 @@ public class ProjectService implements IProjectService {
         return projectRepository.update(project);
     }
 
-    @Override
-    public List<Project> getLeadingProjects(String username) {
-        return projectRepository.getLeadingProjects(username);
-    }
 }

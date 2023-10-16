@@ -9,6 +9,6 @@ import java.util.List;
 
 @Repository
 public interface ProjectJpaRepository extends JpaRepository<ProjectEntity, Long> {
-    @Query("select p from ProjectEntity p where p.lead.username = :username")
-    List<ProjectEntity> getLeadingProjects(String username);
+    @Query("select p from ProjectEntity p where p.lead.id = :teamMemberId")
+    List<ProjectEntity> getLeadingProjects(Long teamMemberId);
 }

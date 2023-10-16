@@ -10,5 +10,5 @@ public interface IProjectRepository {
     void delete(Long id);
     List<Project> getAll();
     Project update(Project project);
-    List<Project> getLeadingProjects(String username);
+    List<Project> getLeadingProjects(Long teamMemberId);
 }

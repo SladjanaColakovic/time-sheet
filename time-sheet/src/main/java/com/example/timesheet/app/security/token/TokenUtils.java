@@ -34,6 +34,7 @@ public class TokenUtils {
                 .setIssuer(APP_NAME)
                 .setSubject(user.getUsername())
                 .claim("role", user.getRole().toString())
+                .claim("id", user.getId())
                 .setAudience(generateAudience())
                 .setIssuedAt(new Date())
                 .setExpiration(generateExpirationDate())
@@ -128,6 +129,16 @@ public class TokenUtils {
             claims = null;
         }
         return claims;
+    }
+
+    public String getRoleFromToken(String token){
+        Claims claims = getAllClaimsFromToken(token);
+        return claims.get("role").toString();
+    }
+
+    public Long getUserIdFromToken(String token){
+        Claims claims = getAllClaimsFromToken(token);
+        return Long.parseLong(claims.get("id").toString());
     }
 
     public Boolean validateToken(String token, UserDetails userDetails) {

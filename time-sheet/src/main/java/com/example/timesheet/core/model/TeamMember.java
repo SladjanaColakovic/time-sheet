@@ -24,4 +24,15 @@ public class TeamMember {
     private Timestamp lastPasswordChangeDate;
     //private Set<Project> leadingProjects;
     //private Set<Project> workingProjects;
+
+    public TeamMember(Long id, String name, String username, String password, String email, Float hoursPerWeek, TeamMemberStatus status, Role role){
+        this.id= id;
+        this.name = name;
+        this.username = username;
+        this.password = password;
+        this.email = email;
+        this.hoursPerWeek = hoursPerWeek;
+        this.status = status;
+        this.role = role;
+    }
 }
