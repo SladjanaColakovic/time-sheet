@@ -12,4 +12,9 @@ import java.util.List;
 public class Report {
     private List<TimeSheetItem> items;
     private Float totalReport;
+
+    public Report(List<TimeSheetItem> items, Float totalReport){
+        this.items = items;
+        this.totalReport = totalReport;
+    }
 }

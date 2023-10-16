@@ -25,12 +25,9 @@ public class ReportService implements IReportService {
     @Override
     public Report reportSearch(ReportSearch reportSearch) {
         List<TimeSheetItem> items = timeSheetItemRepository.reportSearch(reportSearch);
-        Report report = new Report();
-        report.setItems(items);
         Float totalReport = items.stream()
                 .map(TimeSheetItem::getTime)
                 .reduce(0f, Float::sum);
-        report.setTotalReport(totalReport);
-        return report;
+        return new Report(items, totalReport);
     }
 }

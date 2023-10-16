@@ -7,7 +7,6 @@ import com.example.timesheet.app.dto.ProjectUpdateDTO;
 import com.example.timesheet.app.dto.Projects;
 import com.example.timesheet.core.model.Project;
 import com.example.timesheet.core.service.IProjectService;
-import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,7 +16,6 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 

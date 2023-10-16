@@ -28,7 +28,7 @@ public class TimeSheetService implements ITimeSheetService {
     public TimeSheet getTimeSheet(TimeSheetRange timeSheetRange) {
         Map<LocalDate, DailyTimeSheet> timeSheet = createInitialTimeSheet(timeSheetRange.getFrom(), timeSheetRange.getTo());
         List<DailyTimeSheet> dailyTimeSheets = dailyTimeSheetRepository.getDailyTimeSheets(timeSheetRange);
-        List<DailyTimeSheet> flaggedDailyTimeSheets = flagDailyTimeSheets(dailyTimeSheets);
+        List<DailyTimeSheet> flaggedDailyTimeSheets = flagDailyTimeSheet(dailyTimeSheets);
 
         Map<LocalDate, DailyTimeSheet> existingTimeSheet = flaggedDailyTimeSheets
                 .stream()
@@ -46,7 +46,7 @@ public class TimeSheetService implements ITimeSheetService {
         return initialTimeSheet;
     }
 
-    private List<DailyTimeSheet> flagDailyTimeSheets(List<DailyTimeSheet> dailyTimeSheets){
+    private List<DailyTimeSheet> flagDailyTimeSheet(List<DailyTimeSheet> dailyTimeSheets){
         dailyTimeSheets.forEach(element -> {
             element.setTotalHoursPerDay(element.getHoursPerDay() + element.getOvertimeHoursPerDay());
             if (element.getTotalHoursPerDay() >= DAILY_WORK_NORM) element.setFlag(Flag.FULFILLED);

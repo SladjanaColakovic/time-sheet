@@ -1,5 +1,6 @@
 package com.example.timesheet.app.security.token;
 
+import com.example.timesheet.core.exception.UserNotFoundException;
 import io.jsonwebtoken.ExpiredJwtException;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -53,7 +54,7 @@ public class TokenAuthenticationFilter extends OncePerRequestFilter {
             }
 
         } catch (ExpiredJwtException ex) {
-            ex.printStackTrace();
+            throw new UserNotFoundException();
         }
 
         filterChain.doFilter(request, response);

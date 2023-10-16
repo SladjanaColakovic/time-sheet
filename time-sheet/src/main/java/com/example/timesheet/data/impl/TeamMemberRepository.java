@@ -28,7 +28,7 @@ public class TeamMemberRepository implements ITeamMemberRepository {
     @Override
     public TeamMember create(TeamMember teamMember) {
         TeamMemberEntity newEntity = mapper.teamMemberToTeamMemberEntity(teamMember);
-        if(!Pattern.compile("^(?=.*[A-Z])(?=.*[0-9])(?=.*[a-z]).{8,}$").matcher(teamMember.getPassword()).matches()) throw new InvalidPasswordFormatException();
+        if(!isValid(teamMember.getPassword())) throw new InvalidPasswordFormatException();
         newEntity.setPassword(passwordEncoder.encode(teamMember.getPassword()));
         TeamMemberEntity saved = teamMemberJpaRepository.save(newEntity);
         return mapper.teamMemberEntityToTeamMember(saved);
@@ -78,8 +78,12 @@ public class TeamMemberRepository implements ITeamMemberRepository {
         if(teamMember == null) throw new UserNotFoundException();
         if(!passwordEncoder.matches(changePassword.getOldPassword(), teamMember.getPassword())) throw new InvalidOldPasswordException();
         if(!changePassword.getPassword().equals(changePassword.getConfirmPassword())) throw new PasswordsDoNotMatchException();
-        if(!Pattern.compile("^(?=.*[A-Z])(?=.*[0-9])(?=.*[a-z]).{8,}$").matcher(changePassword.getPassword()).matches()) throw new InvalidPasswordFormatException();
+        if(!isValid(changePassword.getPassword())) throw new InvalidPasswordFormatException();
         teamMember.setPassword(passwordEncoder.encode(changePassword.getPassword()));
         teamMemberJpaRepository.save(teamMember);
+    }
+
+    private boolean isValid(String password){
+        return Pattern.compile("^(?=.*[A-Z])(?=.*[0-9])(?=.*[a-z]).{8,}$").matcher(password).matches();
     }
 }
