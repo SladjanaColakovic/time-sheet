@@ -1,6 +1,7 @@
 package com.example.timesheet.service;
 
 import com.example.timesheet.core.model.Project;
+import com.example.timesheet.core.model.UserInfo;
 import com.example.timesheet.core.repository.IProjectRepository;
 import com.example.timesheet.core.service.IProjectService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,10 +32,10 @@ public class ProjectService implements IProjectService {
     }
 
     @Override
-    public List<Project> getAll(Long teamMemberId, String role) {
-        if(role.equals(ROLE_ADMIN))
+    public List<Project> getAll(UserInfo userInfo) {
+        if(userInfo.getRole().equals(ROLE_ADMIN))
             return projectRepository.getAll();
-        return projectRepository.getLeadingProjects(teamMemberId);
+        return projectRepository.getLeadingProjects(userInfo.getId());
     }
 
     @Override

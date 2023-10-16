@@ -5,8 +5,8 @@ import com.example.timesheet.app.dto.NewProjectDTO;
 import com.example.timesheet.app.dto.ProjectDTO;
 import com.example.timesheet.app.dto.ProjectUpdateDTO;
 import com.example.timesheet.app.dto.Projects;
-import com.example.timesheet.app.security.token.TokenUtils;
 import com.example.timesheet.core.model.Project;
+import com.example.timesheet.core.model.UserInfo;
 import com.example.timesheet.core.service.IProjectService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -26,9 +26,6 @@ public class ProjectController {
     @Autowired
     private CustomMapper mapper;
 
-    @Autowired
-    private TokenUtils tokenUtils;
-
     @PostMapping
     public ResponseEntity<?> create(@RequestBody NewProjectDTO newProject){
         Project project = mapper.newProjectDTOToProject(newProject);
@@ -45,13 +42,8 @@ public class ProjectController {
     }
 
     @GetMapping
-    public ResponseEntity<?> getAll(@RequestHeader (name="Authorization") String authHeader){
-
-        String token = authHeader.substring(7);
-        Long userId = tokenUtils.getUserIdFromToken(token);
-        String role = tokenUtils.getRoleFromToken(token);
-
-        List<Project> projects = projectService.getAll(userId, role);
+    public ResponseEntity<?> getAll(@RequestAttribute("userInfo") UserInfo userInfo){
+        List<Project> projects = projectService.getAll(userInfo);
         List<ProjectDTO> response = projects.stream()
                 .map(mapper::projectToProjectDTO)
                 .collect(Collectors.toList());
