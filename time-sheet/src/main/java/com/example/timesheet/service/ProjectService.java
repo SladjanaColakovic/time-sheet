@@ -13,6 +13,7 @@ public class ProjectService implements IProjectService {
 
     @Autowired
     private  IProjectRepository projectRepository;
+    private static final String ROLE_ADMIN = "ADMIN";
 
     @Override
     public Project create(Project project) {
@@ -31,7 +32,7 @@ public class ProjectService implements IProjectService {
 
     @Override
     public List<Project> getAll(Long teamMemberId, String role) {
-        if(role.equals("ADMIN"))
+        if(role.equals(ROLE_ADMIN))
             return projectRepository.getAll();
         return projectRepository.getLeadingProjects(teamMemberId);
     }

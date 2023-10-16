@@ -30,12 +30,8 @@ public class TimeSheetService implements ITimeSheetService {
 
         double totalHours = 0.0;
         for(LocalDate date = timeSheetRange.getFrom(); date.isBefore(timeSheetRange.getTo()); date = date.plusDays(1)) {
-            DailyTimeSheet dailyTimeSheet = dailyTimeSheets.containsKey(date)
-                    ? flagDailyTimeSheet(dailyTimeSheets.get(date))
-                    : new DailyTimeSheet(date, 0.0, Flag.NOT_FILLED);
-
+            DailyTimeSheet dailyTimeSheet = createDailyTimeSheet(dailyTimeSheets, date);
             response.add(dailyTimeSheet);
-
             totalHours += dailyTimeSheet.getTotalHoursPerDay();
         }
         return new TimeSheet(response, totalHours);
@@ -47,15 +43,15 @@ public class TimeSheetService implements ITimeSheetService {
                 .collect(Collectors.toMap(DailyTimeSheet::getDate, Function.identity()));
     }
 
-    /*private Double calculateTotalHours(List<DailyTimeSheet> dailyTimeSheets){
-        return dailyTimeSheets.stream()
-                .map(DailyTimeSheet::getTotalHoursPerDay)
-                .reduce(0.0, Double::sum);
-    }*/
-
     private DailyTimeSheet flagDailyTimeSheet(DailyTimeSheet dailyTimeSheet){
         if (dailyTimeSheet.getTotalHoursPerDay() >= DAILY_WORK_NORM) dailyTimeSheet.setFlag(Flag.FULFILLED);
         else dailyTimeSheet.setFlag(Flag.UNFULFILLED);
         return  dailyTimeSheet;
+    }
+
+    private DailyTimeSheet createDailyTimeSheet(Map<LocalDate, DailyTimeSheet> dailyTimeSheets, LocalDate date){
+        return dailyTimeSheets.containsKey(date)
+                ? flagDailyTimeSheet(dailyTimeSheets.get(date))
+                : new DailyTimeSheet(date, 0.0, Flag.NOT_FILLED);
     }
 }
