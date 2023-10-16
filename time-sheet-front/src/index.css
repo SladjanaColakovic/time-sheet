@@ -12,26 +12,43 @@ code {
     monospace;
 }
 
-.navbar {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-  overflow: hidden;
-  background-color: #f6a68d;
+.sidenav {
+  height: 100%;
+  width: 90px;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: #d66937;
+  overflow-x: hidden;
 }
 
-.navbar li {
-  float: right;
+.sidenav button {
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  border-bottom: 1px solid #000000;
+  width: 100%;
+  background-color: transparent;
+  height: 80px;
 }
 
-.navbar li a {
+.sidenav button:hover {
+  background-color: #c95f2e;
+
+}
+
+.sidenav button:active{
+  background-color: #c95f2e;
+}
+
+.sidenav label {
   display: block;
-  color: white;
-  text-align: center;
-  padding: 14px 16px;
-  text-decoration: none;
+  color: rgb(0, 0, 0);
+  font-size: 13px;
 }
 
-.navbar li a:hover {
-  background-color: #f99677;
+.sidenav .bottomButton {
+  position: sticky;
+  top: 100%;
 }
