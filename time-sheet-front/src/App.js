@@ -3,13 +3,14 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import Login from './Login';
 import PrivateRoute from './auth/ProtectedRoute';
 import Home from './Home';
+import Navbar from './Navbar';
 
 function App() {
   return (
     <Router>
       <div>
         <div className="navbar">
-
+          <Navbar></Navbar>
         </div>
         <div className="content">
           <Routes>
