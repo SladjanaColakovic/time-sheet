@@ -48,7 +48,7 @@ public class TimeSheetServiceTests {
         TimeSheet timeSheet = timeSheetService.getTimeSheet(range);
 
         assertEquals(10, timeSheet.getDailyTimeSheets().size());
-        assertTrue(timeSheet.getTotalHours() == 26.0);
+        assertTrue(timeSheet.getTotalHours() == TOTAL_HOURS);
         verify(dailyTimeSheetRepository, times(1)).getDailyTimeSheets(any());
         verifyNoMoreInteractions(dailyTimeSheetRepository);
     }

@@ -14,4 +14,11 @@ public class TimeSheetRangeDTO {
     private LocalDate to;
     private Long teamMemberId;
     //private Double regularHours;
+
+
+    public TimeSheetRangeDTO(LocalDate from, LocalDate to, Long teamMemberId) {
+        this.from = from;
+        this.to = to;
+        this.teamMemberId = teamMemberId;
+    }
 }
