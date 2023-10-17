@@ -1,5 +1,5 @@
-import axios from 'axios';
 import { useState } from 'react'
+import axiosInstance from './axiosIntance'
 
 const Login = () => {
 
@@ -16,11 +16,9 @@ const Login = () => {
             password: password
         }
         
-        axios.post(url, 
-            JSON.stringify(data), 
-            {headers: { "Content-Type": "application/json" }})
+        axiosInstance.post(url, 
+            JSON.stringify(data))
         .then((res) => {
-            console.log(res);
             localStorage.clear();
             localStorage.setItem('token', res.data.accessToken)
             var obj = JSON.parse(window.atob(res.data.accessToken.split('.')[1]))

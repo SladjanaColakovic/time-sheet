@@ -1,7 +1,8 @@
 import { useLocation, Navigate, Outlet } from "react-router-dom";
+import AccessDenied from "../AccessDenied";
 
 
-const PrivateRoute = ({ children, roles}) => {
+const ProtectedRoute = ({ children, roles}) => {
     let location = useLocation();
 
     const currentRole = localStorage.getItem('role');
@@ -9,11 +10,11 @@ const PrivateRoute = ({ children, roles}) => {
     return roles.find((role) => currentRole.includes(role)) ? (
         <Outlet />
     ) : currentRole ? (
-        <div>Access Denied...</div>
+        <AccessDenied/>
     ) : (
         <Navigate to="/login" state={{ from: location }} />
     )
 
 };
 
-export default PrivateRoute;
+export default ProtectedRoute;
