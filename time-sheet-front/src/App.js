@@ -4,6 +4,7 @@ import Login from './Login';
 import PrivateRoute from './auth/ProtectedRoute';
 import Home from './Home';
 import Navbar from './Navbar';
+import Catgeories from './Categories';
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
             <Route element={<PrivateRoute roles={["ADMIN"]}/>}>
               <Route path='/home' element={<Home/>}/>
             </Route>
+            <Route path='/categories' element={<Catgeories/>}/>
           </Routes>
         </div>
       </div>

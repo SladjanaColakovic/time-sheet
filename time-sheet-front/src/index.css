@@ -116,3 +116,19 @@ code {
 svg{
   fill: rgb(236, 232, 232);
 }
+
+.main {
+  margin-left: 210px;
+  margin-right: 10px;
+  overflow: hidden;
+}
+
+.main h1{
+  margin-top: 10px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.span-top{
+  margin-top: 50px;
+}
