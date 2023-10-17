@@ -3,13 +3,10 @@ package com.example.timesheet.controller;
 import com.example.timesheet.app.dto.TimeSheetRangeDTO;
 import com.example.timesheet.core.model.DailyTimeSheet;
 import com.example.timesheet.core.model.TimeSheet;
-import com.example.timesheet.core.service.ITimeSheetService;
 import com.example.timesheet.service.TimeSheetService;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -18,7 +15,6 @@ import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
@@ -30,6 +26,7 @@ import static org.hamcrest.Matchers.hasSize;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 
 import static org.hamcrest.Matchers.hasItem;
 
@@ -57,7 +54,7 @@ public class TimeSheetControllerTests {
                         new DailyTimeSheet(DATE_3, HOURS_PER_DAY_3, FLAG_3),
                         new DailyTimeSheet(DATE_4, HOURS_PER_DAY_4, FLAG_4),
                         new DailyTimeSheet(DATE_5, HOURS_PER_DAY_5, FLAG_5)
-                ), 26.0)
+                ), TOTAL_HOURS)
         );
     }
 
@@ -70,13 +67,13 @@ public class TimeSheetControllerTests {
                         .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
-                .andExpect(MockMvcResultMatchers.jsonPath("$.dailyTimeSheets").exists())
-                .andExpect(MockMvcResultMatchers.jsonPath("$.totalHours").exists())
-                .andExpect(MockMvcResultMatchers.jsonPath("$.dailyTimeSheets", hasSize(5)))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.totalHours").value(TOTAL_HOURS))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.dailyTimeSheets[0].totalHoursPerDay").value(HOURS_PER_DAY_1))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.dailyTimeSheets[0].flag").value(FLAG))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.dailyTimeSheets[*].totalHoursPerDay").value(hasItem(HOURS_PER_DAY_5)));
+                .andExpect(jsonPath("$.dailyTimeSheets").exists())
+                .andExpect(jsonPath("$.totalHours").exists())
+                .andExpect(jsonPath("$.dailyTimeSheets", hasSize(5)))
+                .andExpect(jsonPath("$.totalHours").value(TOTAL_HOURS))
+                .andExpect(jsonPath("$.dailyTimeSheets[0].totalHoursPerDay").value(HOURS_PER_DAY_1))
+                .andExpect(jsonPath("$.dailyTimeSheets[0].flag").value(FLAG))
+                .andExpect(jsonPath("$.dailyTimeSheets[*].totalHoursPerDay").value(hasItem(HOURS_PER_DAY_5)));
 
     }
 

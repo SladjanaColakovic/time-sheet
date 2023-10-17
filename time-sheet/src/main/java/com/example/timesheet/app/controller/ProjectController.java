@@ -5,6 +5,7 @@ import com.example.timesheet.app.dto.NewProjectDTO;
 import com.example.timesheet.app.dto.ProjectDTO;
 import com.example.timesheet.app.dto.ProjectUpdateDTO;
 import com.example.timesheet.app.dto.Projects;
+import com.example.timesheet.app.security.RequestInterceptor;
 import com.example.timesheet.core.model.Project;
 import com.example.timesheet.core.model.UserInfo;
 import com.example.timesheet.core.service.IProjectService;
@@ -26,6 +27,9 @@ public class ProjectController {
     @Autowired
     private CustomMapper mapper;
 
+    @Autowired
+    private RequestInterceptor requestInterceptor;
+
     @PostMapping
     public ResponseEntity<?> create(@RequestBody NewProjectDTO newProject){
         Project project = mapper.newProjectDTOToProject(newProject);
@@ -42,8 +46,8 @@ public class ProjectController {
     }
 
     @GetMapping
-    public ResponseEntity<?> getAll(@RequestAttribute("userInfo") UserInfo userInfo){
-        List<Project> projects = projectService.getAll(userInfo);
+    public ResponseEntity<?> getAll(){
+        List<Project> projects = projectService.getAll(requestInterceptor.getUserInfo());
         List<ProjectDTO> response = projects.stream()
                 .map(mapper::projectToProjectDTO)
                 .collect(Collectors.toList());

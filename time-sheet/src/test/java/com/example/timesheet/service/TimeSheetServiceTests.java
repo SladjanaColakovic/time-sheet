@@ -54,38 +54,23 @@ public class TimeSheetServiceTests {
     }
 
     @Test
-    public void Should_ReturnTwoFulfilledDailyTimeSheets_ForGivenDateRange(){
+    public void Should_ReturnTwoFulfilled_TwoUnfulfilled_SixNotFilled_DailyTimeSheets_ForGivenDateRange(){
         TimeSheetRange range = new TimeSheetRange(FROM, TO, TEAM_MEMBER_ID);
         TimeSheet timeSheet = timeSheetService.getTimeSheet(range);
 
-        List<DailyTimeSheet> filteredList = timeSheet.getDailyTimeSheets().stream()
+        List<DailyTimeSheet> fulfilledDailyTimeSheets = timeSheet.getDailyTimeSheets().stream()
                 .filter(element -> element.getFlag().equals(Flag.FULFILLED))
                 .toList();
-
-        assertEquals(2, filteredList.size());
-    }
-
-    @Test
-    public void Should_ReturnTwoUnfulfilledDailyTimeSheets_ForGivenDateRange(){
-        TimeSheetRange range = new TimeSheetRange(FROM, TO, TEAM_MEMBER_ID);
-        TimeSheet timeSheet = timeSheetService.getTimeSheet(range);
-
-        List<DailyTimeSheet> filteredList = timeSheet.getDailyTimeSheets().stream()
+        List<DailyTimeSheet> unfulfilledDailyTimeSheets = timeSheet.getDailyTimeSheets().stream()
                 .filter(element -> element.getFlag().equals(Flag.UNFULFILLED))
                 .toList();
-
-        assertEquals(2, filteredList.size());
-    }
-
-    @Test
-    public void Should_ReturnSixNotFilledDailyTimeSheets_ForGivenDateRange(){
-        TimeSheetRange range = new TimeSheetRange(FROM, TO, TEAM_MEMBER_ID);
-        TimeSheet timeSheet = timeSheetService.getTimeSheet(range);
-
-        List<DailyTimeSheet> filteredList = timeSheet.getDailyTimeSheets().stream()
+        List<DailyTimeSheet> notFilledDailyTimeSheets = timeSheet.getDailyTimeSheets().stream()
                 .filter(element -> element.getFlag().equals(Flag.NOT_FILLED))
                 .toList();
 
-        assertEquals(6, filteredList.size());
+        assertEquals(2, fulfilledDailyTimeSheets.size());
+        assertEquals(2, unfulfilledDailyTimeSheets.size());
+        assertEquals(6, notFilledDailyTimeSheets.size());
     }
+
 }
