@@ -74,27 +74,45 @@ code {
 }
 
 
-.navbar {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-  overflow: hidden;
-  background-color: #333;
+.sidenav {
+  height: 100%;
+  width: 200px;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: #567189;
+  overflow-x: hidden;
 }
 
-.navbar li {
-  float: left;
+.sidenav button {
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  border-bottom: 1px solid #4d667c;
+  width: 100%;
+  background-color: transparent;
+  height: 80px;
+  text-align: left;
+  padding-left: 10px;
 }
 
-.navbar li a {
-  display: block;
-  color: white;
-  text-align: center;
-  padding: 2px 16px;
-  text-decoration: none;
+.sidenav button:hover{
+  background-color: #4c667d;
+
+}
+.sidenav label{
+  margin-left: 10px;
+  display: inline-block;
+  color: rgb(236, 232, 232);
+  font-size: 16px;
 }
 
-.navbar li a:hover {
-  background-color: #111;
+.sidenav .bottomButton {
+  position: sticky;
+  top: 100%;
 }
 
+svg{
+  fill: rgb(236, 232, 232);
+}
