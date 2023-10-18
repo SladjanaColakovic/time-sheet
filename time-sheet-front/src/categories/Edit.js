@@ -1,12 +1,12 @@
 import { useState } from "react";
-import axiosInstance from "../axiosIntance";
-import { useLocation } from "react-router-dom";
+import putRequest from "../putRequest";
+import getRequest from "../getRequest";
+import deleteRequest from "../deleteRequest";
 
-const Edit = ({ category }) => {
+const Edit = ({ category, setData }) => {
 
     const [editCategory, setEditCategory] = useState(category);
     const url = "http://localhost:8080/api/category";
-    const location = useLocation();
 
 
     const handleSave = () => {
@@ -14,32 +14,37 @@ const Edit = ({ category }) => {
             id: editCategory.id,
             name: editCategory.name
         }
-        axiosInstance.put(url, data)
-            .then((res) => {
-                console.log(res);
-                location.reload(true)
+        putRequest(url, data).then(res => {
+            console.log(res.data);
+            getRequest(url).then((res) => {
+                setData(res.data.categories)
             })
+        })
+            .catch(error => {
+                console.log(error)
+            })
+
+    }
+
+    const handleDelete = () => {
+        const params = { id: editCategory.id }
+        deleteRequest(url, params)
+            .then((res) => {
+                getRequest(url).then((res) => {
+                    setData(res.data.categories)
+                })
+            }
+            )
             .catch((error) => {
                 console.log(error)
             })
-    }
-
-    const handleDelete = () => { 
-        const params = {id: editCategory.id}
-        axiosInstance.delete(url, {params})
-        .then(
-            location.reload(true)
-        )
-        .catch((error) => {
-            console.log(error)
-        })
 
     }
 
     return (
         <div className="edit">
             <div className="row">
-                <div className="col-5">
+                <div className="col-4">
                     <input type="text" value={editCategory.name} onChange={(e) => { setEditCategory({ ...editCategory, name: e.target.value }) }} />
                 </div>
                 <div className="col-2">

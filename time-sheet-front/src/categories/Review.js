@@ -1,14 +1,20 @@
 import Accordion from 'react-bootstrap/Accordion';
-import useFetch from '../useFetch';
 import Edit from './Edit';
+import { useEffect, useState } from 'react';
+import getRequest from '../getRequest';
 
 const Review = () => {
 
-    const [data, error] = useFetch("http://localhost:8080/api/category");
+    const [data, setData] = useState(null);
 
-    const handleError = () => {
-        
-    }
+    useEffect(() => {
+        getRequest("http://localhost:8080/api/category")
+            .then((res) => {
+                setData(res.data.categories)
+            }).catch((error) => {
+                console.log(error);
+            })
+    }, [])
 
     return (
         <div className='span-top'>
@@ -20,7 +26,7 @@ const Review = () => {
                             <Accordion.Item key={category.id} eventKey={category.id}>
                                 <Accordion.Header>{category.name}</Accordion.Header>
                                 <Accordion.Body>
-                                    <Edit category={category}></Edit>
+                                    <Edit category={category} setData = {setData}></Edit>
                                 </Accordion.Body>
                             </Accordion.Item>
                         ))}

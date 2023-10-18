@@ -132,6 +132,32 @@ svg{
   margin-top: 50px;
 }
 
+.span-top input{
+  width: 100%;
+  padding: 7px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  resize: horizontal;
+  box-shadow: rgba(0, 0, 0, 0.04) 0px 3px 5px;
+}
+
+.span-top label {
+  font-size: 17px;
+  padding: 9px 9px 9px 0;
+  display: inline-block;
+}
+
+.span-top .save{
+  width: 90px;
+  background-color: #5b7d7e;
+  border: none;
+  color: rgb(236, 232, 232);
+  padding: 7px 9px;
+  text-align: center;
+  font-size: 16px;
+  border-radius: 3px;
+}
+
 .edit{
   margin-top: 20px;
   margin-bottom: 20px;
