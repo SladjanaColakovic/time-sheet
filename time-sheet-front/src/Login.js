@@ -15,48 +15,43 @@ const Login = () => {
             username: username,
             password: password
         }
-        
-        axiosInstance.post(url, 
+
+        axiosInstance.post(url,
             JSON.stringify(data))
-        .then((res) => {
-            localStorage.clear();
-            localStorage.setItem('token', res.data.accessToken)
-            var obj = JSON.parse(window.atob(res.data.accessToken.split('.')[1]))
-            localStorage.setItem('role', obj.role)
-        }).catch((error) => {
-            console.log(error);
-            
-        })
+            .then((res) => {
+                localStorage.clear();
+                localStorage.setItem('token', res.data.accessToken)
+                var obj = JSON.parse(window.atob(res.data.accessToken.split('.')[1]))
+                localStorage.setItem('role', obj.role)
+            }).catch((error) => {
+                console.log(error);
+
+            })
     }
 
     return (
-        <div className="login">
-            <h2>Prijava</h2>
-            <div className="box">
-                <form>
-                    <div className="row">
-                        <div className="col-6">
-                            <label>Korisnicko ime:</label>
+            <div className="login">
+                <h2>Login</h2>
+                <div className="box">
+                    <form>
+                        <div className='row'>
+                            <label>Username:</label>
                         </div>
-                        <div className="col-6">
-                            <input type="text" value={username} onChange={(e) => {setUsername(e.target.value)}}/>
-
+                        <div className='row'>
+                            <input type="text" value={username} onChange={(e) => { setUsername(e.target.value) }} />
                         </div>
-                    </div>
-                    <div className="row">
-                        <div className="col-6">
-                            <label>Lozinka:</label>
+                        <div className='row'>
+                            <label>Password:</label>
                         </div>
-                        <div className="col-6">
-                            <input type="password" value={password} onChange={(e) => {setPassword(e.target.value)}}/>
+                        <div className='row'>
+                            <input type="password" value={password} onChange={(e) => { setPassword(e.target.value) }} />
                         </div>
-                    </div>
-                    <div className="row">
-                        <button onClick={handleClick}>Uloguj se</button>
-                    </div>
-                </form>
+                        <div className="row">
+                            <button onClick={handleClick}>Login</button>
+                        </div>
+                    </form>
+                </div>
             </div>
-        </div>
     );
 }
 

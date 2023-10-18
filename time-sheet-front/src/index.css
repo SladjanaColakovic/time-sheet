@@ -15,15 +15,14 @@ code {
 .login h2 {
   text-align: center;
   margin-top: 20px;
-  margin-bottom: 30px;
+  margin-bottom: 50px;
 }
 
 .login .box {
   margin: auto;
-  max-width: 650px;
+  margin-bottom: 20px;
+  max-width: 550px;
   padding: 25px;
-  border: 1px solid;
-  border-color: #d6b8b8;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 
 }
@@ -32,7 +31,7 @@ code {
   width: 100%;
   padding: 9px;
   border: 1px solid #ccc;
-  border-radius: 4px;
+  border-radius: 3px;
   resize: horizontal;
   box-shadow: rgba(0, 0, 0, 0.04) 0px 3px 5px;
 }
@@ -49,9 +48,9 @@ code {
 
 .login button {
   width: 130px;
-  background-color: #d17272;
+  background-color: #567189;
   border: none;
-  color: white;
+  color: rgb(236, 232, 232);
   padding: 11px 30px;
   text-align: center;
   text-decoration: none;
@@ -61,12 +60,12 @@ code {
   margin-left: auto;
   margin-right: auto;
   cursor: pointer;
-  border-radius: 5px;
+  border-radius: 3px;
   float: right;
 }
 
 .login button:hover {
-  background-color: #9d4d4d;
+  background-color: #4d667c;
 }
 
 .accessDenied h1{
@@ -131,4 +130,46 @@ svg{
 
 .span-top{
   margin-top: 50px;
+}
+
+.edit{
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.edit .save{
+  width: 90px;
+  background-color: #5b7d7e;
+  border: none;
+  color: rgb(236, 232, 232);
+  padding: 7px 9px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 16px;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 3px;
+}
+
+.edit .delete{
+  width: 90px;
+  background-color: #b65151;
+  border: none;
+  color: rgb(236, 232, 232);
+  padding: 7px 9px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 16px;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 3px;
+}
+
+.edit input {
+  width: 100%;
+  padding: 6px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  resize: horizontal;
+  box-shadow: rgba(0, 0, 0, 0.04) 0px 3px 5px;
 }
