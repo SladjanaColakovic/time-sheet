@@ -3,7 +3,7 @@ import Tabs from 'react-bootstrap/Tabs';
 import Review from './Review';
 import New from './New';
 
-const Catgeories = () => {
+const Categories = () => {
     return (
         <div className="main">
             <h1>Categories</h1>
@@ -22,4 +22,4 @@ const Catgeories = () => {
     );
 }
 
-export default Catgeories;
+export default Categories;

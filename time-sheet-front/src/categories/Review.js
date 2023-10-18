@@ -17,10 +17,10 @@ const Review = () => {
     }, [])
 
     return (
-        <div className='span-top'>
-            <div className='row'>
-                <div className='col-1'></div>
-                <div className='col-10'>
+        <div className="span-top">
+            <div className="row">
+                <div className="col-2"></div>
+                <div className="col-8">
                     <Accordion>
                         {data && data.map((category) => (
                             <Accordion.Item key={category.id} eventKey={category.id}>
@@ -32,7 +32,7 @@ const Review = () => {
                         ))}
                     </Accordion>
                 </div>
-                <div className='col-1'></div>
+                <div className="col-2"></div>
             </div>
         </div>
     );

@@ -22,7 +22,9 @@ const Login = () => {
                 localStorage.clear();
                 localStorage.setItem('token', res.data.accessToken)
                 var obj = JSON.parse(window.atob(res.data.accessToken.split('.')[1]))
+                console.log(obj)
                 localStorage.setItem('role', obj.role)
+                window.location.reload();
             }).catch((error) => {
                 console.log(error);
 
