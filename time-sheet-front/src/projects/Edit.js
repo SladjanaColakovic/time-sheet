@@ -4,8 +4,6 @@ import { deleteRequest, getRequest, putRequest } from "../requests/httpClient";
 const Edit = ({ clients, teamMembers, project, setData }) => {
 
     const [editProject, setEditProject] = useState(project);
-    const [client, setClient] = useState(project.client.id);
-    const [lead, setLead] = useState(project.lead.id);
     const url = "http://localhost:8080/api/project";
 
 
@@ -16,10 +14,10 @@ const Edit = ({ clients, teamMembers, project, setData }) => {
             description: editProject.description,
             status: editProject.status,
             client: {
-                id: client
+                id: editProject.client.id
             },
             lead: {
-                id: lead
+                id: editProject.lead.id
             }
         }
         putRequest(url, data)
@@ -64,7 +62,7 @@ const Edit = ({ clients, teamMembers, project, setData }) => {
                 </div>
                 <div className="col-4">
                     <label>Client</label>
-                    <select onChange={(e) => { setClient(e.target.value) }}>
+                    <select value={editProject.client.id} onChange={(e) => { setEditProject({...editProject, client: {...editProject.client, id: e.target.value}}) }}>
                         {clients && clients.map((client) => (
                             <option key={client.id} value={client.id}>{client.name}</option>
                         ))}
@@ -75,7 +73,7 @@ const Edit = ({ clients, teamMembers, project, setData }) => {
             <div className="row">
                 <div className="col-4">
                     <label>Team member</label>
-                    <select onChange={(e) => { setLead(e.target.value)}}>
+                    <select value={editProject.lead.id} onChange={(e) => { setEditProject({...editProject, lead: {...editProject.lead, id: e.target.value}}) }}>
                         {teamMembers && teamMembers.map((teamMember) => (
                             <option key={teamMember.id} value={teamMember.id}>{teamMember.name}</option>
                         ))}
