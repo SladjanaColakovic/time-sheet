@@ -6,6 +6,7 @@ import Home from './Home';
 import Navbar from './Navbar';
 import Categories from './categories/Categories';
 import { useEffect } from 'react';
+import TeamMembers from './teamMembers/TeamMembers';
 
 function App() {
 
@@ -37,6 +38,7 @@ function App() {
               <Route path='/home' element={<Home />} />
             </Route>
             <Route path='/categories' element={<Categories />} />
+            <Route path='/teamMembers' element={<TeamMembers />} />
           </Routes>
         </div>
       </div>

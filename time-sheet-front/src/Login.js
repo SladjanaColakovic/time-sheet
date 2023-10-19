@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import axiosInstance from './axiosIntance'
+import axiosInstance from './requests/axiosIntance';
 
 const Login = () => {
 

@@ -1,32 +1,32 @@
-import Accordion from 'react-bootstrap/Accordion';
-import Edit from './Edit';
-import { useEffect, useState } from 'react';
-import getRequest from '../requests/getRequest';
+import { useEffect, useState } from "react";
+import { Accordion } from "react-bootstrap";
+import getRequest from "../requests/getRequest";
+import Edit from "./Edit";
 
 const Review = () => {
 
     const [data, setData] = useState(null);
 
     useEffect(() => {
-        getRequest("http://localhost:8080/api/category")
+        getRequest("http://localhost:8080/api/teamMember")
             .then((res) => {
-                setData(res.data.categories)
+                setData(res.data.teamMembers)
             }).catch((error) => {
                 console.log(error);
             })
     }, [])
 
-    return (
+    return ( 
         <div className="span-top">
             <div className="row">
                 <div className="col-2"></div>
                 <div className="col-8">
                     <Accordion>
-                        {data && data.map((category) => (
-                            <Accordion.Item key={category.id} eventKey={category.id}>
-                                <Accordion.Header>{category.name}</Accordion.Header>
+                        {data && data.map((teamMember) => (
+                            <Accordion.Item key={teamMember.id} eventKey={teamMember.id}>
+                                <Accordion.Header>{teamMember.name}</Accordion.Header>
                                 <Accordion.Body>
-                                    <Edit category={category} setData = {setData}></Edit>
+                                    <Edit teamMember = {teamMember} setData = {setData}></Edit>
                                 </Accordion.Body>
                             </Accordion.Item>
                         ))}
@@ -35,7 +35,7 @@ const Review = () => {
                 <div className="col-2"></div>
             </div>
         </div>
-    );
+     );
 }
-
+ 
 export default Review;

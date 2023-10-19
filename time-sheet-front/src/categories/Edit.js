@@ -1,7 +1,7 @@
 import { useState } from "react";
-import putRequest from "../putRequest";
-import getRequest from "../getRequest";
-import deleteRequest from "../deleteRequest";
+import putRequest from "../requests/putRequest";
+import getRequest from "../requests/getRequest";
+import deleteRequest from "../requests/deleteRequest";
 
 const Edit = ({ category, setData }) => {
 
@@ -14,16 +14,16 @@ const Edit = ({ category, setData }) => {
             id: editCategory.id,
             name: editCategory.name
         }
-        putRequest(url, data).then(res => {
-            console.log(res.data);
-            getRequest(url).then((res) => {
-                setData(res.data.categories)
+        putRequest(url, data)
+            .then(res => {
+                console.log(res.data);
+                getRequest(url).then((res) => {
+                    setData(res.data.categories)
+                })
             })
-        })
             .catch(error => {
                 console.log(error)
             })
-
     }
 
     const handleDelete = () => {
@@ -33,12 +33,10 @@ const Edit = ({ category, setData }) => {
                 getRequest(url).then((res) => {
                     setData(res.data.categories)
                 })
-            }
-            )
+            })
             .catch((error) => {
                 console.log(error)
             })
-
     }
 
     return (

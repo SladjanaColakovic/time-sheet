@@ -132,7 +132,7 @@ svg{
   margin-top: 50px;
 }
 
-.span-top input{
+.span-top input[type=text]{
   width: 100%;
   padding: 7px;
   border: 1px solid #ccc;
@@ -148,7 +148,7 @@ svg{
 }
 
 .span-top .save{
-  width: 90px;
+  width: 100%;
   background-color: #5b7d7e;
   border: none;
   color: rgb(236, 232, 232);
@@ -164,7 +164,7 @@ svg{
 }
 
 .edit .save{
-  width: 90px;
+  width: 100%;
   background-color: #5b7d7e;
   border: none;
   color: rgb(236, 232, 232);
@@ -178,7 +178,7 @@ svg{
 }
 
 .edit .delete{
-  width: 90px;
+  width: 100%;
   background-color: #b65151;
   border: none;
   color: rgb(236, 232, 232);
@@ -191,7 +191,7 @@ svg{
   border-radius: 3px;
 }
 
-.edit input {
+.edit input[type=text] {
   width: 100%;
   padding: 7px;
   border: 1px solid #ccc;
@@ -199,3 +199,4 @@ svg{
   resize: horizontal;
   box-shadow: rgba(0, 0, 0, 0.04) 0px 3px 5px;
 }
+
