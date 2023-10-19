@@ -21,9 +21,6 @@ const New = () => {
             role: role,
             password: "Lozinka123"
         }
-        console.log()
-        console.log(status)
-        console.log(role)
 
         postRequest("http://localhost:8080/api/teamMember", data)
             .then((res) => {
