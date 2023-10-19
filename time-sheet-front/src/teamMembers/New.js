@@ -1,5 +1,5 @@
 import { useState } from "react";
-import postRequest from "../requests/postRequest";
+import { postRequest } from "../requests/httpClient";
 
 const New = () => {
 

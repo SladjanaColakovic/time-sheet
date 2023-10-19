@@ -1,7 +1,7 @@
 import Accordion from 'react-bootstrap/Accordion';
 import Edit from './Edit';
 import { useEffect, useState } from 'react';
-import getRequest from '../requests/getRequest';
+import {getRequest} from '../requests/httpClient'
 
 const Review = () => {
 

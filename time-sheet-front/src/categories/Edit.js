@@ -1,7 +1,5 @@
 import { useState } from "react";
-import putRequest from "../requests/putRequest";
-import getRequest from "../requests/getRequest";
-import deleteRequest from "../requests/deleteRequest";
+import { getRequest, deleteRequest, putRequest } from "../requests/httpClient";
 
 const Edit = ({ category, setData }) => {
 

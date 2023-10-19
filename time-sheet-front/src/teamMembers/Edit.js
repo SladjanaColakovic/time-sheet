@@ -1,7 +1,5 @@
 import { useState } from "react";
-import deleteRequest from "../requests/deleteRequest";
-import getRequest from "../requests/getRequest";
-import putRequest from "../requests/putRequest";
+import { getRequest, putRequest, deleteRequest } from "../requests/httpClient";
 
 const Edit = ({ teamMember, setData }) => {
 

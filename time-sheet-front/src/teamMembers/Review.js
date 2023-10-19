@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Accordion } from "react-bootstrap";
-import getRequest from "../requests/getRequest";
+import { getRequest } from "../requests/httpClient";
 import Edit from "./Edit";
 
 const Review = () => {
