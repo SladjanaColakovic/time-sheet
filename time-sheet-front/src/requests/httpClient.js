@@ -13,5 +13,9 @@ export const putRequest = (url, data) => {
 }
 
 export const deleteRequest = (url, params) => {
-    return axiosInstance.delete(url, {params});
+    return axiosInstance.delete(url, { params });
+}
+
+export const getRequestWithParams = (url, params) => {
+    return axiosInstance.get(url, { params });
 }

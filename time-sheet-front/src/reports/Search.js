@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { getRequest, getRequestWithParams } from "../requests/httpClient";
-import axiosInstance from "../requests/axiosIntance";
 
 const Search = ({ setData }) => {
 
@@ -37,20 +36,24 @@ const Search = ({ setData }) => {
 
 
     const handleSearch = () => {
-        let data = {
+
+        const params =
+        {
             clientId: client,
+            projectId: project,
             categoryId: category,
             teamMemberId: teamMember,
-            projectId: project,
             startDate: startDate,
             endDate: endDate
         }
-        
-    //     const params = { clientId: client }
-    //    axiosInstance.get("http://localhost:8080/api/report", {params}).
-    //    then((res) => {
-    //     console.log(res)
-    //    })
+        getRequestWithParams("http://localhost:8080/api/report", params)
+            .then((res) => {
+                console.log(res);
+                setData(res.data)
+            })
+            .catch((error) => {
+                console.log(error.message)
+            })
     }
 
     return (

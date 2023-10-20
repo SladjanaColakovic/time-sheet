@@ -17,4 +17,12 @@ public class ReportSearchDTO {
     private LocalDate startDate;
     private LocalDate endDate;
 
+    public ReportSearchDTO(Long clientId, Long teamMemberId, Long categoryId, Long projectId, LocalDate startDate, LocalDate endDate) {
+        this.clientId = clientId;
+        this.teamMemberId = teamMemberId;
+        this.categoryId = categoryId;
+        this.projectId = projectId;
+        this.startDate = startDate;
+        this.endDate = endDate;
+    }
 }

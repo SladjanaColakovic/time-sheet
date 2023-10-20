@@ -11,6 +11,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
+
 
 @RestController
 @RequestMapping(value = "/api/report")
@@ -23,8 +25,13 @@ public class ReportController {
     private CustomMapper mapper;
 
     @GetMapping
-    public ResponseEntity<?> reportSearch(@RequestBody ReportSearchDTO reportSearchDTO){
-        ReportSearch reportSearch = mapper.reportSearchDTOToReportSearch(reportSearchDTO);
+    public ResponseEntity<?> reportSearch(@RequestParam(value = "clientId", required = false) Long clientId,
+                                          @RequestParam(value = "projectId", required = false) Long projectId,
+                                          @RequestParam(value = "categoryId", required = false) Long categoryId,
+                                          @RequestParam(value = "teamMemberId", required = false) Long teamMemberId,
+                                          @RequestParam(value = "startDate", required = false) LocalDate startDate,
+                                          @RequestParam(value = "endDate", required = false) LocalDate endDate){
+        ReportSearch reportSearch = mapper.reportSearchDTOToReportSearch(new ReportSearchDTO(clientId, teamMemberId, categoryId, projectId, startDate, endDate));
         Report report = reportService.reportSearch(reportSearch);
         ReportDTO response = mapper.reportToReportDTO(report);
         return new ResponseEntity<>(response, HttpStatus.OK);
