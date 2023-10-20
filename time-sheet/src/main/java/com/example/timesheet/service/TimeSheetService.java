@@ -29,7 +29,7 @@ public class TimeSheetService implements ITimeSheetService {
         Map<LocalDate, DailyTimeSheet> dailyTimeSheets = getExistingDailyTimeSheets(timeSheetRange);
 
         double totalHours = 0.0;
-        for(LocalDate date = timeSheetRange.getFrom(); date.isBefore(timeSheetRange.getTo()); date = date.plusDays(1)) {
+        for(LocalDate date = timeSheetRange.getFrom(); date.isBefore(timeSheetRange.getTo()) || date.isEqual(timeSheetRange.getTo()); date = date.plusDays(1)) {
             DailyTimeSheet dailyTimeSheet = createDailyTimeSheet(dailyTimeSheets, date);
             response.add(dailyTimeSheet);
             totalHours += dailyTimeSheet.getTotalHoursPerDay();

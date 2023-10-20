@@ -10,6 +10,7 @@ import TeamMembers from './teamMembers/TeamMembers';
 import Projects from './projects/Projects';
 import Clients from './clients/Clients';
 import Reports from './reports/Reports';
+import TimeSheet from './timeSheet/TimeSheet';
 
 function App() {
 
@@ -45,6 +46,7 @@ function App() {
             <Route path='/projects' element={<Projects />} />
             <Route path='/clients' element={<Clients />} />
             <Route path='/reports' element={<Reports />} />
+            <Route path='/timeSheet' element={<TimeSheet />} />
           </Routes>
         </div>
       </div>

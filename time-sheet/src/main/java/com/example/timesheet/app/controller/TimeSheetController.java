@@ -11,6 +11,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
+
 @RestController
 @RequestMapping("/api/timeSheet")
 public class TimeSheetController {
@@ -22,8 +24,10 @@ public class TimeSheetController {
     private CustomMapper mapper;
 
     @GetMapping()
-    public ResponseEntity<?> getDailyTimeSheets(@RequestBody TimeSheetRangeDTO timeSheetRangeDTO){
-        TimeSheetRange timeSheetRange = mapper.timeSheetRangeDTOToTimeSheetRange(timeSheetRangeDTO);
+    public ResponseEntity<?> getDailyTimeSheets(@RequestParam("from") LocalDate from,
+                                                @RequestParam("to") LocalDate to,
+                                                @RequestParam("teamMemberId") Long teamMemberId){
+        TimeSheetRange timeSheetRange = mapper.timeSheetRangeDTOToTimeSheetRange(new TimeSheetRangeDTO(from, to, teamMemberId));
         TimeSheet timeSheet = timeSheetService.getTimeSheet(timeSheetRange);
         TimeSheetDTO response = mapper.timeSheetToTimeSheetDTO(timeSheet);
         return new ResponseEntity<>(response, HttpStatus.OK);

@@ -61,7 +61,7 @@ const Search = ({ setData }) => {
             <div className="row">
                 <div className="col-1"></div>
                 <div className="col-10">
-                    <div className="search">
+                    <div className="box">
                         <div className="row">
                             <div className="col-4">
                                 <label>Team member</label>

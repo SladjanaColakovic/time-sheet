@@ -220,7 +220,7 @@ input[type=date] {
   box-shadow: rgba(0, 0, 0, 0.04) 0px 3px 5px;
 }
 
-.search {
+.box {
   box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
   padding: 20px;
 }
@@ -262,4 +262,32 @@ tr:nth-child(even) {
   float: right;
   font-size: 17px;
   color: #567189
+}
+
+.back{
+  float: left;
+  border: none;
+  width: auto;
+  background-color: transparent;
+  text-align: left;
+}
+
+.next{
+  float: right;
+  border: none;
+  width: auto;
+  background-color: transparent;
+  text-align: left;
+}
+
+
+.col-md{
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 15px;
+}
+
+.box-date{
+  border: 1px solid rgb(236, 232, 232);
+  padding: 20px;
 }
