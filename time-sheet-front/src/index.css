@@ -243,17 +243,17 @@ input[type=date] {
   overflow-x: auto;
 }
 
-table {
+.table-div table {
   border-collapse: collapse;
   width: 100%;
 }
 
-th, td {
+.table-div th, td {
   text-align: left;
   padding: 8px;
 }
 
-tr:nth-child(even) {
+.table-div tr:nth-child(even) {
   background-color: rgb(236, 232, 232);
 }
 
@@ -289,5 +289,36 @@ tr:nth-child(even) {
 
 .box-date{
   border: 1px solid rgb(236, 232, 232);
-  padding: 20px;
+}
+
+.date-label{
+  padding: 5px;
+}
+
+.hours{
+  padding: 5px;
+  text-decoration: none;
+  color: black;
+  display: block;
+}
+
+.hours:hover{
+  cursor: pointer;
+  text-decoration: underline;
+  text-decoration-color: #a9b6c2;
+}
+
+.calendar-div {
+  overflow-x: auto;
+  text-align: center;
+}
+
+.calendar-div table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.calendar-div th, td {
+  text-align: left;
+  padding: 8px;
 }

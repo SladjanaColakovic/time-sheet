@@ -41,11 +41,11 @@ const TimeSheet = () => {
         const firstDayOfMonth = firstDateOfMonth.getDay();
         const lastDayOfMonth = lastDateOfMonth.getDay();
         let from = firstDateOfMonth;
-        if (firstDayOfMonth != MONDAY) {
-            from = new Date(firstDateOfMonth.setDate((firstDayOfMonth != 0) ? firstDateOfMonth.getDate() - firstDayOfMonth + 1 : firstDateOfMonth.getDate() - 7 + 1));
+        if (firstDayOfMonth !== MONDAY) {
+            from = new Date(firstDateOfMonth.setDate((firstDayOfMonth !== 0) ? firstDateOfMonth.getDate() - firstDayOfMonth + 1 : firstDateOfMonth.getDate() - 7 + 1));
         }
         let to = lastDateOfMonth;
-        if (lastDayOfMonth != SUNDAY) {
+        if (lastDayOfMonth !== SUNDAY) {
             to = new Date(lastDateOfMonth.setDate(lastDateOfMonth.getDate() + SUNDAY - lastDateOfMonth.getDay()))
         }
         return [from, to, userInfo.id]
@@ -63,7 +63,8 @@ const TimeSheet = () => {
         }
         getRequestWithParams("http://localhost:8080/api/timeSheet", params)
             .then((res) => {
-                console.log(res)
+                setData(res.data.dailyTimeSheets);
+                setTotalHours(res.data.totalHours);
             })
     }
 
@@ -78,9 +79,11 @@ const TimeSheet = () => {
         }
         getRequestWithParams("http://localhost:8080/api/timeSheet", params)
             .then((res) => {
-                console.log(res)
+                setData(res.data.dailyTimeSheets);
+                setTotalHours(res.data.totalHours);
             })
     }
+
 
     return (
         <div className="main">
@@ -116,17 +119,21 @@ const TimeSheet = () => {
                         {data &&
                             <div className="row">
                                 {data.map((item) => (
-                                    <label key={item.date} style={{ width: "14.28%" }}>
-                                        <div style={{ margin: "5px" }} className="box-date">
-                                            {new Date(item.date).getDate()}
+                                    <label key={item.date} style={{ width: "14.28%", paddingRight: "0", paddingLeft: "0" }}>
+                                        <div style={{ margin: "2px" }} className="box-date">
+                                            <label className="date-label">{new Date(item.date).getDate()}.</label>
                                             <br />
-                                            <br />
-                                            <div>Hours: {item.totalHoursPerDay}</div>
+                                            <div style={{backgroundColor: item.flag === 'FULFILLED'? '#c5d2d4': item.flag === 'UNFULFILLED'? '#ffcccb': 'white'}}>    
+                                                <a className="hours">Hours: {item.totalHoursPerDay}</a>
+                                            </div>
                                         </div>
                                     </label>
                                 ))}
                             </div>
                         }
+                        <label className="total-report">Total hours: {totalHours}</label>
+                        <br />
+                        <br />
                     </div>
                 </div>
                 <div className="col-1"></div>

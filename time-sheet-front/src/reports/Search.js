@@ -46,6 +46,7 @@ const Search = ({ setData }) => {
             startDate: startDate,
             endDate: endDate
         }
+        console.log(params)
         getRequestWithParams("http://localhost:8080/api/report", params)
             .then((res) => {
                 console.log(res);
