@@ -7,8 +7,10 @@ const Review = () => {
 
     const [data, setData] = useState(null);
 
+    const URL = process.env.REACT_APP_SERVER_BASE_URL + process.env.REACT_APP_TEAM_MEMBER_URL
+
     useEffect(() => {
-        getRequest("http://localhost:8080/api/teamMember")
+        getRequest(URL)
             .then((res) => {
                 setData(res.data.teamMembers)
                 console.log(res.data.teamMembers)

@@ -1,5 +1,9 @@
 import { useState } from 'react'
-import axiosInstance from './requests/axiosIntance';
+import { postRequest } from './requests/httpClient';
+import ButtonComponent from './components/ButtonComponent';
+import InputPasswordComponent from './components/InputPasswordComponent';
+import InputComponent from './components/InputComponent';
+
 
 const Login = () => {
 
@@ -16,8 +20,7 @@ const Login = () => {
             password: password
         }
 
-        axiosInstance.post(url,
-            JSON.stringify(data))
+        postRequest(url, data)
             .then((res) => {
                 localStorage.clear();
                 localStorage.setItem('token', res.data.accessToken)
@@ -27,33 +30,30 @@ const Login = () => {
                 window.location.reload();
             }).catch((error) => {
                 console.log(error);
-
             })
     }
 
     return (
-            <div className="login">
-                <h2>Login</h2>
-                <div className="box">
-                    <form>
-                        <div className='row'>
-                            <label>Username:</label>
-                        </div>
-                        <div className='row'>
-                            <input type="text" value={username} onChange={(e) => { setUsername(e.target.value) }} />
-                        </div>
-                        <div className='row'>
-                            <label>Password:</label>
-                        </div>
-                        <div className='row'>
-                            <input type="password" value={password} onChange={(e) => { setPassword(e.target.value) }} />
-                        </div>
-                        <div className="row">
-                            <button onClick={handleClick}>Login</button>
-                        </div>
-                    </form>
+        <div className="login">
+            <h2>Login</h2>
+            <div className="box">
+
+                <div className='row'>
+                    <InputComponent labelName={"Username"} value={username} setValue={setUsername}></InputComponent>
+                    {/* <label>Username:</label>
+                    <input type="text" value={username} onChange={(e) => { setUsername(e.target.value) }} /> */}
                 </div>
+                <div className='row'>
+                    <InputPasswordComponent value={password} labelName={"Password"} setValue={setPassword}></InputPasswordComponent>
+                    {/* <label>Password:</label>
+                    <input type="password" value={password} onChange={(e) => { setPassword(e.target.value) }} /> */}
+                </div>
+                <div className="row">
+                    <ButtonComponent handleClick={handleClick} buttonName={"Login"}></ButtonComponent>
+                </div>
+
             </div>
+        </div>
     );
 }
 

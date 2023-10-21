@@ -17,10 +17,8 @@ function App() {
   const token = localStorage.getItem('token')
 
   useEffect(() => {
-    console.log("Ok");
     if (token) {
       var obj = JSON.parse(window.atob(token.split('.')[1]))
-      console.log(obj)
       if(obj.exp < Date.now() / 1000){
         localStorage.clear();
         window.location.reload();

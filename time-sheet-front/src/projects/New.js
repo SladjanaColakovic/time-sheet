@@ -12,6 +12,8 @@ const New = ({ clients, teamMembers }) => {
     const [name, setName] = useState('');
     const [description, setDescription] = useState('');
 
+    const URL = process.env.REACT_APP_SERVER_BASE_URL + process.env.REACT_APP_PROJECT_URL
+
     const handleSave = () => {
 
         const data = {
@@ -25,7 +27,7 @@ const New = ({ clients, teamMembers }) => {
             }
         }
 
-        postRequest("http://localhost:8080/api/project", data)
+        postRequest(URL, data)
             .then((res) => {
                 window.location.reload();
             })

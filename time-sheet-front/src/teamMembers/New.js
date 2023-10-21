@@ -13,6 +13,7 @@ const New = () => {
     const [status, setStatus] = useState("ACTIVE");
     const [role, setRole] = useState("WORKER");
 
+    const URL = process.env.REACT_APP_SERVER_BASE_URL + process.env.REACT_APP_TEAM_MEMBER_URL
 
     const handleSave = () => {
 
@@ -26,7 +27,7 @@ const New = () => {
             password: "Lozinka123"
         }
 
-        postRequest("http://localhost:8080/api/teamMember", data)
+        postRequest(URL, data)
             .then((res) => {
                 console.log(res.data)
                 window.location.reload()

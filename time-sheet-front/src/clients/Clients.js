@@ -8,9 +8,10 @@ import New from './New';
 const Clients = () => {
 
     const [countries, setCountries] = useState(null);
+    const URL = process.env.REACT_APP_SERVER_BASE_URL + process.env.REACT_APP_COUNTRY_URL
 
     useEffect(() => {
-        getRequest("http://localhost:8080/api/country")
+        getRequest(URL)
             .then((res) => {
                 setCountries(res.data.countries)
             })

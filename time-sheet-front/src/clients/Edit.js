@@ -8,7 +8,7 @@ const Edit = ({ countries, client, setData }) => {
 
     const [editClient, setEditClient] = useState(client);
 
-    const url = "http://localhost:8080/api/client";
+    const URL = process.env.REACT_APP_SERVER_BASE_URL + process.env.REACT_APP_CLIENT_URL
 
 
     const handleSave = () => {
@@ -23,9 +23,9 @@ const Edit = ({ countries, client, setData }) => {
                 id: editClient.country.id
             }
         }
-        putRequest(url, data)
+        putRequest(URL, data)
             .then(res => {
-                getRequest(url).then((res) => {
+                getRequest(URL).then((res) => {
                     setData(res.data.clients)
                 })
 
@@ -39,9 +39,9 @@ const Edit = ({ countries, client, setData }) => {
     const handleDelete = () => {
 
         const params = { id: editClient.id }
-        deleteRequest(url, params)
+        deleteRequest(URL, params)
             .then((res) => {
-                getRequest(url).then((res) => {
+                getRequest(URL).then((res) => {
                     setData(res.data.clients)
                 })
             }

@@ -6,7 +6,7 @@ import InputEditComponent from "../components/InputEditComponent";
 const Edit = ({ category, setData }) => {
 
     const [editCategory, setEditCategory] = useState(category);
-    const url = "http://localhost:8080/api/category";
+    const URL = process.env.REACT_APP_SERVER_BASE_URL + process.env.REACT_APP_CATEGORY_URL
 
 
     const handleSave = () => {
@@ -15,9 +15,9 @@ const Edit = ({ category, setData }) => {
             id: editCategory.id,
             name: editCategory.name
         }
-        putRequest(url, data)
+        putRequest(URL, data)
             .then(res => {
-                getRequest(url).then((res) => {
+                getRequest(URL).then((res) => {
                     setData(res.data.categories);
                 })
             })
@@ -28,9 +28,9 @@ const Edit = ({ category, setData }) => {
 
     const handleDelete = () => {
         const params = { id: editCategory.id }
-        deleteRequest(url, params)
+        deleteRequest(URL, params)
             .then((res) => {
-                getRequest(url).then((res) => {
+                getRequest(URL).then((res) => {
                     setData(res.data.categories);
                 })
             })

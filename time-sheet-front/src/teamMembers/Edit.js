@@ -6,7 +6,7 @@ import ButtonComponent from "../components/ButtonComponent";
 const Edit = ({ teamMember, setData }) => {
 
     const [editTeamMember, setEditTeamMember] = useState(teamMember);
-    const url = "http://localhost:8080/api/teamMember";
+    const URL = process.env.REACT_APP_SERVER_BASE_URL + process.env.REACT_APP_TEAM_MEMBER_URL
 
 
     const handleSave = () => {
@@ -20,9 +20,9 @@ const Edit = ({ teamMember, setData }) => {
             status: editTeamMember.status,
             role: editTeamMember.role
         }
-        putRequest(url, data)
+        putRequest(URL, data)
             .then(res => {
-                getRequest(url).then((res) => {
+                getRequest(URL).then((res) => {
                     setData(res.data.teamMembers)
                 })
 
@@ -36,9 +36,9 @@ const Edit = ({ teamMember, setData }) => {
 
     const handleDelete = () => {
         const params = { id: editTeamMember.id }
-        deleteRequest(url, params)
+        deleteRequest(URL, params)
             .then((res) => {
-                getRequest(url).then((res) => {
+                getRequest(URL).then((res) => {
                     setData(res.data.teamMembers)
                 })
             }

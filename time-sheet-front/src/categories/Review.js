@@ -6,9 +6,10 @@ import { getRequest } from '../requests/httpClient'
 const Review = () => {
 
     const [data, setData] = useState(null);
+    const URL = process.env.REACT_APP_SERVER_BASE_URL + process.env.REACT_APP_CATEGORY_URL
 
     useEffect(() => {
-        getRequest("http://localhost:8080/api/category")
+        getRequest(URL)
             .then((res) => {
                 setData(res.data.categories)
             }).catch((error) => {

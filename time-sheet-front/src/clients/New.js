@@ -12,6 +12,8 @@ const New = ({ countries }) => {
     const [city, setCity] = useState('');
     const [postalCode, setPostalCode] = useState('');
 
+    const URL = process.env.REACT_APP_SERVER_BASE_URL + process.env.REACT_APP_CLIENT_URL
+
     const handleSave = () => {
 
         const data = {
@@ -24,7 +26,7 @@ const New = ({ countries }) => {
             }
         }
 
-        postRequest("http://localhost:8080/api/client", data)
+        postRequest(URL, data)
             .then((res) => {
                 window.location.reload();
             })

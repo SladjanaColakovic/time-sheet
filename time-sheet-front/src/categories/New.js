@@ -4,16 +4,15 @@ import InputComponent from "../components/InputComponent";
 import ButtonComponent from "../components/ButtonComponent";
 
 const New = () => {
-
-    const url = "http://localhost:8080/api/category";
+    
     const [name, setName] = useState('');
-
+    const URL = process.env.REACT_APP_SERVER_BASE_URL + process.env.REACT_APP_CATEGORY_URL
     const handleSave = () => {
 
         const data = {
             name: name
         }
-        postRequest(url, data)
+        postRequest(URL, data)
             .then((res) => {
                 window.location.reload();
             })

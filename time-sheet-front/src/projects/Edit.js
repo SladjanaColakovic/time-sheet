@@ -7,7 +7,7 @@ import SelectEditComponent from "../components/SelectEditComponent";
 const Edit = ({ clients, teamMembers, project, setData }) => {
 
     const [editProject, setEditProject] = useState(project);
-    const url = "http://localhost:8080/api/project";
+    const URL = process.env.REACT_APP_SERVER_BASE_URL + process.env.REACT_APP_PROJECT_URL
 
 
     const handleSave = () => {
@@ -24,9 +24,9 @@ const Edit = ({ clients, teamMembers, project, setData }) => {
                 id: editProject.lead.id
             }
         }
-        putRequest(url, data)
+        putRequest(URL, data)
             .then(res => {
-                getRequest(url).then((res) => {
+                getRequest(URL).then((res) => {
                     setData(res.data.projects);
                 })
 
@@ -39,9 +39,9 @@ const Edit = ({ clients, teamMembers, project, setData }) => {
 
     const handleDelete = () => {
         const params = { id: editProject.id }
-        deleteRequest(url, params)
+        deleteRequest(URL, params)
             .then((res) => {
-                getRequest(url).then((res) => {
+                getRequest(URL).then((res) => {
                     setData(res.data.projects);
                 })
             }

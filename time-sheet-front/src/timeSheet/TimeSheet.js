@@ -10,6 +10,9 @@ const TimeSheet = () => {
     const [data, setData] = useState();
     const [totalHours, setTotalHours] = useState();
 
+    const URL = process.env.REACT_APP_SERVER_BASE_URL + process.env.REACT_APP_TIME_SHEET_URL
+
+
     const MONDAY = 1;
     const SUNDAY = 7;
     const DATE_FORMAT = 'yyyy-MM-dd';
@@ -29,7 +32,7 @@ const TimeSheet = () => {
         }
         console.log(params)
 
-        getRequestWithParams("http://localhost:8080/api/timeSheet", params)
+        getRequestWithParams(URL, params)
             .then((res) => {
                 console.log(res);
                 setData(res.data.dailyTimeSheets);

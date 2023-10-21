@@ -9,16 +9,18 @@ const Projects = () => {
 
     const [clients, setClients] = useState(null);
     const [teamMembers, setTeamMembers] = useState(null);
+    const CLIENT_URL = process.env.REACT_APP_SERVER_BASE_URL + process.env.REACT_APP_CLIENT_URL
+    const TEAM_MEMBER_URL = process.env.REACT_APP_SERVER_BASE_URL + process.env.REACT_APP_TEAM_MEMBER_URL
 
     useEffect(() => {
-        getRequest("http://localhost:8080/api/client")
+        getRequest(CLIENT_URL)
             .then((res) => {
                 setClients(res.data.clients)
                 console.log(res.data)
             }).catch((error) => {
                 console.log(error.message)
             })
-        getRequest("http://localhost:8080/api/teamMember")
+        getRequest(TEAM_MEMBER_URL)
             .then((res) => {
                 setTeamMembers(res.data.teamMembers)
             }).catch((error) => {

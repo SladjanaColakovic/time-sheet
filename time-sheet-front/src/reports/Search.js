@@ -17,18 +17,24 @@ const Search = ({ setData }) => {
     const [startDate, setStartDate] = useState("")
     const [endDate, setEndDate] = useState("");
 
+    const CLIENT_URL = process.env.REACT_APP_SERVER_BASE_URL + process.env.REACT_APP_CLIENT_URL
+    const PROJECT_URL = process.env.REACT_APP_SERVER_BASE_URL + process.env.REACT_APP_PROJECT_URL
+    const TEAM_MEMBER_URL = process.env.REACT_APP_SERVER_BASE_URL + process.env.REACT_APP_TEAM_MEMBER_URL
+    const CATEGORY_URL = process.env.REACT_APP_SERVER_BASE_URL + process.env.REACT_APP_CATEGORY_URL
+    const REPORT_URL = process.env.REACT_APP_SERVER_BASE_URL + process.env.REACT_APP_REPORT_URL
+
     useEffect(() => {
-        getRequest("http://localhost:8080/api/client")
+        getRequest(CLIENT_URL)
             .then((res) => {
                 console.log(res.data.clients)
                 setClients(res.data.clients);
-                getRequest("http://localhost:8080/api/project")
+                getRequest(PROJECT_URL)
                     .then((res) => {
                         setProjects(res.data.projects);
-                        getRequest("http://localhost:8080/api/teamMember")
+                        getRequest(TEAM_MEMBER_URL)
                             .then((res) => {
                                 setTeamMembers(res.data.teamMembers);
-                                getRequest("http://localhost:8080/api/category")
+                                getRequest(CATEGORY_URL)
                                     .then((res) => {
                                         setCategories(res.data.categories)
                                     })
@@ -52,7 +58,7 @@ const Search = ({ setData }) => {
         }
         console.log(params)
 
-        getRequestWithParams("http://localhost:8080/api/report", params)
+        getRequestWithParams(REPORT_URL, params)
             .then((res) => {
                 setData(res.data);
             })

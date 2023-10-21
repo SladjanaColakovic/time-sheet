@@ -6,9 +6,10 @@ import Edit from "./Edit";
 const Review = ({ clients, teamMembers }) => {
 
     const [data, setData] = useState(null);
+    const URL = process.env.REACT_APP_SERVER_BASE_URL + process.env.REACT_APP_PROJECT_URL
 
     useEffect(() => {
-        getRequest("http://localhost:8080/api/project")
+        getRequest(URL)
             .then((res) => {
                 setData(res.data.projects)
                 console.log(res.data.projects)
