@@ -11,6 +11,7 @@ const Review = ({clients, teamMembers}) => {
         getRequest("http://localhost:8080/api/project")
             .then((res) => {
                 setData(res.data.projects)
+                console.log(res.data.projects)
             }).catch((error) => {
                 console.log(error);
             })

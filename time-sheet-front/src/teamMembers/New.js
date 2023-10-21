@@ -48,10 +48,10 @@ const New = () => {
                     <InputComponent labelName={"Hours per week"} placeholder={"Enter hours per week..."} value={hoursPerWeek} setValue={setHoursPerWeek}></InputComponent>
                     <div className="row">
                         <div className="col-6">
-                            <RadioComponent value={status} radioName={"Status"} radioValues={["ACTIVE", "INACTIVE"]} setValue={setStatus} radioLabelValues={["Active", "Inactive"]}></RadioComponent>
+                            <RadioComponent value={status} radioName={"new-member-status"} radioLabelName={"Status"} radioValues={["ACTIVE", "INACTIVE"]} setValue={setStatus} radioLabelValues={["Active", "Inactive"]}></RadioComponent>
                         </div>
                         <div className="col-6">
-                            <RadioComponent value={role} radioName={"Role"} radioValues={["WORKER", "ADMIN"]} setValue={setRole} radioLabelValues={["Worker", "Admin"]}></RadioComponent>
+                            <RadioComponent value={role} radioName={"new-member-role"} radioLabelName={"Role"} radioValues={["WORKER", "ADMIN"]} setValue={setRole} radioLabelValues={["Worker", "Admin"]}></RadioComponent>
                         </div>
                     </div>
                     <ButtonComponent handleClick={handleSave} className='new-save' buttonName={"Save"}></ButtonComponent>

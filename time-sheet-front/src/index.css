@@ -173,9 +173,9 @@ svg {
   margin-bottom: 20px;
 }
 
-.edit .save {
+.edit-save {
   width: 100%;
-  background-color: #5b7d7e;
+  background-color: #567189;
   border: none;
   color: rgb(236, 232, 232);
   padding: 7px 9px;
@@ -184,10 +184,15 @@ svg {
   font-size: 16px;
   margin-left: auto;
   margin-right: auto;
+  margin-top: 25px;
   border-radius: 3px;
 }
 
-.edit .delete {
+.edit-save:hover{
+  background-color: #4c667d;
+}
+
+.edit-delete {
   width: 100%;
   background-color: #b65151;
   border: none;
@@ -198,6 +203,7 @@ svg {
   font-size: 16px;
   margin-left: auto;
   margin-right: auto;
+  margin-top: 25px;
   border-radius: 3px;
 }
 

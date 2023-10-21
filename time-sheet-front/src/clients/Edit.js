@@ -1,5 +1,8 @@
 import { useState } from "react";
 import { deleteRequest, getRequest, putRequest } from "../requests/httpClient";
+import InputEditComponent from "../components/InputEditComponent";
+import SelectEditComponent from "../components/SelectEditComponent";
+import ButtonComponent from "../components/ButtonComponent";
 
 const Edit = ({ countries, client, setData }) => {
 
@@ -9,8 +12,8 @@ const Edit = ({ countries, client, setData }) => {
 
 
     const handleSave = () => {
-        console.log(editClient.country.id)
-        let data = {
+
+        const data = {
             id: editClient.id,
             name: editClient.name,
             address: editClient.address,
@@ -34,6 +37,7 @@ const Edit = ({ countries, client, setData }) => {
     }
 
     const handleDelete = () => {
+        
         const params = { id: editClient.id }
         deleteRequest(url, params)
             .then((res) => {
@@ -47,45 +51,44 @@ const Edit = ({ countries, client, setData }) => {
             })
     }
 
+    const changeClient = (e, property) => {
+        setEditClient({ ...editClient, [property]: e.target.value })
+    }
+
+    const changeClientCountry = (e) => {
+        setEditClient({ ...editClient, country: { ...editClient.country, id: e.target.value } })
+    }
+
     return (
         <div className="edit">
             <div className="row">
                 <div className="col-4">
-                    <label>Name</label>
-                    <input type="text" value={editClient.name} onChange={(e) => { setEditClient({ ...editClient, name: e.target.value }) }} />
+                    <InputEditComponent labelName={"Name"} changeValue={changeClient} value={editClient.name} property={"name"}></InputEditComponent>
                 </div>
                 <div className="col-4">
-                    <label>Address</label>
-                    <input type="text" value={editClient.address} onChange={(e) => { setEditClient({ ...editClient, address: e.target.value }) }} />
+                    <InputEditComponent labelName={"Address"} changeValue={changeClient} value={editClient.address} property={"address"}></InputEditComponent>
                 </div>
                 <div className="col-4">
-                    <label>City</label>
-                    <input type="text" value={editClient.city} onChange={(e) => { setEditClient({ ...editClient, city: e.target.value }) }} />
+                    <InputEditComponent labelName={"City"} changeValue={changeClient} value={editClient.city} property={"city"}></InputEditComponent>
                 </div>
             </div>
             <br />
             <div className="row">
                 <div className="col-4">
-                    <label>Postal code</label>
-                    <input type="text" value={editClient.postalCode} onChange={(e) => { setEditClient({ ...editClient, postalCode: e.target.value }) }} />
+                    <InputEditComponent labelName={"Postal code"} changeValue={changeClient} value={editClient.postalCode} property={"postalCode"}></InputEditComponent>
                 </div>
                 <div className="col-4">
-                    <label>Country</label>
-                    <select value={editClient.country.id} onChange={(e) => { setEditClient({ ...editClient, country: { ...editClient.country, id: e.target.value } }) }}>
-                        {countries && countries.map((country) => (
-                            <option key={country.id} value={country.id}>{country.name}</option>
-                        ))}
-                    </select>
+                    <SelectEditComponent labelName={"Country"} items={countries} selectedValue={editClient.country.id} setValue={changeClientCountry}></SelectEditComponent>
                 </div>
                 <div className="col-4"></div>
             </div>
             <br />
             <div className="row">
                 <div className="col-2">
-                    <button onClick={handleSave} className="save">Save</button>
+                    <ButtonComponent handleClick={handleSave} buttonName={"Save"} className="edit-save"></ButtonComponent>
                 </div>
                 <div className="col-2">
-                    <button onClick={handleDelete} className="delete">Delete</button>
+                    <ButtonComponent handleClick={handleDelete} buttonName={"Delete"} className="edit-delete"></ButtonComponent>
                 </div>
             </div>
         </div>

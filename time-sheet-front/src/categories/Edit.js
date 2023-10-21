@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { getRequest, deleteRequest, putRequest } from "../requests/httpClient";
+import ButtonComponent from "../components/ButtonComponent";
+import InputEditComponent from "../components/InputEditComponent";
 
 const Edit = ({ category, setData }) => {
 
@@ -8,19 +10,19 @@ const Edit = ({ category, setData }) => {
 
 
     const handleSave = () => {
-        let data = {
+
+        const data = {
             id: editCategory.id,
             name: editCategory.name
         }
         putRequest(url, data)
             .then(res => {
-                console.log(res.data);
                 getRequest(url).then((res) => {
-                    setData(res.data.categories)
+                    setData(res.data.categories);
                 })
             })
             .catch(error => {
-                console.log(error)
+                console.log(error);
             })
     }
 
@@ -29,25 +31,31 @@ const Edit = ({ category, setData }) => {
         deleteRequest(url, params)
             .then((res) => {
                 getRequest(url).then((res) => {
-                    setData(res.data.categories)
+                    setData(res.data.categories);
                 })
             })
             .catch((error) => {
-                console.log(error)
+                console.log(error);
             })
+    }
+
+    const changeCategory = (e, property) => {
+        setEditCategory({ ...editCategory, [property]: e.target.value });
     }
 
     return (
         <div className="edit">
             <div className="row">
-                <div className="col-4">
-                    <input type="text" value={editCategory.name} onChange={(e) => { setEditCategory({ ...editCategory, name: e.target.value }) }} />
+                <div className="col-5">
+                    <InputEditComponent value={editCategory.name} changeValue={changeCategory} property={"name"} labelName={"Name"}></InputEditComponent>
+                </div>
+            </div>
+            <div className="row">
+                <div className="col-2">
+                    <ButtonComponent handleClick={handleSave} className="edit-save" buttonName={"Save"}></ButtonComponent>
                 </div>
                 <div className="col-2">
-                    <button onClick={handleSave} className="save">Save</button>
-                </div>
-                <div className="col-2">
-                    <button onClick={handleDelete} className="delete">Delete</button>
+                    <ButtonComponent handleClick={handleDelete} className="edit-delete" buttonName={"Delete"}></ButtonComponent>
                 </div>
             </div>
         </div>
