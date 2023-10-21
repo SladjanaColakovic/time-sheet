@@ -1,5 +1,8 @@
 import { useState } from "react";
 import { postRequest } from "../requests/httpClient";
+import InputComponent from "../components/InputComponent";
+import ButtonComponent from "../components/ButtonComponent";
+import SelectComponent from "../components/SelectComponent";
 
 const New = ({clients, teamMembers}) => {
 
@@ -10,7 +13,8 @@ const New = ({clients, teamMembers}) => {
     const [description, setDescription] = useState('');
 
     const handleSave = () => {
-        let data = {
+
+        const data = {
             name: name,
             description: description,
             client: {
@@ -23,44 +27,23 @@ const New = ({clients, teamMembers}) => {
 
         postRequest("http://localhost:8080/api/project", data)
             .then((res) => {
-                console.log(res.data)
-                window.location.reload()
+                window.location.reload();
             })
             .catch((error) => {
-                console.log(error.message)
+                console.log(error.message);
             })
     }
 
     return (  
-        <div className='span-top'>
+        <div className='new-item'>
             <div className="row">
                 <div className="col-4"></div>
                 <div className="col-4">
-                    <label>Name</label>
-                    <input type="text" placeholder="Enter name..." value={name} onChange={(e) => {setName(e.target.value)}}/>
-                    <label>Description</label>
-                    <input type="text" placeholder="Enter description..." value={description} onChange={(e) => {setDescription(e.target.value)}}/>
-                    <label>Client</label>
-                    <select onChange={(e) => { setClient(e.target.value) }}>
-                        {clients && clients.map((client) => (
-                            <option key={client.id} value={client.id}>{client.name}</option>
-                        ))}
-                    </select>
-                    <label>Team member</label>
-                    <select onChange={(e) => { setLead(e.target.value)}}>
-                        {teamMembers && teamMembers.map((teamMember) => (
-                            <option key={teamMember.id} value={teamMember.id}>{teamMember.name}</option>
-                        ))}
-                    </select>
-                    <br />
-                    <br />
-                    <div className="row">
-                        <div className="col-4"></div>
-                        <div className="col-4">
-                            <button onClick={handleSave} className="save">Save</button>
-                        </div>
-                        <div className="col-4"></div>
-                    </div>
+                    <InputComponent labelName={"Name"} placeholder={"Enter name..."} value={name} setValue={setName}></InputComponent>
+                    <InputComponent labelName={"Description"} placeholder={"Enter description..."} value={description} setValue={setDescription}></InputComponent>
+                    <SelectComponent labelName={"Client"} items={clients} setValue={setClient}></SelectComponent>  
+                    <SelectComponent labelName={"Team member"} items={teamMembers} setValue={setLead}></SelectComponent>
+                    <ButtonComponent handleClick={handleSave} className='new-save' buttonName={"Save"}></ButtonComponent>
                 </div>
                 <div className="col-4"></div>
             </div>

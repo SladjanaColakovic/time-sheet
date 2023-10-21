@@ -1,7 +1,10 @@
 import { useState } from "react";
 import { postRequest } from "../requests/httpClient";
+import InputComponent from "../components/InputComponent";
+import SelectComponent from "../components/SelectComponent";
+import ButtonComponent from "../components/ButtonComponent";
 
-const New = ({countries}) => {
+const New = ({ countries }) => {
 
     const [country, setCountry] = useState(1);
     const [name, setName] = useState('');
@@ -10,8 +13,8 @@ const New = ({countries}) => {
     const [postalCode, setPostalCode] = useState('');
 
     const handleSave = () => {
-        console.log(country)
-        let data = {
+        
+        const data = {
             name: name,
             address: address,
             city: city,
@@ -20,51 +23,32 @@ const New = ({countries}) => {
                 id: country
             }
         }
-        console.log(data)
 
         postRequest("http://localhost:8080/api/client", data)
             .then((res) => {
-                console.log(res.data)
-                window.location.reload()
+                window.location.reload();
             })
             .catch((error) => {
-                console.log(error.message)
+                console.log(error.message);
             })
     }
 
-    return ( 
-        <div className='span-top'>
+    return (
+        <div className='new-item'>
             <div className="row">
                 <div className="col-4"></div>
                 <div className="col-4">
-                    <label>Name</label>
-                    <input type="text" placeholder="Enter name..." value={name} onChange={(e) => {setName(e.target.value)}}/>
-                    <label>Adrress</label>
-                    <input type="text" placeholder="Enter address..." value={address} onChange={(e) => {setAddress(e.target.value)}}/>
-                    <label>City</label>
-                    <input type="text" placeholder="Enter city..." value={city} onChange={(e) => {setCity(e.target.value)}}/>
-                    <label>Postal code</label>
-                    <input type="text" placeholder="Enter postal code..." value={postalCode} onChange={(e) => {setPostalCode(e.target.value)}}/>
-                    <label>Country</label>
-                    <select onChange={(e) => { setCountry(e.target.value) }}>
-                        {countries && countries.map((country) => (
-                            <option key={country.id} value={country.id}>{country.name}</option>
-                        ))}
-                    </select>
-                    <br />
-                    <br />
-                    <div className="row">
-                        <div className="col-4"></div>
-                        <div className="col-4">
-                            <button onClick={handleSave} className="save">Save</button>
-                        </div>
-                        <div className="col-4"></div>
-                    </div>
+                    <InputComponent labelName={"Name"} placeholder={"Enter name..."} value={name} setValue={setName}></InputComponent>
+                    <InputComponent labelName={"Address"} placeholder={"Enter address..."} value={address} setValue={setAddress}></InputComponent>
+                    <InputComponent labelName={"City"} placeholder={"Enter city..."} value={city} setValue={setCity}></InputComponent>
+                    <InputComponent labelName={"Postal code"} placeholder={"Enter postal code..."} value={postalCode} setValue={setPostalCode}></InputComponent>
+                    <SelectComponent labelName={"Country"} items={countries} setValue={setCountry}></SelectComponent>
+                    <ButtonComponent handleClick={handleSave} buttonName={"Save"} className="new-save"></ButtonComponent>
                 </div>
                 <div className="col-4"></div>
             </div>
         </div>
-     );
+    );
 }
- 
+
 export default New;

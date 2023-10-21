@@ -1,5 +1,8 @@
 import { useState } from "react";
 import { postRequest } from "../requests/httpClient";
+import InputComponent from "../components/InputComponent";
+import ButtonComponent from "../components/ButtonComponent";
+import RadioComponent from "../components/RadioComponent";
 
 const New = () => {
 
@@ -12,7 +15,8 @@ const New = () => {
 
 
     const handleSave = () => {
-        let data = {
+  
+        const data = {
             name: name,
             username: username,
             email: email,
@@ -34,48 +38,23 @@ const New = () => {
 
 
     return (
-        <div className='span-top'>
+        <div className='new-item'>
             <div className="row">
                 <div className="col-4"></div>
                 <div className="col-4">
-                    <label>Name</label>
-                    <input type="text" placeholder="Enter name..." value={name} onChange={(e) => { setName(e.target.value) }} />
-                    <label>Username</label>
-                    <input type="text" placeholder="Enter username..." value={username} onChange={(e) => { setUsername(e.target.value) }} />
-                    <label>Email</label>
-                    <input type="text" placeholder="Enter email..." value={email} onChange={(e) => { setEmail(e.target.value) }} />
-                    <label>Hours per week</label>
-                    <input type="text" placeholder="Enter hours per week..." value={hoursPerWeek} onChange={(e) => { setHoursPerWeek(e.target.value) }} />
+                    <InputComponent labelName={"Name"} placeholder={"Enter name..."} value={name} setValue={setName}></InputComponent>
+                    <InputComponent labelName={"Username"} placeholder={"Enter username..."} value={username} setValue={setUsername}></InputComponent>
+                    <InputComponent labelName={"Email"} placeholder={"Enter email..."} value={email} setValue={setEmail}></InputComponent>
+                    <InputComponent labelName={"Hours per week"} placeholder={"Enter hours per week..."} value={hoursPerWeek} setValue={setHoursPerWeek}></InputComponent>
                     <div className="row">
                         <div className="col-6">
-                            <label style={{ display: "block" }}>Status</label>
-                            <input type="radio" value={status} onChange={(e) => { setStatus(e.target.value) }} checked/>
-                            <span style={{ marginRight: "10px" }}></span>
-                            <label>Active</label>
-                            <span style={{ marginRight: "15px" }}></span>
-                            <input type="radio" value={status} onChange={(e) => { setStatus(e.target.value) }} />
-                            <span style={{ marginRight: "10px" }}></span>
-                            <label>Inactive</label>
+                            <RadioComponent value={status} radioName={"Status"} radioValues={["ACTIVE", "INACTIVE"]} setValue={setStatus} radioLabelValues={["Active", "Inactive"]}></RadioComponent>
                         </div>
                         <div className="col-6">
-                            <label style={{ display: "block" }}>Role</label>
-                            <input type="radio" value={role} onChange={(e) => { setRole(e.target.value) }} checked/>
-                            <span style={{ marginRight: "10px" }}></span>
-                            <label>Worker</label>
-                            <span style={{ marginRight: "15px" }}></span>
-                            <input type="radio" value={role} onChange={(e) => { setRole(e.target.value) }} />
-                            <span style={{ marginRight: "10px" }}></span>
-                            <label>Admin</label>
+                            <RadioComponent value={role} radioName={"Role"} radioValues={["WORKER", "ADMIN"]} setValue={setRole} radioLabelValues={["Worker", "Admin"]}></RadioComponent>
                         </div>
                     </div>
-                    <br />
-                    <div className="row">
-                        <div className="col-4"></div>
-                        <div className="col-4">
-                            <button onClick={handleSave} className="save">Save</button>
-                        </div>
-                        <div className="col-4"></div>
-                    </div>
+                    <ButtonComponent handleClick={handleSave} className='new-save' buttonName={"Save"}></ButtonComponent>
                 </div>
                 <div className="col-4"></div>
             </div>

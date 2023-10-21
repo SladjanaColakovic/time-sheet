@@ -129,11 +129,11 @@ svg {
   text-align: center;
 }
 
-.span-top {
+.new-item {
   margin-top: 50px;
 }
 
-.span-top input[type=text] {
+.new-item input[type=text] {
   width: 100%;
   padding: 7px;
   border: 1px solid #ccc;
@@ -142,21 +142,30 @@ svg {
   box-shadow: rgba(0, 0, 0, 0.04) 0px 3px 5px;
 }
 
-.span-top label {
+.new-item label {
   font-size: 17px;
   padding: 9px 9px 9px 0;
   display: inline-block;
 }
 
-.span-top .save {
-  width: 100%;
-  background-color: #5b7d7e;
+/*-------------NEW SAVE-------------*/
+.new-save {
+  margin: auto;
+  display: flex;
+  justify-content: center;
+  margin-top: 25px;
+  width: 100px;
+  background-color: #567189;
   border: none;
   color: rgb(236, 232, 232);
   padding: 7px 9px;
   text-align: center;
   font-size: 16px;
   border-radius: 3px;
+}
+
+.new-save:hover{
+  background-color: #4c667d;
 }
 
 .edit {
@@ -321,4 +330,15 @@ input[type=date] {
 .calendar-div th, td {
   text-align: left;
   padding: 8px;
+}
+
+
+
+
+.radio-span{
+  margin-right: 10px;
+}
+
+.radios-span{
+  margin-right: 15px;
 }
