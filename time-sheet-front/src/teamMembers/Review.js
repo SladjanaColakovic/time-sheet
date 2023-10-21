@@ -17,7 +17,7 @@ const Review = () => {
             })
     }, [])
 
-    return ( 
+    return (
         <div className="span-top">
             <div className="row">
                 <div className="col-2"></div>
@@ -27,7 +27,7 @@ const Review = () => {
                             <Accordion.Item key={teamMember.id} eventKey={teamMember.id}>
                                 <Accordion.Header>{teamMember.name}</Accordion.Header>
                                 <Accordion.Body>
-                                    <Edit teamMember = {teamMember} setData = {setData}></Edit>
+                                    <Edit teamMember={teamMember} setData={setData}></Edit>
                                 </Accordion.Body>
                             </Accordion.Item>
                         ))}
@@ -36,7 +36,7 @@ const Review = () => {
                 <div className="col-2"></div>
             </div>
         </div>
-     );
+    );
 }
- 
+
 export default Review;

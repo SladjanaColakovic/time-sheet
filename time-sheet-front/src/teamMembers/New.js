@@ -15,7 +15,7 @@ const New = () => {
 
 
     const handleSave = () => {
-  
+
         const data = {
             name: name,
             username: username,

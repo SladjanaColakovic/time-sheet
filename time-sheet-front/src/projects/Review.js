@@ -3,7 +3,7 @@ import { getRequest } from "../requests/httpClient";
 import { Accordion } from "react-bootstrap";
 import Edit from "./Edit";
 
-const Review = ({clients, teamMembers}) => {
+const Review = ({ clients, teamMembers }) => {
 
     const [data, setData] = useState(null);
 
@@ -15,10 +15,10 @@ const Review = ({clients, teamMembers}) => {
             }).catch((error) => {
                 console.log(error);
             })
-            
+
     }, [])
 
-    return ( 
+    return (
         <div className="span-top">
             <div className="row">
                 <div className="col-2"></div>
@@ -28,7 +28,7 @@ const Review = ({clients, teamMembers}) => {
                             <Accordion.Item key={project.id} eventKey={project.id}>
                                 <Accordion.Header>{project.name}</Accordion.Header>
                                 <Accordion.Body>
-                                    <Edit project={project} clients = {clients} teamMembers = {teamMembers} setData={setData}></Edit>
+                                    <Edit project={project} clients={clients} teamMembers={teamMembers} setData={setData}></Edit>
                                 </Accordion.Body>
                             </Accordion.Item>
                         ))}
@@ -37,7 +37,7 @@ const Review = ({clients, teamMembers}) => {
                 <div className="col-2"></div>
             </div>
         </div>
-     );
+    );
 }
- 
+
 export default Review;

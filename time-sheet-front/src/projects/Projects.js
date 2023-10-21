@@ -34,7 +34,7 @@ const Projects = () => {
                 id="fill-tab-example"
                 className="mb-3">
                 <Tab eventKey="review" title="Review">
-                    <Review clients = {clients} teamMembers = {teamMembers}></Review>
+                    <Review clients={clients} teamMembers={teamMembers}></Review>
                 </Tab>
                 <Tab eventKey="new" title="Create new project">
                     <New clients={clients} teamMembers={teamMembers}></New>

@@ -3,7 +3,7 @@ import { getRequest } from "../requests/httpClient";
 import { Accordion } from "react-bootstrap";
 import Edit from "./Edit";
 
-const Review = ({countries}) => {
+const Review = ({ countries }) => {
 
     const [data, setData] = useState(null);
 
@@ -14,9 +14,9 @@ const Review = ({countries}) => {
             }).catch((error) => {
                 console.log(error);
             })
-            
+
     }, [])
-    return ( 
+    return (
         <div className="span-top">
             <div className="row">
                 <div className="col-2"></div>
@@ -35,7 +35,7 @@ const Review = ({countries}) => {
                 <div className="col-2"></div>
             </div>
         </div>
-     );
+    );
 }
- 
+
 export default Review;

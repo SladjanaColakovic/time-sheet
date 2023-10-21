@@ -1,4 +1,4 @@
-const SelectEditComponent = ({labelName, setValue, items, selectedValue}) => {
+const SelectEditComponent = ({ labelName, setValue, items, selectedValue }) => {
     return (
         <div>
             <label>{labelName}</label>

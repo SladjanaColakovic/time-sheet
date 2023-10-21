@@ -1,4 +1,4 @@
-const SelectComponent = ({labelName, setValue, items}) => {
+const SelectComponent = ({ labelName, setValue, items }) => {
     return (
         <div>
             <label>{labelName}</label>

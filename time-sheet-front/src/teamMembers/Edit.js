@@ -60,20 +60,20 @@ const Edit = ({ teamMember, setData }) => {
                     <InputEditComponent labelName={"Name"} changeValue={changeTeamMember} property={"name"} value={editTeamMember.name}></InputEditComponent>
                 </div>
                 <div className="col-4">
-                <InputEditComponent labelName={"Username"} changeValue={changeTeamMember} property={"username"} value={editTeamMember.username}></InputEditComponent>
+                    <InputEditComponent labelName={"Username"} changeValue={changeTeamMember} property={"username"} value={editTeamMember.username}></InputEditComponent>
                 </div>
                 <div className="col-4">
-                <InputEditComponent labelName={"Email"} changeValue={changeTeamMember} property={"email"} value={editTeamMember.email}></InputEditComponent>
+                    <InputEditComponent labelName={"Email"} changeValue={changeTeamMember} property={"email"} value={editTeamMember.email}></InputEditComponent>
                 </div>
             </div>
             <br />
             <div className="row">
                 <div className="col-4">
-                <InputEditComponent labelName={"Hours per week"} changeValue={changeTeamMember} property={"hoursPerWeek"} value={editTeamMember.hoursPerWeek}></InputEditComponent>
+                    <InputEditComponent labelName={"Hours per week"} changeValue={changeTeamMember} property={"hoursPerWeek"} value={editTeamMember.hoursPerWeek}></InputEditComponent>
                 </div>
                 <div className="col-4">
                     <label style={{ display: "block" }}>Status</label>
-                    <input type="radio" value={"ACTIVE"} checked={editTeamMember.status === "ACTIVE"} onChange={(e) => {  setEditTeamMember({ ...editTeamMember, status: e.target.value }) }} />
+                    <input type="radio" value={"ACTIVE"} checked={editTeamMember.status === "ACTIVE"} onChange={(e) => { setEditTeamMember({ ...editTeamMember, status: e.target.value }) }} />
                     <span style={{ marginRight: "10px" }}></span>
                     <label>Active</label>
                     <span style={{ marginRight: "15px" }}></span>
@@ -94,10 +94,10 @@ const Edit = ({ teamMember, setData }) => {
             </div>
             <div className="row">
                 <div className="col-2">
-                <ButtonComponent handleClick={handleSave} className="edit-save" buttonName={"Save"}></ButtonComponent>
+                    <ButtonComponent handleClick={handleSave} className="edit-save" buttonName={"Save"}></ButtonComponent>
                 </div>
                 <div className="col-2">
-                <ButtonComponent handleClick={handleDelete} className="edit-delete" buttonName={"Delete"}></ButtonComponent>
+                    <ButtonComponent handleClick={handleDelete} className="edit-delete" buttonName={"Delete"}></ButtonComponent>
                 </div>
             </div>
         </div>

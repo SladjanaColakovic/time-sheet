@@ -4,7 +4,7 @@ import InputComponent from "../components/InputComponent";
 import ButtonComponent from "../components/ButtonComponent";
 import SelectComponent from "../components/SelectComponent";
 
-const New = ({clients, teamMembers}) => {
+const New = ({ clients, teamMembers }) => {
 
 
     const [client, setClient] = useState(1);
@@ -34,14 +34,14 @@ const New = ({clients, teamMembers}) => {
             })
     }
 
-    return (  
+    return (
         <div className='new-item'>
             <div className="row">
                 <div className="col-4"></div>
                 <div className="col-4">
                     <InputComponent labelName={"Name"} placeholder={"Enter name..."} value={name} setValue={setName}></InputComponent>
                     <InputComponent labelName={"Description"} placeholder={"Enter description..."} value={description} setValue={setDescription}></InputComponent>
-                    <SelectComponent labelName={"Client"} items={clients} setValue={setClient}></SelectComponent>  
+                    <SelectComponent labelName={"Client"} items={clients} setValue={setClient}></SelectComponent>
                     <SelectComponent labelName={"Team member"} items={teamMembers} setValue={setLead}></SelectComponent>
                     <ButtonComponent handleClick={handleSave} className='new-save' buttonName={"Save"}></ButtonComponent>
                 </div>
@@ -50,5 +50,5 @@ const New = ({clients, teamMembers}) => {
         </div>
     );
 }
- 
+
 export default New;

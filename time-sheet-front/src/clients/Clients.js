@@ -11,16 +11,16 @@ const Clients = () => {
 
     useEffect(() => {
         getRequest("http://localhost:8080/api/country")
-        .then((res) => {
-            setCountries(res.data.countries)
-        })
-        .catch((error) => {
-            console.log(error.message)
-        })
-        
+            .then((res) => {
+                setCountries(res.data.countries)
+            })
+            .catch((error) => {
+                console.log(error.message)
+            })
+
     }, [])
-    
-    return ( 
+
+    return (
         <div className="main">
             <h1>Clients</h1>
             <Tabs
@@ -35,7 +35,7 @@ const Clients = () => {
                 </Tab>
             </Tabs>
         </div>
-     );
+    );
 }
- 
+
 export default Clients;

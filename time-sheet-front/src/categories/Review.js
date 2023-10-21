@@ -1,7 +1,7 @@
 import Accordion from 'react-bootstrap/Accordion';
 import Edit from './Edit';
 import { useEffect, useState } from 'react';
-import {getRequest} from '../requests/httpClient'
+import { getRequest } from '../requests/httpClient'
 
 const Review = () => {
 
@@ -26,7 +26,7 @@ const Review = () => {
                             <Accordion.Item key={category.id} eventKey={category.id}>
                                 <Accordion.Header>{category.name}</Accordion.Header>
                                 <Accordion.Body>
-                                    <Edit category={category} setData = {setData}></Edit>
+                                    <Edit category={category} setData={setData}></Edit>
                                 </Accordion.Body>
                             </Accordion.Item>
                         ))}

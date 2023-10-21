@@ -1,4 +1,4 @@
-const InputComponent = ({labelName, placeholder, value, setValue}) => {
+const InputComponent = ({ labelName, placeholder, value, setValue }) => {
     return (
         <div>
             <label>{labelName}</label>

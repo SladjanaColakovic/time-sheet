@@ -1,4 +1,4 @@
-const InputDateComponent = ({labelName, value, setValue}) => {
+const InputDateComponent = ({ labelName, value, setValue }) => {
     return (
         <div>
             <label>{labelName}</label>

@@ -13,7 +13,7 @@ const Reports = () => {
             <Search setData={setData}></Search>
             <br />
             <br />
-            {data && <Report items = {data.items} totalHours={data.totalReport}></Report>}
+            {data && <Report items={data.items} totalHours={data.totalReport}></Report>}
         </div>
     );
 }

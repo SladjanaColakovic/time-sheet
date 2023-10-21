@@ -12,14 +12,19 @@ const TimeSheet = () => {
 
     const MONDAY = 1;
     const SUNDAY = 7;
+    const DATE_FORMAT = 'yyyy-MM-dd';
+    const SHOWING_DATE_FORMAT = 'MMMM, yyyy';
 
     useEffect(() => {
-        //let formatCurrentDate = format(date, 'MMMM, yyyy');
-        //setFormatDate(formatCurrentDate);
         const [from, to, id] = getDateRange();
+       getCalendar(from, to, id);
+
+    }, [])
+
+    const getCalendar = (from, to, id) => {
         const params = {
-            from: format(from, 'yyyy-MM-dd'),
-            to: format(to, 'yyyy-MM-dd'),
+            from: format(from, DATE_FORMAT),
+            to: format(to, DATE_FORMAT),
             teamMemberId: id
         }
         console.log(params)
@@ -30,8 +35,7 @@ const TimeSheet = () => {
                 setData(res.data.dailyTimeSheets);
                 setTotalHours(res.data.totalHours)
             })
-
-    }, [])
+    }
 
 
     const getDateRange = () => {
@@ -54,34 +58,16 @@ const TimeSheet = () => {
 
     const handleNext = () => {
         setDate(new Date(date.setMonth(date.getMonth() + 1)));
-        setFormatDate(format(date, 'MMMM, yyyy'));
+        setFormatDate(format(date, SHOWING_DATE_FORMAT));
         const [from, to, id] = getDateRange();
-        const params = {
-            from: format(from, 'yyyy-MM-dd'),
-            to: format(to, 'yyyy-MM-dd'),
-            teamMemberId: id
-        }
-        getRequestWithParams("http://localhost:8080/api/timeSheet", params)
-            .then((res) => {
-                setData(res.data.dailyTimeSheets);
-                setTotalHours(res.data.totalHours);
-            })
+        getCalendar(from, to, id);
     }
 
     const handleBack = () => {
         setDate(new Date(date.setMonth(date.getMonth() - 1)));
-        setFormatDate(format(date, 'MMMM, yyyy'));
+        setFormatDate(format(date, SHOWING_DATE_FORMAT));
         const [from, to, id] = getDateRange();
-        const params = {
-            from: format(from, 'yyyy-MM-dd'),
-            to: format(to, 'yyyy-MM-dd'),
-            teamMemberId: id
-        }
-        getRequestWithParams("http://localhost:8080/api/timeSheet", params)
-            .then((res) => {
-                setData(res.data.dailyTimeSheets);
-                setTotalHours(res.data.totalHours);
-            })
+        getCalendar(from, to, id);
     }
 
 
@@ -123,7 +109,7 @@ const TimeSheet = () => {
                                         <div style={{ margin: "2px" }} className="box-date">
                                             <label className="date-label">{new Date(item.date).getDate()}.</label>
                                             <br />
-                                            <div style={{backgroundColor: item.flag === 'FULFILLED'? '#c5d2d4': item.flag === 'UNFULFILLED'? '#ffcccb': 'white'}}>    
+                                            <div style={{ backgroundColor: item.flag === 'FULFILLED' ? '#c5d2d4' : item.flag === 'UNFULFILLED' ? '#ffcccb' : 'white' }}>
                                                 <a className="hours">Hours: {item.totalHoursPerDay}</a>
                                             </div>
                                         </div>

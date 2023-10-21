@@ -13,7 +13,7 @@ const New = ({ countries }) => {
     const [postalCode, setPostalCode] = useState('');
 
     const handleSave = () => {
-        
+
         const data = {
             name: name,
             address: address,

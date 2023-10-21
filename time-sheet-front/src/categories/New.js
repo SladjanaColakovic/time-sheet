@@ -9,7 +9,7 @@ const New = () => {
     const [name, setName] = useState('');
 
     const handleSave = () => {
-        
+
         const data = {
             name: name
         }

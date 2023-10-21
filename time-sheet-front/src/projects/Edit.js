@@ -86,7 +86,7 @@ const Edit = ({ clients, teamMembers, project, setData }) => {
                     <SelectEditComponent selectedValue={editProject.lead.id} items={teamMembers} labelName={"Lead"} setValue={changeProjectLaed}></SelectEditComponent>
                 </div>
                 <div className="col-4">
-                <label style={{ display: "block" }}>Status</label>
+                    <label style={{ display: "block" }}>Status</label>
                     <input type="radio" value={"ACTIVE"} checked={editProject.status === "ACTIVE"} onChange={(e) => { setEditProject({ ...editProject, status: e.target.value }) }} />
                     <span style={{ marginRight: "10px" }}></span>
                     <label>Active</label>

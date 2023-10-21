@@ -37,7 +37,7 @@ const Edit = ({ countries, client, setData }) => {
     }
 
     const handleDelete = () => {
-        
+
         const params = { id: editClient.id }
         deleteRequest(url, params)
             .then((res) => {
