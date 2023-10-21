@@ -11,6 +11,7 @@ import Projects from './projects/Projects';
 import Clients from './clients/Clients';
 import Reports from './reports/Reports';
 import TimeSheet from './timeSheet/TimeSheet';
+import WeekView from './timeSheet/WeekView';
 
 function App() {
 
@@ -45,6 +46,7 @@ function App() {
             <Route path='/clients' element={<Clients />} />
             <Route path='/reports' element={<Reports />} />
             <Route path='/timeSheet' element={<TimeSheet />} />
+            <Route path='/weekView/:startDate/:endDate/:selectedDate' element={<WeekView />} />
           </Routes>
         </div>
       </div>

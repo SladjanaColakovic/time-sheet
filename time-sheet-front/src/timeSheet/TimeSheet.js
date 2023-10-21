@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { format } from 'date-fns';
 import { getRequestWithParams } from "../requests/httpClient";
+import { useNavigate } from "react-router-dom";
 
 
 const TimeSheet = () => {
@@ -9,6 +10,7 @@ const TimeSheet = () => {
     const [formatDate, setFormatDate] = useState(format(new Date(), 'MMMM, yyyy'));
     const [data, setData] = useState();
     const [totalHours, setTotalHours] = useState();
+    const navigate = useNavigate();
 
     const URL = process.env.REACT_APP_SERVER_BASE_URL + process.env.REACT_APP_TIME_SHEET_URL
 
@@ -73,6 +75,18 @@ const TimeSheet = () => {
         getCalendar(from, to, id);
     }
 
+    const showDetails = (selected) => {
+        let selectedDate = new Date(selected);
+        const formatSelectedDate = selectedDate.toLocaleDateString('en-us', { weekday: "long", day: "numeric", month: "short" })
+        const firstDayOfWeek = selectedDate.getDate() - selectedDate.getDay() + 1;
+        const weekStartDate = new Date(selectedDate.setDate(firstDayOfWeek));
+        const weekEndDate = new Date(selectedDate.setDate(firstDayOfWeek + 6));
+        const formatStartDate = format(weekStartDate, 'MMMM dd, yyyy')
+        const formatEndDate = format(weekEndDate, 'MMMM dd, yyyy')
+        navigate('/weekView/' +  formatStartDate + "/" + formatEndDate + "/" + formatSelectedDate)
+
+    }
+
 
     return (
         <div className="main">
@@ -113,7 +127,7 @@ const TimeSheet = () => {
                                             <label className="date-label">{new Date(item.date).getDate()}.</label>
                                             <br />
                                             <div style={{ backgroundColor: item.flag === 'FULFILLED' ? '#c5d2d4' : item.flag === 'UNFULFILLED' ? '#ffcccb' : 'white' }}>
-                                                <a className="hours">Hours: {item.totalHoursPerDay}</a>
+                                                <a onClick={() => {showDetails(item.date)}} className="hours">Hours: {item.totalHoursPerDay}</a>
                                             </div>
                                         </div>
                                     </label>
