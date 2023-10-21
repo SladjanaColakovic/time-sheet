@@ -1,5 +1,8 @@
 import { useEffect, useState } from "react";
 import { getRequest, getRequestWithParams } from "../requests/httpClient";
+import SelectSearchComponent from "../components/SelectSearchComponent";
+import ButtonComponent from "../components/ButtonComponent";
+import InputDateComponent from "../components/InputDateComponent";
 
 const Search = ({ setData }) => {
 
@@ -7,10 +10,10 @@ const Search = ({ setData }) => {
     const [projects, setProjects] = useState();
     const [categories, setCategories] = useState();
     const [teamMembers, setTeamMembers] = useState();
-    const [client, setClient] = useState()
-    const [project, setProject] = useState()
-    const [teamMember, setTeamMember] = useState()
-    const [category, setCategory] = useState()
+    const [client, setClient] = useState(null)
+    const [project, setProject] = useState(null)
+    const [teamMember, setTeamMember] = useState(null)
+    const [category, setCategory] = useState(null)
     const [startDate, setStartDate] = useState("")
     const [endDate, setEndDate] = useState("");
 
@@ -37,20 +40,21 @@ const Search = ({ setData }) => {
 
     const handleSearch = () => {
 
+        console.log(project)
         const params =
         {
-            clientId: client,
-            projectId: project,
-            categoryId: category,
-            teamMemberId: teamMember,
+            clientId: (client !== "All") ? client : null,
+            projectId: (project !== "All") ? project : null,
+            categoryId: (category !== "All") ? category : null,
+            teamMemberId: (teamMember !== "All") ? teamMember : null,
             startDate: startDate,
             endDate: endDate
         }
         console.log(params)
+
         getRequestWithParams("http://localhost:8080/api/report", params)
             .then((res) => {
-                console.log(res);
-                setData(res.data)
+                setData(res.data);
             })
             .catch((error) => {
                 console.log(error.message)
@@ -65,62 +69,32 @@ const Search = ({ setData }) => {
                     <div className="box">
                         <div className="row">
                             <div className="col-4">
-                                <label>Team member</label>
-                                <select onChange={(e) => { setTeamMember(e.target.value) }}>
-                                    <option>All</option>
-                                    {teamMembers && teamMembers.map((teamMember) => (
-                                        <option key={teamMember.id} value={teamMember.id}>{teamMember.name}</option>
-                                    ))}
-
-                                </select>
+                                <SelectSearchComponent labelName={"Team member"} setValue={setTeamMember} items={teamMembers}></SelectSearchComponent>
                             </div>
                             <div className="col-4">
-                                <label>Client</label>
-                                <select onChange={(e) => { setClient(e.target.value) }}>
-                                    <option>All</option>
-                                    {clients && clients.map((client) => (
-                                        <option key={client.id} value={client.id}>{client.name}</option>
-                                    ))}
-
-                                </select>
+                                <SelectSearchComponent labelName={"Client"} setValue={setClient} items={clients}></SelectSearchComponent>
                             </div>
                             <div className="col-4">
-                                <label>Project</label>
-                                <select onChange={(e) => { setProject(e.target.value) }}>
-                                    <option>All</option>
-                                    {projects && projects.map((project) => (
-                                        <option key={project.id} value={project.id}>{project.name}</option>
-                                    ))}
-
-                                </select>
+                                <SelectSearchComponent labelName={"Project"} setValue={setProject} items={projects}></SelectSearchComponent>
                             </div>
                         </div>
                         <br />
                         <div className="row">
                             <div className="col-4">
-                                <label>Category</label>
-                                <select onChange={(e) => { setCategory(e.target.value) }}>
-                                    <option value="">All</option>
-                                    {categories && categories.map((category) => (
-                                        <option key={category.id} value={category.id}>{category.name}</option>
-                                    ))}
-
-                                </select>
+                                <SelectSearchComponent labelName={"Category"} setValue={setCategory} items={categories}></SelectSearchComponent>
                             </div>
                             <div className="col-4">
-                                <label>Start date</label>
-                                <input type="date" value={startDate} onChange={(e) => { setStartDate(e.target.value) }} />
+                                <InputDateComponent labelName={"Start date"} value={startDate} setValue={setStartDate}></InputDateComponent>
                             </div>
                             <div className="col-4">
-                                <label>End date</label>
-                                <input type="date" value={endDate} onChange={(e) => { setEndDate(e.target.value) }} />
+                                <InputDateComponent labelName={"End date"} value={endDate} setValue={setEndDate}></InputDateComponent>
                             </div>
                         </div>
                         <br />
                         <div className="row">
                             <div className="col-10"></div>
                             <div className="col-2">
-                                <button onClick={handleSearch} className="search-btn">Search</button>
+                                <ButtonComponent handleClick={handleSearch} buttonName={"Search"} className="search-btn"></ButtonComponent>
                             </div>
                         </div>
                     </div>
