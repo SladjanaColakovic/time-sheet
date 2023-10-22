@@ -77,13 +77,14 @@ const TimeSheet = () => {
 
     const showDetails = (selected) => {
         let selectedDate = new Date(selected);
+        const dateSelect = new Date(selectedDate.getTime());
         const formatSelectedDate = selectedDate.toLocaleDateString('en-us', { weekday: "long", day: "numeric", month: "short" })
         const firstDayOfWeek = selectedDate.getDate() - selectedDate.getDay() + 1;
         const weekStartDate = new Date(selectedDate.setDate(firstDayOfWeek));
         const weekEndDate = new Date(selectedDate.setDate(firstDayOfWeek + 6));
         const formatStartDate = format(weekStartDate, 'MMMM dd, yyyy')
         const formatEndDate = format(weekEndDate, 'MMMM dd, yyyy')
-        navigate('/weekView/' +  formatStartDate + "/" + formatEndDate + "/" + formatSelectedDate)
+        navigate('/weekView/' +  formatStartDate + "/" + formatEndDate + "/" + dateSelect)
 
     }
 
@@ -113,8 +114,8 @@ const TimeSheet = () => {
                         <div className="row">
                             <div className="col-md">Monday</div>
                             <div className="col-md">Tuesday</div>
-                            <div className="col-md">Wendesday</div>
-                            <div className="col-md">Thurstday</div>
+                            <div className="col-md">Wednesday</div>
+                            <div className="col-md">Thursday</div>
                             <div className="col-md">Friday</div>
                             <div className="col-md">Saturday</div>
                             <div className="col-md">Sunday</div>

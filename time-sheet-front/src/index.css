@@ -240,6 +240,15 @@ input[type=date] {
   padding: 20px;
 }
 
+.box input {
+  width: 100%;
+  padding: 7px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  resize: horizontal;
+  box-shadow: rgba(0, 0, 0, 0.04) 0px 3px 5px;
+}
+
 .search-btn {
   width: 100%;
   background-color: #5b7d7e;
