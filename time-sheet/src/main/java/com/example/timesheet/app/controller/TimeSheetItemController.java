@@ -11,6 +11,7 @@ import com.example.timesheet.core.service.ITimeSheetItemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
@@ -28,6 +29,7 @@ public class TimeSheetItemController {
     private CustomMapper mapper;
 
     @PostMapping
+    @PreAuthorize("hasRole('WORKER')")
     public ResponseEntity<?> create(@RequestBody NewTimeSheetItemDTO newTimeSheetItem){
         TimeSheetItem timeSheetItem = timeSheetItemService.create(mapper.newTimeSheetItemDTOToTimeSheetItem(newTimeSheetItem));
         TimeSheetItemDTO response = mapper.timeSheetItemToTimeSheetItemDTO(timeSheetItem);
@@ -35,6 +37,7 @@ public class TimeSheetItemController {
     }
 
     @GetMapping("/{id}")
+    @PreAuthorize("hasRole('WORKER')")
     public ResponseEntity<?> getById(@PathVariable Long id){
         TimeSheetItem timeSheetItem = timeSheetItemService.getById(id);
         TimeSheetItemDTO response = mapper.timeSheetItemToTimeSheetItemDTO(timeSheetItem);
@@ -42,6 +45,7 @@ public class TimeSheetItemController {
     }
 
     @GetMapping
+    @PreAuthorize("hasRole('WORKER')")
     public ResponseEntity<?> getAll(){
         List<TimeSheetItem> items = timeSheetItemService.getAll();
         List<TimeSheetItemDTO> response = items.stream()
@@ -51,6 +55,7 @@ public class TimeSheetItemController {
     }
 
     @GetMapping("/teamMember")
+    @PreAuthorize("hasRole('WORKER')")
     public ResponseEntity<?> getTeamMemberItems(@RequestParam("teamMemberId") Long teamMemberId,
                                                 @RequestParam("date") LocalDate date){
         TeamMemberTimeSheetItems teamMemberTimeSheetItems = timeSheetItemService.getTeamMemberItems(teamMemberId, date);

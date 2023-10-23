@@ -9,6 +9,7 @@ import com.example.timesheet.core.service.ITimeSheetService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
@@ -24,6 +25,7 @@ public class TimeSheetController {
     private CustomMapper mapper;
 
     @GetMapping()
+    @PreAuthorize("hasRole('WORKER')")
     public ResponseEntity<?> getDailyTimeSheets(@RequestParam("from") LocalDate from,
                                                 @RequestParam("to") LocalDate to,
                                                 @RequestParam("teamMemberId") Long teamMemberId){

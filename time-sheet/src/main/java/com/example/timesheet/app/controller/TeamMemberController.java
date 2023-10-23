@@ -26,6 +26,7 @@ public class TeamMemberController {
     private CustomMapper mapper;
 
     @PostMapping
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<?> create(@RequestBody NewTeamMemberDTO newTeamMember){
         TeamMember teamMember = teamMemberService.create(mapper.newTeamMemberDTOToTeamMember(newTeamMember));
         TeamMemberDTO response = mapper.teamMemberToTeamMemberDTO(teamMember);
@@ -33,6 +34,7 @@ public class TeamMemberController {
     }
 
     @GetMapping("/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<?> getById(@PathVariable Long id){
         TeamMember teamMember = teamMemberService.getById(id);
         TeamMemberDTO response = mapper.teamMemberToTeamMemberDTO(teamMember);
@@ -50,12 +52,13 @@ public class TeamMemberController {
     }
 
     @DeleteMapping
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<?> delete(@RequestParam("id") Long id){
         teamMemberService.delete(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @PutMapping
+    @PutMapping@PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<?> update(@RequestBody TeamMemberUpdateDTO editing){
         TeamMember teamMember = teamMemberService.update(mapper.teamMemberUpdateDTOToTeamMember(editing));
         TeamMemberDTO response = mapper.teamMemberToTeamMemberDTO(teamMember);
@@ -63,7 +66,6 @@ public class TeamMemberController {
     }
 
     @PutMapping("/changePassword")
-    @PreAuthorize("hasAnyRole('WORKER', 'ADMIN')")
     public ResponseEntity<?> changePassword(@RequestBody ChangePasswordDTO changePasswordDTO){
         ChangePassword changePassword = mapper.chnagePasswordDTOToChangePassword(changePasswordDTO);
         teamMemberService.changePassword(changePassword);

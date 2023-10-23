@@ -12,6 +12,7 @@ import com.example.timesheet.core.service.IClientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -29,6 +30,7 @@ public class ClientController {
 
 
     @PostMapping
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<?> create(@RequestBody NewClientDTO newClient){
         Client client = mapper.newClientDTOToClient(newClient);
         Client created = clientService.create(client);
@@ -37,6 +39,7 @@ public class ClientController {
     }
 
     @GetMapping("/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<?> getById(@PathVariable Long id){
         Client client = clientService.getById(id);
         ClientDTO response = mapper.clientToClientDTO(client);
@@ -55,12 +58,14 @@ public class ClientController {
     }
 
     @DeleteMapping
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<?> delete(@RequestParam("id") Long id){
         clientService.delete(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @PutMapping
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<?> update(@RequestBody ClientUpdateDTO editing){
         Client client = clientService.update(mapper.clientUpdateDTOToClient(editing));
         ClientDTO response = mapper.clientToClientDTO(client);

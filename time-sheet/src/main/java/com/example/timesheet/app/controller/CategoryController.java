@@ -28,6 +28,7 @@ public class CategoryController {
 
 
     @PostMapping
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<?> create(@RequestBody NewCategoryDTO newCategory){
         Category category = categoryService.create(mapper.newCategoryDTOToCategory(newCategory));
         CategoryDTO response = mapper.categoryToCategoryDTO(category);
@@ -52,12 +53,14 @@ public class CategoryController {
     }
 
     @DeleteMapping
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<?> delete(@RequestParam("id") Long id){
         categoryService.delete(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @PutMapping
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<?> update(@RequestBody CategoryUpdateDTO editing){
         Category category = categoryService.update(mapper.categoryUpdateDTOToCategory(editing));
         CategoryDTO response = mapper.categoryToCategoryDTO(category);

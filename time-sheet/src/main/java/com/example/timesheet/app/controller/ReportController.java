@@ -9,6 +9,7 @@ import com.example.timesheet.core.service.IReportService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
@@ -25,6 +26,7 @@ public class ReportController {
     private CustomMapper mapper;
 
     @GetMapping
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<?> reportSearch(@RequestParam(value = "clientId", required = false) Long clientId,
                                           @RequestParam(value = "projectId", required = false) Long projectId,
                                           @RequestParam(value = "categoryId", required = false) Long categoryId,
