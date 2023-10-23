@@ -3,6 +3,7 @@ import { deleteRequest, getRequest, putRequest } from "../requests/httpClient";
 import ButtonComponent from "../components/ButtonComponent";
 import InputEditComponent from "../components/InputEditComponent";
 import SelectEditComponent from "../components/SelectEditComponent";
+import { NotificationContainer, NotificationManager } from "react-notifications";
 
 const Edit = ({ clients, teamMembers, project, setData }) => {
 
@@ -32,7 +33,7 @@ const Edit = ({ clients, teamMembers, project, setData }) => {
 
             })
             .catch(error => {
-                console.log(error);
+                NotificationManager.error(error.message, '', 5000);
             })
 
     }
@@ -47,7 +48,7 @@ const Edit = ({ clients, teamMembers, project, setData }) => {
             }
             )
             .catch((error) => {
-                console.log(error);
+                NotificationManager.error(error.message, '', 5000);
             })
     }
 
@@ -110,6 +111,7 @@ const Edit = ({ clients, teamMembers, project, setData }) => {
                     <ButtonComponent handleClick={handleDelete} className="edit-delete" buttonName={"Delete"} />
                 </div>
             </div>
+            <NotificationContainer/>
         </div>
     );
 }

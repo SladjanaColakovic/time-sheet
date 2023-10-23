@@ -3,6 +3,7 @@ import { postRequest } from './requests/httpClient';
 import ButtonComponent from './components/ButtonComponent';
 import InputPasswordComponent from './components/InputPasswordComponent';
 import InputComponent from './components/InputComponent';
+import { NotificationContainer, NotificationManager } from "react-notifications";
 
 
 const Login = () => {
@@ -29,7 +30,7 @@ const Login = () => {
                 localStorage.setItem('role', obj.role)
                 window.location.reload();
             }).catch((error) => {
-                console.log(error);
+                NotificationManager.error(error.message, '', 5000);
             })
     }
 
@@ -49,6 +50,7 @@ const Login = () => {
                 </div>
 
             </div>
+            <NotificationContainer/>
         </div>
     );
 }

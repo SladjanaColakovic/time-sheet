@@ -2,6 +2,7 @@ import { useState } from "react";
 import { getRequest, deleteRequest, putRequest } from "../requests/httpClient";
 import ButtonComponent from "../components/ButtonComponent";
 import InputEditComponent from "../components/InputEditComponent";
+import { NotificationContainer, NotificationManager } from "react-notifications";
 
 const Edit = ({ category, setData }) => {
 
@@ -22,7 +23,7 @@ const Edit = ({ category, setData }) => {
                 })
             })
             .catch(error => {
-                console.log(error);
+                NotificationManager.error(error.message, '', 5000);
             })
     }
 
@@ -35,7 +36,7 @@ const Edit = ({ category, setData }) => {
                 })
             })
             .catch((error) => {
-                console.log(error);
+                NotificationManager.error(error.message, '', 5000);
             })
     }
 
@@ -58,6 +59,7 @@ const Edit = ({ category, setData }) => {
                     <ButtonComponent handleClick={handleDelete} className="edit-delete" buttonName={"Delete"} />
                 </div>
             </div>
+            <NotificationContainer/>
         </div>
     );
 }

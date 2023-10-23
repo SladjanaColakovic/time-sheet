@@ -6,6 +6,8 @@ import InputComponent from '../components/InputComponent'
 import { useNavigate } from "react-router-dom";
 import { format } from "date-fns";
 import ButtonComponent from "../components/ButtonComponent";
+import { NotificationContainer, NotificationManager } from "react-notifications";
+
 
 const WeekView = () => {
 
@@ -114,6 +116,9 @@ const WeekView = () => {
                         setTime('')
                         setOvertime('')
                     })
+
+            }).catch((error) => {
+                NotificationManager.error(error.message, '', 5000);
 
             })
     }
@@ -271,6 +276,7 @@ const WeekView = () => {
                 <div className="col-1"></div>
             </div>
             <br />
+            <NotificationContainer/>
         </div>
     );
 }

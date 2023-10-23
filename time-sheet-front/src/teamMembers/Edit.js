@@ -2,6 +2,8 @@ import { useState } from "react";
 import { getRequest, putRequest, deleteRequest } from "../requests/httpClient";
 import InputEditComponent from "../components/InputEditComponent";
 import ButtonComponent from "../components/ButtonComponent";
+import { NotificationContainer, NotificationManager } from "react-notifications";
+
 
 const Edit = ({ teamMember, setData }) => {
 
@@ -28,7 +30,7 @@ const Edit = ({ teamMember, setData }) => {
 
             })
             .catch(error => {
-                console.log(error)
+                NotificationManager.error(error.message, '', 5000);
             })
 
 
@@ -44,7 +46,7 @@ const Edit = ({ teamMember, setData }) => {
             }
             )
             .catch((error) => {
-                console.log(error)
+                NotificationManager.error(error.message, '', 5000);
             })
     }
 
@@ -100,6 +102,7 @@ const Edit = ({ teamMember, setData }) => {
                     <ButtonComponent handleClick={handleDelete} className="edit-delete" buttonName={"Delete"} />
                 </div>
             </div>
+            <NotificationContainer/>
         </div>
     );
 }

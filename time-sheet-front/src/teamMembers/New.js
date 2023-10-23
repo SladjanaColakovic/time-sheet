@@ -3,6 +3,8 @@ import { postRequest } from "../requests/httpClient";
 import InputComponent from "../components/InputComponent";
 import ButtonComponent from "../components/ButtonComponent";
 import RadioComponent from "../components/RadioComponent";
+import { NotificationContainer, NotificationManager } from "react-notifications";
+
 
 const New = () => {
 
@@ -33,7 +35,7 @@ const New = () => {
                 window.location.reload()
             })
             .catch((error) => {
-                console.log(error.message)
+                NotificationManager.error(error.message, '', 5000);
             })
     }
 
@@ -59,6 +61,7 @@ const New = () => {
                 </div>
                 <div className="col-4"></div>
             </div>
+            <NotificationContainer/>
         </div>
     );
 }

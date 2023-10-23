@@ -3,6 +3,8 @@ import { postRequest } from "../requests/httpClient";
 import InputComponent from "../components/InputComponent";
 import ButtonComponent from "../components/ButtonComponent";
 import SelectComponent from "../components/SelectComponent";
+import { NotificationContainer, NotificationManager } from "react-notifications";
+
 
 const New = ({ clients, teamMembers }) => {
 
@@ -32,7 +34,7 @@ const New = ({ clients, teamMembers }) => {
                 window.location.reload();
             })
             .catch((error) => {
-                console.log(error.message);
+                NotificationManager.error(error.message, '', 5000);
             })
     }
 
@@ -49,6 +51,7 @@ const New = ({ clients, teamMembers }) => {
                 </div>
                 <div className="col-4"></div>
             </div>
+            <NotificationContainer/>
         </div>
     );
 }
