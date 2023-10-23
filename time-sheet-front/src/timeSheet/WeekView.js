@@ -5,6 +5,7 @@ import SelectComponent from "../components/SelectComponent";
 import InputComponent from '../components/InputComponent'
 import { useNavigate } from "react-router-dom";
 import { format } from "date-fns";
+import ButtonComponent from "../components/ButtonComponent";
 
 const WeekView = () => {
 
@@ -38,16 +39,8 @@ const WeekView = () => {
         setFormatSelectedDate(new Date(selectedDate).toLocaleDateString('en-us', { weekday: "long", day: "numeric", month: "short" }))
         const firstDayOfWeek = new Date(startDate)
         const lastDayOfWeek = new Date(endDate)
-        const date = new Date(firstDayOfWeek.getTime());
 
-        const range = [];
-
-        while (date <= lastDayOfWeek) {
-            range.push(new Date(date).toLocaleDateString('en-us', { weekday: "long", day: "numeric", month: "short" }));
-            date.setDate(date.getDate() + 1);
-        }
-
-        setDates(range);
+        findDateRange(firstDayOfWeek, lastDayOfWeek);
 
         getRequest(CLIENT_URL)
             .then((res) => {
@@ -74,6 +67,19 @@ const WeekView = () => {
 
     }, [])
 
+    const findDateRange = (start, end) => {
+        const date = new Date(start.getTime());
+
+        const range = [];
+
+        while (date <= end) {
+            range.push(new Date(date).toLocaleDateString('en-us', { weekday: "long", day: "numeric", month: "short" }));
+            date.setDate(date.getDate() + 1);
+        }
+
+        setDates(range);
+    }
+
     const showMonthlyView = () => {
         navigate('/timeSheet', { replace: true });
     }
@@ -95,8 +101,6 @@ const WeekView = () => {
             }
         }
 
-        console.log(data)
-
         postRequest(ITEMS_URL, data)
             .then((res) => {
                 console.log(res.data);
@@ -117,46 +121,30 @@ const WeekView = () => {
     }
 
     const next = () => {
-        let nextFirstDateOfWeek = new Date(new Date(endDate));
-        nextFirstDateOfWeek.setDate(new Date(endDate).getDate() + 1);
-        let nextLastDateOfWeek = new Date(endDate);
-        nextLastDateOfWeek.setDate(new Date(endDate).getDate() + 7);
+        let firstDateOfNextWeek = new Date(new Date(endDate));
+        firstDateOfNextWeek.setDate(new Date(endDate).getDate() + 1);
+        let lastDateOfNextWeek = new Date(endDate);
+        lastDateOfNextWeek.setDate(new Date(endDate).getDate() + 7);
 
-        const date = new Date(nextFirstDateOfWeek.getTime());
+        findDateRange(firstDateOfNextWeek, lastDateOfNextWeek);
 
-        const range = [];
-
-        while (date <= nextLastDateOfWeek) {
-            range.push(new Date(date).toLocaleDateString('en-us', { weekday: "long", day: "numeric", month: "short" }));
-            date.setDate(date.getDate() + 1);
-        }
-
-        setStartDate(format(nextFirstDateOfWeek, 'MMMM dd, yyyy'));
-        setEndDate(format(nextLastDateOfWeek, 'MMMM dd, yyyy'));
-        setDates(range);
+        setStartDate(format(firstDateOfNextWeek, 'MMMM dd, yyyy'));
+        setEndDate(format(lastDateOfNextWeek, 'MMMM dd, yyyy'));
     }
 
     const back = () => {
-        let lastDateOfPreviosWeek = new Date(new Date(startDate));
-        lastDateOfPreviosWeek.setDate(new Date(startDate).getDate() - 1);
-        let firstDateOfPreviosWeek = new Date(startDate);
-        firstDateOfPreviosWeek.setDate(new Date(startDate).getDate() - 7);
+        let lastDateOfPreviousWeek = new Date(new Date(startDate));
+        lastDateOfPreviousWeek.setDate(new Date(startDate).getDate() - 1);
+        let firstDateOfPreviousWeek = new Date(startDate);
+        firstDateOfPreviousWeek.setDate(new Date(startDate).getDate() - 7);
 
-        const date = new Date(firstDateOfPreviosWeek.getTime());
+        findDateRange(firstDateOfPreviousWeek, lastDateOfPreviousWeek);
 
-        const range = [];
-
-        while (date <= lastDateOfPreviosWeek) {
-            range.push(new Date(date).toLocaleDateString('en-us', { weekday: "long", day: "numeric", month: "short" }));
-            date.setDate(date.getDate() + 1);
-        }
-
-        setStartDate(format(firstDateOfPreviosWeek, 'MMMM dd, yyyy'));
-        setEndDate(format(lastDateOfPreviosWeek, 'MMMM dd, yyyy'));
-        setDates(range);
+        setStartDate(format(firstDateOfPreviousWeek, 'MMMM dd, yyyy'));
+        setEndDate(format(lastDateOfPreviousWeek, 'MMMM dd, yyyy'));
     }
 
-    const selectDate = (date) => {
+    const flagSelectedDate = (date) => {
         const iterator = new Date(new Date(startDate).getTime());
         while (iterator <= new Date(endDate)) {
             if (new Date(date).getDate() === iterator.getDate()) {
@@ -166,6 +154,11 @@ const WeekView = () => {
             }
             iterator.setDate(iterator.getDate() + 1);
         }
+        return iterator;
+    }
+
+    const selectDate = (date) => {
+        const iterator = flagSelectedDate(date)
         const params = {
             teamMemberId: JSON.parse(window.atob(localStorage.getItem('token').split('.')[1])).id,
             date: format(new Date(iterator), 'yyyy-MM-dd')
@@ -269,7 +262,7 @@ const WeekView = () => {
                         <br />
                         <div className="row">
                             <div className="col-3">
-                                <button onClick={showMonthlyView} className="monthly-view">back to monthly view</button>
+                                <ButtonComponent handleClick={showMonthlyView} className="monthly-view" buttonName={"back to monthly view"}></ButtonComponent>
                             </div>
                             <div className="col-9">
                                 <label className="total-hours">Total hours: {totalHours}</label>

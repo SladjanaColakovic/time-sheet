@@ -334,3 +334,18 @@ td {
   font-size: 17px;
   color: #567189
 }
+
+
+@media screen and (max-width: 750px) {
+  .span-top .col-8  {
+      width: 100%;
+  }
+
+  .new-item .col-4{
+    width: 100%;
+  }
+
+  .new-item .col-6{
+    width: 100%;
+  }
+}
