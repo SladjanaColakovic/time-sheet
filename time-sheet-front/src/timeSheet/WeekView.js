@@ -64,12 +64,10 @@ const WeekView = () => {
                     })
             })
 
-
     }, [])
 
     const findDateRange = (start, end) => {
         const date = new Date(start.getTime());
-
         const range = [];
 
         while (date <= end) {

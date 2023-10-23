@@ -16,11 +16,12 @@ import WeekView from './timeSheet/WeekView';
 function App() {
 
   const token = localStorage.getItem('token')
+  const role = localStorage.getItem('role')
 
   useEffect(() => {
     if (token) {
       var obj = JSON.parse(window.atob(token.split('.')[1]))
-      if(obj.exp < Date.now() / 1000){
+      if (obj.exp < Date.now() / 1000) {
         localStorage.clear();
         window.location.reload();
       }
@@ -35,18 +36,33 @@ function App() {
         </div>
         <div className="content">
           <Routes>
-            {!token && <Route path='/' element={<Login />}></Route>}
-            {token && <Route path='/' element={<Categories />}></Route>}
+            {!token &&  <Route path='/' element={<Login />}></Route>}
+            {token && role === 'ADMIN' && <Route path='/' element={<Categories />}></Route>}
+            {token && role === 'WORKER' && <Route path='/' element={<TimeSheet />}></Route>}
             <Route element={<PrivateRoute roles={["ADMIN"]} />}>
               <Route path='/home' element={<Home />} />
             </Route>
-            <Route path='/categories' element={<Categories />} />
-            <Route path='/teamMembers' element={<TeamMembers />} />
-            <Route path='/projects' element={<Projects />} />
-            <Route path='/clients' element={<Clients />} />
-            <Route path='/reports' element={<Reports />} />
-            <Route path='/timeSheet' element={<TimeSheet />} />
-            <Route path='/weekView/:startDateFormat/:endDateFormat/:date' element={<WeekView />} />
+            <Route element={<PrivateRoute roles={["ADMIN"]} />}>
+              <Route path='/categories' element={<Categories />} />
+            </Route>
+            <Route element={<PrivateRoute roles={["ADMIN"]} />}>
+              <Route path='/teamMembers' element={<TeamMembers />} />
+            </Route>
+            <Route element={<PrivateRoute roles={["ADMIN"]} />}>
+              <Route path='/projects' element={<Projects />} />
+            </Route>
+            <Route element={<PrivateRoute roles={["ADMIN"]} />}>
+              <Route path='/clients' element={<Clients />} />
+            </Route>
+            <Route element={<PrivateRoute roles={["ADMIN"]} />}>
+              <Route path='/reports' element={<Reports />} />
+            </Route>
+            <Route element={<PrivateRoute roles={["WORKER"]} />}>
+              <Route path='/timeSheet' element={<TimeSheet />} />
+            </Route>
+            <Route element={<PrivateRoute roles={["WORKER"]} />}>
+              <Route path='/weekView/:startDateFormat/:endDateFormat/:date' element={<WeekView />} />
+            </Route>
           </Routes>
         </div>
       </div>
