@@ -35,18 +35,14 @@ const Login = () => {
 
     return (
         <div className="login">
-            <h2>Login</h2>
+            <h1>Login</h1>
             <div className="box">
 
                 <div className='row'>
                     <InputComponent labelName={"Username"} value={username} setValue={setUsername}></InputComponent>
-                    {/* <label>Username:</label>
-                    <input type="text" value={username} onChange={(e) => { setUsername(e.target.value) }} /> */}
                 </div>
                 <div className='row'>
                     <InputPasswordComponent value={password} labelName={"Password"} setValue={setPassword}></InputPasswordComponent>
-                    {/* <label>Password:</label>
-                    <input type="password" value={password} onChange={(e) => { setPassword(e.target.value) }} /> */}
                 </div>
                 <div className="row">
                     <ButtonComponent handleClick={handleClick} buttonName={"Login"}></ButtonComponent>

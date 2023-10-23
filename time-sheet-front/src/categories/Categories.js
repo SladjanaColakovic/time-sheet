@@ -12,10 +12,10 @@ const Categories = () => {
                 id="fill-tab-example"
                 className="mb-3">
                 <Tab eventKey="review" title="Review">
-                    <Review></Review>
+                    <Review/>
                 </Tab>
                 <Tab eventKey="new" title="Create new category">
-                    <New></New>
+                    <New/>
                 </Tab>
             </Tabs>
         </div>

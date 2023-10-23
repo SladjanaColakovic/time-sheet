@@ -27,12 +27,12 @@ function App() {
         localStorage.clear();
         window.location.reload();
       }
-      if(role === 'ADMIN'){
-        navigate('/reports', { replace: true });
-      }
-      if(role === 'WORKER'){
-        navigate('/timeSheet', { replace: true });
-      }
+      // if(role === 'ADMIN'){
+      //   navigate('/reports', { replace: true });
+      // }
+      // if(role === 'WORKER'){
+      //   navigate('/timeSheet', { replace: true });
+      // }
     }
   }, [token])
 
@@ -45,6 +45,8 @@ function App() {
         <div className="content">
           <Routes>
             {!token &&  <Route path='/' element={<Login />}></Route>}
+            {token && role === 'ADMIN' && <Route path='/' element={<Categories />}></Route>}
+            {token && role === 'WORKER' && <Route path='/' element={<TimeSheet />}></Route>}
             <Route element={<PrivateRoute roles={["ADMIN"]} />}>
               <Route path='/home' element={<Home />} />
             </Route>
