@@ -63,32 +63,32 @@ const Edit = ({ countries, client, setData }) => {
         <div className="edit">
             <div className="row">
                 <div className="col-4">
-                    <InputEditComponent labelName={"Name"} changeValue={changeClient} value={editClient.name} property={"name"}></InputEditComponent>
+                    <InputEditComponent labelName={"Name"} changeValue={changeClient} value={editClient.name} property={"name"} />
                 </div>
                 <div className="col-4">
-                    <InputEditComponent labelName={"Address"} changeValue={changeClient} value={editClient.address} property={"address"}></InputEditComponent>
+                    <InputEditComponent labelName={"Address"} changeValue={changeClient} value={editClient.address} property={"address"} />
                 </div>
                 <div className="col-4">
-                    <InputEditComponent labelName={"City"} changeValue={changeClient} value={editClient.city} property={"city"}></InputEditComponent>
+                    <InputEditComponent labelName={"City"} changeValue={changeClient} value={editClient.city} property={"city"} />
                 </div>
             </div>
             <br />
             <div className="row">
                 <div className="col-4">
-                    <InputEditComponent labelName={"Postal code"} changeValue={changeClient} value={editClient.postalCode} property={"postalCode"}></InputEditComponent>
+                    <InputEditComponent labelName={"Postal code"} changeValue={changeClient} value={editClient.postalCode} property={"postalCode"} />
                 </div>
                 <div className="col-4">
-                    <SelectEditComponent labelName={"Country"} items={countries} selectedValue={editClient.country.id} setValue={changeClientCountry}></SelectEditComponent>
+                    <SelectEditComponent labelName={"Country"} items={countries} selectedValue={editClient.country.id} setValue={changeClientCountry} />
                 </div>
                 <div className="col-4"></div>
             </div>
             <br />
             <div className="row">
                 <div className="col-2">
-                    <ButtonComponent handleClick={handleSave} buttonName={"Save"} className="edit-save"></ButtonComponent>
+                    <ButtonComponent handleClick={handleSave} buttonName={"Save"} className="edit-save" />
                 </div>
                 <div className="col-2">
-                    <ButtonComponent handleClick={handleDelete} buttonName={"Delete"} className="edit-delete"></ButtonComponent>
+                    <ButtonComponent handleClick={handleDelete} buttonName={"Delete"} className="edit-delete" />
                 </div>
             </div>
         </div>

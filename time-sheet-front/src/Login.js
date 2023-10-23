@@ -39,13 +39,13 @@ const Login = () => {
             <div className="box">
 
                 <div className='row'>
-                    <InputComponent labelName={"Username"} value={username} setValue={setUsername}></InputComponent>
+                    <InputComponent labelName={"Username"} value={username} setValue={setUsername} />
                 </div>
                 <div className='row'>
-                    <InputPasswordComponent value={password} labelName={"Password"} setValue={setPassword}></InputPasswordComponent>
+                    <InputPasswordComponent value={password} labelName={"Password"} setValue={setPassword} />
                 </div>
                 <div className="row">
-                    <ButtonComponent handleClick={handleClick} buttonName={"Login"}></ButtonComponent>
+                    <ButtonComponent handleClick={handleClick} buttonName={"Login"} />
                 </div>
 
             </div>

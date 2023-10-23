@@ -57,19 +57,19 @@ const Edit = ({ teamMember, setData }) => {
         <div className="edit">
             <div className="row">
                 <div className="col-4">
-                    <InputEditComponent labelName={"Name"} changeValue={changeTeamMember} property={"name"} value={editTeamMember.name}></InputEditComponent>
+                    <InputEditComponent labelName={"Name"} changeValue={changeTeamMember} property={"name"} value={editTeamMember.name} />
                 </div>
                 <div className="col-4">
-                    <InputEditComponent labelName={"Username"} changeValue={changeTeamMember} property={"username"} value={editTeamMember.username}></InputEditComponent>
+                    <InputEditComponent labelName={"Username"} changeValue={changeTeamMember} property={"username"} value={editTeamMember.username} />
                 </div>
                 <div className="col-4">
-                    <InputEditComponent labelName={"Email"} changeValue={changeTeamMember} property={"email"} value={editTeamMember.email}></InputEditComponent>
+                    <InputEditComponent labelName={"Email"} changeValue={changeTeamMember} property={"email"} value={editTeamMember.email} />
                 </div>
             </div>
             <br />
             <div className="row">
                 <div className="col-4">
-                    <InputEditComponent labelName={"Hours per week"} changeValue={changeTeamMember} property={"hoursPerWeek"} value={editTeamMember.hoursPerWeek}></InputEditComponent>
+                    <InputEditComponent labelName={"Hours per week"} changeValue={changeTeamMember} property={"hoursPerWeek"} value={editTeamMember.hoursPerWeek} />
                 </div>
                 <div className="col-4">
                     <label style={{ display: "block" }}>Status</label>
@@ -94,10 +94,10 @@ const Edit = ({ teamMember, setData }) => {
             </div>
             <div className="row">
                 <div className="col-2">
-                    <ButtonComponent handleClick={handleSave} className="edit-save" buttonName={"Save"}></ButtonComponent>
+                    <ButtonComponent handleClick={handleSave} className="edit-save" buttonName={"Save"} />
                 </div>
                 <div className="col-2">
-                    <ButtonComponent handleClick={handleDelete} className="edit-delete" buttonName={"Delete"}></ButtonComponent>
+                    <ButtonComponent handleClick={handleDelete} className="edit-delete" buttonName={"Delete"} />
                 </div>
             </div>
         </div>

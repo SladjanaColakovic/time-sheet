@@ -26,7 +26,7 @@ const Review = ({ countries }) => {
                             <Accordion.Item key={client.id} eventKey={client.id}>
                                 <Accordion.Header>{client.name}</Accordion.Header>
                                 <Accordion.Body>
-                                    <Edit countries={countries} client={client} setData={setData}></Edit>
+                                    <Edit countries={countries} client={client} setData={setData} />
                                 </Accordion.Body>
                             </Accordion.Item>
                         ))}

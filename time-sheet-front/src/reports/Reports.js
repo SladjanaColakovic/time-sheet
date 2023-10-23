@@ -10,10 +10,10 @@ const Reports = () => {
     return (
         <div className="main">
             <h1>Reports</h1>
-            <Search setData={setData}></Search>
+            <Search setData={setData} />
             <br />
             <br />
-            {data && <Report items={data.items} totalHours={data.totalReport}></Report>}
+            {data && <Report items={data.items} totalHours={data.totalReport} />}
         </div>
     );
 }

@@ -228,22 +228,22 @@ const WeekView = () => {
 
                                     <tr className="tr-margin">
                                         <td>
-                                            <SelectComponent items={clients} setValue={setClient}></SelectComponent>
+                                            <SelectComponent items={clients} setValue={setClient} />
                                         </td>
                                         <td>
-                                            <SelectComponent items={projects} setValue={setProject}></SelectComponent>
+                                            <SelectComponent items={projects} setValue={setProject} />
                                         </td>
                                         <td>
-                                            <SelectComponent items={categories} setValue={setCategory}></SelectComponent>
+                                            <SelectComponent items={categories} setValue={setCategory} />
                                         </td>
                                         <td>
-                                            <InputComponent value={description} setValue={setDescription}></InputComponent>
+                                            <InputComponent value={description} setValue={setDescription} />
                                         </td>
                                         <td>
-                                            <InputComponent value={time} setValue={setTime}></InputComponent>
+                                            <InputComponent value={time} setValue={setTime} />
                                         </td>
                                         <td>
-                                            <InputComponent value={overtime} setValue={setOvertime}></InputComponent>
+                                            <InputComponent value={overtime} setValue={setOvertime} />
                                         </td>
                                         <td>
                                             <button onClick={addItem} className="add-btn">
@@ -260,7 +260,7 @@ const WeekView = () => {
                         <br />
                         <div className="row">
                             <div className="col-3">
-                                <ButtonComponent handleClick={showMonthlyView} className="monthly-view" buttonName={"back to monthly view"}></ButtonComponent>
+                                <ButtonComponent handleClick={showMonthlyView} className="monthly-view" buttonName={"back to monthly view"} />
                             </div>
                             <div className="col-9">
                                 <label className="total-hours">Total hours: {totalHours}</label>

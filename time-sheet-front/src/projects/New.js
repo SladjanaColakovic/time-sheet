@@ -41,11 +41,11 @@ const New = ({ clients, teamMembers }) => {
             <div className="row">
                 <div className="col-4"></div>
                 <div className="col-4">
-                    <InputComponent labelName={"Name"} placeholder={"Enter name..."} value={name} setValue={setName}></InputComponent>
-                    <InputComponent labelName={"Description"} placeholder={"Enter description..."} value={description} setValue={setDescription}></InputComponent>
-                    <SelectComponent labelName={"Client"} items={clients} setValue={setClient}></SelectComponent>
-                    <SelectComponent labelName={"Team member"} items={teamMembers} setValue={setLead}></SelectComponent>
-                    <ButtonComponent handleClick={handleSave} className='new-save' buttonName={"Save"}></ButtonComponent>
+                    <InputComponent labelName={"Name"} placeholder={"Enter name..."} value={name} setValue={setName} />
+                    <InputComponent labelName={"Description"} placeholder={"Enter description..."} value={description} setValue={setDescription} />
+                    <SelectComponent labelName={"Client"} items={clients} setValue={setClient} />
+                    <SelectComponent labelName={"Team member"} items={teamMembers} setValue={setLead} />
+                    <ButtonComponent handleClick={handleSave} className='new-save' buttonName={"Save"} />
                 </div>
                 <div className="col-4"></div>
             </div>

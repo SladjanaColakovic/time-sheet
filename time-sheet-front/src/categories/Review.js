@@ -27,7 +27,7 @@ const Review = () => {
                             <Accordion.Item key={category.id} eventKey={category.id}>
                                 <Accordion.Header>{category.name}</Accordion.Header>
                                 <Accordion.Body>
-                                    <Edit category={category} setData={setData}></Edit>
+                                    <Edit category={category} setData={setData}/>
                                 </Accordion.Body>
                             </Accordion.Item>
                         ))}

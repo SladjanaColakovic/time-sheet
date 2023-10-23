@@ -13,10 +13,10 @@ const TeamMembers = () => {
                     id="fill-tab-example"
                     className="mb-3">
                     <Tab eventKey="review" title="Review">
-                        <Review></Review>
+                        <Review />
                     </Tab>
                     <Tab eventKey="new" title="Create new member">
-                        <New></New>
+                        <New />
                     </Tab>
                 </Tabs>
             </div>

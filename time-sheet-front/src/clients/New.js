@@ -40,12 +40,12 @@ const New = ({ countries }) => {
             <div className="row">
                 <div className="col-4"></div>
                 <div className="col-4">
-                    <InputComponent labelName={"Name"} placeholder={"Enter name..."} value={name} setValue={setName}></InputComponent>
-                    <InputComponent labelName={"Address"} placeholder={"Enter address..."} value={address} setValue={setAddress}></InputComponent>
-                    <InputComponent labelName={"City"} placeholder={"Enter city..."} value={city} setValue={setCity}></InputComponent>
-                    <InputComponent labelName={"Postal code"} placeholder={"Enter postal code..."} value={postalCode} setValue={setPostalCode}></InputComponent>
-                    <SelectComponent labelName={"Country"} items={countries} setValue={setCountry}></SelectComponent>
-                    <ButtonComponent handleClick={handleSave} buttonName={"Save"} className="new-save"></ButtonComponent>
+                    <InputComponent labelName={"Name"} placeholder={"Enter name..."} value={name} setValue={setName} />
+                    <InputComponent labelName={"Address"} placeholder={"Enter address..."} value={address} setValue={setAddress} />
+                    <InputComponent labelName={"City"} placeholder={"Enter city..."} value={city} setValue={setCity} />
+                    <InputComponent labelName={"Postal code"} placeholder={"Enter postal code..."} value={postalCode} setValue={setPostalCode} />
+                    <SelectComponent labelName={"Country"} items={countries} setValue={setCountry} />
+                    <ButtonComponent handleClick={handleSave} buttonName={"Save"} className="new-save" />
                 </div>
                 <div className="col-4"></div>
             </div>

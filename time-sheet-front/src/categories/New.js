@@ -4,7 +4,7 @@ import InputComponent from "../components/InputComponent";
 import ButtonComponent from "../components/ButtonComponent";
 
 const New = () => {
-    
+
     const [name, setName] = useState('');
     const URL = process.env.REACT_APP_SERVER_BASE_URL + process.env.REACT_APP_CATEGORY_URL
     const handleSave = () => {
@@ -26,8 +26,8 @@ const New = () => {
             <div className='row'>
                 <div className='col-4'></div>
                 <div className='col-4'>
-                    <InputComponent value={name} setValue={setName} labelName={"Name"} placeholder={"Enter name..."}></InputComponent>
-                    <ButtonComponent handleClick={handleSave} className='new-save' buttonName={"Save"}></ButtonComponent>
+                    <InputComponent value={name} setValue={setName} labelName={"Name"} placeholder={"Enter name..."} />
+                    <ButtonComponent handleClick={handleSave} className='new-save' buttonName={"Save"} />
                 </div>
                 <div className='col-4'></div>
             </div>

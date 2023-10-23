@@ -29,10 +29,10 @@ const Clients = () => {
                 id="fill-tab-example"
                 className="mb-3">
                 <Tab eventKey="review" title="Review">
-                    <Review countries={countries}></Review>
+                    <Review countries={countries} />
                 </Tab>
                 <Tab eventKey="new" title="Create new client">
-                    <New countries={countries}></New>
+                    <New countries={countries} />
                 </Tab>
             </Tabs>
         </div>

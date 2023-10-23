@@ -29,7 +29,7 @@ const Review = ({ clients, teamMembers }) => {
                             <Accordion.Item key={project.id} eventKey={project.id}>
                                 <Accordion.Header>{project.name}</Accordion.Header>
                                 <Accordion.Body>
-                                    <Edit project={project} clients={clients} teamMembers={teamMembers} setData={setData}></Edit>
+                                    <Edit project={project} clients={clients} teamMembers={teamMembers} setData={setData} />
                                 </Accordion.Body>
                             </Accordion.Item>
                         ))}

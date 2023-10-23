@@ -76,32 +76,32 @@ const Search = ({ setData }) => {
                     <div className="box">
                         <div className="row">
                             <div className="col-4">
-                                <SelectSearchComponent labelName={"Team member"} setValue={setTeamMember} items={teamMembers}></SelectSearchComponent>
+                                <SelectSearchComponent labelName={"Team member"} setValue={setTeamMember} items={teamMembers} />
                             </div>
                             <div className="col-4">
-                                <SelectSearchComponent labelName={"Client"} setValue={setClient} items={clients}></SelectSearchComponent>
+                                <SelectSearchComponent labelName={"Client"} setValue={setClient} items={clients} />
                             </div>
                             <div className="col-4">
-                                <SelectSearchComponent labelName={"Project"} setValue={setProject} items={projects}></SelectSearchComponent>
+                                <SelectSearchComponent labelName={"Project"} setValue={setProject} items={projects} />
                             </div>
                         </div>
                         <br />
                         <div className="row">
                             <div className="col-4">
-                                <SelectSearchComponent labelName={"Category"} setValue={setCategory} items={categories}></SelectSearchComponent>
+                                <SelectSearchComponent labelName={"Category"} setValue={setCategory} items={categories} />
                             </div>
                             <div className="col-4">
-                                <InputDateComponent labelName={"Start date"} value={startDate} setValue={setStartDate}></InputDateComponent>
+                                <InputDateComponent labelName={"Start date"} value={startDate} setValue={setStartDate} />
                             </div>
                             <div className="col-4">
-                                <InputDateComponent labelName={"End date"} value={endDate} setValue={setEndDate}></InputDateComponent>
+                                <InputDateComponent labelName={"End date"} value={endDate} setValue={setEndDate} />
                             </div>
                         </div>
                         <br />
                         <div className="row">
                             <div className="col-10"></div>
                             <div className="col-2">
-                                <ButtonComponent handleClick={handleSearch} buttonName={"Search"} className="search-btn"></ButtonComponent>
+                                <ButtonComponent handleClick={handleSearch} buttonName={"Search"} className="search-btn" />
                             </div>
                         </div>
                     </div>

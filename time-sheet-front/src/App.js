@@ -1,8 +1,7 @@
 import './App.css';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import { Routes, Route } from 'react-router-dom'
 import Login from './Login';
 import PrivateRoute from './auth/ProtectedRoute';
-import Home from './Home';
 import Navbar from './Navbar';
 import Categories from './categories/Categories';
 import { useEffect } from 'react';
@@ -41,9 +40,6 @@ function App() {
             {!token &&  <Route path='/' element={<Login />}></Route>}
             {token && role === 'ADMIN' && <Route path='/' element={<Categories />}></Route>}
             {token && role === 'WORKER' && <Route path='/' element={<TimeSheet />}></Route>}
-            <Route element={<PrivateRoute roles={["ADMIN"]} />}>
-              <Route path='/home' element={<Home />} />
-            </Route>
             <Route element={<PrivateRoute roles={["ADMIN"]} />}>
               <Route path='/categories' element={<Categories />} />
             </Route>
