@@ -27,12 +27,6 @@ function App() {
         localStorage.clear();
         window.location.reload();
       }
-      // if(role === 'ADMIN'){
-      //   navigate('/reports', { replace: true });
-      // }
-      // if(role === 'WORKER'){
-      //   navigate('/timeSheet', { replace: true });
-      // }
     }
   }, [token])
 
