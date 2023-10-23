@@ -239,12 +239,28 @@ td {
   text-align: left;
 }
 
+.back:hover svg{
+  fill: #3a4752;
+}
+
+.back svg{
+  fill: #567189;
+}
+
 .next {
   float: right;
   border: none;
   width: auto;
   background-color: transparent;
   text-align: left;
+}
+
+.next:hover svg{
+  fill: #3a4752;
+}
+
+.next svg{
+  fill: #567189;
 }
 
 .col-md {

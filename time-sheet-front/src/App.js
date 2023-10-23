@@ -12,11 +12,13 @@ import Clients from './clients/Clients';
 import Reports from './reports/Reports';
 import TimeSheet from './timeSheet/TimeSheet';
 import WeekView from './timeSheet/WeekView';
+import { useNavigate } from 'react-router-dom';
 
 function App() {
 
   const token = localStorage.getItem('token')
   const role = localStorage.getItem('role')
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (token) {
@@ -25,11 +27,17 @@ function App() {
         localStorage.clear();
         window.location.reload();
       }
+      if(role === 'ADMIN'){
+        navigate('/reports', { replace: true });
+      }
+      if(role === 'WORKER'){
+        navigate('/timeSheet', { replace: true });
+      }
     }
-  })
+  }, [token])
 
   return (
-    <Router>
+   
       <div>
         <div>
           {token && <Navbar></Navbar>}
@@ -37,8 +45,6 @@ function App() {
         <div className="content">
           <Routes>
             {!token &&  <Route path='/' element={<Login />}></Route>}
-            {token && role === 'ADMIN' && <Route path='/' element={<Categories />}></Route>}
-            {token && role === 'WORKER' && <Route path='/' element={<TimeSheet />}></Route>}
             <Route element={<PrivateRoute roles={["ADMIN"]} />}>
               <Route path='/home' element={<Home />} />
             </Route>
@@ -66,7 +72,7 @@ function App() {
           </Routes>
         </div>
       </div>
-    </Router>
+
   );
 }
 
