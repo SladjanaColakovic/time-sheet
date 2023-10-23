@@ -1,17 +1,3 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
-}
-
 .login h2 {
   text-align: center;
   margin-top: 20px;
@@ -27,41 +13,21 @@ code {
 
 }
 
-.login input {
-  width: 100%;
-  padding: 9px;
-  border: 1px solid #ccc;
-  border-radius: 3px;
-  resize: horizontal;
-  box-shadow: rgba(0, 0, 0, 0.04) 0px 3px 5px;
-}
-
-.login label {
-  font-size: 17px;
-  padding: 9px 9px 9px 0;
-  display: inline-block;
-}
-
 .login .row:not(:last-child) {
-  margin-bottom: 10px;
+  margin-bottom: 15px;
 }
 
 .login button {
-  width: 130px;
+  width: 110px;
   background-color: #567189;
   border: none;
   color: rgb(236, 232, 232);
-  padding: 11px 30px;
-  text-align: center;
-  text-decoration: none;
-  display: block;
+  padding: 7px 9px;
   font-size: 16px;
   margin-top: 20px;
   margin-left: auto;
   margin-right: auto;
-  cursor: pointer;
   border-radius: 3px;
-  float: right;
 }
 
 .login button:hover {
@@ -71,7 +37,6 @@ code {
 .accessDenied h1 {
   text-align: center;
 }
-
 
 .sidenav {
   height: 100%;
@@ -98,7 +63,6 @@ code {
 
 .sidenav button:hover {
   background-color: #4c667d;
-
 }
 
 .sidenav label {
@@ -133,22 +97,12 @@ svg {
   margin-top: 50px;
 }
 
-.new-item input[type=text] {
-  width: 100%;
-  padding: 7px;
-  border: 1px solid #ccc;
-  border-radius: 3px;
-  resize: horizontal;
-  box-shadow: rgba(0, 0, 0, 0.04) 0px 3px 5px;
-}
-
 .new-item label {
   font-size: 17px;
   padding: 9px 9px 9px 0;
   display: inline-block;
 }
 
-/*-------------NEW SAVE-------------*/
 .new-save {
   margin: auto;
   display: flex;
@@ -164,7 +118,7 @@ svg {
   border-radius: 3px;
 }
 
-.new-save:hover{
+.new-save:hover {
   background-color: #4c667d;
 }
 
@@ -188,7 +142,7 @@ svg {
   border-radius: 3px;
 }
 
-.edit-save:hover{
+.edit-save:hover {
   background-color: #4c667d;
 }
 
@@ -207,14 +161,8 @@ svg {
   border-radius: 3px;
 }
 
-.edit input[type=text],
-select {
-  width: 100%;
-  padding: 7px;
-  border: 1px solid #ccc;
-  border-radius: 3px;
-  resize: horizontal;
-  box-shadow: rgba(0, 0, 0, 0.04) 0px 3px 5px;
+.edit-delete:hover {
+  background-color: #994343;
 }
 
 select {
@@ -226,7 +174,9 @@ select {
   box-shadow: rgba(0, 0, 0, 0.04) 0px 3px 5px;
 }
 
-input[type=date] {
+input[type=date],
+[type=password],
+[type=text] {
   width: 100%;
   padding: 7px;
   border: 1px solid #ccc;
@@ -238,15 +188,6 @@ input[type=date] {
 .box {
   box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
   padding: 20px;
-}
-
-.box input {
-  width: 100%;
-  padding: 7px;
-  border: 1px solid #ccc;
-  border-radius: 3px;
-  resize: horizontal;
-  box-shadow: rgba(0, 0, 0, 0.04) 0px 3px 5px;
 }
 
 .search-btn {
@@ -272,7 +213,8 @@ input[type=date] {
   width: 100%;
 }
 
-.table-div th, td {
+.table-div th,
+td {
   text-align: left;
   padding: 8px;
 }
@@ -281,14 +223,14 @@ input[type=date] {
   background-color: rgb(236, 232, 232);
 }
 
-.total-report{
+.total-report {
   margin-top: 30px;
   float: right;
   font-size: 17px;
   color: #567189
 }
 
-.back{
+.back {
   float: left;
   border: none;
   width: auto;
@@ -296,7 +238,7 @@ input[type=date] {
   text-align: left;
 }
 
-.next{
+.next {
   float: right;
   border: none;
   width: auto;
@@ -304,56 +246,91 @@ input[type=date] {
   text-align: left;
 }
 
-
-.col-md{
+.col-md {
   font-weight: bold;
   text-align: center;
   margin-bottom: 15px;
 }
 
-.box-date{
+.box-date {
   border: 1px solid rgb(236, 232, 232);
 }
 
-.date-label{
+.date-label {
   padding: 5px;
+  cursor: pointer;
 }
 
-.hours{
+.hours {
   padding: 5px;
   text-decoration: none;
   color: black;
   display: block;
 }
 
-.hours:hover{
+.hours:hover {
   cursor: pointer;
   text-decoration: underline;
   text-decoration-color: #a9b6c2;
 }
 
-.calendar-div {
-  overflow-x: auto;
-  text-align: center;
+.radio-span {
+  margin-right: 10px;
 }
 
-.calendar-div table {
+.radios-span {
+  margin-right: 15px;
+}
+
+.monthly-view {
+  float: left;
+  width: 100%;
+  border: none;
+  background-color: transparent;
+  color: #4c667d;
+  text-align: left;
+}
+
+.monthly-view:hover {
+  font-weight: bold;
+}
+
+.add-btn {
+  border: none;
+  background-color: transparent;
+}
+
+.add-btn svg {
+  fill: #4c667d;
+}
+
+.table-box {
+  overflow-x: auto;
+}
+
+.table-box table {
+  table-layout: fixed;
   border-collapse: collapse;
   width: 100%;
 }
 
-.calendar-div th, td {
+.table-box th,
+td {
   text-align: left;
   padding: 8px;
+  width: 19, 75%;
 }
 
-
-
-
-.radio-span{
-  margin-right: 10px;
+.custom-width {
+  width: 7%;
 }
 
-.radios-span{
-  margin-right: 15px;
+.label-btn {
+  cursor: pointer;
+}
+
+.total-hours {
+  float: right;
+  font-size: 17px;
+  color: #567189
 }

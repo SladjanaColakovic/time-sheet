@@ -8,6 +8,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Repository
@@ -24,5 +25,8 @@ public interface TimeSheetItemJpaRepository extends JpaRepository<TimeSheetItemE
            "from TimeSheetItemEntity i where i.teamMember.id = :#{#timeSheetRange.teamMemberId} AND" +
            " i.date between :#{#timeSheetRange.from} AND :#{#timeSheetRange.to} group by i.date")
    List<DailyTimeSheet> getDailyTimeSheets(TimeSheetRange timeSheetRange);
+
+   @Query("select i from TimeSheetItemEntity i where i.teamMember.id = :teamMemberId AND i.date = :date")
+   List<TimeSheetItemEntity> getTeamMemberItems(Long teamMemberId, LocalDate date);
 
 }

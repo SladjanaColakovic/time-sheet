@@ -96,4 +96,6 @@ public interface CustomMapper {
 
     TimeSheetDTO timeSheetToTimeSheetDTO(TimeSheet timeSheet);
 
+    TeamMemberTimeSheetItemsDTO teamMemberTimeSheetItemToTeamMemberTimeSheetItemsDTO(TeamMemberTimeSheetItems teamMemberTimeSheetItems);
+
 }

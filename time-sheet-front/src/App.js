@@ -46,7 +46,7 @@ function App() {
             <Route path='/clients' element={<Clients />} />
             <Route path='/reports' element={<Reports />} />
             <Route path='/timeSheet' element={<TimeSheet />} />
-            <Route path='/weekView/:startDate/:endDate/:selectedDate' element={<WeekView />} />
+            <Route path='/weekView/:startDateFormat/:endDateFormat/:date' element={<WeekView />} />
           </Routes>
         </div>
       </div>

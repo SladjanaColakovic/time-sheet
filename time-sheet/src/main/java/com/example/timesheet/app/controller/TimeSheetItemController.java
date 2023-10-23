@@ -2,8 +2,10 @@ package com.example.timesheet.app.controller;
 
 import com.example.timesheet.CustomMapper;
 import com.example.timesheet.app.dto.NewTimeSheetItemDTO;
+import com.example.timesheet.app.dto.TeamMemberTimeSheetItemsDTO;
 import com.example.timesheet.app.dto.TimeSheetItemDTO;
 import com.example.timesheet.app.dto.TimeSheetItems;
+import com.example.timesheet.core.model.TeamMemberTimeSheetItems;
 import com.example.timesheet.core.model.TimeSheetItem;
 import com.example.timesheet.core.service.ITimeSheetItemService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +13,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -44,8 +47,16 @@ public class TimeSheetItemController {
         List<TimeSheetItemDTO> response = items.stream()
                 .map(mapper::timeSheetItemToTimeSheetItemDTO)
                 .collect(Collectors.toList());
-        return new ResponseEntity<>(new TimeSheetItems(response), HttpStatus.OK
-        );
+        return new ResponseEntity<>(new TimeSheetItems(response), HttpStatus.OK);
+    }
+
+    @GetMapping("/teamMember")
+    public ResponseEntity<?> getTeamMemberItems(@RequestParam("teamMemberId") Long teamMemberId,
+                                                @RequestParam("date") LocalDate date){
+        TeamMemberTimeSheetItems teamMemberTimeSheetItems = timeSheetItemService.getTeamMemberItems(teamMemberId, date);
+        TeamMemberTimeSheetItemsDTO response = mapper.teamMemberTimeSheetItemToTeamMemberTimeSheetItemsDTO(teamMemberTimeSheetItems);
+        return new ResponseEntity<>(response, HttpStatus.OK);
+
     }
 
 }

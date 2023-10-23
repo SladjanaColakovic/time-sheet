@@ -10,6 +10,7 @@ import com.example.timesheet.data.repository.TimeSheetItemJpaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -48,6 +49,15 @@ public class TimeSheetItemRepository implements ITimeSheetItemRepository {
     @Override
     public List<TimeSheetItem> reportSearch(ReportSearch reportSearch) {
         List<TimeSheetItemEntity> items = timeSheetItemJpaRepository.reportSearch(reportSearch);
+        return items
+                .stream()
+                .map(mapper::timeSheetItemEntityToTimeSheetItem)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<TimeSheetItem> getTeamMemberItems(Long teamMemberId, LocalDate date) {
+        List<TimeSheetItemEntity> items = timeSheetItemJpaRepository.getTeamMemberItems(teamMemberId, date);
         return items
                 .stream()
                 .map(mapper::timeSheetItemEntityToTimeSheetItem)
