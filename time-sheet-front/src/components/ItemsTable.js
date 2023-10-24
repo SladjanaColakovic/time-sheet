@@ -1,8 +1,41 @@
 import DailyCalendarTableHeader from "./DailyCalenadarTableHeader";
 import AddItem from "./AddItem";
 import Edititem from "./EditItem";
+import { useEffect, useState } from "react";
+import { getRequest} from "../requests/httpClient";
+import { NotificationContainer, NotificationManager } from "react-notifications";
 
-const ItemsTable = ({ items, changeCategory, changeClient, clients, changeProject, projects, categories, changeItem, edit, setClient, client, setProject, project, setCategory, category, description, time, overtime, setDescription, setTime, setOvertime, addItem }) => {
+const ItemsTable = ({ items, selectedDate, setItems, setTotalHours }) => {
+
+    const [clients, setClients] = useState();
+    const [projects, setProjects] = useState();
+    const [categories, setCategories] = useState();
+
+    const CLIENT_URL = process.env.REACT_APP_SERVER_BASE_URL + process.env.REACT_APP_CLIENT_URL
+    const PROJECT_URL = process.env.REACT_APP_SERVER_BASE_URL + process.env.REACT_APP_PROJECT_URL
+    const CATEGORY_URL = process.env.REACT_APP_SERVER_BASE_URL + process.env.REACT_APP_CATEGORY_URL
+
+    useEffect(() => {
+        getRequest(CLIENT_URL)
+            .then((res) => {
+                setClients(res.data.clients);
+                getRequest(PROJECT_URL)
+                    .then((res) => {
+                        setProjects(res.data.projects);
+                        getRequest(CATEGORY_URL)
+                            .then((res) => {
+                                setCategories(res.data.categories);
+                            })
+                    })
+            })
+    }, [])
+
+
+    const showErrorMessage = (message) => {
+        NotificationManager.error(message, '', 5000);
+    }
+
+    
     return (
         <div className="table-box">
             {items && <table>
@@ -11,11 +44,12 @@ const ItemsTable = ({ items, changeCategory, changeClient, clients, changeProjec
                 </thead>
                 <tbody>
                     {items.map((item) => (
-                        <Edititem item={item} key={item.id} categories={categories} clients={clients} projects={projects} changeClient={changeClient} changeCategory={changeCategory} changeProject={changeProject} changeItem={changeItem} edit={edit}/>
+                        <Edititem item={item} key={item.id} categories={categories} clients={clients} projects={projects} setItems={setItems} setTotalHours={setTotalHours} selectedDate={selectedDate} items={items} showErrorMessage={showErrorMessage}/>
                     ))}
-                    <AddItem clients={clients} setClient={setClient} client={client} projects={projects} setProject={setProject} project={project} categories={categories} setCategory={setCategory} category={category} description={description} setDescription={setDescription} time={time} setTime={setTime} overtime={overtime} setOvertime={setOvertime} addItem={addItem}/>
+                    <AddItem clients={clients} projects={projects} categories={categories} setItems={setItems} setTotalHours={setTotalHours} selectedDate={selectedDate} showErrorMessage={showErrorMessage}/>
                 </tbody>
             </table>}
+            <NotificationContainer />
         </div>
     );
 }

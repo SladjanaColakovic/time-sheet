@@ -1,7 +1,61 @@
 import InputComponent from "./InputComponent";
 import SelectComponent from "./SelectComponent";
+import { getRequestWithParams, postRequest } from "../requests/httpClient";
+import { useState } from "react";
+import { format } from "date-fns";
 
-const AddItem = ({clients, setClient, client, projects, setProject, project, categories, setCategory, category, description, setDescription, time, setTime, overtime, setOvertime, addItem}) => {
+const AddItem = ({clients, projects, categories, setItems, setTotalHours, selectedDate, showErrorMessage}) => {
+    
+    const [client, setClient] = useState('');
+    const [project, setProject] = useState('');
+    const [category, setCategory] = useState('');
+    const [description, setDescription] = useState('');
+    const [time, setTime] = useState('');
+    const [overtime, setOvertime] = useState('');
+
+    const ITEMS_URL = process.env.REACT_APP_SERVER_BASE_URL + process.env.REACT_APP_ITEMS_URL
+
+    const addItem = () => {
+        const data = {
+            date: format(new Date(selectedDate), 'yyyy-MM-dd'),
+            description: description,
+            time: time,
+            overtime: overtime,
+            project: {
+                id: project
+            },
+            teamMember: {
+                id: JSON.parse(window.atob(localStorage.getItem('token').split('.')[1])).id
+            },
+            category: {
+                id: category
+            }
+        }
+
+        postRequest(ITEMS_URL, data)
+            .then((res) => {
+                const params = {
+                    teamMemberId: JSON.parse(window.atob(localStorage.getItem('token').split('.')[1])).id,
+                    date: format(new Date(selectedDate), 'yyyy-MM-dd')
+                }
+                getRequestWithParams(ITEMS_URL + "/teamMember", params)
+                    .then((res) => {
+                        setItems(res.data.items);
+                        setTotalHours(res.data.totalHours)
+                        setDescription('')
+                        setTime('')
+                        setOvertime('')
+                        setCategory('')
+                        setClient('')
+                        setProject('')
+
+                    })
+
+            }).catch((error) => {
+                showErrorMessage(error.message);
+            })
+    }
+    
     return (
         <tr className="tr-margin">
             <td>

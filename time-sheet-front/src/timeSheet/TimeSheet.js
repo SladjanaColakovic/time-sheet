@@ -35,11 +35,9 @@ const TimeSheet = () => {
             to: format(to, DATE_FORMAT),
             teamMemberId: id
         }
-        console.log(params)
 
         getRequestWithParams(URL, params)
             .then((res) => {
-                console.log(res);
                 setData(res.data.dailyTimeSheets);
                 setTotalHours(res.data.totalHours)
             })
