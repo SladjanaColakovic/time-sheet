@@ -1,11 +1,11 @@
 import DailyCalendarTableHeader from "./DailyCalenadarTableHeader";
-import AddItem from "./AddItem";
-import Edititem from "./EditItem";
+import AddItemComponent from "./AddItemComponent";
 import { useEffect, useState } from "react";
-import { getRequest} from "../requests/httpClient";
+import { getRequest } from "../requests/httpClient";
 import { NotificationContainer, NotificationManager } from "react-notifications";
+import EdititemComponent from "./EditItemComponent";
 
-const ItemsTable = ({ items, selectedDate, setItems, setTotalHours }) => {
+const ItemsTableComponent = ({ items, selectedDate, setItems, setTotalHours }) => {
 
     const [clients, setClients] = useState();
     const [projects, setProjects] = useState();
@@ -35,7 +35,7 @@ const ItemsTable = ({ items, selectedDate, setItems, setTotalHours }) => {
         NotificationManager.error(message, '', 5000);
     }
 
-    
+
     return (
         <div className="table-box">
             {items && <table>
@@ -44,9 +44,9 @@ const ItemsTable = ({ items, selectedDate, setItems, setTotalHours }) => {
                 </thead>
                 <tbody>
                     {items.map((item) => (
-                        <Edititem item={item} key={item.id} categories={categories} clients={clients} projects={projects} setItems={setItems} setTotalHours={setTotalHours} selectedDate={selectedDate} items={items} showErrorMessage={showErrorMessage}/>
+                        <EdititemComponent item={item} key={item.id} categories={categories} clients={clients} projects={projects} setItems={setItems} setTotalHours={setTotalHours} selectedDate={selectedDate} items={items} showErrorMessage={showErrorMessage} />
                     ))}
-                    <AddItem clients={clients} projects={projects} categories={categories} setItems={setItems} setTotalHours={setTotalHours} selectedDate={selectedDate} showErrorMessage={showErrorMessage}/>
+                    <AddItemComponent clients={clients} projects={projects} categories={categories} setItems={setItems} setTotalHours={setTotalHours} selectedDate={selectedDate} showErrorMessage={showErrorMessage} />
                 </tbody>
             </table>}
             <NotificationContainer />
@@ -54,4 +54,4 @@ const ItemsTable = ({ items, selectedDate, setItems, setTotalHours }) => {
     );
 }
 
-export default ItemsTable;
+export default ItemsTableComponent;

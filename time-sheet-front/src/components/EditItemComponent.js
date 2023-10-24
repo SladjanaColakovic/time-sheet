@@ -3,7 +3,7 @@ import InputListItemComponent from "./InputListItemComponent";
 import SelectListItemComponent from "./SelectListItemComponent";
 import { format } from "date-fns";
 
-const Edititem = ({item, setItems, items, setTotalHours, selectedDate, clients, projects, categories, showErrorMessage}) => {
+const EdititemComponent = ({item, setItems, items, setTotalHours, selectedDate, clients, projects, categories, showErrorMessage}) => {
 
     const ITEMS_URL = process.env.REACT_APP_SERVER_BASE_URL + process.env.REACT_APP_ITEMS_URL
     
@@ -14,7 +14,6 @@ const Edititem = ({item, setItems, items, setTotalHours, selectedDate, clients, 
             }
             return obj;
         });
-
         setItems(newState);
     }
 
@@ -25,7 +24,6 @@ const Edititem = ({item, setItems, items, setTotalHours, selectedDate, clients, 
             }
             return obj;
         });
-
         setItems(newState);
     }
 
@@ -36,7 +34,6 @@ const Edititem = ({item, setItems, items, setTotalHours, selectedDate, clients, 
             }
             return obj;
         });
-
         setItems(newState);
     }
 
@@ -47,7 +44,6 @@ const Edititem = ({item, setItems, items, setTotalHours, selectedDate, clients, 
             }
             return obj;
         });
-
         setItems(newState);
     }
 
@@ -119,4 +115,4 @@ const Edititem = ({item, setItems, items, setTotalHours, selectedDate, clients, 
     );
 }
 
-export default Edititem;
+export default EdititemComponent;

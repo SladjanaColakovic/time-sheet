@@ -6,7 +6,7 @@ import { format } from "date-fns";
 import ButtonComponent from "../components/ButtonComponent";
 import CalendarNavigationComponent from "../components/CalendarNavigationComponent";
 import DailyCalendarComponent from "../components/DailyCalendarComponent";
-import ItemsTable from "../components/ItemsTable";
+import ItemsTableComponent from "../components/ItemsTableComponent";
 
 
 const WeekView = () => {
@@ -28,9 +28,7 @@ const WeekView = () => {
         setFormatSelectedDate(new Date(selectedDate).toLocaleDateString('en-us', { weekday: "long", day: "numeric", month: "short" }))
         const firstDayOfWeek = new Date(startDate)
         const lastDayOfWeek = new Date(endDate)
-
         findDateRange(firstDayOfWeek, lastDayOfWeek);
-
         const params = {
             teamMemberId: JSON.parse(window.atob(localStorage.getItem('token').split('.')[1])).id,
             date: format(new Date(selectedDate), 'yyyy-MM-dd')
@@ -60,9 +58,7 @@ const WeekView = () => {
         firstDateOfNextWeek.setDate(new Date(endDate).getDate() + 1);
         let lastDateOfNextWeek = new Date(endDate);
         lastDateOfNextWeek.setDate(new Date(endDate).getDate() + 7);
-
         findDateRange(firstDateOfNextWeek, lastDateOfNextWeek);
-
         setStartDate(format(firstDateOfNextWeek, 'MMMM dd, yyyy'));
         setEndDate(format(lastDateOfNextWeek, 'MMMM dd, yyyy'));
     }
@@ -72,9 +68,7 @@ const WeekView = () => {
         lastDateOfPreviousWeek.setDate(new Date(startDate).getDate() - 1);
         let firstDateOfPreviousWeek = new Date(startDate);
         firstDateOfPreviousWeek.setDate(new Date(startDate).getDate() - 7);
-
         findDateRange(firstDateOfPreviousWeek, lastDateOfPreviousWeek);
-
         setStartDate(format(firstDateOfPreviousWeek, 'MMMM dd, yyyy'));
         setEndDate(format(lastDateOfPreviousWeek, 'MMMM dd, yyyy'));
     }
@@ -93,10 +87,10 @@ const WeekView = () => {
     }
 
     const selectDate = (date) => {
-        const iterator = flagSelectedDate(date);
+        const showingDate = flagSelectedDate(date);
         const params = {
             teamMemberId: JSON.parse(window.atob(localStorage.getItem('token').split('.')[1])).id,
-            date: format(new Date(iterator), 'yyyy-MM-dd')
+            date: format(new Date(showingDate), 'yyyy-MM-dd')
         }
         getItems(params);
     }
@@ -123,7 +117,7 @@ const WeekView = () => {
                             <DailyCalendarComponent dates={dates} formatSelectedDate={formatSelectedDate} selectDate={selectDate} />
                             <br />
                             <br />
-                            <ItemsTable items={items} selectedDate={selectedDate} setItems={setItems} setTotalHours={setTotalHours} />
+                            <ItemsTableComponent items={items} selectedDate={selectedDate} setItems={setItems} setTotalHours={setTotalHours} />
                             <br />
                             <div className="row">
                                 <div className="col-3">

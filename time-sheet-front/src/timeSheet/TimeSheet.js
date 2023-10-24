@@ -6,7 +6,6 @@ import CalendarNavigationComponent from "../components/CalendarNavigationCompone
 import DaysComponent from "../components/DaysComponent";
 import MonthlyCalendarComponent from "../components/MonthlyCalendarComponent";
 
-
 const TimeSheet = () => {
 
     const [date, setDate] = useState(new Date());
@@ -16,7 +15,6 @@ const TimeSheet = () => {
     const navigate = useNavigate();
 
     const URL = process.env.REACT_APP_SERVER_BASE_URL + process.env.REACT_APP_TIME_SHEET_URL
-
 
     const MONDAY = 1;
     const SUNDAY = 7;
@@ -35,14 +33,12 @@ const TimeSheet = () => {
             to: format(to, DATE_FORMAT),
             teamMemberId: id
         }
-
         getRequestWithParams(URL, params)
             .then((res) => {
                 setData(res.data.dailyTimeSheets);
                 setTotalHours(res.data.totalHours)
             })
     }
-
 
     const getDateRange = () => {
         var userInfo = JSON.parse(window.atob(localStorage.getItem('token').split('.')[1]))
@@ -56,11 +52,10 @@ const TimeSheet = () => {
         }
         let to = lastDateOfMonth;
         if (lastDayOfMonth !== SUNDAY) {
-            to = new Date(lastDateOfMonth.setDate(lastDateOfMonth.getDate() + SUNDAY - lastDateOfMonth.getDay()))
+            to = new Date(lastDateOfMonth.setDate(lastDateOfMonth.getDate() + 7 - lastDateOfMonth.getDay()))
         }
         return [from, to, userInfo.id]
     }
-
 
     const handleNext = () => {
         setDate(new Date(date.setMonth(date.getMonth() + 1)));

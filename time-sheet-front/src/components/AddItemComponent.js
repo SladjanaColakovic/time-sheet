@@ -4,8 +4,8 @@ import { getRequestWithParams, postRequest } from "../requests/httpClient";
 import { useState } from "react";
 import { format } from "date-fns";
 
-const AddItem = ({clients, projects, categories, setItems, setTotalHours, selectedDate, showErrorMessage}) => {
-    
+const AddItemComponent = ({ clients, projects, categories, setItems, setTotalHours, selectedDate, showErrorMessage }) => {
+
     const [client, setClient] = useState('');
     const [project, setProject] = useState('');
     const [category, setCategory] = useState('');
@@ -48,14 +48,13 @@ const AddItem = ({clients, projects, categories, setItems, setTotalHours, select
                         setCategory('')
                         setClient('')
                         setProject('')
-
                     })
 
             }).catch((error) => {
                 showErrorMessage(error.message);
             })
     }
-    
+
     return (
         <tr className="tr-margin">
             <td>
@@ -87,4 +86,4 @@ const AddItem = ({clients, projects, categories, setItems, setTotalHours, select
     );
 }
 
-export default AddItem;
+export default AddItemComponent;
