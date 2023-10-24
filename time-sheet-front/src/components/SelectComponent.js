@@ -1,8 +1,11 @@
-const SelectComponent = ({ labelName, setValue, items }) => {
+const SelectComponent = ({ labelName, setValue, items, value }) => {
     return (
         <div>
             <label>{labelName}</label>
-            <select onChange={(e) => { setValue(e.target.value) }}>
+            <select value={value} onChange={(e) => { setValue(e.target.value) }}>
+                <option value={''}>
+                Choose an option
+                </option>
                 {items && items.map((item) => (
                     <option key={item.id} value={item.id}>{item.name}</option>
                 ))}

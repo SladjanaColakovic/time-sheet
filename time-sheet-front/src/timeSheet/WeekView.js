@@ -22,9 +22,9 @@ const WeekView = () => {
     const [clients, setClients] = useState();
     const [projects, setProjects] = useState();
     const [categories, setCategories] = useState();
-    const [client, setClient] = useState(1);
-    const [project, setProject] = useState(1);
-    const [category, setCategory] = useState(1);
+    const [client, setClient] = useState('');
+    const [project, setProject] = useState('');
+    const [category, setCategory] = useState('');
     const [description, setDescription] = useState('');
     const [time, setTime] = useState('');
     const [overtime, setOvertime] = useState('');
@@ -116,12 +116,17 @@ const WeekView = () => {
                         setDescription('')
                         setTime('')
                         setOvertime('')
+                        setCategory('')
+                        setClient('')
+                        setProject('')
+
                     })
 
             }).catch((error) => {
                 NotificationManager.error(error.message, '', 5000);
 
             })
+
     }
 
     const next = () => {
@@ -223,13 +228,13 @@ const WeekView = () => {
 
                                         <tr className="tr-margin">
                                             <td>
-                                                <SelectComponent items={clients} setValue={setClient} />
+                                                <SelectComponent items={clients} setValue={setClient} value={client}/>
                                             </td>
                                             <td>
-                                                <SelectComponent items={projects} setValue={setProject} />
+                                                <SelectComponent items={projects} setValue={setProject} value={project}/>
                                             </td>
                                             <td>
-                                                <SelectComponent items={categories} setValue={setCategory} />
+                                                <SelectComponent items={categories} setValue={setCategory} value={category}/>
                                             </td>
                                             <td>
                                                 <InputComponent value={description} setValue={setDescription} />
