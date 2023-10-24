@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { getRequest, getRequestWithParams, postRequest } from "../requests/httpClient";
+import { getRequest, getRequestWithParams, postRequest, putRequest } from "../requests/httpClient";
 import SelectComponent from "../components/SelectComponent";
 import InputComponent from '../components/InputComponent'
 import { useNavigate } from "react-router-dom";
@@ -61,6 +61,7 @@ const WeekView = () => {
                                 getRequestWithParams(ITEMS_URL + "/teamMember", params)
                                     .then((res) => {
                                         setItems(res.data.items);
+                                        console.log(res.data.items)
                                         setTotalHours(res.data.totalHours)
                                     })
                             })
@@ -179,6 +180,91 @@ const WeekView = () => {
             })
     }
 
+    const changeItem = (e, property, id) => {
+        const newState = items.map(obj => {
+            if (obj.id === id) {
+                return { ...obj, [property]: e.target.value };
+            }
+            return obj;
+        });
+
+        setItems(newState);
+    }
+
+    const changeClient = (e, id) => {
+        const newState = items.map(obj => {
+            if (obj.id === id) {
+                return { ...obj, project: { ...obj.project, client: { ...obj.project.client, id: e.target.value } } };
+            }
+            return obj;
+        });
+
+        setItems(newState);
+    }
+
+    const changeProject = (e, id) => {
+        const newState = items.map(obj => {
+            if (obj.id === id) {
+                return { ...obj, project: { ...obj.project, id: e.target.value } };
+            }
+            return obj;
+        });
+
+        setItems(newState);
+    }
+
+    const changeCategory = (e, id) => {
+        const newState = items.map(obj => {
+            if (obj.id === id) {
+                return { ...obj, category: { ...obj.category, id: e.target.value } };
+            }
+            return obj;
+        });
+
+        setItems(newState);
+    }
+
+    const edit = (id) => {
+        let editing;
+        items.map(obj => {
+            if (obj.id === id) {
+                editing = obj;
+            }
+        })
+        console.log(editing);
+        const data = {
+            id: id,
+            description: editing.description,
+            time: editing.time,
+            overtime: editing.overtime,
+            project: {
+                id: editing.project.id
+            },
+            category: {
+                id: editing.category.id
+            }
+        }
+        putRequest(ITEMS_URL, data)
+            .then((res) => {
+                console.log(res);
+                const params = {
+                    teamMemberId: JSON.parse(window.atob(localStorage.getItem('token').split('.')[1])).id,
+                    date: format(new Date(selectedDate), 'yyyy-MM-dd')
+                }
+                getRequestWithParams(ITEMS_URL + "/teamMember", params)
+                    .then((res) => {
+                        setItems(res.data.items);
+                        console.log(res.data.items)
+                        setTotalHours(res.data.totalHours)
+                    })
+
+            })
+            .catch((error) => {
+                NotificationManager.error(error.message, '', 5000);
+
+            })
+    }
+
     return (
         <div className="main">
             <div className="weeklyView">
@@ -216,25 +302,63 @@ const WeekView = () => {
                                     <tbody>
                                         {items.map((item) => (
                                             <tr key={item.id}>
-                                                <td>{item.project.client.name}</td>
+                                                <td>
+                                                    <select value={item.project.client.id} onChange={(e) => { changeClient(e, item.id) }}>
+                                                        {clients && clients.map((client) => (
+                                                            <option key={client.id} value={client.id}>{client.name}</option>
+                                                        ))}
+                                                    </select>
+                                                </td>
+                                                <td>
+                                                    <select value={item.project.id} onChange={(e) => { changeProject(e, item.id) }}>
+                                                        {projects && projects.map((project) => (
+                                                            <option key={project.id} value={project.id}>{project.name}</option>
+                                                        ))}
+                                                    </select>
+                                                </td>
+                                                <td>
+                                                    <select value={item.category.id} onChange={(e) => { changeCategory(e, item.id) }}>
+                                                        {categories && categories.map((category) => (
+                                                            <option key={category.id} value={category.id}>{category.name}</option>
+                                                        ))}
+                                                    </select>
+                                                </td>
+                                                <td>
+                                                    <input type="text" value={item.description} onChange={(e) => { changeItem(e, "description", item.id) }} />
+                                                </td>
+                                                <td>
+                                                    <input type="text" value={item.time} onChange={(e) => { changeItem(e, "time", item.id) }} />
+                                                </td>
+                                                <td>
+                                                    <input type="text" value={item.overtime} onChange={(e) => { changeItem(e, "overtime", item.id) }} />
+                                                </td>
+                                                <td>
+                                                    <button onClick={() => { edit(item.id) }} className="add-btn">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" className="bi bi-pencil-square" viewBox="0 0 16 16">
+                                                            <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
+                                                            <path d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
+                                                        </svg>
+                                                    </button>
+                                                </td>
+                                                {/* <td>{item.project.client.name}</td>
                                                 <td>{item.project.name}</td>
                                                 <td>{item.category.name}</td>
                                                 <td>{item.description}</td>
                                                 <td className="custom-width">{item.time}</td>
                                                 <td className="custom-width">{item.overtime}</td>
-                                                <td className="custom-width">&nbsp;</td>
+                                                <td className="custom-width">&nbsp;</td> */}
                                             </tr>
                                         ))}
 
                                         <tr className="tr-margin">
                                             <td>
-                                                <SelectComponent items={clients} setValue={setClient} value={client}/>
+                                                <SelectComponent items={clients} setValue={setClient} value={client} />
                                             </td>
                                             <td>
-                                                <SelectComponent items={projects} setValue={setProject} value={project}/>
+                                                <SelectComponent items={projects} setValue={setProject} value={project} />
                                             </td>
                                             <td>
-                                                <SelectComponent items={categories} setValue={setCategory} value={category}/>
+                                                <SelectComponent items={categories} setValue={setCategory} value={category} />
                                             </td>
                                             <td>
                                                 <InputComponent value={description} setValue={setDescription} />

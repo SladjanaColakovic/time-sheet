@@ -38,6 +38,11 @@ public class TimeSheetItemService implements ITimeSheetItemService {
         return new TeamMemberTimeSheetItems(items, totalHours);
     }
 
+    @Override
+    public TimeSheetItem update(TimeSheetItem timeSheetItem) {
+        return timeSheetItemRepository.update(timeSheetItem);
+    }
+
     private float calculateTotalHours(List<TimeSheetItem> timeSheetItems) {
         return timeSheetItems.stream()
                 .map(element -> element.getTime() + element.getOvertime())

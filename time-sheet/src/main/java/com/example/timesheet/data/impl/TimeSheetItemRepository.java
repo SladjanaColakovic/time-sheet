@@ -63,4 +63,13 @@ public class TimeSheetItemRepository implements ITimeSheetItemRepository {
                 .map(mapper::timeSheetItemEntityToTimeSheetItem)
                 .collect(Collectors.toList());
     }
+
+    @Override
+    public TimeSheetItem update(TimeSheetItem timeSheetItem) {
+        TimeSheetItemEntity editing = timeSheetItemJpaRepository.findById(timeSheetItem.getId()).orElse(null);
+        if(editing == null) throw new ObjectNotFoundException();
+        mapper.timeSheetItemToTimeSheetItemEntityUpdate(timeSheetItem, editing);
+        TimeSheetItemEntity saved = timeSheetItemJpaRepository.save(editing);
+        return mapper.timeSheetItemEntityToTimeSheetItem(saved);
+    }
 }

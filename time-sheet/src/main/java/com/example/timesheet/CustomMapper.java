@@ -98,4 +98,9 @@ public interface CustomMapper {
 
     TeamMemberTimeSheetItemsDTO teamMemberTimeSheetItemToTeamMemberTimeSheetItemsDTO(TeamMemberTimeSheetItems teamMemberTimeSheetItems);
 
+    @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
+    void timeSheetItemToTimeSheetItemEntityUpdate(TimeSheetItem timeSheetItem, @MappingTarget TimeSheetItemEntity timeSheetItemEntity);
+
+    TimeSheetItem timeSheetItemUpdateDTOToTimeSheetItem(TimeSheetItemUpdateDTO timeSheetItemUpdateDTO);
+
 }

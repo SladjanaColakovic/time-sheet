@@ -1,10 +1,8 @@
 package com.example.timesheet.app.controller;
 
 import com.example.timesheet.CustomMapper;
-import com.example.timesheet.app.dto.NewTimeSheetItemDTO;
-import com.example.timesheet.app.dto.TeamMemberTimeSheetItemsDTO;
-import com.example.timesheet.app.dto.TimeSheetItemDTO;
-import com.example.timesheet.app.dto.TimeSheetItems;
+import com.example.timesheet.app.dto.*;
+import com.example.timesheet.core.model.Project;
 import com.example.timesheet.core.model.TeamMemberTimeSheetItems;
 import com.example.timesheet.core.model.TimeSheetItem;
 import com.example.timesheet.core.service.ITimeSheetItemService;
@@ -62,6 +60,14 @@ public class TimeSheetItemController {
         TeamMemberTimeSheetItemsDTO response = mapper.teamMemberTimeSheetItemToTeamMemberTimeSheetItemsDTO(teamMemberTimeSheetItems);
         return new ResponseEntity<>(response, HttpStatus.OK);
 
+    }
+
+    @PutMapping
+    @PreAuthorize("hasRole('WORKER')")
+    public ResponseEntity<?> update(@RequestBody TimeSheetItemUpdateDTO editing){
+        TimeSheetItem timeSheetItem = timeSheetItemService.update(mapper.timeSheetItemUpdateDTOToTimeSheetItem(editing));
+        TimeSheetItemDTO response = mapper.timeSheetItemToTimeSheetItemDTO(timeSheetItem);
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
 }

@@ -12,5 +12,6 @@ public interface ITimeSheetItemService {
     TimeSheetItem getById(Long id);
     List<TimeSheetItem> getAll();
     TeamMemberTimeSheetItems getTeamMemberItems(Long teamMemberId, LocalDate date);
+    TimeSheetItem update(TimeSheetItem timeSheetItem);
 
 }
