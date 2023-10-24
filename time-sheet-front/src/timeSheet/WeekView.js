@@ -8,6 +8,8 @@ import { format } from "date-fns";
 import ButtonComponent from "../components/ButtonComponent";
 import { NotificationContainer, NotificationManager } from "react-notifications";
 import CalendarNavigationComponent from "../components/CalendarNavigationComponent";
+import SelectListItemComponent from "../components/SelectListItemComponent";
+import InputListItemComponent from "../components/InputListItemComponent";
 
 
 const WeekView = () => {
@@ -303,34 +305,22 @@ const WeekView = () => {
                                         {items.map((item) => (
                                             <tr key={item.id}>
                                                 <td>
-                                                    <select value={item.project.client.id} onChange={(e) => { changeClient(e, item.id) }}>
-                                                        {clients && clients.map((client) => (
-                                                            <option key={client.id} value={client.id}>{client.name}</option>
-                                                        ))}
-                                                    </select>
+                                                    <SelectListItemComponent value={item.project.client.id} changeValue={changeClient} itemId={item.id} items={clients}/>
                                                 </td>
                                                 <td>
-                                                    <select value={item.project.id} onChange={(e) => { changeProject(e, item.id) }}>
-                                                        {projects && projects.map((project) => (
-                                                            <option key={project.id} value={project.id}>{project.name}</option>
-                                                        ))}
-                                                    </select>
+                                                <SelectListItemComponent value={item.project.id} changeValue={changeProject} itemId={item.id} items={projects}/>
                                                 </td>
                                                 <td>
-                                                    <select value={item.category.id} onChange={(e) => { changeCategory(e, item.id) }}>
-                                                        {categories && categories.map((category) => (
-                                                            <option key={category.id} value={category.id}>{category.name}</option>
-                                                        ))}
-                                                    </select>
+                                                <SelectListItemComponent value={item.category.id} changeValue={changeCategory} itemId={item.id} items={categories}/>
                                                 </td>
                                                 <td>
-                                                    <input type="text" value={item.description} onChange={(e) => { changeItem(e, "description", item.id) }} />
+                                                    <InputListItemComponent value={item.description} changeItem={changeItem} property={"description"} itemId={item.id}/>
                                                 </td>
                                                 <td>
-                                                    <input type="text" value={item.time} onChange={(e) => { changeItem(e, "time", item.id) }} />
+                                                <InputListItemComponent value={item.time} changeItem={changeItem} property={"time"} itemId={item.id}/>
                                                 </td>
                                                 <td>
-                                                    <input type="text" value={item.overtime} onChange={(e) => { changeItem(e, "overtime", item.id) }} />
+                                                <InputListItemComponent value={item.overtime} changeItem={changeItem} property={"overtime"} itemId={item.id}/>
                                                 </td>
                                                 <td>
                                                     <button onClick={() => { edit(item.id) }} className="add-btn">
