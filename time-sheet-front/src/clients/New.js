@@ -7,7 +7,7 @@ import { NotificationContainer, NotificationManager } from "react-notifications"
 
 const New = ({ countries }) => {
 
-    const [country, setCountry] = useState(1);
+    const [country, setCountry] = useState();
     const [name, setName] = useState('');
     const [address, setAddress] = useState('');
     const [city, setCity] = useState('');

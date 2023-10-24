@@ -15,6 +15,5 @@ public class ClientDTO {
     private String city;
     private String postalCode;
     private CountryDTO country;
-    //private Set<ProjectDTO> projects;
 
 }

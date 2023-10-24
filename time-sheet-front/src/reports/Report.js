@@ -19,9 +19,9 @@ const Report = ({ items, totalHours }) => {
                             {items.map((item) => (
                                 <tr key={item.id}>
                                     <td>{item.date}</td>
-                                    <td>{item.teamMember.name}</td>
-                                    <td>{item.project.name}</td>
-                                    <td>{item.category.name}</td>
+                                    <td>{(item.teamMember)? item.teamMember.name: ''}</td>
+                                    <td>{(item.project)? item.project.name: ''}</td>
+                                    <td>{(item.category)? item.category.name : ''}</td>
                                     <td>{item.description}</td>
                                     <td>{item.time + item.overtime}</td>
                                 </tr>

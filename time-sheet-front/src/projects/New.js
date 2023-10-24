@@ -9,8 +9,8 @@ import { NotificationContainer, NotificationManager } from "react-notifications"
 const New = ({ clients, teamMembers }) => {
 
 
-    const [client, setClient] = useState(1);
-    const [lead, setLead] = useState(1);
+    const [client, setClient] = useState();
+    const [lead, setLead] = useState();
     const [name, setName] = useState('');
     const [description, setDescription] = useState('');
 

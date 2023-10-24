@@ -13,8 +13,6 @@ public class TimeSheetRangeDTO {
     private LocalDate from;
     private LocalDate to;
     private Long teamMemberId;
-    //private Double regularHours;
-
 
     public TimeSheetRangeDTO(LocalDate from, LocalDate to, Long teamMemberId) {
         this.from = from;

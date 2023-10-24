@@ -340,13 +340,6 @@ const WeekView = () => {
                                                         </svg>
                                                     </button>
                                                 </td>
-                                                {/* <td>{item.project.client.name}</td>
-                                                <td>{item.project.name}</td>
-                                                <td>{item.category.name}</td>
-                                                <td>{item.description}</td>
-                                                <td className="custom-width">{item.time}</td>
-                                                <td className="custom-width">{item.overtime}</td>
-                                                <td className="custom-width">&nbsp;</td> */}
                                             </tr>
                                         ))}
 
