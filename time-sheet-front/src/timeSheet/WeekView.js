@@ -176,95 +176,97 @@ const WeekView = () => {
 
     return (
         <div className="main">
-            <h1>Weekly view</h1>
-            <div className="row">
-                <div className="col-1"></div>
-                <div className="col-10">
-                    <div className="box">
-                        <CalendarNavigationComponent back={back} next={next} content={startDate +  ' - '+  endDate}/>
-                        <br />
-                        <br />
-                        {dates && formatSelectedDate && dates.map((date) => (
-                            <label className="label-btn" onClick={() => { selectDate(date) }} key={date} style={{ width: "14.28%", paddingRight: "0", paddingLeft: "0" }}>
-                                <div style={{ backgroundColor: date === formatSelectedDate ? '#c5d2d4' : 'white', margin: "2px" }} className="box-date">
-                                    <label className="date-label">{date}</label>
-                                    <br />
-                                </div>
-                            </label>
-                        ))}
-                        <br />
-                        <br />
-                        <div className="table-box">
-                            {items && <table>
-                                <thead>
-                                    <tr>
-                                        <th>Client</th>
-                                        <th>Project</th>
-                                        <th>Category</th>
-                                        <th>Description</th>
-                                        <th className="custom-width">Time</th>
-                                        <th className="custom-width">Overtime</th>
-                                        <th className="custom-width">&nbsp;</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {items.map((item) => (
-                                        <tr key={item.id}>
-                                            <td>{item.project.client.name}</td>
-                                            <td>{item.project.name}</td>
-                                            <td>{item.category.name}</td>
-                                            <td>{item.description}</td>
-                                            <td className="custom-width">{item.time}</td>
-                                            <td className="custom-width">{item.overtime}</td>
-                                            <td className="custom-width">&nbsp;</td>
+            <div className="weeklyView">
+                <h1>Weekly view</h1>
+                <div className="row">
+                    <div className="col-1"></div>
+                    <div className="col-10">
+                        <div className="box">
+                            <CalendarNavigationComponent back={back} next={next} content={startDate + ' - ' + endDate} />
+                            <br />
+                            <br />
+                            {dates && formatSelectedDate && dates.map((date) => (
+                                <label className="label-btn" onClick={() => { selectDate(date) }} key={date} style={{ width: "14.28%", paddingRight: "0", paddingLeft: "0" }}>
+                                    <div style={{ backgroundColor: date === formatSelectedDate ? '#c5d2d4' : 'white', margin: "2px" }} className="box-date">
+                                        <label className="date-label">{date}</label>
+                                        <br />
+                                    </div>
+                                </label>
+                            ))}
+                            <br />
+                            <br />
+                            <div className="table-box">
+                                {items && <table>
+                                    <thead>
+                                        <tr>
+                                            <th>Client</th>
+                                            <th>Project</th>
+                                            <th>Category</th>
+                                            <th>Description</th>
+                                            <th className="custom-width">Time</th>
+                                            <th className="custom-width">Overtime</th>
+                                            <th className="custom-width">&nbsp;</th>
                                         </tr>
-                                    ))}
+                                    </thead>
+                                    <tbody>
+                                        {items.map((item) => (
+                                            <tr key={item.id}>
+                                                <td>{item.project.client.name}</td>
+                                                <td>{item.project.name}</td>
+                                                <td>{item.category.name}</td>
+                                                <td>{item.description}</td>
+                                                <td className="custom-width">{item.time}</td>
+                                                <td className="custom-width">{item.overtime}</td>
+                                                <td className="custom-width">&nbsp;</td>
+                                            </tr>
+                                        ))}
 
-                                    <tr className="tr-margin">
-                                        <td>
-                                            <SelectComponent items={clients} setValue={setClient} />
-                                        </td>
-                                        <td>
-                                            <SelectComponent items={projects} setValue={setProject} />
-                                        </td>
-                                        <td>
-                                            <SelectComponent items={categories} setValue={setCategory} />
-                                        </td>
-                                        <td>
-                                            <InputComponent value={description} setValue={setDescription} />
-                                        </td>
-                                        <td>
-                                            <InputComponent value={time} setValue={setTime} />
-                                        </td>
-                                        <td>
-                                            <InputComponent value={overtime} setValue={setOvertime} />
-                                        </td>
-                                        <td>
-                                            <button onClick={addItem} className="add-btn">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" className="bi bi-plus-square-fill" viewBox="0 0 16 16">
-                                                    <path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm6.5 4.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3a.5.5 0 0 1 1 0z" />
-                                                </svg>
-                                            </button>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>}
-                        </div>
-                        <br />
-                        <div className="row">
-                            <div className="col-3">
-                                <ButtonComponent handleClick={showMonthlyView} className="monthly-view" buttonName={"back to monthly view"} />
+                                        <tr className="tr-margin">
+                                            <td>
+                                                <SelectComponent items={clients} setValue={setClient} />
+                                            </td>
+                                            <td>
+                                                <SelectComponent items={projects} setValue={setProject} />
+                                            </td>
+                                            <td>
+                                                <SelectComponent items={categories} setValue={setCategory} />
+                                            </td>
+                                            <td>
+                                                <InputComponent value={description} setValue={setDescription} />
+                                            </td>
+                                            <td>
+                                                <InputComponent value={time} setValue={setTime} />
+                                            </td>
+                                            <td>
+                                                <InputComponent value={overtime} setValue={setOvertime} />
+                                            </td>
+                                            <td>
+                                                <button onClick={addItem} className="add-btn">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" className="bi bi-plus-square-fill" viewBox="0 0 16 16">
+                                                        <path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm6.5 4.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3a.5.5 0 0 1 1 0z" />
+                                                    </svg>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>}
                             </div>
-                            <div className="col-9">
-                                <label className="total-hours">Total hours: {totalHours}</label>
+                            <br />
+                            <div className="row">
+                                <div className="col-3">
+                                    <ButtonComponent handleClick={showMonthlyView} className="monthly-view" buttonName={"back to monthly view"} />
+                                </div>
+                                <div className="col-9">
+                                    <label className="total-hours">Total hours: {totalHours}</label>
+                                </div>
                             </div>
                         </div>
                     </div>
+                    <div className="col-1"></div>
                 </div>
-                <div className="col-1"></div>
+                <br />
+                <NotificationContainer />
             </div>
-            <br />
-            <NotificationContainer/>
         </div>
     );
 }

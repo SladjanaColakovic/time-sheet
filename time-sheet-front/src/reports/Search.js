@@ -69,7 +69,7 @@ const Search = ({ setData }) => {
     }
 
     return (
-        <div>
+        <div className="search">
             <div className="row">
                 <div className="col-1"></div>
                 <div className="col-10">

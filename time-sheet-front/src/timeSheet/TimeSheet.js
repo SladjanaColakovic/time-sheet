@@ -23,7 +23,7 @@ const TimeSheet = () => {
 
     useEffect(() => {
         const [from, to, id] = getDateRange();
-       getCalendar(from, to, id);
+        getCalendar(from, to, id);
 
     }, [])
 
@@ -85,50 +85,52 @@ const TimeSheet = () => {
         const weekEndDate = new Date(selectedDate.setDate(firstDayOfWeek + 6));
         const formatStartDate = format(weekStartDate, 'MMMM dd, yyyy')
         const formatEndDate = format(weekEndDate, 'MMMM dd, yyyy')
-        navigate('/weekView/' +  formatStartDate + "/" + formatEndDate + "/" + dateSelect)
+        navigate('/weekView/' + formatStartDate + "/" + formatEndDate + "/" + dateSelect)
 
     }
 
     return (
         <div className="main">
-            <h1>TimeSheet</h1>
-            <div className="row">
-                <div className="col-1"></div>
-                <div className="col-10">
-                    <div className="box">
-                    <CalendarNavigationComponent back={handleBack} next={handleNext} content={formatDate}/>
-                        <br />
-                        <br />
-                        <div className="row">
-                            <div className="col-md">Monday</div>
-                            <div className="col-md">Tuesday</div>
-                            <div className="col-md">Wednesday</div>
-                            <div className="col-md">Thursday</div>
-                            <div className="col-md">Friday</div>
-                            <div className="col-md">Saturday</div>
-                            <div className="col-md">Sunday</div>
-                        </div>
-                        {data &&
+            <div className="timeSheet">
+                <h1>TimeSheet</h1>
+                <div className="row">
+                    <div className="col-1"></div>
+                    <div className="col-10">
+                        <div className="box">
+                            <CalendarNavigationComponent back={handleBack} next={handleNext} content={formatDate} />
+                            <br />
+                            <br />
                             <div className="row">
-                                {data.map((item) => (
-                                    <label key={item.date} style={{ width: "14.28%", paddingRight: "0", paddingLeft: "0" }}>
-                                        <div style={{ margin: "2px" }} className="box-date">
-                                            <label className="date-label">{new Date(item.date).getDate()}.</label>
-                                            <br />
-                                            <div style={{ backgroundColor: item.flag === 'FULFILLED' ? '#c5d2d4' : item.flag === 'UNFULFILLED' ? '#ffcccb' : 'white' }}>
-                                                <a onClick={() => {showDetails(item.date)}} className="hours">Hours: {item.totalHoursPerDay}</a>
-                                            </div>
-                                        </div>
-                                    </label>
-                                ))}
+                                <div className="col-md">Monday</div>
+                                <div className="col-md">Tuesday</div>
+                                <div className="col-md">Wednesday</div>
+                                <div className="col-md">Thursday</div>
+                                <div className="col-md">Friday</div>
+                                <div className="col-md">Saturday</div>
+                                <div className="col-md">Sunday</div>
                             </div>
-                        }
-                        <label className="total-report">Total hours: {totalHours}</label>
-                        <br />
-                        <br />
+                            {data &&
+                                <div className="row">
+                                    {data.map((item) => (
+                                        <label key={item.date} style={{ width: "14.28%", paddingRight: "0", paddingLeft: "0" }}>
+                                            <div style={{ margin: "2px" }} className="box-date">
+                                                <label className="date-label">{new Date(item.date).getDate()}.</label>
+                                                <br />
+                                                <div style={{ backgroundColor: item.flag === 'FULFILLED' ? '#c5d2d4' : item.flag === 'UNFULFILLED' ? '#ffcccb' : 'white' }}>
+                                                    <a onClick={() => { showDetails(item.date) }} className="hours">Hours: {item.totalHoursPerDay}</a>
+                                                </div>
+                                            </div>
+                                        </label>
+                                    ))}
+                                </div>
+                            }
+                            <label className="total-report">Total hours: {totalHours}</label>
+                            <br />
+                            <br />
+                        </div>
                     </div>
+                    <div className="col-1"></div>
                 </div>
-                <div className="col-1"></div>
             </div>
             <br />
         </div>
