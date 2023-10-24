@@ -1,15 +1,13 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { getRequest, getRequestWithParams, postRequest, putRequest } from "../requests/httpClient";
-import SelectComponent from "../components/SelectComponent";
-import InputComponent from '../components/InputComponent'
 import { useNavigate } from "react-router-dom";
 import { format } from "date-fns";
 import ButtonComponent from "../components/ButtonComponent";
 import { NotificationContainer, NotificationManager } from "react-notifications";
 import CalendarNavigationComponent from "../components/CalendarNavigationComponent";
-import SelectListItemComponent from "../components/SelectListItemComponent";
-import InputListItemComponent from "../components/InputListItemComponent";
+import DailyCalendarComponent from "../components/DailyCalendarComponent";
+import ItemsTable from "../components/ItemsTable";
 
 
 const WeekView = () => {
@@ -278,91 +276,10 @@ const WeekView = () => {
                             <CalendarNavigationComponent back={back} next={next} content={startDate + ' - ' + endDate} />
                             <br />
                             <br />
-                            {dates && formatSelectedDate && dates.map((date) => (
-                                <label className="label-btn" onClick={() => { selectDate(date) }} key={date} style={{ width: "14.28%", paddingRight: "0", paddingLeft: "0" }}>
-                                    <div style={{ backgroundColor: date === formatSelectedDate ? '#c5d2d4' : 'white', margin: "2px" }} className="box-date">
-                                        <label className="date-label">{date}</label>
-                                        <br />
-                                    </div>
-                                </label>
-                            ))}
+                            <DailyCalendarComponent dates={dates} formatSelectedDate={formatSelectedDate} selectDate={selectDate} />
                             <br />
                             <br />
-                            <div className="table-box">
-                                {items && <table>
-                                    <thead>
-                                        <tr>
-                                            <th>Client</th>
-                                            <th>Project</th>
-                                            <th>Category</th>
-                                            <th>Description</th>
-                                            <th className="custom-width">Time</th>
-                                            <th className="custom-width">Overtime</th>
-                                            <th className="custom-width">&nbsp;</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        {items.map((item) => (
-                                            <tr key={item.id}>
-                                                <td>
-                                                    <SelectListItemComponent value={item.project.client.id} changeValue={changeClient} itemId={item.id} items={clients}/>
-                                                </td>
-                                                <td>
-                                                <SelectListItemComponent value={item.project.id} changeValue={changeProject} itemId={item.id} items={projects}/>
-                                                </td>
-                                                <td>
-                                                <SelectListItemComponent value={item.category.id} changeValue={changeCategory} itemId={item.id} items={categories}/>
-                                                </td>
-                                                <td>
-                                                    <InputListItemComponent value={item.description} changeItem={changeItem} property={"description"} itemId={item.id}/>
-                                                </td>
-                                                <td>
-                                                <InputListItemComponent value={item.time} changeItem={changeItem} property={"time"} itemId={item.id}/>
-                                                </td>
-                                                <td>
-                                                <InputListItemComponent value={item.overtime} changeItem={changeItem} property={"overtime"} itemId={item.id}/>
-                                                </td>
-                                                <td>
-                                                    <button onClick={() => { edit(item.id) }} className="add-btn">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" className="bi bi-pencil-square" viewBox="0 0 16 16">
-                                                            <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
-                                                            <path d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
-                                                        </svg>
-                                                    </button>
-                                                </td>
-                                            </tr>
-                                        ))}
-
-                                        <tr className="tr-margin">
-                                            <td>
-                                                <SelectComponent items={clients} setValue={setClient} value={client} />
-                                            </td>
-                                            <td>
-                                                <SelectComponent items={projects} setValue={setProject} value={project} />
-                                            </td>
-                                            <td>
-                                                <SelectComponent items={categories} setValue={setCategory} value={category} />
-                                            </td>
-                                            <td>
-                                                <InputComponent value={description} setValue={setDescription} />
-                                            </td>
-                                            <td>
-                                                <InputComponent value={time} setValue={setTime} />
-                                            </td>
-                                            <td>
-                                                <InputComponent value={overtime} setValue={setOvertime} />
-                                            </td>
-                                            <td>
-                                                <button onClick={addItem} className="add-btn">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" className="bi bi-plus-square-fill" viewBox="0 0 16 16">
-                                                        <path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm6.5 4.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3a.5.5 0 0 1 1 0z" />
-                                                    </svg>
-                                                </button>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>}
-                            </div>
+                            <ItemsTable items={items} categories={categories} clients={clients} projects={projects} client={client} project={project} category={category} description={description} time={time} overtime={overtime} setClient={setClient} setProject={setProject} setCategory={setCategory} setDescription={setDescription} setTime={setTime} setOvertime={setOvertime} changeCategory={changeCategory} changeItem={changeItem} changeClient={changeClient} changeProject={changeProject} edit={edit} addItem={addItem}/>
                             <br />
                             <div className="row">
                                 <div className="col-3">
