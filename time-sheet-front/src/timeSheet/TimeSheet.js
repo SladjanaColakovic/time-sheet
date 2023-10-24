@@ -3,6 +3,8 @@ import { format } from 'date-fns';
 import { getRequestWithParams } from "../requests/httpClient";
 import { useNavigate } from "react-router-dom";
 import CalendarNavigationComponent from "../components/CalendarNavigationComponent";
+import DaysComponent from "../components/DaysComponent";
+import MonthlyCalendarComponent from "../components/MonthlyCalendarComponent";
 
 
 const TimeSheet = () => {
@@ -79,7 +81,6 @@ const TimeSheet = () => {
     const showDetails = (selected) => {
         let selectedDate = new Date(selected);
         const dateSelect = new Date(selectedDate.getTime());
-        const formatSelectedDate = selectedDate.toLocaleDateString('en-us', { weekday: "long", day: "numeric", month: "short" })
         const firstDayOfWeek = selectedDate.getDate() - selectedDate.getDay() + 1;
         const weekStartDate = new Date(selectedDate.setDate(firstDayOfWeek));
         const weekEndDate = new Date(selectedDate.setDate(firstDayOfWeek + 6));
@@ -100,30 +101,8 @@ const TimeSheet = () => {
                             <CalendarNavigationComponent back={handleBack} next={handleNext} content={formatDate} />
                             <br />
                             <br />
-                            <div className="row">
-                                <div className="col-md">Monday</div>
-                                <div className="col-md">Tuesday</div>
-                                <div className="col-md">Wednesday</div>
-                                <div className="col-md">Thursday</div>
-                                <div className="col-md">Friday</div>
-                                <div className="col-md">Saturday</div>
-                                <div className="col-md">Sunday</div>
-                            </div>
-                            {data &&
-                                <div className="row">
-                                    {data.map((item) => (
-                                        <label key={item.date} style={{ width: "14.28%", paddingRight: "0", paddingLeft: "0" }}>
-                                            <div style={{ margin: "2px" }} className="box-date">
-                                                <label className="date-label">{new Date(item.date).getDate()}.</label>
-                                                <br />
-                                                <div style={{ backgroundColor: item.flag === 'FULFILLED' ? '#c5d2d4' : item.flag === 'UNFULFILLED' ? '#ffcccb' : 'white' }}>
-                                                    <a onClick={() => { showDetails(item.date) }} className="hours">Hours: {item.totalHoursPerDay}</a>
-                                                </div>
-                                            </div>
-                                        </label>
-                                    ))}
-                                </div>
-                            }
+                            <DaysComponent />
+                            <MonthlyCalendarComponent data={data} showDetails={showDetails}/>
                             <label className="total-report">Total hours: {totalHours}</label>
                             <br />
                             <br />
