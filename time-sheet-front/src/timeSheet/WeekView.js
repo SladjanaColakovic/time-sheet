@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { format } from "date-fns";
 import ButtonComponent from "../components/ButtonComponent";
 import CalendarNavigationComponent from "../components/CalendarNavigationComponent";
-import DailyCalendarComponent from "../components/DailyCalendarComponent";
+import WeeklyCalendarComponent from "../components/WeeklyCalendarComponent";
 import ItemsTableComponent from "../components/ItemsTableComponent";
 
 
@@ -62,6 +62,13 @@ const WeekView = () => {
         findDateRange(firstDateOfNextWeek, lastDateOfNextWeek);
         setStartDate(format(firstDateOfNextWeek, 'MMMM dd, yyyy'));
         setEndDate(format(lastDateOfNextWeek, 'MMMM dd, yyyy'));
+        setSelectedDate(firstDateOfNextWeek);
+        setFormatSelectedDate(new Date(firstDateOfNextWeek).toLocaleDateString('en-us', { weekday: "long", day: "numeric", month: "short" }))
+        const params = {
+            teamMemberId: teamMemberId,
+            date: format(new Date(firstDateOfNextWeek), 'yyyy-MM-dd')
+        }
+        getItems(params);
     }
 
     const back = () => {
@@ -72,6 +79,14 @@ const WeekView = () => {
         findDateRange(firstDateOfPreviousWeek, lastDateOfPreviousWeek);
         setStartDate(format(firstDateOfPreviousWeek, 'MMMM dd, yyyy'));
         setEndDate(format(lastDateOfPreviousWeek, 'MMMM dd, yyyy'));
+        setSelectedDate(firstDateOfPreviousWeek);
+        setFormatSelectedDate(new Date(firstDateOfPreviousWeek).toLocaleDateString('en-us', { weekday: "long", day: "numeric", month: "short" }))
+        const params = {
+            teamMemberId: teamMemberId,
+            date: format(new Date(firstDateOfPreviousWeek), 'yyyy-MM-dd')
+        }
+        getItems(params);
+
     }
 
     const flagSelectedDate = (date) => {
@@ -115,7 +130,7 @@ const WeekView = () => {
                             <CalendarNavigationComponent back={back} next={next} content={startDate + ' - ' + endDate} />
                             <br />
                             <br />
-                            <DailyCalendarComponent dates={dates} formatSelectedDate={formatSelectedDate} selectDate={selectDate} />
+                            <WeeklyCalendarComponent dates={dates} formatSelectedDate={formatSelectedDate} selectDate={selectDate} />
                             <br />
                             <br />
                             <ItemsTableComponent items={items} selectedDate={selectedDate} setItems={setItems} setTotalHours={setTotalHours} />

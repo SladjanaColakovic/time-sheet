@@ -1,4 +1,4 @@
-const DailyCalendarComponent = ({dates, formatSelectedDate, selectDate}) => {
+const WeeklyCalendarComponent = ({dates, formatSelectedDate, selectDate}) => {
     return (
         <div>
             {dates && formatSelectedDate && dates.map((date) => (
@@ -13,4 +13,4 @@ const DailyCalendarComponent = ({dates, formatSelectedDate, selectDate}) => {
     );
 }
 
-export default DailyCalendarComponent;
+export default WeeklyCalendarComponent;

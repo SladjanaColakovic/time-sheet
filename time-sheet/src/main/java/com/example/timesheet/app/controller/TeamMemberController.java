@@ -34,7 +34,6 @@ public class TeamMemberController {
     }
 
     @GetMapping("/{id}")
-    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<?> getById(@PathVariable Long id){
         TeamMember teamMember = teamMemberService.getById(id);
         TeamMemberDTO response = mapper.teamMemberToTeamMemberDTO(teamMember);
@@ -58,7 +57,7 @@ public class TeamMemberController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @PutMapping@PreAuthorize("hasRole('ADMIN')")
+    @PutMapping
     public ResponseEntity<?> update(@RequestBody TeamMemberUpdateDTO editing){
         TeamMember teamMember = teamMemberService.update(mapper.teamMemberUpdateDTOToTeamMember(editing));
         TeamMemberDTO response = mapper.teamMemberToTeamMemberDTO(teamMember);

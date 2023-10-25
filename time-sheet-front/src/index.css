@@ -98,6 +98,11 @@ svg {
   margin-top: 50px;
 }
 
+.profile {
+  margin-top: 30px;
+  margin-bottom: 20px;
+}
+
 .new-item label {
   font-size: 17px;
   padding: 9px 9px 9px 0;
@@ -109,7 +114,7 @@ svg {
   display: flex;
   justify-content: center;
   margin-top: 25px;
-  width: 100px;
+  width: 100px; 
   background-color: #567189;
   border: none;
   color: rgb(236, 232, 232);
@@ -243,12 +248,12 @@ td {
   text-align: left;
 }
 
-.back:hover svg {
-  fill: #3a4752;
-}
-
 .back svg {
   fill: #567189;
+}
+
+.back:hover svg {
+  fill: #3a4752;
 }
 
 .next {
@@ -352,6 +357,10 @@ td {
 
 .label-btn {
   cursor: pointer;
+}
+
+.label-btn:hover .box-date{
+  background-color: #c5d2d4 !important;
 }
 
 .total-hours {
