@@ -17,10 +17,15 @@ const Edit = ({ category, setData }) => {
             name: editCategory.name
         }
         putRequest(URL, data)
-            .then(res => {
-                getRequest(URL).then((res) => {
-                    setData(res.data.categories);
-                })
+            .then(() => {
+                getRequest(URL)
+                    .then((res) => {
+                        setData(res.data.categories);
+                    })
+                    .catch((error) => {
+                        NotificationManager.error(error.message, '', 5000);
+                    })
+
             })
             .catch(error => {
                 NotificationManager.error(error.message, '', 5000);
@@ -30,10 +35,14 @@ const Edit = ({ category, setData }) => {
     const handleDelete = () => {
         const params = { id: editCategory.id }
         deleteRequest(URL, params)
-            .then((res) => {
-                getRequest(URL).then((res) => {
-                    setData(res.data.categories);
-                })
+            .then(() => {
+                getRequest(URL)
+                    .then((res) => {
+                        setData(res.data.categories);
+                    })
+                    .catch((error) => {
+                        NotificationManager.error(error.message, '', 5000);
+                    })
             })
             .catch((error) => {
                 NotificationManager.error(error.message, '', 5000);
@@ -59,7 +68,7 @@ const Edit = ({ category, setData }) => {
                     <ButtonComponent handleClick={handleDelete} className="edit-delete" buttonName={"Delete"} />
                 </div>
             </div>
-            <NotificationContainer/>
+            <NotificationContainer />
         </div>
     );
 }

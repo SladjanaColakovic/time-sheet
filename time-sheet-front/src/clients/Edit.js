@@ -25,9 +25,13 @@ const Edit = ({ countries, client, setData }) => {
             }
         }
         putRequest(URL, data)
-            .then(res => {
-                getRequest(URL).then((res) => {
+            .then(() => {
+                getRequest(URL)
+                .then((res) => {
                     setData(res.data.clients)
+                })
+                .catch((error) => {
+                    NotificationManager.error(error.message, '', 5000);
                 })
 
             })
@@ -42,8 +46,12 @@ const Edit = ({ countries, client, setData }) => {
         const params = { id: editClient.id }
         deleteRequest(URL, params)
             .then((res) => {
-                getRequest(URL).then((res) => {
+                getRequest(URL)
+                .then((res) => {
                     setData(res.data.clients)
+                })
+                .catch((error) => {
+                    NotificationManager.error(error.message, '', 5000);
                 })
             }
             )

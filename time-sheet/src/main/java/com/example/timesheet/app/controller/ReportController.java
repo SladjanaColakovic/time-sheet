@@ -7,11 +7,15 @@ import com.example.timesheet.core.model.Report;
 import com.example.timesheet.core.model.ReportSearch;
 import com.example.timesheet.core.service.IReportService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.time.LocalDate;
 
 
@@ -37,5 +41,24 @@ public class ReportController {
         Report report = reportService.reportSearch(reportSearch);
         ReportDTO response = mapper.reportToReportDTO(report);
         return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+    @GetMapping("/pdf")
+    @PreAuthorize("hasRole('ADMIN')")
+    public ResponseEntity<?> pdfReport(@RequestParam(value = "clientId", required = false) Long clientId,
+                                          @RequestParam(value = "projectId", required = false) Long projectId,
+                                          @RequestParam(value = "categoryId", required = false) Long categoryId,
+                                          @RequestParam(value = "teamMemberId", required = false) Long teamMemberId,
+                                          @RequestParam(value = "startDate", required = false) LocalDate startDate,
+                                          @RequestParam(value = "endDate", required = false) LocalDate endDate){
+        ReportSearch reportSearch = mapper.reportSearchDTOToReportSearch(new ReportSearchDTO(clientId, teamMemberId, categoryId, projectId, startDate, endDate));
+        ByteArrayOutputStream pdfStream = reportService.pdfReport(reportSearch);
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_PDF);
+        headers.set(HttpHeaders.CONTENT_DISPOSITION, "attachment; report.pdf");
+        headers.setContentLength(pdfStream.size());
+        byte[] byteArray = ((java.io.ByteArrayOutputStream) pdfStream).toByteArray();
+        byte[] encodedBytes = java.util.Base64.getEncoder().encode(byteArray);
+        return new ResponseEntity<>(encodedBytes, headers, HttpStatus.OK);
     }
 }

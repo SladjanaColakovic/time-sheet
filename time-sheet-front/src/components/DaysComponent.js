@@ -1,14 +1,13 @@
 const DaysComponent = () => {
+    const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
+
     return (
         <div className="row">
-            <div className="col-md">Monday</div>
-            <div className="col-md">Tuesday</div>
-            <div className="col-md">Wednesday</div>
-            <div className="col-md">Thursday</div>
-            <div className="col-md">Friday</div>
-            <div className="col-md">Saturday</div>
-            <div className="col-md">Sunday</div>
+            {days.map((day) => (
+                <div className="col-md">{day}</div>
+            ))}
         </div>
+        
     );
 }
 

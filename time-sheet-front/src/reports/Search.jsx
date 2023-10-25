@@ -26,27 +26,23 @@ const Search = ({ setData }) => {
     useEffect(() => {
         getRequest(CLIENT_URL)
             .then((res) => {
-                console.log(res.data.clients)
                 setClients(res.data.clients);
-                getRequest(PROJECT_URL)
-                    .then((res) => {
-                        setProjects(res.data.projects);
-                        getRequest(TEAM_MEMBER_URL)
-                            .then((res) => {
-                                setTeamMembers(res.data.teamMembers);
-                                getRequest(CATEGORY_URL)
-                                    .then((res) => {
-                                        setCategories(res.data.categories)
-                                    })
-                            })
-                    })
+            })
+
+        getRequest(TEAM_MEMBER_URL)
+            .then((res) => {
+                setTeamMembers(res.data.teamMembers);
+            })
+
+        getRequest(CATEGORY_URL)
+            .then((res) => {
+                setCategories(res.data.categories)
             })
     }, [])
 
 
     const handleSearch = () => {
 
-        console.log(project)
         const params =
         {
             clientId: (client !== "All") ? client : null,
@@ -56,7 +52,6 @@ const Search = ({ setData }) => {
             startDate: startDate,
             endDate: endDate
         }
-        console.log(params)
 
         getRequestWithParams(REPORT_URL, params)
             .then((res) => {
@@ -65,6 +60,42 @@ const Search = ({ setData }) => {
             })
             .catch((error) => {
                 console.log(error.message)
+            })
+    }
+
+    const pdfReport = () => {
+        const params =
+        {
+            clientId: (client !== "All") ? client : null,
+            projectId: (project !== "All") ? project : null,
+            categoryId: (category !== "All") ? category : null,
+            teamMemberId: (teamMember !== "All") ? teamMember : null,
+            startDate: startDate,
+            endDate: endDate
+        }
+
+        getRequestWithParams(REPORT_URL + "/pdf", params)
+            .then((res) => {
+                console.log(res.data);
+                // const file = new Blob([res.data], {
+                //     type: 'application/pdf',
+                //   });
+                  
+                //   const fileURL = URL.createObjectURL(file);
+                  
+                //   window.open(fileURL);
+            })
+
+    }
+
+    const selectClient = (value) => {
+        setClient(value);
+        const params = {
+            clientId: value
+        }
+        getRequestWithParams(PROJECT_URL + "/client", params)
+            .then((res) => {
+                setProjects(res.data.projects)
             })
     }
 
@@ -79,7 +110,7 @@ const Search = ({ setData }) => {
                                 <SelectSearchComponent labelName={"Team member"} setValue={setTeamMember} items={teamMembers} />
                             </div>
                             <div className="col-4">
-                                <SelectSearchComponent labelName={"Client"} setValue={setClient} items={clients} />
+                                <SelectSearchComponent labelName={"Client"} setValue={selectClient} items={clients} />
                             </div>
                             <div className="col-4">
                                 <SelectSearchComponent labelName={"Project"} setValue={setProject} items={projects} />
@@ -99,9 +130,12 @@ const Search = ({ setData }) => {
                         </div>
                         <br />
                         <div className="row">
-                            <div className="col-10"></div>
+                            <div className="col-8"></div>
                             <div className="col-2">
                                 <ButtonComponent handleClick={handleSearch} buttonName={"Search"} className="search-btn" />
+                            </div>
+                            <div className="col-2">
+                                <ButtonComponent buttonName={"Create PDF"} className="pdf-btn" handleClick={pdfReport} />
                             </div>
                         </div>
                     </div>

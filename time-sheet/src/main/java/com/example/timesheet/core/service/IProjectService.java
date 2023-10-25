@@ -11,5 +11,6 @@ public interface IProjectService {
     void delete(Long id);
     List<Project> getAll(UserInfo userInfo);
     Project update(Project project);
+    List<Project> getClientProjects(Long clientId);
 
 }

@@ -43,4 +43,9 @@ public class ProjectService implements IProjectService {
         return projectRepository.update(project);
     }
 
+    @Override
+    public List<Project> getClientProjects(Long clientId) {
+        return projectRepository.getClientProjects(clientId);
+    }
+
 }

@@ -8,25 +8,20 @@ import { NotificationContainer, NotificationManager } from "react-notifications"
 
 const Login = () => {
 
-    const url = "http://localhost:8080/auth/login";
-
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
-
-
-    const handleClick = (e) => {
-        e.preventDefault();
+    
+    const handleClick = () => {
         let data = {
             username: username,
             password: password
         }
 
-        postRequest(url, data)
+        postRequest(process.env.REACT_APP_SERVER_BASE_URL + process.env.REACT_APP_AUTH_URL + '/login', data)
             .then((res) => {
                 localStorage.clear();
                 localStorage.setItem('token', res.data.accessToken)
                 var obj = JSON.parse(window.atob(res.data.accessToken.split('.')[1]))
-                console.log(obj)
                 localStorage.setItem('role', obj.role)
                 window.location.reload();
             }).catch((error) => {
@@ -38,7 +33,6 @@ const Login = () => {
         <div className="login">
             <h1>Login</h1>
             <div className="box">
-
                 <div className='row'>
                     <InputComponent labelName={"Username"} value={username} setValue={setUsername} />
                 </div>
@@ -48,7 +42,6 @@ const Login = () => {
                 <div className="row">
                     <ButtonComponent handleClick={handleClick} buttonName={"Login"} />
                 </div>
-
             </div>
             <NotificationContainer/>
         </div>

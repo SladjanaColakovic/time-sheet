@@ -11,4 +11,7 @@ import java.util.List;
 public interface ProjectJpaRepository extends JpaRepository<ProjectEntity, Long> {
     @Query("select p from ProjectEntity p where p.lead.id = :teamMemberId")
     List<ProjectEntity> getLeadingProjects(Long teamMemberId);
+
+    @Query("select p from ProjectEntity p where p.client.id = :clientId")
+    List<ProjectEntity> getClientProjects(Long clientId);
 }

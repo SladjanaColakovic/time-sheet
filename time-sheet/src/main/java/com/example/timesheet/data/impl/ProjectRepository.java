@@ -69,4 +69,13 @@ public class ProjectRepository implements IProjectRepository {
                 .map(mapper::projectEntityToProject)
                 .collect(Collectors.toList());
     }
+
+    @Override
+    public List<Project> getClientProjects(Long clientId) {
+        List<ProjectEntity> projects = projectJpaRepository.getClientProjects(clientId);
+        return projects
+                .stream()
+                .map(mapper::projectEntityToProject)
+                .collect(Collectors.toList());
+    }
 }

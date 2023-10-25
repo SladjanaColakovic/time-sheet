@@ -71,4 +71,13 @@ public class ProjectController {
         ProjectDTO response = mapper.projectToProjectDTO(project);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
+
+    @GetMapping("/client")
+    public ResponseEntity<?> getClientProjects(@RequestParam("clientId") Long clientId){
+        List<Project> projects = projectService.getClientProjects(clientId);
+        List<ProjectDTO> response = projects.stream()
+                .map(mapper::projectToProjectDTO)
+                .collect(Collectors.toList());
+        return new ResponseEntity<>(new Projects(response), HttpStatus.OK);
+    }
 }

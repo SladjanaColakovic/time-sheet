@@ -11,4 +11,5 @@ public interface IProjectRepository {
     List<Project> getAll();
     Project update(Project project);
     List<Project> getLeadingProjects(Long teamMemberId);
+    List<Project> getClientProjects(Long clientId);
 }

@@ -14,7 +14,7 @@ const New = () => {
             name: name
         }
         postRequest(URL, data)
-            .then((res) => {
+            .then(() => {
                 window.location.reload();
             })
             .catch((error) => {

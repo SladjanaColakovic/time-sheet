@@ -15,3 +15,15 @@ const ProtectedRoute = ({ children, roles }) => {
 };
 
 export default ProtectedRoute;
+
+
+// const LoggedIn = (Component) => {
+//     const isLoggedIn = localStorage.getItem('token');
+
+//     if(!isLoggedIn) return <Unauthenticated />
+
+//     return <Component />
+// };
+
+
+// return LoggedIn;
