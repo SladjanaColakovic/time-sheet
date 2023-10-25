@@ -4,7 +4,7 @@ const DaysComponent = () => {
     return (
         <div className="row">
             {days.map((day) => (
-                <div className="col-md">{day}</div>
+                <div key={day} className="col-md">{day}</div>
             ))}
         </div>
         

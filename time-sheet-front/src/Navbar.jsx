@@ -32,7 +32,7 @@ const Navbar = () => {
 
     const logout = () => {
         localStorage.clear();
-        navigate('/', { replace: true });
+        window.location.reload();
     }
 
     const getRole = () => {

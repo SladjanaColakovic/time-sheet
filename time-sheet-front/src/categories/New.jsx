@@ -8,6 +8,7 @@ const New = () => {
 
     const [name, setName] = useState('');
     const URL = process.env.REACT_APP_SERVER_BASE_URL + process.env.REACT_APP_CATEGORY_URL
+    
     const handleSave = () => {
 
         const data = {
