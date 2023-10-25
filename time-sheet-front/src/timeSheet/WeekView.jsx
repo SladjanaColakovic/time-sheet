@@ -7,7 +7,7 @@ import Button from "../components/buttons/Button";
 import CalendarNavigation from "../components/calendar/CalendarNavigation";
 import WeeklyCalendar from "../components/calendar/WeeklyCalendar";
 import DailyCalendarTable from "../components/calendar/DailyCalendarTable";
-
+import * as Constants from '../constants/TimeSheetConstants'
 
 const WeekView = () => {
 
@@ -21,7 +21,6 @@ const WeekView = () => {
     const [items, setItems] = useState();
     const [totalHours, setTotalHours] = useState();
 
-    const ITEMS_URL = process.env.REACT_APP_SERVER_BASE_URL + process.env.REACT_APP_ITEMS_URL
     const teamMemberId = JSON.parse(window.atob(localStorage.getItem('token').split('.')[1])).id;
 
 
@@ -32,7 +31,7 @@ const WeekView = () => {
         findDateRange(firstDayOfWeek, lastDayOfWeek);
         const params = {
             teamMemberId: teamMemberId,
-            date: format(new Date(selectedDate), 'yyyy-MM-dd')
+            date: format(new Date(selectedDate), Constants.DATE_FORMAT)
         }
         getItems(params);
 
@@ -54,36 +53,36 @@ const WeekView = () => {
         navigate('/timeSheet', { replace: true });
     }
 
-    const next = () => {
+    const handleNext = () => {
         let firstDateOfNextWeek = new Date(new Date(endDate));
         firstDateOfNextWeek.setDate(new Date(endDate).getDate() + 1);
         let lastDateOfNextWeek = new Date(endDate);
         lastDateOfNextWeek.setDate(new Date(endDate).getDate() + 7);
         findDateRange(firstDateOfNextWeek, lastDateOfNextWeek);
-        setStartDate(format(firstDateOfNextWeek, 'MMMM dd, yyyy'));
-        setEndDate(format(lastDateOfNextWeek, 'MMMM dd, yyyy'));
+        setStartDate(format(firstDateOfNextWeek, Constants.SHOWING_DATE_FORMAT_WEEK));
+        setEndDate(format(lastDateOfNextWeek, Constants.SHOWING_DATE_FORMAT_WEEK));
         setSelectedDate(firstDateOfNextWeek);
         setFormatSelectedDate(new Date(firstDateOfNextWeek).toLocaleDateString('en-us', { weekday: "long", day: "numeric", month: "short" }))
         const params = {
             teamMemberId: teamMemberId,
-            date: format(new Date(firstDateOfNextWeek), 'yyyy-MM-dd')
+            date: format(new Date(firstDateOfNextWeek), Constants.DATE_FORMAT)
         }
         getItems(params);
     }
 
-    const back = () => {
+    const handleBack = () => {
         let lastDateOfPreviousWeek = new Date(new Date(startDate));
         lastDateOfPreviousWeek.setDate(new Date(startDate).getDate() - 1);
         let firstDateOfPreviousWeek = new Date(startDate);
         firstDateOfPreviousWeek.setDate(new Date(startDate).getDate() - 7);
         findDateRange(firstDateOfPreviousWeek, lastDateOfPreviousWeek);
-        setStartDate(format(firstDateOfPreviousWeek, 'MMMM dd, yyyy'));
-        setEndDate(format(lastDateOfPreviousWeek, 'MMMM dd, yyyy'));
+        setStartDate(format(firstDateOfPreviousWeek, Constants.SHOWING_DATE_FORMAT_WEEK));
+        setEndDate(format(lastDateOfPreviousWeek, Constants.SHOWING_DATE_FORMAT_WEEK));
         setSelectedDate(firstDateOfPreviousWeek);
         setFormatSelectedDate(new Date(firstDateOfPreviousWeek).toLocaleDateString('en-us', { weekday: "long", day: "numeric", month: "short" }))
         const params = {
             teamMemberId: teamMemberId,
-            date: format(new Date(firstDateOfPreviousWeek), 'yyyy-MM-dd')
+            date: format(new Date(firstDateOfPreviousWeek), Constants.DATE_FORMAT)
         }
         getItems(params);
 
@@ -106,13 +105,13 @@ const WeekView = () => {
         const showingDate = flagSelectedDate(date);
         const params = {
             teamMemberId: teamMemberId,
-            date: format(new Date(showingDate), 'yyyy-MM-dd')
+            date: format(new Date(showingDate), Constants.DATE_FORMAT)
         }
         getItems(params);
     }
 
     const getItems = (params) => {
-        getRequestWithParams(ITEMS_URL + "/teamMember", params)
+        getRequestWithParams(Constants.ITEMS_URL + "/teamMember", params)
             .then((res) => {
                 setItems(res.data.items);
                 setTotalHours(res.data.totalHours);
@@ -130,7 +129,7 @@ const WeekView = () => {
                     <div className="col-1"></div>
                     <div className="col-10">
                         <div className="box">
-                            <CalendarNavigation back={back} next={next} content={startDate + ' - ' + endDate} />
+                            <CalendarNavigation back={handleBack} next={handleNext} content={startDate + ' - ' + endDate} />
                             <br />
                             <br />
                             <WeeklyCalendar dates={dates} formatSelectedDate={formatSelectedDate} selectDate={selectDate} />

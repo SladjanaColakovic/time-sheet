@@ -5,21 +5,15 @@ import { useNavigate } from "react-router-dom";
 import CalendarNavigation from "../components/calendar/CalendarNavigation";
 import Days from "../components/calendar/Days";
 import MonthlyCalendar from "../components/calendar/MonthlyCalendar";
+import * as Constants from '../constants/TimeSheetConstants'
 
 const TimeSheet = () => {
 
     const [date, setDate] = useState(new Date());
-    const [formatDate, setFormatDate] = useState(format(new Date(), 'MMMM, yyyy'));
+    const [formatDate, setFormatDate] = useState(format(new Date(), Constants.SHOWING_DATE_FORMAT_MONTH));
     const [data, setData] = useState();
     const [totalHours, setTotalHours] = useState();
     const navigate = useNavigate();
-
-    const URL = process.env.REACT_APP_SERVER_BASE_URL + process.env.REACT_APP_TIME_SHEET_URL
-
-    const MONDAY = 1;
-    const SUNDAY = 7;
-    const DATE_FORMAT = 'yyyy-MM-dd';
-    const SHOWING_DATE_FORMAT = 'MMMM, yyyy';
 
     useEffect(() => {
         const [from, to, id] = getDateRange();
@@ -29,11 +23,11 @@ const TimeSheet = () => {
 
     const getCalendar = (from, to, id) => {
         const params = {
-            from: format(from, DATE_FORMAT),
-            to: format(to, DATE_FORMAT),
+            from: format(from, Constants.DATE_FORMAT),
+            to: format(to, Constants.DATE_FORMAT),
             teamMemberId: id
         }
-        getRequestWithParams(URL, params)
+        getRequestWithParams(Constants.TIME_SHEET_URL, params)
             .then((res) => {
                 setData(res.data.dailyTimeSheets);
                 setTotalHours(res.data.totalHours)
@@ -50,11 +44,11 @@ const TimeSheet = () => {
         const firstDayOfMonth = firstDateOfMonth.getDay();
         const lastDayOfMonth = lastDateOfMonth.getDay();
         let from = firstDateOfMonth;
-        if (firstDayOfMonth !== MONDAY) {
+        if (firstDayOfMonth !== Constants.MONDAY) {
             from = new Date(firstDateOfMonth.setDate((firstDayOfMonth !== 0) ? firstDateOfMonth.getDate() - firstDayOfMonth + 1 : firstDateOfMonth.getDate() - 7 + 1));
         }
         let to = lastDateOfMonth;
-        if (lastDayOfMonth !== SUNDAY) {
+        if (lastDayOfMonth !== Constants.SUNDAY) {
             to = new Date(lastDateOfMonth.setDate(lastDateOfMonth.getDate() + 7 - lastDateOfMonth.getDay()))
         }
         return [from, to, userInfo.id]
@@ -62,14 +56,14 @@ const TimeSheet = () => {
 
     const handleNext = () => {
         setDate(new Date(date.setMonth(date.getMonth() + 1)));
-        setFormatDate(format(date, SHOWING_DATE_FORMAT));
+        setFormatDate(format(date, Constants.SHOWING_DATE_FORMAT_MONTH));
         const [from, to, id] = getDateRange();
         getCalendar(from, to, id);
     }
 
     const handleBack = () => {
         setDate(new Date(date.setMonth(date.getMonth() - 1)));
-        setFormatDate(format(date, SHOWING_DATE_FORMAT));
+        setFormatDate(format(date, Constants.SHOWING_DATE_FORMAT_MONTH));
         const [from, to, id] = getDateRange();
         getCalendar(from, to, id);
     }
@@ -80,8 +74,8 @@ const TimeSheet = () => {
         const firstDayOfWeek = selectedDate.getDate() - selectedDate.getDay() + 1;
         const weekStartDate = new Date(selectedDate.setDate(firstDayOfWeek));
         const weekEndDate = new Date(selectedDate.setDate(firstDayOfWeek + 6));
-        const formatStartDate = format(weekStartDate, 'MMMM dd, yyyy')
-        const formatEndDate = format(weekEndDate, 'MMMM dd, yyyy')
+        const formatStartDate = format(weekStartDate, Constants.SHOWING_DATE_FORMAT_WEEK)
+        const formatEndDate = format(weekEndDate, Constants.SHOWING_DATE_FORMAT_WEEK)
         navigate('/weekView/' + formatStartDate + "/" + formatEndDate + "/" + dateSelect)
 
     }

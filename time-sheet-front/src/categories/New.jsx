@@ -3,18 +3,18 @@ import { postRequest } from "../requests/httpClient";
 import InputText from "../components/input/InputText";
 import Button from "../components/buttons/Button";
 import { NotificationContainer, NotificationManager } from "react-notifications";
+import * as Constants from '../constants/CategoryConstants'
 
 const New = () => {
 
     const [name, setName] = useState('');
-    const URL = process.env.REACT_APP_SERVER_BASE_URL + process.env.REACT_APP_CATEGORY_URL
     
     const handleSave = () => {
 
         const data = {
             name: name
         }
-        postRequest(URL, data)
+        postRequest(Constants.URL, data)
             .then(() => {
                 window.location.reload();
             })

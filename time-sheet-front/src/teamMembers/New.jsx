@@ -4,7 +4,7 @@ import InputText from "../components/input/InputText";
 import Button from "../components/buttons/Button";
 import RadioButtons from "../components/buttons/RadioButtons";
 import { NotificationContainer, NotificationManager } from "react-notifications";
-
+import * as Constants from '../constants/TeamMemberConstants'
 
 const New = () => {
 
@@ -14,8 +14,6 @@ const New = () => {
     const [hoursPerWeek, setHoursPerWeek] = useState('');
     const [status, setStatus] = useState("ACTIVE");
     const [role, setRole] = useState("WORKER");
-
-    const URL = process.env.REACT_APP_SERVER_BASE_URL + process.env.REACT_APP_TEAM_MEMBER_URL
 
     const handleSave = () => {
 
@@ -29,7 +27,7 @@ const New = () => {
             password: "Lozinka123"
         }
 
-        postRequest(URL, data)
+        postRequest(Constants.URL, data)
             .then(() => {
                 window.location.reload()
             })

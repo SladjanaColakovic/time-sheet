@@ -3,6 +3,7 @@ import { getRequest, getRequestWithParams } from "../requests/httpClient";
 import SelectSearch from "../components/select/SelectSearch";
 import Button from "../components/buttons/Button";
 import InputDate from "../components/input/InputDate";
+import * as Constants from '../constants/ReportConstants'
 
 const Search = ({ setData }) => {
 
@@ -17,14 +18,8 @@ const Search = ({ setData }) => {
     const [startDate, setStartDate] = useState("")
     const [endDate, setEndDate] = useState("");
 
-    const CLIENT_URL = process.env.REACT_APP_SERVER_BASE_URL + process.env.REACT_APP_CLIENT_URL
-    const PROJECT_URL = process.env.REACT_APP_SERVER_BASE_URL + process.env.REACT_APP_PROJECT_URL
-    const TEAM_MEMBER_URL = process.env.REACT_APP_SERVER_BASE_URL + process.env.REACT_APP_TEAM_MEMBER_URL
-    const CATEGORY_URL = process.env.REACT_APP_SERVER_BASE_URL + process.env.REACT_APP_CATEGORY_URL
-    const REPORT_URL = process.env.REACT_APP_SERVER_BASE_URL + process.env.REACT_APP_REPORT_URL
-
     useEffect(() => {
-        getRequest(CLIENT_URL)
+        getRequest(Constants.CLIENT_URL)
             .then((res) => {
                 setClients(res.data.clients);
             })
@@ -32,7 +27,7 @@ const Search = ({ setData }) => {
                 console.log(error.message)
             })
 
-        getRequest(TEAM_MEMBER_URL)
+        getRequest(Constants.TEAM_MEMBER_URL)
             .then((res) => {
                 setTeamMembers(res.data.teamMembers);
             })
@@ -40,7 +35,7 @@ const Search = ({ setData }) => {
                 console.log(error.message)
             })
 
-        getRequest(CATEGORY_URL)
+        getRequest(Constants.CATEGORY_URL)
             .then((res) => {
                 setCategories(res.data.categories)
             })
@@ -62,7 +57,7 @@ const Search = ({ setData }) => {
             endDate: endDate
         }
 
-        getRequestWithParams(REPORT_URL, params)
+        getRequestWithParams(Constants.REPORT_URL, params)
             .then((res) => {
                 setData(res.data);
                 console.log(res.data)
@@ -83,7 +78,7 @@ const Search = ({ setData }) => {
             endDate: endDate
         }
 
-        getRequestWithParams(REPORT_URL + "/pdf", params)
+        getRequestWithParams(Constants.REPORT_URL + "/pdf", params)
             .then((res) => {
                 console.log(res.data);
                 // const file = new Blob([res.data], {
@@ -102,7 +97,7 @@ const Search = ({ setData }) => {
         const params = {
             clientId: value
         }
-        getRequestWithParams(PROJECT_URL + "/client", params)
+        getRequestWithParams(Constants.PROJECT_URL + "/client", params)
             .then((res) => {
                 setProjects(res.data.projects)
             })

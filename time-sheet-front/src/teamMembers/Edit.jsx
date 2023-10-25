@@ -3,13 +3,11 @@ import { getRequest, putRequest, deleteRequest } from "../requests/httpClient";
 import InputEdit from "../components/input/InputEdit";
 import Button from "../components/buttons/Button";
 import { NotificationContainer, NotificationManager } from "react-notifications";
-
+import * as Constants from '../constants/TeamMemberConstants'
 
 const Edit = ({ teamMember, setData }) => {
 
     const [editTeamMember, setEditTeamMember] = useState(teamMember);
-    const URL = process.env.REACT_APP_SERVER_BASE_URL + process.env.REACT_APP_TEAM_MEMBER_URL
-
 
     const handleSave = () => {
 
@@ -22,9 +20,9 @@ const Edit = ({ teamMember, setData }) => {
             status: editTeamMember.status,
             role: editTeamMember.role
         }
-        putRequest(URL, data)
+        putRequest(Constants.URL, data)
             .then(() => {
-                getRequest(URL)
+                getRequest(Constants.URL)
                     .then((res) => {
                         setData(res.data.teamMembers)
                     })
@@ -42,9 +40,9 @@ const Edit = ({ teamMember, setData }) => {
 
     const handleDelete = () => {
         const params = { id: editTeamMember.id }
-        deleteRequest(URL, params)
+        deleteRequest(Constants.URL, params)
             .then(() => {
-                getRequest(URL)
+                getRequest(Constants.URL)
                     .then((res) => {
                         setData(res.data.teamMembers)
                     })

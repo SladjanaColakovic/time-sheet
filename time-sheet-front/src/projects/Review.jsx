@@ -2,14 +2,14 @@ import { useEffect, useState } from "react";
 import { getRequest } from "../requests/httpClient";
 import { Accordion } from "react-bootstrap";
 import Edit from "./Edit";
+import * as Constants from "../constants/ProjectConstants";
 
 const Review = ({ clients, teamMembers }) => {
 
     const [data, setData] = useState(null);
-    const URL = process.env.REACT_APP_SERVER_BASE_URL + process.env.REACT_APP_PROJECT_URL
 
     useEffect(() => {
-        getRequest(URL)
+        getRequest(Constants.PROJECT_URL)
             .then((res) => {
                 setData(res.data.projects)
             }).catch((error) => {

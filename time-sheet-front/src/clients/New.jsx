@@ -4,6 +4,8 @@ import InputText from "../components/input/InputText";
 import Select from "../components/select/Select";
 import Button from "../components/buttons/Button";
 import { NotificationContainer, NotificationManager } from "react-notifications";
+import * as Constants from "../constants/ClientConstants";
+
 
 const New = ({ countries }) => {
 
@@ -12,8 +14,6 @@ const New = ({ countries }) => {
     const [address, setAddress] = useState('');
     const [city, setCity] = useState('');
     const [postalCode, setPostalCode] = useState('');
-
-    const URL = process.env.REACT_APP_SERVER_BASE_URL + process.env.REACT_APP_CLIENT_URL
 
     const handleSave = () => {
 
@@ -27,7 +27,7 @@ const New = ({ countries }) => {
             }
         }
 
-        postRequest(URL, data)
+        postRequest(Constants.CLIENT_URL, data)
             .then(() => {
                 window.location.reload();
             })

@@ -4,7 +4,7 @@ import InputText from "../components/input/InputText";
 import Button from "../components/buttons/Button";
 import Select from "../components/select/Select";
 import { NotificationContainer, NotificationManager } from "react-notifications";
-
+import * as Constants from "../constants/ProjectConstants";
 
 const New = ({ clients, teamMembers }) => {
 
@@ -13,8 +13,6 @@ const New = ({ clients, teamMembers }) => {
     const [lead, setLead] = useState();
     const [name, setName] = useState('');
     const [description, setDescription] = useState('');
-
-    const URL = process.env.REACT_APP_SERVER_BASE_URL + process.env.REACT_APP_PROJECT_URL
 
     const handleSave = () => {
 
@@ -29,7 +27,7 @@ const New = ({ clients, teamMembers }) => {
             }
         }
 
-        postRequest(URL, data)
+        postRequest(Constants.PROJECT_URL, data)
             .then(() => {
                 window.location.reload();
             })

@@ -4,13 +4,11 @@ import InputEdit from "../components/input/InputEdit";
 import SelectEdit from "../components/select/SelectEdit";
 import Button from "../components/buttons/Button";
 import { NotificationContainer, NotificationManager } from "react-notifications";
+import * as Constants from "../constants/ClientConstants";
 
 const Edit = ({ countries, client, setData }) => {
 
     const [editClient, setEditClient] = useState(client);
-
-    const URL = process.env.REACT_APP_SERVER_BASE_URL + process.env.REACT_APP_CLIENT_URL
-
 
     const handleSave = () => {
 
@@ -24,9 +22,9 @@ const Edit = ({ countries, client, setData }) => {
                 id: editClient.country.id
             }
         }
-        putRequest(URL, data)
+        putRequest(Constants.CLIENT_URL, data)
             .then(() => {
-                getRequest(URL)
+                getRequest(Constants.CLIENT_URL)
                 .then((res) => {
                     setData(res.data.clients)
                 })
@@ -44,9 +42,9 @@ const Edit = ({ countries, client, setData }) => {
     const handleDelete = () => {
 
         const params = { id: editClient.id }
-        deleteRequest(URL, params)
+        deleteRequest(Constants.CLIENT_URL, params)
             .then(() => {
-                getRequest(URL)
+                getRequest(Constants.CLIENT_URL)
                 .then((res) => {
                     setData(res.data.clients)
                 })

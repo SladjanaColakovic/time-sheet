@@ -3,24 +3,22 @@ import Review from "./Review";
 import { useEffect, useState } from "react";
 import { getRequest } from "../requests/httpClient";
 import New from "./New";
-
+import * as Constants from "../constants/ProjectConstants";
 
 const Projects = () => {
 
     const [clients, setClients] = useState(null);
     const [teamMembers, setTeamMembers] = useState(null);
-    const CLIENT_URL = process.env.REACT_APP_SERVER_BASE_URL + process.env.REACT_APP_CLIENT_URL
-    const TEAM_MEMBER_URL = process.env.REACT_APP_SERVER_BASE_URL + process.env.REACT_APP_TEAM_MEMBER_URL
 
     useEffect(() => {
-        getRequest(CLIENT_URL)
+        getRequest(Constants.CLIENT_URL)
             .then((res) => {
                 setClients(res.data.clients)
                 console.log(res.data)
             }).catch((error) => {
                 console.log(error.message)
             })
-        getRequest(TEAM_MEMBER_URL)
+        getRequest(Constants.TEAM_MEMBER_URL)
             .then((res) => {
                 setTeamMembers(res.data.teamMembers)
             }).catch((error) => {

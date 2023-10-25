@@ -4,14 +4,14 @@ import Tabs from 'react-bootstrap/Tabs';
 import { getRequest } from "../requests/httpClient";
 import Review from './Review';
 import New from './New';
+import * as Constants from '../constants/ClientConstants'
 
 const Clients = () => {
 
     const [countries, setCountries] = useState(null);
-    const URL = process.env.REACT_APP_SERVER_BASE_URL + process.env.REACT_APP_COUNTRY_URL
 
     useEffect(() => {
-        getRequest(URL)
+        getRequest(Constants.COUNTRY_URL)
             .then((res) => {
                 setCountries(res.data.countries)
             })

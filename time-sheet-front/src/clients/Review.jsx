@@ -2,13 +2,15 @@ import { useEffect, useState } from "react";
 import { getRequest } from "../requests/httpClient";
 import { Accordion } from "react-bootstrap";
 import Edit from "./Edit";
+import * as Constants from "../constants/ClientConstants";
+
 
 const Review = ({ countries }) => {
 
     const [data, setData] = useState(null);
 
     useEffect(() => {
-        getRequest("http://localhost:8080/api/client")
+        getRequest(Constants.CLIENT_URL)
             .then((res) => {
                 setData(res.data.clients)
             }).catch((error) => {
@@ -16,6 +18,7 @@ const Review = ({ countries }) => {
             })
 
     }, [])
+    
     return (
         <div className="span-top">
             <div className="row">

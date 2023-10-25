@@ -4,12 +4,11 @@ import Button from "../components/buttons/Button";
 import InputEdit from "../components/input/InputEdit";
 import SelectEdit from "../components/select/SelectEdit";
 import { NotificationContainer, NotificationManager } from "react-notifications";
+import * as Constants from "../constants/ProjectConstants";
 
 const Edit = ({ clients, teamMembers, project, setData }) => {
 
     const [editProject, setEditProject] = useState(project);
-    const URL = process.env.REACT_APP_SERVER_BASE_URL + process.env.REACT_APP_PROJECT_URL
-
 
     const handleSave = () => {
 
@@ -25,9 +24,9 @@ const Edit = ({ clients, teamMembers, project, setData }) => {
                 id: editProject.lead.id
             }
         }
-        putRequest(URL, data)
+        putRequest(Constants.PROJECT_URL, data)
             .then(() => {
-                getRequest(URL)
+                getRequest(Constants.PROJECT_URL)
                     .then((res) => {
                         setData(res.data.projects);
                     })
@@ -45,9 +44,9 @@ const Edit = ({ clients, teamMembers, project, setData }) => {
 
     const handleDelete = () => {
         const params = { id: editProject.id }
-        deleteRequest(URL, params)
+        deleteRequest(Constants.PROJECT_URL, params)
             .then(() => {
-                getRequest(URL)
+                getRequest(Constants.PROJECT_URL)
                     .then((res) => {
                         setData(res.data.projects);
                     })

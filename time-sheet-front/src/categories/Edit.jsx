@@ -3,12 +3,11 @@ import { getRequest, deleteRequest, putRequest } from "../requests/httpClient";
 import Button from "../components/buttons/Button";
 import InputEdit from "../components/input/InputEdit";
 import { NotificationContainer, NotificationManager } from "react-notifications";
+import * as Constants from '../constants/CategoryConstants'
 
 const Edit = ({ category, setData }) => {
 
     const [editCategory, setEditCategory] = useState(category);
-    const URL = process.env.REACT_APP_SERVER_BASE_URL + process.env.REACT_APP_CATEGORY_URL
-
 
     const handleSave = () => {
 
@@ -16,9 +15,9 @@ const Edit = ({ category, setData }) => {
             id: editCategory.id,
             name: editCategory.name
         }
-        putRequest(URL, data)
+        putRequest(Constants.URL, data)
             .then(() => {
-                getRequest(URL)
+                getRequest(Constants.URL)
                     .then((res) => {
                         setData(res.data.categories);
                     })
@@ -34,9 +33,9 @@ const Edit = ({ category, setData }) => {
 
     const handleDelete = () => {
         const params = { id: editCategory.id }
-        deleteRequest(URL, params)
+        deleteRequest(Constants.URL, params)
             .then(() => {
-                getRequest(URL)
+                getRequest(Constants.URL)
                     .then((res) => {
                         setData(res.data.categories);
                     })
