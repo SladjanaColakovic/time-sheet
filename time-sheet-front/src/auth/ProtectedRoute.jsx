@@ -2,7 +2,7 @@ import { useLocation, Navigate, Outlet } from "react-router-dom";
 import AccessDenied from "../AccessDenied";
 
 
-const ProtectedRoute = ({ children, roles }) => {
+const ProtectedRoute = ({ roles }) => {
     let location = useLocation();
 
     const currentRole = localStorage.getItem('role');
