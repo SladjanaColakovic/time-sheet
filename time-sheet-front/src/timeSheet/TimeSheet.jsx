@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { format } from 'date-fns';
 import { getRequestWithParams } from "../requests/httpClient";
 import { useNavigate } from "react-router-dom";
-import CalendarNavigationComponent from "../components/CalendarNavigationComponent";
+import CalendarNavigation from "../components/calendar/CalendarNavigation";
 import DaysComponent from "../components/DaysComponent";
 import MonthlyCalendarComponent from "../components/MonthlyCalendarComponent";
 
@@ -94,7 +94,7 @@ const TimeSheet = () => {
                     <div className="col-1"></div>
                     <div className="col-10">
                         <div className="box">
-                            <CalendarNavigationComponent back={handleBack} next={handleNext} content={formatDate} />
+                            <CalendarNavigation back={handleBack} next={handleNext} content={formatDate} />
                             <br />
                             <br />
                             <DaysComponent />

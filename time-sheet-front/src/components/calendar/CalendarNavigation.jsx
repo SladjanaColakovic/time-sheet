@@ -1,5 +1,5 @@
-import SvgButton from "./SvgButton";
-const CalendarNavigationComponent = ({ back, next, content }) => {
+import SvgButton from "../SvgButton";
+const CalendarNavigation= ({ back, next, content }) => {
     return (
         <div style={{ textAlign: "center" }}>
             <SvgButton handleClick={back} className="back" icon={"back"}/>
@@ -9,4 +9,4 @@ const CalendarNavigationComponent = ({ back, next, content }) => {
     );
 }
 
-export default CalendarNavigationComponent;
+export default CalendarNavigation;

@@ -1,11 +1,11 @@
 import DailyCalendarTableHeader from "./DailyCalenadarTableHeader";
-import AddItemComponent from "./AddItemComponent";
+import NewTimeSheetItem from "./NewTimeSheetItem";
 import { useEffect, useState } from "react";
-import { getRequest } from "../requests/httpClient";
+import { getRequest } from "../../requests/httpClient";
 import { NotificationContainer, NotificationManager } from "react-notifications";
-import EdititemComponent from "./EditItemComponent";
+import EdititemComponent from "../EditItemComponent";
 
-const ItemsTableComponent = ({ items, selectedDate, setItems, setTotalHours }) => {
+const DailyCalendarTable = ({ items, selectedDate, setItems, setTotalHours }) => {
 
     const [clients, setClients] = useState();
     const [projects, setProjects] = useState();
@@ -57,7 +57,7 @@ const ItemsTableComponent = ({ items, selectedDate, setItems, setTotalHours }) =
                     {items.map((item) => (
                         <EdititemComponent item={item} key={item.id} categories={categories} clients={clients} projects={projects} setItems={setItems} setTotalHours={setTotalHours} selectedDate={selectedDate} items={items} showErrorMessage={showErrorMessage} />
                     ))}
-                    <AddItemComponent clients={clients} projects={projects} categories={categories} setItems={setItems} setTotalHours={setTotalHours} selectedDate={selectedDate} showErrorMessage={showErrorMessage} />
+                    <NewTimeSheetItem clients={clients} projects={projects} categories={categories} setItems={setItems} setTotalHours={setTotalHours} selectedDate={selectedDate} showErrorMessage={showErrorMessage} />
                 </tbody>
             </table>}
             <NotificationContainer />
@@ -65,4 +65,4 @@ const ItemsTableComponent = ({ items, selectedDate, setItems, setTotalHours }) =
     );
 }
 
-export default ItemsTableComponent;
+export default DailyCalendarTable;

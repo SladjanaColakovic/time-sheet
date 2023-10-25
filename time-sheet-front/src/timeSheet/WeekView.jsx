@@ -4,9 +4,9 @@ import { getRequestWithParams } from "../requests/httpClient";
 import { useNavigate } from "react-router-dom";
 import { format } from "date-fns";
 import ButtonComponent from "../components/ButtonComponent";
-import CalendarNavigationComponent from "../components/CalendarNavigationComponent";
+import CalendarNavigation from "../components/calendar/CalendarNavigation";
 import WeeklyCalendarComponent from "../components/WeeklyCalendarComponent";
-import ItemsTableComponent from "../components/ItemsTableComponent";
+import DailyCalendarTable from "../components/calendar/DailyCalendarTable";
 
 
 const WeekView = () => {
@@ -130,13 +130,13 @@ const WeekView = () => {
                     <div className="col-1"></div>
                     <div className="col-10">
                         <div className="box">
-                            <CalendarNavigationComponent back={back} next={next} content={startDate + ' - ' + endDate} />
+                            <CalendarNavigation back={back} next={next} content={startDate + ' - ' + endDate} />
                             <br />
                             <br />
                             <WeeklyCalendarComponent dates={dates} formatSelectedDate={formatSelectedDate} selectDate={selectDate} />
                             <br />
                             <br />
-                            <ItemsTableComponent items={items} selectedDate={selectedDate} setItems={setItems} setTotalHours={setTotalHours} />
+                            <DailyCalendarTable items={items} selectedDate={selectedDate} setItems={setItems} setTotalHours={setTotalHours} />
                             <br />
                             <div className="row">
                                 <div className="col-3">

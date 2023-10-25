@@ -1,11 +1,11 @@
-import InputComponent from "./InputComponent";
-import SelectComponent from "./SelectComponent";
-import { getRequestWithParams, postRequest } from "../requests/httpClient";
+import InputComponent from "../InputComponent";
+import SelectComponent from "../SelectComponent";
+import { getRequestWithParams, postRequest } from "../../requests/httpClient";
 import { useState } from "react";
 import { format } from "date-fns";
-import SvgButton from "./SvgButton";
+import SvgButton from "../SvgButton";
 
-const AddItemComponent = ({ clients, projects, categories, setItems, setTotalHours, selectedDate, showErrorMessage }) => {
+const NewTimeSheetItem = ({ clients, projects, categories, setItems, setTotalHours, selectedDate, showErrorMessage }) => {
 
     const [client, setClient] = useState('');
     const [project, setProject] = useState('');
@@ -36,7 +36,7 @@ const AddItemComponent = ({ clients, projects, categories, setItems, setTotalHou
         }
 
         postRequest(ITEMS_URL, data)
-            .then((res) => {
+            .then(() => {
                 const params = {
                     teamMemberId: teamMemberId,
                     date: format(new Date(selectedDate), 'yyyy-MM-dd')
@@ -89,4 +89,4 @@ const AddItemComponent = ({ clients, projects, categories, setItems, setTotalHou
     );
 }
 
-export default AddItemComponent;
+export default NewTimeSheetItem;
