@@ -70,7 +70,7 @@ const EdititemComponent = ({item, setItems, items, setTotalHours, selectedDate, 
             }
         }
         putRequest(ITEMS_URL, data)
-            .then((res) => {
+            .then(() => {
                 const params = {
                     teamMemberId: teamMemberId,
                     date: format(new Date(selectedDate), 'yyyy-MM-dd')
@@ -79,6 +79,9 @@ const EdititemComponent = ({item, setItems, items, setTotalHours, selectedDate, 
                     .then((res) => {
                         setItems(res.data.items);
                         setTotalHours(res.data.totalHours);
+                    })
+                    .catch((error) => {
+                        showErrorMessage(error.message);
                     })
             })
             .catch((error) => {

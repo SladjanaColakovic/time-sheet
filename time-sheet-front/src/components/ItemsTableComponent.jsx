@@ -19,14 +19,25 @@ const ItemsTableComponent = ({ items, selectedDate, setItems, setTotalHours }) =
         getRequest(CLIENT_URL)
             .then((res) => {
                 setClients(res.data.clients);
-                getRequest(PROJECT_URL)
-                    .then((res) => {
-                        setProjects(res.data.projects);
-                        getRequest(CATEGORY_URL)
-                            .then((res) => {
-                                setCategories(res.data.categories);
-                            })
-                    })
+            })
+            .catch((error) => {
+                showErrorMessage(error.message);
+            })
+
+        getRequest(PROJECT_URL)
+            .then((res) => {
+                setProjects(res.data.projects);
+            })
+            .catch((error) => {
+                showErrorMessage(error.message);
+            })
+
+        getRequest(CATEGORY_URL)
+            .then((res) => {
+                setCategories(res.data.categories);
+            })
+            .catch((error) => {
+                showErrorMessage(error.message);
             })
     }, [])
 

@@ -30,8 +30,7 @@ const New = () => {
         }
 
         postRequest(URL, data)
-            .then((res) => {
-                console.log(res.data)
+            .then(() => {
                 window.location.reload()
             })
             .catch((error) => {

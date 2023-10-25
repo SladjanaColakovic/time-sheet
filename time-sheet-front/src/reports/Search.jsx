@@ -28,15 +28,24 @@ const Search = ({ setData }) => {
             .then((res) => {
                 setClients(res.data.clients);
             })
+            .catch((error) => {
+                console.log(error.message)
+            })
 
         getRequest(TEAM_MEMBER_URL)
             .then((res) => {
                 setTeamMembers(res.data.teamMembers);
             })
+            .catch((error) => {
+                console.log(error.message)
+            })
 
         getRequest(CATEGORY_URL)
             .then((res) => {
                 setCategories(res.data.categories)
+            })
+            .catch((error) => {
+                console.log(error.message)
             })
     }, [])
 
@@ -80,9 +89,9 @@ const Search = ({ setData }) => {
                 // const file = new Blob([res.data], {
                 //     type: 'application/pdf',
                 //   });
-                  
+
                 //   const fileURL = URL.createObjectURL(file);
-                  
+
                 //   window.open(fileURL);
             })
 

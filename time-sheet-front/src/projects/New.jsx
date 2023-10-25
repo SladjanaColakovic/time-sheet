@@ -30,7 +30,7 @@ const New = ({ clients, teamMembers }) => {
         }
 
         postRequest(URL, data)
-            .then((res) => {
+            .then(() => {
                 window.location.reload();
             })
             .catch((error) => {

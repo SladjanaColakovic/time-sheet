@@ -117,6 +117,9 @@ const WeekView = () => {
                 setItems(res.data.items);
                 setTotalHours(res.data.totalHours);
             })
+            .catch((error) => {
+                console.log(error.message)
+            })
     }
 
     return (

@@ -45,7 +45,7 @@ const Edit = ({ countries, client, setData }) => {
 
         const params = { id: editClient.id }
         deleteRequest(URL, params)
-            .then((res) => {
+            .then(() => {
                 getRequest(URL)
                 .then((res) => {
                     setData(res.data.clients)

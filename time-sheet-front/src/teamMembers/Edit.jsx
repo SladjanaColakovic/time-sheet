@@ -23,10 +23,14 @@ const Edit = ({ teamMember, setData }) => {
             role: editTeamMember.role
         }
         putRequest(URL, data)
-            .then(res => {
-                getRequest(URL).then((res) => {
-                    setData(res.data.teamMembers)
-                })
+            .then(() => {
+                getRequest(URL)
+                    .then((res) => {
+                        setData(res.data.teamMembers)
+                    })
+                    .catch((error) => {
+                        NotificationManager.error(error.message, '', 5000);
+                    })
 
             })
             .catch(error => {
@@ -39,10 +43,14 @@ const Edit = ({ teamMember, setData }) => {
     const handleDelete = () => {
         const params = { id: editTeamMember.id }
         deleteRequest(URL, params)
-            .then((res) => {
-                getRequest(URL).then((res) => {
-                    setData(res.data.teamMembers)
-                })
+            .then(() => {
+                getRequest(URL)
+                    .then((res) => {
+                        setData(res.data.teamMembers)
+                    })
+                    .catch((error) => {
+                        NotificationManager.error(error.message, '', 5000);
+                    })
             }
             )
             .catch((error) => {
@@ -102,7 +110,7 @@ const Edit = ({ teamMember, setData }) => {
                     <ButtonComponent handleClick={handleDelete} className="edit-delete" buttonName={"Delete"} />
                 </div>
             </div>
-            <NotificationContainer/>
+            <NotificationContainer />
         </div>
     );
 }

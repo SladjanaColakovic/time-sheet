@@ -12,7 +12,6 @@ const Review = ({ clients, teamMembers }) => {
         getRequest(URL)
             .then((res) => {
                 setData(res.data.projects)
-                console.log(res.data.projects)
             }).catch((error) => {
                 console.log(error);
             })

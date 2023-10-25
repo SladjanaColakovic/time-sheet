@@ -52,6 +52,10 @@ const AddItemComponent = ({ clients, projects, categories, setItems, setTotalHou
                         setClient('')
                         setProject('')
                     })
+                    .catch((error) => {
+                        showErrorMessage(error.message);
+
+                    })
 
             }).catch((error) => {
                 showErrorMessage(error.message);
@@ -79,7 +83,7 @@ const AddItemComponent = ({ clients, projects, categories, setItems, setTotalHou
                 <InputComponent value={overtime} setValue={setOvertime} />
             </td>
             <td>
-                <SvgButton handleClick={addItem} className="add-btn" icon={"add"}/>
+                <SvgButton handleClick={addItem} className="add-btn" icon={"add"} />
             </td>
         </tr>
     );

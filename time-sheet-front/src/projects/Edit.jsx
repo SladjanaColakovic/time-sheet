@@ -26,10 +26,15 @@ const Edit = ({ clients, teamMembers, project, setData }) => {
             }
         }
         putRequest(URL, data)
-            .then(res => {
-                getRequest(URL).then((res) => {
-                    setData(res.data.projects);
-                })
+            .then(() => {
+                getRequest(URL)
+                    .then((res) => {
+                        setData(res.data.projects);
+                    })
+                    .catch((error) => {
+                        NotificationManager.error(error.message, '', 5000);
+
+                    })
 
             })
             .catch(error => {
@@ -41,12 +46,16 @@ const Edit = ({ clients, teamMembers, project, setData }) => {
     const handleDelete = () => {
         const params = { id: editProject.id }
         deleteRequest(URL, params)
-            .then((res) => {
-                getRequest(URL).then((res) => {
-                    setData(res.data.projects);
-                })
-            }
-            )
+            .then(() => {
+                getRequest(URL)
+                    .then((res) => {
+                        setData(res.data.projects);
+                    })
+                    .catch((error) => {
+                        NotificationManager.error(error.message, '', 5000);
+
+                    })
+            })
             .catch((error) => {
                 NotificationManager.error(error.message, '', 5000);
             })
@@ -63,10 +72,6 @@ const Edit = ({ clients, teamMembers, project, setData }) => {
     const changeProjectClient = (e) => {
         setEditProject({ ...editProject, client: { ...editProject.client, id: e.target.value } })
     }
-
-    // const changeProjectStatus = (value) => {
-    //     setEditProject({ ...editProject, status: value });
-    // }
 
     return (
         <div className="edit">
@@ -95,7 +100,6 @@ const Edit = ({ clients, teamMembers, project, setData }) => {
                     <input type="radio" value={"INACTIVE"} checked={editProject.status === "INACTIVE"} onChange={(e) => { setEditProject({ ...editProject, status: e.target.value }) }} />
                     <span style={{ marginRight: "10px" }}></span>
                     <label>Inactive</label>
-                    {/* <RadioComponent radioName={"edit-project-status"} value={editProject.status} radioLabelName={"Status"} radioValues={["ACTIVE", "INACTIVE"]} setValue={changeProjectStatus} radioLabelValues={["Active", "Inactive"]}></RadioComponent> */}
                 </div>
                 <div className="col-4">
                     <input name="archive" type="radio" />
@@ -111,7 +115,7 @@ const Edit = ({ clients, teamMembers, project, setData }) => {
                     <ButtonComponent handleClick={handleDelete} className="edit-delete" buttonName={"Delete"} />
                 </div>
             </div>
-            <NotificationContainer/>
+            <NotificationContainer />
         </div>
     );
 }

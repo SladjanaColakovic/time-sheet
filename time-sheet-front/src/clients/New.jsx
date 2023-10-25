@@ -28,7 +28,7 @@ const New = ({ countries }) => {
         }
 
         postRequest(URL, data)
-            .then((res) => {
+            .then(() => {
                 window.location.reload();
             })
             .catch((error) => {

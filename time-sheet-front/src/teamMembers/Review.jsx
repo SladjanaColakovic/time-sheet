@@ -13,7 +13,6 @@ const Review = () => {
         getRequest(URL)
             .then((res) => {
                 setData(res.data.teamMembers)
-                console.log(res.data.teamMembers)
             }).catch((error) => {
                 console.log(error);
             })

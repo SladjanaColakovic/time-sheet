@@ -38,6 +38,9 @@ const TimeSheet = () => {
                 setData(res.data.dailyTimeSheets);
                 setTotalHours(res.data.totalHours)
             })
+            .catch((error) => {
+                console.log(error.message)
+            })
     }
 
     const getDateRange = () => {
@@ -95,7 +98,7 @@ const TimeSheet = () => {
                             <br />
                             <br />
                             <DaysComponent />
-                            <MonthlyCalendarComponent data={data} showDetails={showDetails}/>
+                            <MonthlyCalendarComponent data={data} showDetails={showDetails} />
                             <label className="total-report">Total hours: {totalHours}</label>
                             <br />
                             <br />
