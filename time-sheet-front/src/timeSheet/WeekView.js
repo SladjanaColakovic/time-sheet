@@ -22,6 +22,7 @@ const WeekView = () => {
     const [totalHours, setTotalHours] = useState();
 
     const ITEMS_URL = process.env.REACT_APP_SERVER_BASE_URL + process.env.REACT_APP_ITEMS_URL
+    const teamMemberId = JSON.parse(window.atob(localStorage.getItem('token').split('.')[1])).id;
 
 
     useEffect(() => {
@@ -30,7 +31,7 @@ const WeekView = () => {
         const lastDayOfWeek = new Date(endDate)
         findDateRange(firstDayOfWeek, lastDayOfWeek);
         const params = {
-            teamMemberId: JSON.parse(window.atob(localStorage.getItem('token').split('.')[1])).id,
+            teamMemberId: teamMemberId,
             date: format(new Date(selectedDate), 'yyyy-MM-dd')
         }
         getItems(params);
@@ -89,7 +90,7 @@ const WeekView = () => {
     const selectDate = (date) => {
         const showingDate = flagSelectedDate(date);
         const params = {
-            teamMemberId: JSON.parse(window.atob(localStorage.getItem('token').split('.')[1])).id,
+            teamMemberId: teamMemberId,
             date: format(new Date(showingDate), 'yyyy-MM-dd')
         }
         getItems(params);

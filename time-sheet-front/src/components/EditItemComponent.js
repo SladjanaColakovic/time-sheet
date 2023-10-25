@@ -6,6 +6,8 @@ import { format } from "date-fns";
 const EdititemComponent = ({item, setItems, items, setTotalHours, selectedDate, clients, projects, categories, showErrorMessage}) => {
 
     const ITEMS_URL = process.env.REACT_APP_SERVER_BASE_URL + process.env.REACT_APP_ITEMS_URL
+    const teamMemberId = JSON.parse(window.atob(localStorage.getItem('token').split('.')[1])).id;
+
     
     const changeItem = (e, property, id) => {
         const newState = items.map(obj => {
@@ -69,7 +71,7 @@ const EdititemComponent = ({item, setItems, items, setTotalHours, selectedDate, 
         putRequest(ITEMS_URL, data)
             .then((res) => {
                 const params = {
-                    teamMemberId: JSON.parse(window.atob(localStorage.getItem('token').split('.')[1])).id,
+                    teamMemberId: teamMemberId,
                     date: format(new Date(selectedDate), 'yyyy-MM-dd')
                 }
                 getRequestWithParams(ITEMS_URL + "/teamMember", params)

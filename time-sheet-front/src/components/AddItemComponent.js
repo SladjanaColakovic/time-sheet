@@ -14,6 +14,8 @@ const AddItemComponent = ({ clients, projects, categories, setItems, setTotalHou
     const [overtime, setOvertime] = useState('');
 
     const ITEMS_URL = process.env.REACT_APP_SERVER_BASE_URL + process.env.REACT_APP_ITEMS_URL
+    const teamMemberId = JSON.parse(window.atob(localStorage.getItem('token').split('.')[1])).id;
+
 
     const addItem = () => {
         const data = {
@@ -25,7 +27,7 @@ const AddItemComponent = ({ clients, projects, categories, setItems, setTotalHou
                 id: project
             },
             teamMember: {
-                id: JSON.parse(window.atob(localStorage.getItem('token').split('.')[1])).id
+                id: teamMemberId
             },
             category: {
                 id: category
@@ -35,7 +37,7 @@ const AddItemComponent = ({ clients, projects, categories, setItems, setTotalHou
         postRequest(ITEMS_URL, data)
             .then((res) => {
                 const params = {
-                    teamMemberId: JSON.parse(window.atob(localStorage.getItem('token').split('.')[1])).id,
+                    teamMemberId: teamMemberId,
                     date: format(new Date(selectedDate), 'yyyy-MM-dd')
                 }
                 getRequestWithParams(ITEMS_URL + "/teamMember", params)
