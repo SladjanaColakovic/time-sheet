@@ -1,10 +1,14 @@
 import { useNavigate } from 'react-router-dom';
 import SvgButton from './components/buttons/SvgButton';
 import { Role } from './auth/Role';
+import { useDispatch, useSelector } from 'react-redux';
+import { logout, selectUser } from './auth/userSlice';
 
 const Navbar = () => {
 
     const navigate = useNavigate();
+    const dispatch = useDispatch();
+    const user = useSelector(selectUser);
 
     const showCategories = () => {
         navigate('/categories', { replace: true });
@@ -30,14 +34,17 @@ const Navbar = () => {
         navigate('/timeSheet', { replace: true });
     }
 
-    const logout = () => {
-        localStorage.clear();
-        window.location.reload();
+    const logoutFunc = () => {
+        // localStorage.clear();
+        //window.location.reload();
+        dispatch(logout());
     }
 
     const getRole = () => {
-        const role = localStorage.getItem('role');
-        return role;
+        if (user) {
+            const role = user.role;
+            return role;
+        }
     }
 
     return (
@@ -52,7 +59,7 @@ const Navbar = () => {
                     <SvgButton handleClick={showCategories} icon={"categories"} name={"Categories"} />
                 </span>
             }
-            <SvgButton className="bottomButton" handleClick={logout} icon={"logout"} name={"Logout"} />
+            <SvgButton className="bottomButton" handleClick={logoutFunc} icon={"logout"} name={"Logout"} />
         </div>
 
     );

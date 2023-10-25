@@ -8,6 +8,8 @@ import CalendarNavigation from "../components/calendar/CalendarNavigation";
 import WeeklyCalendar from "../components/calendar/WeeklyCalendar";
 import DailyCalendarTable from "../components/calendar/DailyCalendarTable";
 import * as Constants from '../constants/TimeSheetConstants'
+import { useSelector } from "react-redux";
+import { selectUser } from "../auth/userSlice";
 
 const WeekView = () => {
 
@@ -20,8 +22,9 @@ const WeekView = () => {
     const navigate = useNavigate();
     const [items, setItems] = useState();
     const [totalHours, setTotalHours] = useState();
+    const user = useSelector(selectUser)
 
-    const teamMemberId = JSON.parse(window.atob(localStorage.getItem('token').split('.')[1])).id;
+    const teamMemberId = user.id;
 
 
     useEffect(() => {

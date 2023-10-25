@@ -6,6 +6,8 @@ import CalendarNavigation from "../components/calendar/CalendarNavigation";
 import Days from "../components/calendar/Days";
 import MonthlyCalendar from "../components/calendar/MonthlyCalendar";
 import * as Constants from '../constants/TimeSheetConstants'
+import { useSelector } from "react-redux";
+import { selectUser } from "../auth/userSlice";
 
 const TimeSheet = () => {
 
@@ -14,6 +16,7 @@ const TimeSheet = () => {
     const [data, setData] = useState();
     const [totalHours, setTotalHours] = useState();
     const navigate = useNavigate();
+    const user = useSelector(selectUser)
 
     useEffect(() => {
         const [from, to, id] = getDateRange();
@@ -38,7 +41,8 @@ const TimeSheet = () => {
     }
 
     const getDateRange = () => {
-        var userInfo = JSON.parse(window.atob(localStorage.getItem('token').split('.')[1]))
+        console.log(user)
+        var id = user.id
         const firstDateOfMonth = new Date(date.getFullYear(), date.getMonth(), 1)
         const lastDateOfMonth = new Date(date.getFullYear(), date.getMonth() + 1, 0)
         const firstDayOfMonth = firstDateOfMonth.getDay();
@@ -51,7 +55,7 @@ const TimeSheet = () => {
         if (lastDayOfMonth !== Constants.SUNDAY) {
             to = new Date(lastDateOfMonth.setDate(lastDateOfMonth.getDate() + 7 - lastDateOfMonth.getDay()))
         }
-        return [from, to, userInfo.id]
+        return [from, to, id]
     }
 
     const handleNext = () => {

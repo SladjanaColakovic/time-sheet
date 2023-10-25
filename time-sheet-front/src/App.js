@@ -11,30 +11,30 @@ import Reports from './reports/Reports';
 import TimeSheet from './timeSheet/TimeSheet';
 import WeekView from './timeSheet/WeekView';
 import { Role } from './auth/Role';
+import { useSelector } from 'react-redux';
+import { selectUser } from './auth/userSlice';
+import { useDispatch } from 'react-redux';
+import { logout } from './auth/userSlice';
 
 function App() {
 
-  const token = localStorage.getItem('token')
-  const role = localStorage.getItem('role')
+  const user = useSelector(selectUser)
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    if (!token) return;
-
-    var obj = JSON.parse(window.atob(token.split('.')[1]))
-    if (obj.exp < Date.now() / 1000) {
-      localStorage.clear();
-      window.location.reload();
+    if (!user) return;
+    if (user.expiredIn < Date.now() / 1000) {
+      dispatch(logout())
     }
-  }, [token])
+  }, [])
 
   return (
-
-
+    
     <Routes>
-      {!token && <Route path='/' element={<Login />}></Route>}
+      {!user && <Route path='/' element={<Login />}></Route>}
       <Route path='/' element={<LoggedInLayout />}>
-        {token && role === Role.ADMIN && <Route path='/' element={<Navigate to='/categories' />}></Route>}
-        {token && role === Role.WORKER && <Route path='/' element={<Navigate to='/timeSheet' />}></Route>}
+        {user && user.role === Role.ADMIN && <Route path='/' element={<Navigate to='/categories' />}></Route>}
+        {user && user.role === Role.WORKER && <Route path='/' element={<Navigate to='/timeSheet' />}></Route>}
         <Route element={<PrivateRoute roles={[Role.ADMIN]} />}>
           <Route path='/categories' element={<Categories />} />
         </Route>

@@ -3,11 +3,14 @@ import ListItemInput from "../input/ListItemInput";
 import ListItemSelect from "../select/ListItemSelect";
 import { format } from "date-fns";
 import SvgButton from "../buttons/SvgButton";
+import { useSelector } from "react-redux";
+import { selectUser } from "../../auth/userSlice";
 
 const EditTimeSheetItem = ({item, setItems, items, setTotalHours, selectedDate, clients, projects, categories, showErrorMessage}) => {
 
     const ITEMS_URL = process.env.REACT_APP_SERVER_BASE_URL + process.env.REACT_APP_ITEMS_URL
-    const teamMemberId = JSON.parse(window.atob(localStorage.getItem('token').split('.')[1])).id;
+    const user = useSelector(selectUser)
+    const teamMemberId = user.id;
 
     
     const changeItem = (e, property, id) => {
