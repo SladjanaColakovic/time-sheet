@@ -2,8 +2,8 @@ import { useState } from "react";
 import { postRequest } from "../requests/httpClient";
 import InputText from "../components/input/InputText";
 import Button from "../components/buttons/Button";
-import { NotificationContainer, NotificationManager } from "react-notifications";
 import * as Constants from '../constants/CategoryConstants'
+import { notification } from "../shared/notification";
 
 const New = () => {
 
@@ -19,7 +19,7 @@ const New = () => {
                 window.location.reload();
             })
             .catch((error) => {
-                NotificationManager.error(error.message, '', 5000);
+                notification(error.message);
             })
     }
 
@@ -33,7 +33,6 @@ const New = () => {
                 </div>
                 <div className='col-4'></div>
             </div>
-            <NotificationContainer />
         </div>
     );
 }

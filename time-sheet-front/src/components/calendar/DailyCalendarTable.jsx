@@ -2,8 +2,8 @@ import DailyCalendarTableHeader from "./DailyCalenadarTableHeader";
 import NewTimeSheetItem from "./NewTimeSheetItem";
 import { useEffect, useState } from "react";
 import { getRequest } from "../../requests/httpClient";
-import { NotificationContainer, NotificationManager } from "react-notifications";
 import EditTimeSheetItem from "./EditTimeSheetItem";
+import { notification } from "../../shared/notification";
 
 const DailyCalendarTable = ({ items, selectedDate, setItems, setTotalHours }) => {
 
@@ -21,7 +21,7 @@ const DailyCalendarTable = ({ items, selectedDate, setItems, setTotalHours }) =>
                 setClients(res.data.clients);
             })
             .catch((error) => {
-                showErrorMessage(error.message);
+                notification(error.message);
             })
 
         getRequest(PROJECT_URL)
@@ -29,7 +29,7 @@ const DailyCalendarTable = ({ items, selectedDate, setItems, setTotalHours }) =>
                 setProjects(res.data.projects);
             })
             .catch((error) => {
-                showErrorMessage(error.message);
+                notification(error.message);
             })
 
         getRequest(CATEGORY_URL)
@@ -37,14 +37,14 @@ const DailyCalendarTable = ({ items, selectedDate, setItems, setTotalHours }) =>
                 setCategories(res.data.categories);
             })
             .catch((error) => {
-                showErrorMessage(error.message);
+                notification(error.message);
             })
     }, [])
 
 
-    const showErrorMessage = (message) => {
-        NotificationManager.error(message, '', 5000);
-    }
+    // const showErrorMessage = (message) => {
+    //     NotificationManager.error(message, '', 5000);
+    // }
 
 
     return (
@@ -55,12 +55,11 @@ const DailyCalendarTable = ({ items, selectedDate, setItems, setTotalHours }) =>
                 </thead>
                 <tbody>
                     {items.map((item) => (
-                        <EditTimeSheetItem item={item} key={item.id} categories={categories} clients={clients} projects={projects} setItems={setItems} setTotalHours={setTotalHours} selectedDate={selectedDate} items={items} showErrorMessage={showErrorMessage} />
+                        <EditTimeSheetItem item={item} key={item.id} categories={categories} clients={clients} projects={projects} setItems={setItems} setTotalHours={setTotalHours} selectedDate={selectedDate} items={items} showErrorMessage={notification} />
                     ))}
-                    <NewTimeSheetItem clients={clients} projects={projects} categories={categories} setItems={setItems} setTotalHours={setTotalHours} selectedDate={selectedDate} showErrorMessage={showErrorMessage} />
+                    <NewTimeSheetItem clients={clients} projects={projects} categories={categories} setItems={setItems} setTotalHours={setTotalHours} selectedDate={selectedDate} showErrorMessage={notification} />
                 </tbody>
             </table>}
-            <NotificationContainer />
         </div>
     );
 }

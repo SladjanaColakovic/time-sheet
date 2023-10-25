@@ -4,6 +4,7 @@ import SelectSearch from "../components/select/SelectSearch";
 import Button from "../components/buttons/Button";
 import InputDate from "../components/input/InputDate";
 import * as Constants from '../constants/ReportConstants'
+import { notification } from "../shared/notification";
 
 const Search = ({ setData }) => {
 
@@ -24,7 +25,7 @@ const Search = ({ setData }) => {
                 setClients(res.data.clients);
             })
             .catch((error) => {
-                console.log(error.message)
+                notification(error.message);
             })
 
         getRequest(Constants.TEAM_MEMBER_URL)
@@ -32,7 +33,7 @@ const Search = ({ setData }) => {
                 setTeamMembers(res.data.teamMembers);
             })
             .catch((error) => {
-                console.log(error.message)
+                notification(error.message);
             })
 
         getRequest(Constants.CATEGORY_URL)
@@ -40,7 +41,7 @@ const Search = ({ setData }) => {
                 setCategories(res.data.categories)
             })
             .catch((error) => {
-                console.log(error.message)
+                notification(error.message);
             })
     }, [])
 
@@ -60,10 +61,9 @@ const Search = ({ setData }) => {
         getRequestWithParams(Constants.REPORT_URL, params)
             .then((res) => {
                 setData(res.data);
-                console.log(res.data)
             })
             .catch((error) => {
-                console.log(error.message)
+                notification(error.message);
             })
     }
 
@@ -100,6 +100,9 @@ const Search = ({ setData }) => {
         getRequestWithParams(Constants.PROJECT_URL + "/client", params)
             .then((res) => {
                 setProjects(res.data.projects)
+            })
+            .catch((error) => {
+                notification(error.message);
             })
     }
 

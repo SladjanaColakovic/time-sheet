@@ -3,6 +3,7 @@ import { Accordion } from "react-bootstrap";
 import { getRequest } from "../requests/httpClient";
 import Edit from "./Edit";
 import * as Constants from '../constants/TeamMemberConstants'
+import { notification } from "../shared/notification";
 
 const Review = () => {
 
@@ -13,7 +14,7 @@ const Review = () => {
             .then((res) => {
                 setData(res.data.teamMembers)
             }).catch((error) => {
-                console.log(error);
+                notification(error.message);
             })
     }, [])
 

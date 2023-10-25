@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { getRequest } from "../requests/httpClient";
 import New from "./New";
 import * as Constants from "../constants/ProjectConstants";
+import { notification } from "../shared/notification";
 
 const Projects = () => {
 
@@ -14,15 +15,14 @@ const Projects = () => {
         getRequest(Constants.CLIENT_URL)
             .then((res) => {
                 setClients(res.data.clients)
-                console.log(res.data)
             }).catch((error) => {
-                console.log(error.message)
+                notification(error.message);
             })
         getRequest(Constants.TEAM_MEMBER_URL)
             .then((res) => {
                 setTeamMembers(res.data.teamMembers)
             }).catch((error) => {
-                console.log(error.message)
+                notification(error.message);
             })
     }, [])
 

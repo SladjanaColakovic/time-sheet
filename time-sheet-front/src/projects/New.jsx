@@ -3,11 +3,10 @@ import { postRequest } from "../requests/httpClient";
 import InputText from "../components/input/InputText";
 import Button from "../components/buttons/Button";
 import Select from "../components/select/Select";
-import { NotificationContainer, NotificationManager } from "react-notifications";
 import * as Constants from "../constants/ProjectConstants";
+import { notification } from "../shared/notification";
 
 const New = ({ clients, teamMembers }) => {
-
 
     const [client, setClient] = useState();
     const [lead, setLead] = useState();
@@ -32,7 +31,7 @@ const New = ({ clients, teamMembers }) => {
                 window.location.reload();
             })
             .catch((error) => {
-                NotificationManager.error(error.message, '', 5000);
+                notification(error.message);
             })
     }
 
@@ -49,7 +48,6 @@ const New = ({ clients, teamMembers }) => {
                 </div>
                 <div className="col-4"></div>
             </div>
-            <NotificationContainer/>
         </div>
     );
 }

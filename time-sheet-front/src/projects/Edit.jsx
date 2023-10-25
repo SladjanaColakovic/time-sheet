@@ -3,8 +3,8 @@ import { deleteRequest, getRequest, putRequest } from "../requests/httpClient";
 import Button from "../components/buttons/Button";
 import InputEdit from "../components/input/InputEdit";
 import SelectEdit from "../components/select/SelectEdit";
-import { NotificationContainer, NotificationManager } from "react-notifications";
 import * as Constants from "../constants/ProjectConstants";
+import { notification } from "../shared/notification";
 
 const Edit = ({ clients, teamMembers, project, setData }) => {
 
@@ -31,13 +31,12 @@ const Edit = ({ clients, teamMembers, project, setData }) => {
                         setData(res.data.projects);
                     })
                     .catch((error) => {
-                        NotificationManager.error(error.message, '', 5000);
-
+                        notification(error.message);
                     })
 
             })
             .catch(error => {
-                NotificationManager.error(error.message, '', 5000);
+                notification(error.message);
             })
 
     }
@@ -51,12 +50,11 @@ const Edit = ({ clients, teamMembers, project, setData }) => {
                         setData(res.data.projects);
                     })
                     .catch((error) => {
-                        NotificationManager.error(error.message, '', 5000);
-
+                        notification(error.message);
                     })
             })
             .catch((error) => {
-                NotificationManager.error(error.message, '', 5000);
+                notification(error.message);
             })
     }
 
@@ -114,7 +112,6 @@ const Edit = ({ clients, teamMembers, project, setData }) => {
                     <Button handleClick={handleDelete} className="edit-delete" buttonName={"Delete"} />
                 </div>
             </div>
-            <NotificationContainer />
         </div>
     );
 }

@@ -34,9 +34,7 @@ const Navbar = () => {
         navigate('/timeSheet', { replace: true });
     }
 
-    const logoutFunc = () => {
-        // localStorage.clear();
-        //window.location.reload();
+    const doLogout = () => {
         dispatch(logout());
     }
 
@@ -59,7 +57,7 @@ const Navbar = () => {
                     <SvgButton handleClick={showCategories} icon={"categories"} name={"Categories"} />
                 </span>
             }
-            <SvgButton className="bottomButton" handleClick={logoutFunc} icon={"logout"} name={"Logout"} />
+            <SvgButton className="bottomButton" handleClick={doLogout} icon={"logout"} name={"Logout"} />
         </div>
 
     );

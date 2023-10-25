@@ -2,8 +2,8 @@ import { useState } from "react";
 import { getRequest, deleteRequest, putRequest } from "../requests/httpClient";
 import Button from "../components/buttons/Button";
 import InputEdit from "../components/input/InputEdit";
-import { NotificationContainer, NotificationManager } from "react-notifications";
 import * as Constants from '../constants/CategoryConstants'
+import { notification } from "../shared/notification";
 
 const Edit = ({ category, setData }) => {
 
@@ -22,12 +22,12 @@ const Edit = ({ category, setData }) => {
                         setData(res.data.categories);
                     })
                     .catch((error) => {
-                        NotificationManager.error(error.message, '', 5000);
+                        notification(error.message);
                     })
 
             })
             .catch(error => {
-                NotificationManager.error(error.message, '', 5000);
+                notification(error.message);
             })
     }
 
@@ -40,11 +40,11 @@ const Edit = ({ category, setData }) => {
                         setData(res.data.categories);
                     })
                     .catch((error) => {
-                        NotificationManager.error(error.message, '', 5000);
+                        notification(error.message);
                     })
             })
             .catch((error) => {
-                NotificationManager.error(error.message, '', 5000);
+                notification(error.message);
             })
     }
 
@@ -67,7 +67,6 @@ const Edit = ({ category, setData }) => {
                     <Button handleClick={handleDelete} className="edit-delete" buttonName={"Delete"} />
                 </div>
             </div>
-            <NotificationContainer />
         </div>
     );
 }

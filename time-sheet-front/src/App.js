@@ -15,6 +15,8 @@ import { useSelector } from 'react-redux';
 import { selectUser } from './auth/userSlice';
 import { useDispatch } from 'react-redux';
 import { logout } from './auth/userSlice';
+import { NotificationContainer } from "react-notifications";
+
 
 function App() {
 
@@ -26,10 +28,10 @@ function App() {
     if (user.expiredIn < Date.now() / 1000) {
       dispatch(logout())
     }
-  }, [])
+  }, [user])
 
   return (
-    
+
     <Routes>
       {!user && <Route path='/' element={<Login />}></Route>}
       <Route path='/' element={<LoggedInLayout />}>
@@ -62,13 +64,13 @@ function App() {
   );
 }
 
+
 function LoggedInLayout() {
   return (
     <div>
-      <div>
-        {<Navbar />}
-      </div>
+      <Navbar />
       <Outlet />
+      <NotificationContainer />
     </div>
   );
 }

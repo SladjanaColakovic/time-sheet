@@ -8,6 +8,7 @@ import MonthlyCalendar from "../components/calendar/MonthlyCalendar";
 import * as Constants from '../constants/TimeSheetConstants'
 import { useSelector } from "react-redux";
 import { selectUser } from "../auth/userSlice";
+import { notification } from "../shared/notification";
 
 const TimeSheet = () => {
 
@@ -36,12 +37,11 @@ const TimeSheet = () => {
                 setTotalHours(res.data.totalHours)
             })
             .catch((error) => {
-                console.log(error.message)
+                notification(error.message);
             })
     }
 
     const getDateRange = () => {
-        console.log(user)
         var id = user.id
         const firstDateOfMonth = new Date(date.getFullYear(), date.getMonth(), 1)
         const lastDateOfMonth = new Date(date.getFullYear(), date.getMonth() + 1, 0)

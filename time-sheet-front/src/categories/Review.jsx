@@ -3,6 +3,7 @@ import Edit from './Edit';
 import { useEffect, useState } from 'react';
 import { getRequest } from '../requests/httpClient'
 import * as Constants from '../constants/CategoryConstants'
+import { notification } from '../shared/notification';
 
 const Review = () => {
 
@@ -13,7 +14,7 @@ const Review = () => {
             .then((res) => {
                 setData(res.data.categories)
             }).catch((error) => {
-                console.log(error);
+                notification(error.message);
             })
     }, [])
 
@@ -27,7 +28,7 @@ const Review = () => {
                             <Accordion.Item key={category.id} eventKey={category.id}>
                                 <Accordion.Header>{category.name}</Accordion.Header>
                                 <Accordion.Body>
-                                    <Edit category={category} setData={setData}/>
+                                    <Edit category={category} setData={setData} />
                                 </Accordion.Body>
                             </Accordion.Item>
                         ))}

@@ -3,8 +3,8 @@ import { deleteRequest, getRequest, putRequest } from "../requests/httpClient";
 import InputEdit from "../components/input/InputEdit";
 import SelectEdit from "../components/select/SelectEdit";
 import Button from "../components/buttons/Button";
-import { NotificationContainer, NotificationManager } from "react-notifications";
 import * as Constants from "../constants/ClientConstants";
+import { notification } from "../shared/notification";
 
 const Edit = ({ countries, client, setData }) => {
 
@@ -25,16 +25,16 @@ const Edit = ({ countries, client, setData }) => {
         putRequest(Constants.CLIENT_URL, data)
             .then(() => {
                 getRequest(Constants.CLIENT_URL)
-                .then((res) => {
-                    setData(res.data.clients)
-                })
-                .catch((error) => {
-                    NotificationManager.error(error.message, '', 5000);
-                })
+                    .then((res) => {
+                        setData(res.data.clients)
+                    })
+                    .catch((error) => {
+                        notification(error.message);
+                    })
 
             })
             .catch(error => {
-                NotificationManager.error(error.message, '', 5000);
+                notification(error.message);
             })
 
     }
@@ -45,16 +45,16 @@ const Edit = ({ countries, client, setData }) => {
         deleteRequest(Constants.CLIENT_URL, params)
             .then(() => {
                 getRequest(Constants.CLIENT_URL)
-                .then((res) => {
-                    setData(res.data.clients)
-                })
-                .catch((error) => {
-                    NotificationManager.error(error.message, '', 5000);
-                })
+                    .then((res) => {
+                        setData(res.data.clients)
+                    })
+                    .catch((error) => {
+                        notification(error.message);
+                    })
             }
             )
             .catch((error) => {
-                NotificationManager.error(error.message, '', 5000);
+                notification(error.message);
             })
     }
 
@@ -98,7 +98,6 @@ const Edit = ({ countries, client, setData }) => {
                     <Button handleClick={handleDelete} buttonName={"Delete"} className="edit-delete" />
                 </div>
             </div>
-            <NotificationContainer/>
         </div>
     );
 }

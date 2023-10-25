@@ -3,8 +3,8 @@ import { postRequest } from "../requests/httpClient";
 import InputText from "../components/input/InputText";
 import Select from "../components/select/Select";
 import Button from "../components/buttons/Button";
-import { NotificationContainer, NotificationManager } from "react-notifications";
 import * as Constants from "../constants/ClientConstants";
+import { notification } from "../shared/notification";
 
 
 const New = ({ countries }) => {
@@ -32,7 +32,7 @@ const New = ({ countries }) => {
                 window.location.reload();
             })
             .catch((error) => {
-                NotificationManager.error(error.message, '', 5000);
+                notification(error.message);
             })
     }
 
@@ -50,7 +50,6 @@ const New = ({ countries }) => {
                 </div>
                 <div className="col-4"></div>
             </div>
-            <NotificationContainer/>
         </div>
     );
 }

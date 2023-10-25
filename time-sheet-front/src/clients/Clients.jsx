@@ -5,6 +5,7 @@ import { getRequest } from "../requests/httpClient";
 import Review from './Review';
 import New from './New';
 import * as Constants from '../constants/ClientConstants'
+import { notification } from '../shared/notification';
 
 const Clients = () => {
 
@@ -16,7 +17,7 @@ const Clients = () => {
                 setCountries(res.data.countries)
             })
             .catch((error) => {
-                console.log(error.message)
+                notification(error.message);
             })
 
     }, [])
