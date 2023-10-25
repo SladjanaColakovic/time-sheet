@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { getRequest, getRequestWithParams } from "../requests/httpClient";
-import SelectSearchComponent from "../components/SelectSearchComponent";
-import ButtonComponent from "../components/ButtonComponent";
-import InputDateComponent from "../components/InputDateComponent";
+import SelectSearch from "../components/select/SelectSearch";
+import Button from "../components/buttons/Button";
+import InputDate from "../components/input/InputDate";
 
 const Search = ({ setData }) => {
 
@@ -116,35 +116,35 @@ const Search = ({ setData }) => {
                     <div className="box">
                         <div className="row">
                             <div className="col-4">
-                                <SelectSearchComponent labelName={"Team member"} setValue={setTeamMember} items={teamMembers} />
+                                <SelectSearch labelName={"Team member"} setValue={setTeamMember} items={teamMembers} />
                             </div>
                             <div className="col-4">
-                                <SelectSearchComponent labelName={"Client"} setValue={selectClient} items={clients} />
+                                <SelectSearch labelName={"Client"} setValue={selectClient} items={clients} />
                             </div>
                             <div className="col-4">
-                                <SelectSearchComponent labelName={"Project"} setValue={setProject} items={projects} />
+                                <SelectSearch labelName={"Project"} setValue={setProject} items={projects} />
                             </div>
                         </div>
                         <br />
                         <div className="row">
                             <div className="col-4">
-                                <SelectSearchComponent labelName={"Category"} setValue={setCategory} items={categories} />
+                                <SelectSearch labelName={"Category"} setValue={setCategory} items={categories} />
                             </div>
                             <div className="col-4">
-                                <InputDateComponent labelName={"Start date"} value={startDate} setValue={setStartDate} />
+                                <InputDate labelName={"Start date"} value={startDate} setValue={setStartDate} />
                             </div>
                             <div className="col-4">
-                                <InputDateComponent labelName={"End date"} value={endDate} setValue={setEndDate} />
+                                <InputDate labelName={"End date"} value={endDate} setValue={setEndDate} />
                             </div>
                         </div>
                         <br />
                         <div className="row">
                             <div className="col-8"></div>
                             <div className="col-2">
-                                <ButtonComponent handleClick={handleSearch} buttonName={"Search"} className="search-btn" />
+                                <Button handleClick={handleSearch} buttonName={"Search"} className="search-btn" />
                             </div>
                             <div className="col-2">
-                                <ButtonComponent buttonName={"Create PDF"} className="pdf-btn" handleClick={pdfReport} />
+                                <Button buttonName={"Create PDF"} className="pdf-btn" handleClick={pdfReport} />
                             </div>
                         </div>
                     </div>

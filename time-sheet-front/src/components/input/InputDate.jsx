@@ -1,4 +1,4 @@
-const InputDateComponent = ({ labelName, value, setValue }) => {
+const InputDate = ({ labelName, value, setValue }) => {
     return (
         <div>
             <label>{labelName}</label>
@@ -7,4 +7,4 @@ const InputDateComponent = ({ labelName, value, setValue }) => {
     );
 }
 
-export default InputDateComponent;
+export default InputDate;

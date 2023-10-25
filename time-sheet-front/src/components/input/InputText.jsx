@@ -1,4 +1,4 @@
-const InputComponent = ({ labelName, placeholder, value, setValue }) => {
+const InputText = ({ labelName, placeholder, value, setValue }) => {
     return (
         <div>
             <label>{labelName}</label>
@@ -7,4 +7,4 @@ const InputComponent = ({ labelName, placeholder, value, setValue }) => {
     );
 }
 
-export default InputComponent;
+export default InputText;

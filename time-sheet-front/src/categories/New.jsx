@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { postRequest } from "../requests/httpClient";
-import InputComponent from "../components/InputComponent";
-import ButtonComponent from "../components/ButtonComponent";
+import InputText from "../components/input/InputText";
+import Button from "../components/buttons/Button";
 import { NotificationContainer, NotificationManager } from "react-notifications";
 
 const New = () => {
@@ -28,8 +28,8 @@ const New = () => {
             <div className='row'>
                 <div className='col-4'></div>
                 <div className='col-4'>
-                    <InputComponent value={name} setValue={setName} labelName={"Name"} placeholder={"Enter name..."} />
-                    <ButtonComponent handleClick={handleSave} className='new-save' buttonName={"Save"} />
+                    <InputText value={name} setValue={setName} labelName={"Name"} placeholder={"Enter name..."} />
+                    <Button handleClick={handleSave} className='new-save' buttonName={"Save"} />
                 </div>
                 <div className='col-4'></div>
             </div>

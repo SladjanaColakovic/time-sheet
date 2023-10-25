@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { deleteRequest, getRequest, putRequest } from "../requests/httpClient";
-import ButtonComponent from "../components/ButtonComponent";
-import InputEditComponent from "../components/InputEditComponent";
-import SelectEditComponent from "../components/SelectEditComponent";
+import Button from "../components/buttons/Button";
+import InputEdit from "../components/input/InputEdit";
+import SelectEdit from "../components/select/SelectEdit";
 import { NotificationContainer, NotificationManager } from "react-notifications";
 
 const Edit = ({ clients, teamMembers, project, setData }) => {
@@ -77,19 +77,19 @@ const Edit = ({ clients, teamMembers, project, setData }) => {
         <div className="edit">
             <div className="row">
                 <div className="col-4">
-                    <InputEditComponent labelName={"Name"} changeValue={changeProject} property={"name"} value={editProject.name} />
+                    <InputEdit labelName={"Name"} changeValue={changeProject} property={"name"} value={editProject.name} />
                 </div>
                 <div className="col-4">
-                    <InputEditComponent labelName={"Description"} changeValue={changeProject} property={"description"} value={editProject.description} />
+                    <InputEdit labelName={"Description"} changeValue={changeProject} property={"description"} value={editProject.description} />
                 </div>
                 <div className="col-4">
-                    <SelectEditComponent selectedValue={editProject.client.id} items={clients} labelName={"Client"} setValue={changeProjectClient} />
+                    <SelectEdit selectedValue={editProject.client.id} items={clients} labelName={"Client"} setValue={changeProjectClient} />
                 </div>
             </div>
             <br />
             <div className="row">
                 <div className="col-4">
-                    <SelectEditComponent selectedValue={editProject.lead.id} items={teamMembers} labelName={"Lead"} setValue={changeProjectLaed} />
+                    <SelectEdit selectedValue={editProject.lead.id} items={teamMembers} labelName={"Lead"} setValue={changeProjectLaed} />
                 </div>
                 <div className="col-4">
                     <label style={{ display: "block" }}>Status</label>
@@ -109,10 +109,10 @@ const Edit = ({ clients, teamMembers, project, setData }) => {
             </div>
             <div className="row">
                 <div className="col-2">
-                    <ButtonComponent handleClick={handleSave} className="edit-save" buttonName={"Save"} />
+                    <Button handleClick={handleSave} className="edit-save" buttonName={"Save"} />
                 </div>
                 <div className="col-2">
-                    <ButtonComponent handleClick={handleDelete} className="edit-delete" buttonName={"Delete"} />
+                    <Button handleClick={handleDelete} className="edit-delete" buttonName={"Delete"} />
                 </div>
             </div>
             <NotificationContainer />

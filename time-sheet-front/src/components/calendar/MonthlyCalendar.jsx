@@ -1,4 +1,4 @@
-const MonthlyCalendarComponent = ({data, showDetails}) => {
+const MonthlyCalendar = ({data, showDetails}) => {
     return (
         <div>
             {data &&
@@ -20,4 +20,4 @@ const MonthlyCalendarComponent = ({data, showDetails}) => {
     );
 }
 
-export default MonthlyCalendarComponent;
+export default MonthlyCalendar;

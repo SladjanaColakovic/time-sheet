@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { deleteRequest, getRequest, putRequest } from "../requests/httpClient";
-import InputEditComponent from "../components/InputEditComponent";
-import SelectEditComponent from "../components/SelectEditComponent";
-import ButtonComponent from "../components/ButtonComponent";
+import InputEdit from "../components/input/InputEdit";
+import SelectEdit from "../components/select/SelectEdit";
+import Button from "../components/buttons/Button";
 import { NotificationContainer, NotificationManager } from "react-notifications";
 
 const Edit = ({ countries, client, setData }) => {
@@ -72,32 +72,32 @@ const Edit = ({ countries, client, setData }) => {
         <div className="edit">
             <div className="row">
                 <div className="col-4">
-                    <InputEditComponent labelName={"Name"} changeValue={changeClient} value={editClient.name} property={"name"} />
+                    <InputEdit labelName={"Name"} changeValue={changeClient} value={editClient.name} property={"name"} />
                 </div>
                 <div className="col-4">
-                    <InputEditComponent labelName={"Address"} changeValue={changeClient} value={editClient.address} property={"address"} />
+                    <InputEdit labelName={"Address"} changeValue={changeClient} value={editClient.address} property={"address"} />
                 </div>
                 <div className="col-4">
-                    <InputEditComponent labelName={"City"} changeValue={changeClient} value={editClient.city} property={"city"} />
+                    <InputEdit labelName={"City"} changeValue={changeClient} value={editClient.city} property={"city"} />
                 </div>
             </div>
             <br />
             <div className="row">
                 <div className="col-4">
-                    <InputEditComponent labelName={"Postal code"} changeValue={changeClient} value={editClient.postalCode} property={"postalCode"} />
+                    <InputEdit labelName={"Postal code"} changeValue={changeClient} value={editClient.postalCode} property={"postalCode"} />
                 </div>
                 <div className="col-4">
-                    <SelectEditComponent labelName={"Country"} items={countries} selectedValue={editClient.country.id} setValue={changeClientCountry} />
+                    <SelectEdit labelName={"Country"} items={countries} selectedValue={editClient.country.id} setValue={changeClientCountry} />
                 </div>
                 <div className="col-4"></div>
             </div>
             <br />
             <div className="row">
                 <div className="col-2">
-                    <ButtonComponent handleClick={handleSave} buttonName={"Save"} className="edit-save" />
+                    <Button handleClick={handleSave} buttonName={"Save"} className="edit-save" />
                 </div>
                 <div className="col-2">
-                    <ButtonComponent handleClick={handleDelete} buttonName={"Delete"} className="edit-delete" />
+                    <Button handleClick={handleDelete} buttonName={"Delete"} className="edit-delete" />
                 </div>
             </div>
             <NotificationContainer/>

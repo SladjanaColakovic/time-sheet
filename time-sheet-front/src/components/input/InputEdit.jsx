@@ -1,4 +1,4 @@
-const InputEditComponent = ({ value, changeValue, property, labelName }) => {
+const InputEdit = ({ value, changeValue, property, labelName }) => {
     return (
         <div>
             <label>{labelName}</label>
@@ -7,4 +7,4 @@ const InputEditComponent = ({ value, changeValue, property, labelName }) => {
     );
 }
 
-export default InputEditComponent;
+export default InputEdit;

@@ -1,10 +1,10 @@
-import { getRequestWithParams, putRequest } from "../requests/httpClient";
-import InputListItemComponent from "./InputListItemComponent";
-import SelectListItemComponent from "./SelectListItemComponent";
+import { getRequestWithParams, putRequest } from "../../requests/httpClient";
+import ListItemInput from "../input/ListItemInput";
+import ListItemSelect from "../select/ListItemSelect";
 import { format } from "date-fns";
-import SvgButton from "./SvgButton";
+import SvgButton from "../buttons/SvgButton";
 
-const EdititemComponent = ({item, setItems, items, setTotalHours, selectedDate, clients, projects, categories, showErrorMessage}) => {
+const EditTimeSheetItem = ({item, setItems, items, setTotalHours, selectedDate, clients, projects, categories, showErrorMessage}) => {
 
     const ITEMS_URL = process.env.REACT_APP_SERVER_BASE_URL + process.env.REACT_APP_ITEMS_URL
     const teamMemberId = JSON.parse(window.atob(localStorage.getItem('token').split('.')[1])).id;
@@ -92,22 +92,22 @@ const EdititemComponent = ({item, setItems, items, setTotalHours, selectedDate, 
     return (
         <tr>
             <td>
-                <SelectListItemComponent value={item.project.client.id} changeValue={changeClient} itemId={item.id} items={clients} />
+                <ListItemSelect value={item.project.client.id} changeValue={changeClient} itemId={item.id} items={clients} />
             </td>
             <td>
-                <SelectListItemComponent value={item.project.id} changeValue={changeProject} itemId={item.id} items={projects} />
+                <ListItemSelect value={item.project.id} changeValue={changeProject} itemId={item.id} items={projects} />
             </td>
             <td>
-                <SelectListItemComponent value={item.category.id} changeValue={changeCategory} itemId={item.id} items={categories} />
+                <ListItemSelect value={item.category.id} changeValue={changeCategory} itemId={item.id} items={categories} />
             </td>
             <td>
-                <InputListItemComponent value={item.description} changeItem={changeItem} property={"description"} itemId={item.id} />
+                <ListItemInput value={item.description} changeItem={changeItem} property={"description"} itemId={item.id} />
             </td>
             <td>
-                <InputListItemComponent value={item.time} changeItem={changeItem} property={"time"} itemId={item.id} />
+                <ListItemInput value={item.time} changeItem={changeItem} property={"time"} itemId={item.id} />
             </td>
             <td>
-                <InputListItemComponent value={item.overtime} changeItem={changeItem} property={"overtime"} itemId={item.id} />
+                <ListItemInput value={item.overtime} changeItem={changeItem} property={"overtime"} itemId={item.id} />
             </td>
             <td>
                 <SvgButton handleClick={() => {edit(item.id)}} className="add-btn" icon={"edit"}/>
@@ -116,4 +116,4 @@ const EdititemComponent = ({item, setItems, items, setTotalHours, selectedDate, 
     );
 }
 
-export default EdititemComponent;
+export default EditTimeSheetItem;

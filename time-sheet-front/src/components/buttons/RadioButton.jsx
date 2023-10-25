@@ -1,4 +1,4 @@
-const InputRadioComponent = ({ radioName, labelName, radioValue, setValue, checked }) => {
+const RadioButton = ({ radioName, labelName, radioValue, setValue, checked }) => {
     return (
         <span>
             <input name={radioName} type="radio" value={radioValue} onChange={(e) => { setValue(e.target.value) }} checked={checked} />
@@ -8,4 +8,4 @@ const InputRadioComponent = ({ radioName, labelName, radioValue, setValue, check
     );
 }
 
-export default InputRadioComponent;
+export default RadioButton;

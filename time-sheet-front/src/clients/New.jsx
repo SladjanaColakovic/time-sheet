@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { postRequest } from "../requests/httpClient";
-import InputComponent from "../components/InputComponent";
-import SelectComponent from "../components/SelectComponent";
-import ButtonComponent from "../components/ButtonComponent";
+import InputText from "../components/input/InputText";
+import Select from "../components/select/Select";
+import Button from "../components/buttons/Button";
 import { NotificationContainer, NotificationManager } from "react-notifications";
 
 const New = ({ countries }) => {
@@ -41,12 +41,12 @@ const New = ({ countries }) => {
             <div className="row">
                 <div className="col-4"></div>
                 <div className="col-4">
-                    <InputComponent labelName={"Name"} placeholder={"Enter name..."} value={name} setValue={setName} />
-                    <InputComponent labelName={"Address"} placeholder={"Enter address..."} value={address} setValue={setAddress} />
-                    <InputComponent labelName={"City"} placeholder={"Enter city..."} value={city} setValue={setCity} />
-                    <InputComponent labelName={"Postal code"} placeholder={"Enter postal code..."} value={postalCode} setValue={setPostalCode} />
-                    <SelectComponent labelName={"Country"} items={countries} setValue={setCountry} />
-                    <ButtonComponent handleClick={handleSave} buttonName={"Save"} className="new-save" />
+                    <InputText labelName={"Name"} placeholder={"Enter name..."} value={name} setValue={setName} />
+                    <InputText labelName={"Address"} placeholder={"Enter address..."} value={address} setValue={setAddress} />
+                    <InputText labelName={"City"} placeholder={"Enter city..."} value={city} setValue={setCity} />
+                    <InputText labelName={"Postal code"} placeholder={"Enter postal code..."} value={postalCode} setValue={setPostalCode} />
+                    <Select labelName={"Country"} items={countries} setValue={setCountry} />
+                    <Button handleClick={handleSave} buttonName={"Save"} className="new-save" />
                 </div>
                 <div className="col-4"></div>
             </div>

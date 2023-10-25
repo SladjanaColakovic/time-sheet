@@ -1,8 +1,8 @@
 import { useState } from 'react'
 import { postRequest } from './requests/httpClient';
-import ButtonComponent from './components/ButtonComponent';
-import InputPasswordComponent from './components/InputPasswordComponent';
-import InputComponent from './components/InputComponent';
+import Button from './components/buttons/Button';
+import InputPassword from './components/input/InputPassword';
+import InputText from './components/input/InputText';
 import { NotificationContainer, NotificationManager } from "react-notifications";
 
 
@@ -34,13 +34,13 @@ const Login = () => {
             <h1>Login</h1>
             <div className="box">
                 <div className='row'>
-                    <InputComponent labelName={"Username"} value={username} setValue={setUsername} />
+                    <InputText labelName={"Username"} value={username} setValue={setUsername} />
                 </div>
                 <div className='row'>
-                    <InputPasswordComponent value={password} labelName={"Password"} setValue={setPassword} />
+                    <InputPassword value={password} labelName={"Password"} setValue={setPassword} />
                 </div>
                 <div className="row">
-                    <ButtonComponent handleClick={handleClick} buttonName={"Login"} />
+                    <Button handleClick={handleClick} buttonName={"Login"} />
                 </div>
             </div>
             <NotificationContainer/>

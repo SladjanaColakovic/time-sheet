@@ -1,4 +1,5 @@
-import SvgButton from "../SvgButton";
+import SvgButton from "../buttons/SvgButton";
+
 const CalendarNavigation= ({ back, next, content }) => {
     return (
         <div style={{ textAlign: "center" }}>

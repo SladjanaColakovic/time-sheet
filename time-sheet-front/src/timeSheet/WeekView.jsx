@@ -3,9 +3,9 @@ import { useParams } from "react-router-dom";
 import { getRequestWithParams } from "../requests/httpClient";
 import { useNavigate } from "react-router-dom";
 import { format } from "date-fns";
-import ButtonComponent from "../components/ButtonComponent";
+import Button from "../components/buttons/Button";
 import CalendarNavigation from "../components/calendar/CalendarNavigation";
-import WeeklyCalendarComponent from "../components/WeeklyCalendarComponent";
+import WeeklyCalendar from "../components/calendar/WeeklyCalendar";
 import DailyCalendarTable from "../components/calendar/DailyCalendarTable";
 
 
@@ -133,14 +133,14 @@ const WeekView = () => {
                             <CalendarNavigation back={back} next={next} content={startDate + ' - ' + endDate} />
                             <br />
                             <br />
-                            <WeeklyCalendarComponent dates={dates} formatSelectedDate={formatSelectedDate} selectDate={selectDate} />
+                            <WeeklyCalendar dates={dates} formatSelectedDate={formatSelectedDate} selectDate={selectDate} />
                             <br />
                             <br />
                             <DailyCalendarTable items={items} selectedDate={selectedDate} setItems={setItems} setTotalHours={setTotalHours} />
                             <br />
                             <div className="row">
                                 <div className="col-3">
-                                    <ButtonComponent handleClick={showMonthlyView} className="monthly-view" buttonName={"back to monthly view"} />
+                                    <Button handleClick={showMonthlyView} className="monthly-view" buttonName={"back to monthly view"} />
                                 </div>
                                 <div className="col-9">
                                     <label className="total-hours">Total hours: {totalHours}</label>

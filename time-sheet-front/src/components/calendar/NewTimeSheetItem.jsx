@@ -1,9 +1,9 @@
-import InputComponent from "../InputComponent";
-import SelectComponent from "../SelectComponent";
+import InputText from "../input/InputText";
+import Select from "../select/Select";
 import { getRequestWithParams, postRequest } from "../../requests/httpClient";
 import { useState } from "react";
 import { format } from "date-fns";
-import SvgButton from "../SvgButton";
+import SvgButton from "../buttons/SvgButton";
 
 const NewTimeSheetItem = ({ clients, projects, categories, setItems, setTotalHours, selectedDate, showErrorMessage }) => {
 
@@ -65,22 +65,22 @@ const NewTimeSheetItem = ({ clients, projects, categories, setItems, setTotalHou
     return (
         <tr className="tr-margin">
             <td>
-                <SelectComponent items={clients} setValue={setClient} value={client} />
+                <Select items={clients} setValue={setClient} value={client} />
             </td>
             <td>
-                <SelectComponent items={projects} setValue={setProject} value={project} />
+                <Select items={projects} setValue={setProject} value={project} />
             </td>
             <td>
-                <SelectComponent items={categories} setValue={setCategory} value={category} />
+                <Select items={categories} setValue={setCategory} value={category} />
             </td>
             <td>
-                <InputComponent value={description} setValue={setDescription} />
+                <InputText value={description} setValue={setDescription} />
             </td>
             <td>
-                <InputComponent value={time} setValue={setTime} />
+                <InputText value={time} setValue={setTime} />
             </td>
             <td>
-                <InputComponent value={overtime} setValue={setOvertime} />
+                <InputText value={overtime} setValue={setOvertime} />
             </td>
             <td>
                 <SvgButton handleClick={addItem} className="add-btn" icon={"add"} />

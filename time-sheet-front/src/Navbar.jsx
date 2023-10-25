@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-import SvgButton from './components/SvgButton';
+import SvgButton from './components/buttons/SvgButton';
 import { Role } from './auth/Role';
 
 const Navbar = () => {

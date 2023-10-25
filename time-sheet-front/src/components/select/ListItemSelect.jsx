@@ -1,4 +1,4 @@
-const SelectListItemComponent = ({value, changeValue, itemId, items}) => {
+const ListItemSelect = ({value, changeValue, itemId, items}) => {
     return (
         <select value={value} onChange={(e) => { changeValue(e, itemId) }}>
             {items && items.map((item) => (
@@ -8,4 +8,4 @@ const SelectListItemComponent = ({value, changeValue, itemId, items}) => {
     );
 }
 
-export default SelectListItemComponent;
+export default ListItemSelect;

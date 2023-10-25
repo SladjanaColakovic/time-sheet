@@ -1,4 +1,4 @@
-const InputPasswordComponent = ({labelName, value, setValue}) => {
+const InputPassword = ({labelName, value, setValue}) => {
     return (
         <div>
             <label>{labelName}</label>
@@ -7,4 +7,4 @@ const InputPasswordComponent = ({labelName, value, setValue}) => {
     );
 }
 
-export default InputPasswordComponent;
+export default InputPassword;

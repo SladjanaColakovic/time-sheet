@@ -1,8 +1,11 @@
-const SelectEditComponent = ({ labelName, setValue, items, selectedValue }) => {
+const Select = ({ labelName, setValue, items, value }) => {
     return (
         <div>
             <label>{labelName}</label>
-            <select value={selectedValue} onChange={(e) => { setValue(e) }}>
+            <select value={value} onChange={(e) => { setValue(e.target.value) }}>
+                <option value={''}>
+                Choose an option
+                </option>
                 {items && items.map((item) => (
                     <option key={item.id} value={item.id}>{item.name}</option>
                 ))}
@@ -11,4 +14,4 @@ const SelectEditComponent = ({ labelName, setValue, items, selectedValue }) => {
     );
 }
 
-export default SelectEditComponent;
+export default Select;

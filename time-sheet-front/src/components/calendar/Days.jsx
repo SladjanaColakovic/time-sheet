@@ -1,4 +1,4 @@
-const DaysComponent = () => {
+const Days = () => {
     const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
 
     return (
@@ -11,4 +11,4 @@ const DaysComponent = () => {
     );
 }
 
-export default DaysComponent;
+export default Days;
