@@ -114,7 +114,7 @@ svg {
   display: flex;
   justify-content: center;
   margin-top: 25px;
-  width: 100px; 
+  width: 100px;
   background-color: #567189;
   border: none;
   color: rgb(236, 232, 232);
@@ -224,7 +224,7 @@ input[type=date],
   border-radius: 3px;
 }
 
-.pdf-btn:hover{
+.pdf-btn:hover {
   background-color: rgb(221, 216, 216);
 
 }
@@ -323,10 +323,6 @@ td {
   margin-right: 10px;
 }
 
-.radios-span {
-  margin-right: 15px;
-}
-
 .monthly-view {
   float: left;
   width: 100%;
@@ -378,7 +374,7 @@ td {
   cursor: pointer;
 }
 
-.label-btn:hover .box-date{
+.label-btn:hover .box-date {
   background-color: #c5d2d4 !important;
 }
 
@@ -388,6 +384,41 @@ td {
   color: #567189
 }
 
+.edit-label {
+  display: block;
+}
+
+.new-label{
+  display: block !important;
+}
+
+.span-radio {
+  margin-right: 10px;
+}
+
+.span-radios{
+  margin-right: 15px;
+}
+
+.calendar-nav{
+  text-align: center;
+}
+
+.box-date{
+  margin: 2px;
+}
+
+.fulfilled{
+  background-color: #c5d2d4;
+}
+
+.unfulfilled{
+  background-color: #ffcccb;
+}
+
+.not-filled{
+  background-color: white;
+}
 
 @media screen and (max-width: 800px) {
   .span-top .col-8 {
@@ -439,7 +470,7 @@ td {
     display: none;
   }
 
-  .weeklyView .col-10{
+  .weeklyView .col-10 {
     width: 100%;
   }
 
@@ -462,7 +493,7 @@ td {
     font-size: 9px;
   }
 
-  .weeklyView .label-btn{
+  .weeklyView .label-btn {
     width: 100% !important;
     font-size: 15px;
   }
@@ -495,7 +526,7 @@ td {
     font-size: 14px;
   }
 
-  .weeklyView .col-10{
+  .weeklyView .col-10 {
     width: 100%;
   }
 
@@ -514,7 +545,7 @@ td {
     width: auto;
   }
 
-  .weeklyView .label-btn{
+  .weeklyView .label-btn {
     font-size: 13px;
   }
 

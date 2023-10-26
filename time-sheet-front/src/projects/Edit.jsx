@@ -89,18 +89,18 @@ const Edit = ({ clients, teamMembers, project, setData }) => {
                     <SelectEdit selectedValue={editProject.lead.id} items={teamMembers} labelName={"Lead"} setValue={changeProjectLaed} />
                 </div>
                 <div className="col-4">
-                    <label style={{ display: "block" }}>Status</label>
+                    <label className="edit-label">Status</label>
                     <input type="radio" value={"ACTIVE"} checked={editProject.status === "ACTIVE"} onChange={(e) => { setEditProject({ ...editProject, status: e.target.value }) }} />
-                    <span style={{ marginRight: "10px" }}></span>
+                    <span className="span-radio"></span>
                     <label>Active</label>
-                    <span style={{ marginRight: "15px" }}></span>
+                    <span className="span-radios"></span>
                     <input type="radio" value={"INACTIVE"} checked={editProject.status === "INACTIVE"} onChange={(e) => { setEditProject({ ...editProject, status: e.target.value }) }} />
-                    <span style={{ marginRight: "10px" }}></span>
+                    <span className="span-radio"></span>
                     <label>Inactive</label>
                 </div>
                 <div className="col-4">
                     <input name="archive" type="radio" />
-                    <span style={{ marginRight: "10px" }}></span>
+                    <span className="span-radio"></span>
                     <label>Archive</label>
                 </div>
             </div>

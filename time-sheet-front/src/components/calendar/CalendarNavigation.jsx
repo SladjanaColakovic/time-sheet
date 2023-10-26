@@ -2,7 +2,7 @@ import SvgButton from "../buttons/SvgButton";
 
 const CalendarNavigation= ({ back, next, content }) => {
     return (
-        <div style={{ textAlign: "center" }}>
+        <div className="calendar-nav">
             <SvgButton handleClick={back} className="back" icon={"back"}/>
             {content && <label className="date">{content}</label>}
             <SvgButton handleClick={next} className="next" icon={"next"}/>

@@ -80,23 +80,23 @@ const Edit = ({ teamMember, setData }) => {
                     <InputEdit labelName={"Hours per week"} changeValue={changeTeamMember} property={"hoursPerWeek"} value={editTeamMember.hoursPerWeek} />
                 </div>
                 <div className="col-4">
-                    <label style={{ display: "block" }}>Status</label>
+                    <label className="edit-label">Status</label>
                     <input type="radio" value={"ACTIVE"} checked={editTeamMember.status === "ACTIVE"} onChange={(e) => { setEditTeamMember({ ...editTeamMember, status: e.target.value }) }} />
-                    <span style={{ marginRight: "10px" }}></span>
+                    <span className="span-radio"></span>
                     <label>Active</label>
-                    <span style={{ marginRight: "15px" }}></span>
+                    <span className="span-radios"></span>
                     <input type="radio" value={"INACTIVE"} checked={editTeamMember.status === "INACTIVE"} onChange={(e) => { setEditTeamMember({ ...editTeamMember, status: e.target.value }) }} />
-                    <span style={{ marginRight: "10px" }}></span>
+                    <span className="span-radio"></span>
                     <label>Inactive</label>
                 </div>
                 <div className="col-4">
-                    <label style={{ display: "block" }}>Role</label>
+                    <label className="edit-label">Role</label>
                     <input type="radio" value={"WORKER"} checked={editTeamMember.role === "WORKER"} onChange={(e) => { setEditTeamMember({ ...editTeamMember, role: e.target.value }) }} />
-                    <span style={{ marginRight: "10px" }}></span>
+                    <span className="span-radio"></span>
                     <label>Worker</label>
-                    <span style={{ marginRight: "15px" }}></span>
+                    <span className="span-radios"></span>
                     <input type="radio" value={"ADMIN"} checked={editTeamMember.role === "ADMIN"} onChange={(e) => { setEditTeamMember({ ...editTeamMember, role: e.target.value }) }} />
-                    <span style={{ marginRight: "10px" }}></span>
+                    <span className="span-radio"></span>
                     <label>Admin</label>
                 </div>
             </div>

@@ -6,6 +6,7 @@ import { format } from "date-fns";
 import SvgButton from "../buttons/SvgButton";
 import { useSelector } from "react-redux";
 import { selectUser } from "../../auth/userSlice";
+import * as Constants from '../../constants/TimeSheetConstants'
 
 const NewTimeSheetItem = ({ clients, projects, categories, setItems, setTotalHours, selectedDate, showErrorMessage }) => {
 
@@ -16,14 +17,13 @@ const NewTimeSheetItem = ({ clients, projects, categories, setItems, setTotalHou
     const [time, setTime] = useState('');
     const [overtime, setOvertime] = useState('');
 
-    const ITEMS_URL = process.env.REACT_APP_SERVER_BASE_URL + process.env.REACT_APP_ITEMS_URL
     const user = useSelector(selectUser)
     const teamMemberId = user.id;
 
 
     const addItem = () => {
         const data = {
-            date: format(new Date(selectedDate), 'yyyy-MM-dd'),
+            date: format(new Date(selectedDate), Constants.DATE_FORMAT),
             description: description,
             time: time,
             overtime: overtime,
@@ -38,13 +38,13 @@ const NewTimeSheetItem = ({ clients, projects, categories, setItems, setTotalHou
             }
         }
 
-        postRequest(ITEMS_URL, data)
+        postRequest(Constants.ITEMS_URL, data)
             .then(() => {
                 const params = {
                     teamMemberId: teamMemberId,
-                    date: format(new Date(selectedDate), 'yyyy-MM-dd')
+                    date: format(new Date(selectedDate), Constants.DATE_FORMAT)
                 }
-                getRequestWithParams(ITEMS_URL + "/teamMember", params)
+                getRequestWithParams(Constants.ITEMS_URL + "/teamMember", params)
                     .then((res) => {
                         setItems(res.data.items);
                         setTotalHours(res.data.totalHours)
