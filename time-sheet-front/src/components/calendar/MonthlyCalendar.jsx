@@ -21,5 +21,3 @@ const MonthlyCalendar = ({data, showDetails}) => {
 }
 
 export default MonthlyCalendar;
-
-// style={{ backgroundColor: item.flag === 'FULFILLED' ? '#c5d2d4' : item.flag === 'UNFULFILLED' ? '#ffcccb' : 'white' }}

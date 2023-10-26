@@ -4,7 +4,7 @@ import SelectSearch from "../components/select/SelectSearch";
 import Button from "../components/buttons/Button";
 import InputDate from "../components/input/InputDate";
 import * as Constants from '../constants/ReportConstants'
-import { notification } from "../shared/notification";
+import { errorNotification } from "../shared/notification";
 
 const Search = ({ setData }) => {
 
@@ -25,7 +25,7 @@ const Search = ({ setData }) => {
                 setClients(res.data.clients);
             })
             .catch((error) => {
-                notification(error.message);
+                errorNotification(error.message);
             })
 
         getRequest(Constants.TEAM_MEMBER_URL)
@@ -33,7 +33,7 @@ const Search = ({ setData }) => {
                 setTeamMembers(res.data.teamMembers);
             })
             .catch((error) => {
-                notification(error.message);
+                errorNotification(error.message);
             })
 
         getRequest(Constants.CATEGORY_URL)
@@ -41,7 +41,7 @@ const Search = ({ setData }) => {
                 setCategories(res.data.categories)
             })
             .catch((error) => {
-                notification(error.message);
+                errorNotification(error.message);
             })
     }, [])
 
@@ -63,7 +63,7 @@ const Search = ({ setData }) => {
                 setData(res.data);
             })
             .catch((error) => {
-                notification(error.message);
+                errorNotification(error.message);
             })
     }
 
@@ -102,7 +102,7 @@ const Search = ({ setData }) => {
                 setProjects(res.data.projects)
             })
             .catch((error) => {
-                notification(error.message);
+                errorNotification(error.message);
             })
     }
 

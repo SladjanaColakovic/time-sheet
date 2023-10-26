@@ -3,7 +3,7 @@ import { getRequest } from "../requests/httpClient";
 import { Accordion } from "react-bootstrap";
 import Edit from "./Edit";
 import * as Constants from "../constants/ClientConstants";
-import { notification } from "../shared/notification";
+import { errorNotification } from "../shared/notification";
 
 
 const Review = ({ countries }) => {
@@ -15,7 +15,7 @@ const Review = ({ countries }) => {
             .then((res) => {
                 setData(res.data.clients)
             }).catch((error) => {
-                notification(error.message);
+                errorNotification(error.message);
             })
 
     }, [])

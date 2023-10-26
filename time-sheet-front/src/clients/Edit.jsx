@@ -4,7 +4,7 @@ import InputEdit from "../components/input/InputEdit";
 import SelectEdit from "../components/select/SelectEdit";
 import Button from "../components/buttons/Button";
 import * as Constants from "../constants/ClientConstants";
-import { notification } from "../shared/notification";
+import { errorNotification, successNotification } from "../shared/notification";
 
 const Edit = ({ countries, client, setData }) => {
 
@@ -27,14 +27,15 @@ const Edit = ({ countries, client, setData }) => {
                 getRequest(Constants.CLIENT_URL)
                     .then((res) => {
                         setData(res.data.clients)
+                        successNotification("Successfully edited");
                     })
                     .catch((error) => {
-                        notification(error.message);
+                        errorNotification(error.message);
                     })
 
             })
             .catch(error => {
-                notification(error.message);
+                errorNotification(error.message);
             })
 
     }
@@ -46,15 +47,16 @@ const Edit = ({ countries, client, setData }) => {
             .then(() => {
                 getRequest(Constants.CLIENT_URL)
                     .then((res) => {
-                        setData(res.data.clients)
+                        setData(res.data.clients);
+                        successNotification("Successfully deleted")
                     })
                     .catch((error) => {
-                        notification(error.message);
+                        errorNotification(error.message);
                     })
             }
             )
             .catch((error) => {
-                notification(error.message);
+                errorNotification(error.message);
             })
     }
 

@@ -3,7 +3,7 @@ import { postRequest } from "../requests/httpClient";
 import InputText from "../components/input/InputText";
 import Button from "../components/buttons/Button";
 import * as Constants from '../constants/CategoryConstants'
-import { notification } from "../shared/notification";
+import { errorNotification, successNotification } from "../shared/notification";
 
 const New = () => {
 
@@ -19,7 +19,7 @@ const New = () => {
                 window.location.reload();
             })
             .catch((error) => {
-                notification(error.message);
+                errorNotification(error.message);
             })
     }
 

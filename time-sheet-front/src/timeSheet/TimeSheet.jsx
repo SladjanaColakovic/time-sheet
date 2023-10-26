@@ -8,7 +8,7 @@ import MonthlyCalendar from "../components/calendar/MonthlyCalendar";
 import * as Constants from '../constants/TimeSheetConstants'
 import { useSelector } from "react-redux";
 import { selectUser } from "../auth/userSlice";
-import { notification } from "../shared/notification";
+import { errorNotification } from "../shared/notification";
 
 const TimeSheet = () => {
 
@@ -37,7 +37,7 @@ const TimeSheet = () => {
                 setTotalHours(res.data.totalHours)
             })
             .catch((error) => {
-                notification(error.message);
+                errorNotification(error.message);
             })
     }
 

@@ -4,7 +4,7 @@ import Button from "../components/buttons/Button";
 import InputEdit from "../components/input/InputEdit";
 import SelectEdit from "../components/select/SelectEdit";
 import * as Constants from "../constants/ProjectConstants";
-import { notification } from "../shared/notification";
+import { errorNotification, successNotification } from "../shared/notification";
 
 const Edit = ({ clients, teamMembers, project, setData }) => {
 
@@ -29,14 +29,15 @@ const Edit = ({ clients, teamMembers, project, setData }) => {
                 getRequest(Constants.PROJECT_URL)
                     .then((res) => {
                         setData(res.data.projects);
+                        successNotification("Successfully edited");
                     })
                     .catch((error) => {
-                        notification(error.message);
+                        errorNotification(error.message);
                     })
 
             })
             .catch(error => {
-                notification(error.message);
+                errorNotification(error.message);
             })
 
     }
@@ -48,13 +49,14 @@ const Edit = ({ clients, teamMembers, project, setData }) => {
                 getRequest(Constants.PROJECT_URL)
                     .then((res) => {
                         setData(res.data.projects);
+                        successNotification("Successfully deleted");
                     })
                     .catch((error) => {
-                        notification(error.message);
+                        errorNotification(error.message);
                     })
             })
             .catch((error) => {
-                notification(error.message);
+                errorNotification(error.message);
             })
     }
 

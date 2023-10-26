@@ -4,7 +4,7 @@ import InputText from "../components/input/InputText";
 import Button from "../components/buttons/Button";
 import RadioButtons from "../components/buttons/RadioButtons";
 import * as Constants from '../constants/TeamMemberConstants'
-import { notification } from "../shared/notification";
+import { errorNotification } from "../shared/notification";
 
 const New = () => {
 
@@ -32,7 +32,7 @@ const New = () => {
                 window.location.reload()
             })
             .catch((error) => {
-                notification(error.message);
+                errorNotification(error.message);
             })
     }
 

@@ -3,7 +3,7 @@ import { getRequest, putRequest, deleteRequest } from "../requests/httpClient";
 import InputEdit from "../components/input/InputEdit";
 import Button from "../components/buttons/Button";
 import * as Constants from '../constants/TeamMemberConstants'
-import { notification } from "../shared/notification";
+import { errorNotification, successNotification } from "../shared/notification";
 
 const Edit = ({ teamMember, setData }) => {
 
@@ -25,14 +25,15 @@ const Edit = ({ teamMember, setData }) => {
                 getRequest(Constants.URL)
                     .then((res) => {
                         setData(res.data.teamMembers)
+                        successNotification("Successfully edited")
                     })
                     .catch((error) => {
-                        notification(error.message);
+                        errorNotification(error.message);
                     })
 
             })
             .catch(error => {
-                notification(error.message);
+                errorNotification(error.message);
             })
 
 
@@ -44,15 +45,16 @@ const Edit = ({ teamMember, setData }) => {
             .then(() => {
                 getRequest(Constants.URL)
                     .then((res) => {
-                        setData(res.data.teamMembers)
+                        setData(res.data.teamMembers);
+                        successNotification("Successfully deleted");
                     })
                     .catch((error) => {
-                        notification(error.message);
+                        errorNotification(error.message);
                     })
             }
             )
             .catch((error) => {
-                notification(error.message);
+                errorNotification(error.message);
             })
     }
 

@@ -3,7 +3,7 @@ import Edit from './Edit';
 import { useEffect, useState } from 'react';
 import { getRequest } from '../requests/httpClient'
 import * as Constants from '../constants/CategoryConstants'
-import { notification } from '../shared/notification';
+import { errorNotification } from '../shared/notification';
 
 const Review = () => {
 
@@ -14,7 +14,7 @@ const Review = () => {
             .then((res) => {
                 setData(res.data.categories)
             }).catch((error) => {
-                notification(error.message);
+                errorNotification(error.message);
             })
     }, [])
 

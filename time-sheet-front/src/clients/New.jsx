@@ -4,7 +4,7 @@ import InputText from "../components/input/InputText";
 import Select from "../components/select/Select";
 import Button from "../components/buttons/Button";
 import * as Constants from "../constants/ClientConstants";
-import { notification } from "../shared/notification";
+import { errorNotification } from "../shared/notification";
 
 
 const New = ({ countries }) => {
@@ -32,7 +32,7 @@ const New = ({ countries }) => {
                 window.location.reload();
             })
             .catch((error) => {
-                notification(error.message);
+                errorNotification(error.message);
             })
     }
 

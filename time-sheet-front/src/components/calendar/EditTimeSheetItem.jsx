@@ -6,8 +6,9 @@ import SvgButton from "../buttons/SvgButton";
 import { useSelector } from "react-redux";
 import { selectUser } from "../../auth/userSlice";
 import * as Constants from '../../constants/TimeSheetConstants'
+import { errorNotification, successNotification } from "../../shared/notification";
 
-const EditTimeSheetItem = ({item, setItems, items, setTotalHours, selectedDate, clients, projects, categories, showErrorMessage}) => {
+const EditTimeSheetItem = ({item, setItems, items, setTotalHours, selectedDate, clients, projects, categories}) => {
 
     const user = useSelector(selectUser)
     const teamMemberId = user.id;
@@ -82,13 +83,14 @@ const EditTimeSheetItem = ({item, setItems, items, setTotalHours, selectedDate, 
                     .then((res) => {
                         setItems(res.data.items);
                         setTotalHours(res.data.totalHours);
+                        successNotification("Successfully edited")
                     })
                     .catch((error) => {
-                        showErrorMessage(error.message);
+                        errorNotification(error.message);
                     })
             })
             .catch((error) => {
-                showErrorMessage(error.message);
+                errorNotification(error.message);
             })
     }
     

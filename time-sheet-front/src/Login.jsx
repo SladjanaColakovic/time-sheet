@@ -6,7 +6,7 @@ import InputText from './components/input/InputText';
 import { NotificationContainer} from "react-notifications";
 import { login } from './auth/userSlice';
 import { useDispatch } from 'react-redux';
-import { notification } from './shared/notification';
+import { errorNotification } from './shared/notification';
 
 
 const Login = () => {
@@ -34,7 +34,7 @@ const Login = () => {
                     })
                 )
             }).catch((error) => {
-                notification(error.message);
+                errorNotification(error.message);
             })
     }
 

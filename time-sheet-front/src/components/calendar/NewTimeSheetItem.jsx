@@ -7,8 +7,9 @@ import SvgButton from "../buttons/SvgButton";
 import { useSelector } from "react-redux";
 import { selectUser } from "../../auth/userSlice";
 import * as Constants from '../../constants/TimeSheetConstants'
+import { errorNotification } from "../../shared/notification";
 
-const NewTimeSheetItem = ({ clients, projects, categories, setItems, setTotalHours, selectedDate, showErrorMessage }) => {
+const NewTimeSheetItem = ({ clients, projects, categories, setItems, setTotalHours, selectedDate}) => {
 
     const [client, setClient] = useState('');
     const [project, setProject] = useState('');
@@ -56,12 +57,12 @@ const NewTimeSheetItem = ({ clients, projects, categories, setItems, setTotalHou
                         setProject('')
                     })
                     .catch((error) => {
-                        showErrorMessage(error.message);
+                        errorNotification(error.message);
 
                     })
 
             }).catch((error) => {
-                showErrorMessage(error.message);
+                errorNotification(error.message);
             })
     }
 

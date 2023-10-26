@@ -10,7 +10,7 @@ import DailyCalendarTable from "../components/calendar/DailyCalendarTable";
 import * as Constants from '../constants/TimeSheetConstants'
 import { useSelector } from "react-redux";
 import { selectUser } from "../auth/userSlice";
-import { notification } from "../shared/notification";
+import { errorNotification } from "../shared/notification";
 
 const WeekView = () => {
 
@@ -121,7 +121,7 @@ const WeekView = () => {
                 setTotalHours(res.data.totalHours);
             })
             .catch((error) => {
-                notification(error.message);
+                errorNotification(error.message);
             })
     }
 
