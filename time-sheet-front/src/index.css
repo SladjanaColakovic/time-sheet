@@ -420,6 +420,14 @@ td {
   background-color: white;
 }
 
+.disable{
+  background-color: rgb(248, 246, 246);
+}
+
+.disable a{
+  pointer-events: none;
+}
+
 @media screen and (max-width: 800px) {
   .span-top .col-8 {
     width: 100%;

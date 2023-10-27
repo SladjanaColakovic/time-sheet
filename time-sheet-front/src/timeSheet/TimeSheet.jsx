@@ -74,13 +74,21 @@ const TimeSheet = () => {
 
     const showDetails = (selected) => {
         let selectedDate = new Date(selected);
+        console.log(selectedDate)
         const dateSelect = new Date(selectedDate.getTime());
-        const firstDayOfWeek = selectedDate.getDate() - selectedDate.getDay() + 1;
+        const firstDayOfWeek = selectedDate.getDate() - (selectedDate.getDay() === 0? 7 : selectedDate.getDay()) + 1;
+        console.log(firstDayOfWeek)
+        console.log(selectedDate.getDay())
         const weekStartDate = new Date(selectedDate.setDate(firstDayOfWeek));
         const weekEndDate = new Date(selectedDate.setDate(firstDayOfWeek + 6));
+        if(weekEndDate < weekStartDate){
+             weekEndDate.setMonth(weekEndDate.getMonth() + 1)
+        }
         const formatStartDate = format(weekStartDate, Constants.SHOWING_DATE_FORMAT_WEEK)
         const formatEndDate = format(weekEndDate, Constants.SHOWING_DATE_FORMAT_WEEK)
         navigate('/weekView/' + formatStartDate + "/" + formatEndDate + "/" + dateSelect)
+        console.log(formatStartDate)
+        console.log(formatEndDate)
 
     }
 
