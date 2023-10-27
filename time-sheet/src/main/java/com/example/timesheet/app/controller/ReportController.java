@@ -57,8 +57,6 @@ public class ReportController {
         headers.setContentType(MediaType.APPLICATION_PDF);
         headers.set(HttpHeaders.CONTENT_DISPOSITION, "attachment; report.pdf");
         headers.setContentLength(pdfStream.size());
-        byte[] byteArray = ((java.io.ByteArrayOutputStream) pdfStream).toByteArray();
-        byte[] encodedBytes = java.util.Base64.getEncoder().encode(byteArray);
-        return new ResponseEntity<>(encodedBytes, headers, HttpStatus.OK);
+        return new ResponseEntity<>(pdfStream.toByteArray(), headers, HttpStatus.OK);
     }
 }

@@ -81,13 +81,13 @@ const Search = ({ setData }) => {
         getRequestWithParams(Constants.REPORT_URL + "/pdf", params)
             .then((res) => {
                 console.log(res.data);
-                // const file = new Blob([res.data], {
-                //     type: 'application/pdf',
-                //   });
-
-                //   const fileURL = URL.createObjectURL(file);
-
-                //   window.open(fileURL);
+                const file = new Blob([res.data], {
+                    type: 'application/pdf',
+                });
+                //console.log(file)
+                const fileURL = URL.createObjectURL(file);
+                //console.log(fileURL)
+                //window.open(fileURL);
             })
 
     }
